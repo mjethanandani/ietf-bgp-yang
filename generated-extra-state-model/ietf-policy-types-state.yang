@@ -1,0 +1,46 @@
+module ietf-policy-types-state {
+  yang-version 1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-policy-types-state";
+  prefix ietf-pol-types-s;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import ietf-policy-types {
+    prefix ietf-pol-types;
+  }
+
+  organization
+    "OpenConfig working group";
+  contact
+    "OpenConfig working group
+     netopenconfig@googlegroups.com";
+  description
+    "This module contains general data definitions for use in routing
+     policy.  It can be imported by modules that contain protocol-
+     specific policy conditions and actions.";
+
+  revision 2016-03-28 {
+    description
+      "OpenConfig public release";
+    reference "2.0.0";
+  }
+
+  grouping attribute-compare-operators {
+    description
+      "common definitions for comparison operations in
+       condition statements";
+    leaf operator {
+      type identityref {
+        base ietf-pol-types:ATTRIBUTE_COMPARISON;
+      }
+      description
+        "type of comparison to be performed";
+    }
+    leaf value {
+      type uint32;
+      description
+        "value to compare with the community count";
+    }
+  }
+}

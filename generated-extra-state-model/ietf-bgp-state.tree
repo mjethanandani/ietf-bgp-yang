@@ -1,0 +1,402 @@
+module: ietf-bgp-state
+    +--ro bgp
+       +--ro global
+       |  +--ro as                         inet:as-number
+       |  +--ro router-id?                 yang:dotted-quad
+       |  +--ro total-paths?               uint32
+       |  +--ro total-prefixes?            uint32
+       |  +--ro default-route-distance
+       |  |  +--ro external-route-distance?   uint8
+       |  |  +--ro internal-route-distance?   uint8
+       |  +--ro confederation
+       |  |  +--ro enabled?      boolean
+       |  |  +--ro identifier?   inet:as-number
+       |  |  +--ro member-as*    inet:as-number
+       |  +--ro graceful-restart
+       |  |  +--ro enabled?             boolean
+       |  |  +--ro restart-time?        uint16
+       |  |  +--ro stale-routes-time?   decimal64
+       |  |  +--ro helper-only?         boolean
+       |  +--ro use-multiple-paths
+       |  |  +--ro enabled?   boolean
+       |  |  +--ro ebgp
+       |  |  |  +--ro allow-multiple-as?   boolean
+       |  |  |  +--ro maximum-paths?       uint32
+       |  |  +--ro ibgp
+       |  |     +--ro maximum-paths?   uint32
+       |  +--ro route-selection-options
+       |  |  +--ro always-compare-med?           boolean
+       |  |  +--ro ignore-as-path-length?        boolean
+       |  |  +--ro external-compare-router-id?   boolean
+       |  |  +--ro advertise-inactive-routes?    boolean
+       |  |  +--ro enable-aigp?                  boolean
+       |  |  +--ro ignore-next-hop-igp-metric?   boolean
+       |  +--ro afi-safis
+       |  |  +--ro afi-safi* [afi-safi-name]
+       |  |     +--ro afi-safi-name              identityref
+       |  |     +--ro enabled?                   boolean
+       |  |     +--ro total-paths?               uint32
+       |  |     +--ro total-prefixes?            uint32
+       |  |     +--ro graceful-restart
+       |  |     |  +--ro enabled?   boolean
+       |  |     +--ro route-selection-options
+       |  |     |  +--ro always-compare-med?           boolean
+       |  |     |  +--ro ignore-as-path-length?        boolean
+       |  |     |  +--ro external-compare-router-id?   boolean
+       |  |     |  +--ro advertise-inactive-routes?    boolean
+       |  |     |  +--ro enable-aigp?                  boolean
+       |  |     |  +--ro ignore-next-hop-igp-metric?   boolean
+       |  |     +--ro use-multiple-paths
+       |  |     |  +--ro enabled?   boolean
+       |  |     |  +--ro ebgp
+       |  |     |  |  +--ro allow-multiple-as?   boolean
+       |  |     |  |  +--ro maximum-paths?       uint32
+       |  |     |  +--ro ibgp
+       |  |     |     +--ro maximum-paths?   uint32
+       |  |     +--ro apply-policy
+       |  |     |  +--ro import-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |  |     |  +--ro default-import-policy?   default-policy-type
+       |  |     |  +--ro export-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |  |     |  +--ro default-export-policy?   default-policy-type
+       |  |     +--ro ipv4-unicast
+       |  |     |  +--ro prefix-limit
+       |  |     |  |  +--ro max-prefixes?             uint32
+       |  |     |  |  +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |  |  +--ro restart-timer?            decimal64
+       |  |     |  +--ro send-default-route?   boolean
+       |  |     +--ro ipv6-unicast
+       |  |     |  +--ro prefix-limit
+       |  |     |  |  +--ro max-prefixes?             uint32
+       |  |     |  |  +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |  |  +--ro restart-timer?            decimal64
+       |  |     |  +--ro send-default-route?   boolean
+       |  |     +--ro ipv4-labeled-unicast
+       |  |     |  +--ro prefix-limit
+       |  |     |     +--ro max-prefixes?             uint32
+       |  |     |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |     +--ro restart-timer?            decimal64
+       |  |     +--ro ipv6-labeled-unicast
+       |  |     |  +--ro prefix-limit
+       |  |     |     +--ro max-prefixes?             uint32
+       |  |     |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |     +--ro restart-timer?            decimal64
+       |  |     +--ro l3vpn-ipv4-unicast
+       |  |     |  +--ro prefix-limit
+       |  |     |     +--ro max-prefixes?             uint32
+       |  |     |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |     +--ro restart-timer?            decimal64
+       |  |     +--ro l3vpn-ipv6-unicast
+       |  |     |  +--ro prefix-limit
+       |  |     |     +--ro max-prefixes?             uint32
+       |  |     |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |     +--ro restart-timer?            decimal64
+       |  |     +--ro l3vpn-ipv4-multicast
+       |  |     |  +--ro prefix-limit
+       |  |     |     +--ro max-prefixes?             uint32
+       |  |     |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |     +--ro restart-timer?            decimal64
+       |  |     +--ro l3vpn-ipv6-multicast
+       |  |     |  +--ro prefix-limit
+       |  |     |     +--ro max-prefixes?             uint32
+       |  |     |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |     +--ro restart-timer?            decimal64
+       |  |     +--ro l2vpn-vpls
+       |  |     |  +--ro prefix-limit
+       |  |     |     +--ro max-prefixes?             uint32
+       |  |     |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |     |     +--ro restart-timer?            decimal64
+       |  |     +--ro l2vpn-evpn
+       |  |        +--ro prefix-limit
+       |  |           +--ro max-prefixes?             uint32
+       |  |           +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |  |           +--ro restart-timer?            decimal64
+       |  +--ro apply-policy
+       |     +--ro import-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |     +--ro default-import-policy?   default-policy-type
+       |     +--ro export-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |     +--ro default-export-policy?   default-policy-type
+       +--ro neighbors
+       |  +--ro neighbor* [neighbor-address]
+       |     +--ro peer-group?                -> ../../../peer-groups/peer-group/peer-group-name
+       |     +--ro neighbor-address           inet:ip-address
+       |     +--ro enabled?                   boolean
+       |     +--ro peer-as?                   inet:as-number
+       |     +--ro local-as?                  inet:as-number
+       |     +--ro peer-type?                 bgp-types:peer-type
+       |     +--ro auth-password?             string
+       |     +--ro remove-private-as?         bgp-types:remove-private-as-option
+       |     +--ro route-flap-damping?        boolean
+       |     +--ro send-community?            bgp-types:community-type
+       |     +--ro description?               string
+       |     +--ro session-state?             enumeration
+       |     +--ro last-established?          uint64
+       |     +--ro established-transitions?   yang:counter64
+       |     +--ro supported-capabilities*    identityref
+       |     +--ro messages
+       |     |  +--ro sent
+       |     |  |  +--ro UPDATE?         uint64
+       |     |  |  +--ro NOTIFICATION?   uint64
+       |     |  +--ro received
+       |     |     +--ro UPDATE?         uint64
+       |     |     +--ro NOTIFICATION?   uint64
+       |     +--ro queues
+       |     |  +--ro input?    uint32
+       |     |  +--ro output?   uint32
+       |     +--ro timers
+       |     |  +--ro connect-retry?                    decimal64
+       |     |  +--ro hold-time?                        decimal64
+       |     |  +--ro keepalive-interval?               decimal64
+       |     |  +--ro minimum-advertisement-interval?   decimal64
+       |     |  +--ro negotiated-hold-time?             decimal64
+       |     +--ro transport
+       |     |  +--ro tcp-mss?          uint16
+       |     |  +--ro mtu-discovery?    boolean
+       |     |  +--ro passive-mode?     boolean
+       |     |  +--ro local-address?    union
+       |     |  +--ro local-port?       inet:port-number
+       |     |  +--ro remote-address?   inet:ip-address
+       |     |  +--ro remote-port?      inet:port-number
+       |     +--ro error-handling
+       |     |  +--ro treat-as-withdraw?           boolean
+       |     |  +--ro erroneous-update-messages?   uint32
+       |     +--ro graceful-restart
+       |     |  +--ro enabled?             boolean
+       |     |  +--ro restart-time?        uint16
+       |     |  +--ro stale-routes-time?   decimal64
+       |     |  +--ro helper-only?         boolean
+       |     |  +--ro peer-restart-time?   uint16
+       |     |  +--ro peer-restarting?     boolean
+       |     |  +--ro local-restarting?    boolean
+       |     |  +--ro mode?                enumeration
+       |     +--ro logging-options
+       |     |  +--ro log-neighbor-state-changes?   boolean
+       |     +--ro ebgp-multihop
+       |     |  +--ro enabled?        boolean
+       |     |  +--ro multihop-ttl?   uint8
+       |     +--ro route-reflector
+       |     |  +--ro route-reflector-cluster-id?   bgp-types:rr-cluster-id-type
+       |     |  +--ro route-reflector-client?       boolean
+       |     +--ro as-path-options
+       |     |  +--ro allow-own-as?      uint8
+       |     |  +--ro replace-peer-as?   boolean
+       |     +--ro add-paths
+       |     |  +--ro receive?                  boolean
+       |     |  +--ro send-max?                 uint8
+       |     |  +--ro eligible-prefix-policy?   -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |     +--ro use-multiple-paths
+       |     |  +--ro enabled?   boolean
+       |     |  +--ro ebgp
+       |     |     +--ro allow-multiple-as?   boolean
+       |     +--ro apply-policy
+       |     |  +--ro import-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |     |  +--ro default-import-policy?   default-policy-type
+       |     |  +--ro export-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |     |  +--ro default-export-policy?   default-policy-type
+       |     +--ro afi-safis
+       |        +--ro afi-safi* [afi-safi-name]
+       |           +--ro afi-safi-name           identityref
+       |           +--ro enabled?                boolean
+       |           +--ro active?                 boolean
+       |           +--ro prefixes
+       |           |  +--ro received?    uint32
+       |           |  +--ro sent?        uint32
+       |           |  +--ro installed?   uint32
+       |           +--ro graceful-restart
+       |           |  +--ro enabled?      boolean
+       |           |  +--ro received?     boolean
+       |           |  +--ro advertised?   boolean
+       |           +--ro apply-policy
+       |           |  +--ro import-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |           |  +--ro default-import-policy?   default-policy-type
+       |           |  +--ro export-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+       |           |  +--ro default-export-policy?   default-policy-type
+       |           +--ro ipv4-unicast
+       |           |  +--ro prefix-limit
+       |           |  |  +--ro max-prefixes?             uint32
+       |           |  |  +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |  |  +--ro restart-timer?            decimal64
+       |           |  +--ro send-default-route?   boolean
+       |           +--ro ipv6-unicast
+       |           |  +--ro prefix-limit
+       |           |  |  +--ro max-prefixes?             uint32
+       |           |  |  +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |  |  +--ro restart-timer?            decimal64
+       |           |  +--ro send-default-route?   boolean
+       |           +--ro ipv4-labeled-unicast
+       |           |  +--ro prefix-limit
+       |           |     +--ro max-prefixes?             uint32
+       |           |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |     +--ro restart-timer?            decimal64
+       |           +--ro ipv6-labeled-unicast
+       |           |  +--ro prefix-limit
+       |           |     +--ro max-prefixes?             uint32
+       |           |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |     +--ro restart-timer?            decimal64
+       |           +--ro l3vpn-ipv4-unicast
+       |           |  +--ro prefix-limit
+       |           |     +--ro max-prefixes?             uint32
+       |           |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |     +--ro restart-timer?            decimal64
+       |           +--ro l3vpn-ipv6-unicast
+       |           |  +--ro prefix-limit
+       |           |     +--ro max-prefixes?             uint32
+       |           |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |     +--ro restart-timer?            decimal64
+       |           +--ro l3vpn-ipv4-multicast
+       |           |  +--ro prefix-limit
+       |           |     +--ro max-prefixes?             uint32
+       |           |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |     +--ro restart-timer?            decimal64
+       |           +--ro l3vpn-ipv6-multicast
+       |           |  +--ro prefix-limit
+       |           |     +--ro max-prefixes?             uint32
+       |           |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |     +--ro restart-timer?            decimal64
+       |           +--ro l2vpn-vpls
+       |           |  +--ro prefix-limit
+       |           |     +--ro max-prefixes?             uint32
+       |           |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |     +--ro restart-timer?            decimal64
+       |           +--ro l2vpn-evpn
+       |           |  +--ro prefix-limit
+       |           |     +--ro max-prefixes?             uint32
+       |           |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+       |           |     +--ro restart-timer?            decimal64
+       |           +--ro use-multiple-paths
+       |              +--ro enabled?   boolean
+       |              +--ro ebgp
+       |                 +--ro allow-multiple-as?   boolean
+       +--ro peer-groups
+          +--ro peer-group* [peer-group-name]
+             +--ro peer-group-name       string
+             +--ro peer-as?              inet:as-number
+             +--ro local-as?             inet:as-number
+             +--ro peer-type?            bgp-types:peer-type
+             +--ro auth-password?        string
+             +--ro remove-private-as?    bgp-types:remove-private-as-option
+             +--ro route-flap-damping?   boolean
+             +--ro send-community?       bgp-types:community-type
+             +--ro description?          string
+             +--ro total-paths?          uint32
+             +--ro total-prefixes?       uint32
+             +--ro timers
+             |  +--ro connect-retry?                    decimal64
+             |  +--ro hold-time?                        decimal64
+             |  +--ro keepalive-interval?               decimal64
+             |  +--ro minimum-advertisement-interval?   decimal64
+             +--ro transport
+             |  +--ro tcp-mss?         uint16
+             |  +--ro mtu-discovery?   boolean
+             |  +--ro passive-mode?    boolean
+             |  +--ro local-address?   union
+             +--ro error-handling
+             |  +--ro treat-as-withdraw?   boolean
+             +--ro graceful-restart
+             |  +--ro enabled?             boolean
+             |  +--ro restart-time?        uint16
+             |  +--ro stale-routes-time?   decimal64
+             |  +--ro helper-only?         boolean
+             +--ro logging-options
+             |  +--ro log-neighbor-state-changes?   boolean
+             +--ro ebgp-multihop
+             |  +--ro enabled?        boolean
+             |  +--ro multihop-ttl?   uint8
+             +--ro route-reflector
+             |  +--ro route-reflector-cluster-id?   bgp-types:rr-cluster-id-type
+             |  +--ro route-reflector-client?       boolean
+             +--ro as-path-options
+             |  +--ro allow-own-as?      uint8
+             |  +--ro replace-peer-as?   boolean
+             +--ro add-paths
+             |  +--ro receive?                  boolean
+             |  +--ro send-max?                 uint8
+             |  +--ro eligible-prefix-policy?   -> /rpol:routing-policy/policy-definitions/policy-definition/name
+             +--ro use-multiple-paths
+             |  +--ro enabled?   boolean
+             |  +--ro ebgp
+             |  |  +--ro allow-multiple-as?   boolean
+             |  |  +--ro maximum-paths?       uint32
+             |  +--ro ibgp
+             |     +--ro maximum-paths?   uint32
+             +--ro apply-policy
+             |  +--ro import-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+             |  +--ro default-import-policy?   default-policy-type
+             |  +--ro export-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+             |  +--ro default-export-policy?   default-policy-type
+             +--ro afi-safis
+                +--ro afi-safi* [afi-safi-name]
+                   +--ro afi-safi-name              identityref
+                   +--ro enabled?                   boolean
+                   +--ro graceful-restart
+                   |  +--ro enabled?   boolean
+                   +--ro route-selection-options
+                   |  +--ro always-compare-med?           boolean
+                   |  +--ro ignore-as-path-length?        boolean
+                   |  +--ro external-compare-router-id?   boolean
+                   |  +--ro advertise-inactive-routes?    boolean
+                   |  +--ro enable-aigp?                  boolean
+                   |  +--ro ignore-next-hop-igp-metric?   boolean
+                   +--ro use-multiple-paths
+                   |  +--ro enabled?   boolean
+                   |  +--ro ebgp
+                   |  |  +--ro allow-multiple-as?   boolean
+                   |  |  +--ro maximum-paths?       uint32
+                   |  +--ro ibgp
+                   |     +--ro maximum-paths?   uint32
+                   +--ro apply-policy
+                   |  +--ro import-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+                   |  +--ro default-import-policy?   default-policy-type
+                   |  +--ro export-policy*           -> /rpol:routing-policy/policy-definitions/policy-definition/name
+                   |  +--ro default-export-policy?   default-policy-type
+                   +--ro ipv4-unicast
+                   |  +--ro prefix-limit
+                   |  |  +--ro max-prefixes?             uint32
+                   |  |  +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |  |  +--ro restart-timer?            decimal64
+                   |  +--ro send-default-route?   boolean
+                   +--ro ipv6-unicast
+                   |  +--ro prefix-limit
+                   |  |  +--ro max-prefixes?             uint32
+                   |  |  +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |  |  +--ro restart-timer?            decimal64
+                   |  +--ro send-default-route?   boolean
+                   +--ro ipv4-labeled-unicast
+                   |  +--ro prefix-limit
+                   |     +--ro max-prefixes?             uint32
+                   |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |     +--ro restart-timer?            decimal64
+                   +--ro ipv6-labeled-unicast
+                   |  +--ro prefix-limit
+                   |     +--ro max-prefixes?             uint32
+                   |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |     +--ro restart-timer?            decimal64
+                   +--ro l3vpn-ipv4-unicast
+                   |  +--ro prefix-limit
+                   |     +--ro max-prefixes?             uint32
+                   |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |     +--ro restart-timer?            decimal64
+                   +--ro l3vpn-ipv6-unicast
+                   |  +--ro prefix-limit
+                   |     +--ro max-prefixes?             uint32
+                   |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |     +--ro restart-timer?            decimal64
+                   +--ro l3vpn-ipv4-multicast
+                   |  +--ro prefix-limit
+                   |     +--ro max-prefixes?             uint32
+                   |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |     +--ro restart-timer?            decimal64
+                   +--ro l3vpn-ipv6-multicast
+                   |  +--ro prefix-limit
+                   |     +--ro max-prefixes?             uint32
+                   |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |     +--ro restart-timer?            decimal64
+                   +--ro l2vpn-vpls
+                   |  +--ro prefix-limit
+                   |     +--ro max-prefixes?             uint32
+                   |     +--ro shutdown-threshold-pct?   bgp-types:percentage
+                   |     +--ro restart-timer?            decimal64
+                   +--ro l2vpn-evpn
+                      +--ro prefix-limit
+                         +--ro max-prefixes?             uint32
+                         +--ro shutdown-threshold-pct?   bgp-types:percentage
+                         +--ro restart-timer?            decimal64
