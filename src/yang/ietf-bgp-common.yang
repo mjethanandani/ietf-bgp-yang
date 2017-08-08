@@ -1,19 +1,27 @@
 submodule ietf-bgp-common {
-
   belongs-to ietf-bgp {
     prefix "bgp";
   }
 
-  import ietf-bgp-types { prefix bgp-types; }
-  import ietf-inet-types { prefix inet; }
+  import ietf-bgp-types { 
+    prefix bgp-types; 
+  }
+  import ietf-inet-types { 
+    prefix inet; 
+  }
 
   // meta
   organization
-    "OpenConfig working group";
+    "IETF IDR Working Group";
 
   contact
-    "OpenConfig working group
-     netopenconfig@googlegroups.com";
+    "WG Web:   <http://tools.ietf.org/wg/idr>
+     WG List:  <idr@ietf.org>
+
+     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
+     Authors: Keyur Patel,
+              Mahesh Jethanandani,
+              Susan Hares";
 
   description
     "This sub-module contains common groupings that are common across
@@ -21,10 +29,11 @@ submodule ietf-bgp-common {
      they may be application to a subset of global, peer-group or
      neighbor contexts.";
 
-  revision "2016-06-21" {
+  revision "YYYY-MM-DD" {
     description
-      "OpenConfig BGP refactor";
-    reference "2.1.1";
+      "Initial Version";
+    reference 
+      "RFC XXX, BGP Model for Service Provider Network.";
   }
 
   grouping bgp-common-neighbor-group-timers-config {

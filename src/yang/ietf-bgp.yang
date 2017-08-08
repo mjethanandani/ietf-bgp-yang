@@ -8,7 +8,9 @@ module ietf-bgp {
   prefix "bgp";
 
   // import some basic inet types
-  import ietf-routing-policy { prefix rpol; }
+  import ietf-routing-policy { 
+    prefix rpol; 
+  }
 
   // Common: defines the groupings that are common across more than
   //         one context (where contexts are neighbor, group, global)
@@ -21,9 +23,9 @@ module ietf-bgp {
   include ietf-bgp-common-structure;
   // Include peer-group/neighbor/global - these define the groupings
   // that are specific to one context
-  include ietf-bgp-peer-group;
   include ietf-bgp-neighbor;
   include ietf-bgp-global;
+  include ietf-bgp-peer-group;
 
   // meta
   organization

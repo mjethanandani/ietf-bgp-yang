@@ -3,8 +3,12 @@ submodule ietf-bgp-common-multiprotocol {
     prefix "bgp";
   }
 
-  import ietf-bgp-types { prefix bgp-types; }
-  import ietf-routing-policy { prefix rpol; }
+  import ietf-bgp-types { 
+    prefix bgp-types; 
+  }
+  import ietf-routing-policy { 
+    prefix rpol; 
+  }
 
   include ietf-bgp-common;
 

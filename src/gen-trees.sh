@@ -1,8 +1,10 @@
-for i in yang/ietf-*\@$(date +%Y-%m-%d).yang
+#!/bin/sh
+for i in ../build/ietf-*\@$(date +%Y-%m-%d).yang
 do
-	name=$(echo $i | cut -f 1 -d '.')
-	echo $name
-	pyang -p ../ -f tree $name.yang > $name-tree.txt.tmp
-	fold -w 71 $name-tree.txt.tmp > $name-tree.txt
+	filename=$(basename "$i")
+        name="${filename%.*}"
+        echo $name
+	pyang -p ../build -f tree ../build/$name.yang > ../build/$name-tree.txt.tmp
+	fold -w 71 ../build/$name-tree.txt.tmp > ../build/$name-tree.txt
 done
-rm yang/*-tree.txt.tmp
+rm ../build/*-tree.txt.tmp
