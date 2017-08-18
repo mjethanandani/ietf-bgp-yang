@@ -49,6 +49,7 @@ endif
 	rm ../build/ietf-*\@$(shell date +%Y-%m-%d).yang
 
 $(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/yang/ietf-bgp-common-structure.yang ../src/yang/ietf-bgp-common.yang ../src/yang/ietf-bgp-global.yang ../src/yang/ietf-bgp-neighbor.yang ../src/yang/ietf-bgp-peer-group.yang ../src/yang/ietf-bgp-policy.yang ../src/yang/ietf-bgp-types.yang ../src/yang/ietf-bgp.yang ../src/yang/ietf-policy-types.yang ../src/yang/ietf-routing-policy.yang
+	-mkdir -p build
 	sed -e"s/$(basename $<)/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-common-multiprotocol.yang > ../build/ietf-bgp-common-multiprotocol\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-common-structure.yang > ../build/ietf-bgp-common-structure\@$(shell date +%Y-%m-%d).yang

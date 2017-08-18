@@ -75,33 +75,27 @@ module ietf-bgp {
   /*
    * Groupings
    */
-  grouping bgp-top {
+  container bgp {
     description
-      "Top-level grouping for the BGP model data";
+      "Top-level configuration for the BGP router";
 
-    container bgp {
+    container global {
       description
-        "Top-level configuration for the BGP router";
+        "Global configuration for the BGP router";
+      uses bgp-global-base;
+      uses rpol:apply-policy-group;
+    }
 
-      container global {
-        description
-          "Global configuration for the BGP router";
-          uses bgp-global-base;
-          uses rpol:apply-policy-group;
-      }
+    container neighbors {
+      description
+        "Configuration for BGP neighbors";
+      uses bgp-neighbor-list;
+    }
 
-      container neighbors {
-        description
-          "Configuration for BGP neighbors";
-        uses bgp-neighbor-list;
-      }
-
-      container peer-groups {
-        description
-          "Configuration for BGP peer-groups";
-        uses bgp-peer-group-list;
-      }
+    container peer-groups {
+      description
+        "Configuration for BGP peer-groups";
+      uses bgp-peer-group-list;
     }
   }
-  uses bgp-top;
 }
