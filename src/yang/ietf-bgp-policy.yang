@@ -13,11 +13,12 @@ module ietf-bgp-policy {
   import ietf-routing-policy {
     prefix rpol; 
   }
-  import ietf-policy-types { 
-    prefix pol-types; 
-  }
   import ietf-bgp-types { 
     prefix bgp-types; 
+  }
+  
+  import ietf-routing-types {
+    prefix rt-types;
   }
 
 
@@ -199,8 +200,6 @@ module ietf-bgp-policy {
       description
         "Value and comparison operations for conditions based on the
         number of communities in the route update";
-
-      uses pol-types:attribute-compare-operators;
     }
   }
 
@@ -212,8 +211,6 @@ module ietf-bgp-policy {
       description
         "Value and comparison operations for conditions based on the
         length of the AS path in the route update";
-
-      uses pol-types:attribute-compare-operators;
     }
   }
 
@@ -338,7 +335,7 @@ module ietf-bgp-policy {
 
         leaf-list ext-community-member {
           type union {
-            type bgp-types:bgp-ext-community-type;
+            type rt-types:route-target;
             type bgp-types:bgp-community-regexp-type;
           }
           description
@@ -475,7 +472,7 @@ module ietf-bgp-policy {
 
   grouping set-community-reference-top {
     description
-      "Top-level grouping for referening a community-set in the
+      "Top-level grouping for referencing a community-set in the
       set-community action";
 
     container reference {
@@ -533,7 +530,7 @@ module ietf-bgp-policy {
 
       leaf-list communities {
         type union {
-          type bgp-types:bgp-ext-community-type;
+          type rt-types:route-target;
           type bgp-types:bgp-well-known-community-type;
         }
         description

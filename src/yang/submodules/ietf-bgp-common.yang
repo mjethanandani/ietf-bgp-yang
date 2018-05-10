@@ -1,4 +1,5 @@
 submodule ietf-bgp-common {
+  yang-version "1.1";
   belongs-to ietf-bgp {
     prefix "bgp";
   }
@@ -10,7 +11,6 @@ submodule ietf-bgp-common {
     prefix inet; 
   }
 
-  // meta
   organization
     "IETF IDR Working Group";
 
@@ -18,7 +18,6 @@ submodule ietf-bgp-common {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
      Authors: Keyur Patel,
               Mahesh Jethanandani,
               Susan Hares";
@@ -247,7 +246,7 @@ submodule ietf-bgp-common {
         fraction-digits 2;
       }
       description
-        "An upper-bound on the time thate stale routes will be
+        "An upper-bound on the time that stale routes will be
          retained by a router after a session is restarted. If an
          End-of-RIB (EOR) marker is received prior to this timer
          expiring stale-routes will be flushed upon its receipt - if
@@ -283,16 +282,16 @@ submodule ietf-bgp-common {
 
   grouping bgp-common-use-multiple-paths-ebgp-as-options-config {
     description
-      "Configuration parameters specific to eBGP multipath applicable
+      "Configuration parameters specific to eBGP multi-path applicable
        to all contexts";
 
     leaf allow-multiple-as {
      type boolean;
      default "false";
      description
-      "Allow multipath to use paths from different neighbouring ASes.
+      "Allow multi-path to use paths from different neighboring ASes.
        The default is to only consider multiple paths from the same
-       neighbouring AS.";
+       neighboring AS.";
     }
   }
 
@@ -311,15 +310,15 @@ submodule ietf-bgp-common {
 
       container ebgp {
         description
-          "Multipath parameters for eBGP";
+          "Multi-Path parameters for eBGP";
 
         leaf allow-multiple-as {
           type boolean;
           default "false";
           description
-            "Allow multipath to use paths from different neighbouring
+            "Allow multi-path to use paths from different neighboring
              ASes.  The default is to only consider multiple paths
-             from the same neighbouring AS.";
+             from the same neighboring AS.";
         }
 
         leaf maximum-paths {
@@ -327,20 +326,20 @@ submodule ietf-bgp-common {
           default 1;
           description
             "Maximum number of parallel paths to consider when using
-             BGP multipath. The default is use a single path.";
+             BGP multi-path. The default is use a single path.";
         }
       }
 
       container ibgp {
         description
-          "Multipath parameters for iBGP";
+          "Multi-Path parameters for iBGP";
 
         leaf maximum-paths {
           type uint32;
           default 1;
           description
             "Maximum number of parallel paths to consider when using
-             iBGP multipath. The default is to use a single path";
+             iBGP multi-path. The default is to use a single path";
         }
       }
     }

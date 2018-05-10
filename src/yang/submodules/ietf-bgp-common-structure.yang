@@ -1,5 +1,5 @@
 submodule ietf-bgp-common-structure {
-
+  yang-version "1.1";
   belongs-to ietf-bgp {
     prefix "bgp";
   }
@@ -56,7 +56,7 @@ submodule ietf-bgp-common-structure {
   }
   grouping bgp-common-structure-neighbor-group-ebgp-multihop {
     description
-      "Structural grouping used to include eBGP multihop
+      "Structural grouping used to include eBGP multi-hop
        configuration and state for both BGP neighbors and peer
        groups";
 

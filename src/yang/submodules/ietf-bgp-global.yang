@@ -1,6 +1,7 @@
 submodule ietf-bgp-global {
+  yang-version "1.1";
   belongs-to ietf-bgp {
-    prefix "bgp";
+    prefix bgp;
   }
 
   import ietf-inet-types { 
@@ -10,11 +11,9 @@ submodule ietf-bgp-global {
     prefix yang; 
   }
 
-  // Include common submodule
   include ietf-bgp-common;
   include ietf-bgp-common-multiprotocol;
-
-  // meta
+  
   organization
     "IETF IDR Working Group";
 
@@ -29,7 +28,7 @@ submodule ietf-bgp-global {
 
   description
     "This sub-module contains groupings that are specific to the
-    global context of the OpenConfig BGP module";
+     global context of the BGP module";
 
   revision "YYYY-MM-DD" {
     description

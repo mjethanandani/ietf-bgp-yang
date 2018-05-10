@@ -20,7 +20,7 @@ draft_type := $(suffix $(firstword $(wildcard $(draft).md $(draft).org $(draft).
 
 current_ver := $(shell git tag | grep '$(draft)-[0-9][0-9]' | tail -1 | sed -e"s/.*-//")
 ifeq "${current_ver}" ""
-next_ver ?= 03
+next_ver ?=
 else
 next_ver ?= $(shell printf "%.2d" $$((1$(current_ver)-99)))
 endif
@@ -45,26 +45,24 @@ endif
 ifeq (org,$(draft_type))
 	-rm -f $(draft).xml
 endif
-	rm ../build/*-tree.txt
-	rm ../build/ietf-*\@$(shell date +%Y-%m-%d).yang
+	-rm -f ../src/yang/*\@$(shell date +%Y)-*-*-tree.txt
+	-rm -f ../src/yang/*\@$(shell date +%Y)-*-*.yang
+	-rm -f ../src/yang/submodules/*\@$(shell date +%Y)-*-*.yang
 
-$(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/yang/ietf-bgp-common-structure.yang ../src/yang/ietf-bgp-common.yang ../src/yang/ietf-bgp-global.yang ../src/yang/ietf-bgp-neighbor.yang ../src/yang/ietf-bgp-peer-group.yang ../src/yang/ietf-bgp-policy.yang ../src/yang/ietf-bgp-types.yang ../src/yang/ietf-bgp.yang ../src/yang/ietf-policy-types.yang ../src/yang/ietf-routing-policy.yang
-	-mkdir -p build
-	sed -e"s/$(basename $<)/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-common-multiprotocol.yang > ../build/ietf-bgp-common-multiprotocol\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-common-structure.yang > ../build/ietf-bgp-common-structure\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-common.yang > ../build/ietf-bgp-common\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-global.yang > ../build/ietf-bgp-global\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-neighbor.yang > ../build/ietf-bgp-neighbor\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-peer-group.yang > ../build/ietf-bgp-peer-group\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-policy.yang > ../build/ietf-bgp-policy\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-types.yang > ../build/ietf-bgp-types\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp.yang > ../build/ietf-bgp\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-policy-types.yang > ../build/ietf-policy-types\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-routing-policy.yang > ../build/ietf-routing-policy\@$(shell date +%Y-%m-%d).yang
-        
+$(next).xml: $(draft).xml ../src/yang/submodules/ietf-bgp-common-multiprotocol.yang ../src/yang/submodules/ietf-bgp-common-structure.yang ../src/yang/submodules/ietf-bgp-common.yang ../src/yang/submodules/ietf-bgp-global.yang ../src/yang/submodules/ietf-bgp-neighbor.yang ../src/yang/submodules/ietf-bgp-peer-group.yang ../src/yang/ietf-bgp-policy.yang ../src/yang/ietf-bgp-types.yang ../src/yang/ietf-bgp.yang
+	-mkdir -p ../build
+	sed -e"s/$(basename $<)-latest/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-common-multiprotocol.yang > ../src/yang/submodules/ietf-bgp-common-multiprotocol\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-common-structure.yang > ../src/yang/submodules/ietf-bgp-common-structure\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-common.yang > ../src/yang/submodules/ietf-bgp-common\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-global.yang > ../src/yang/submodules/ietf-bgp-global\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-neighbor.yang > ../src/yang/submodules/ietf-bgp-neighbor\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-peer-group.yang > ../src/yang/submodules/ietf-bgp-peer-group\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-policy.yang > ../src/yang/ietf-bgp-policy\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-types.yang > ../src/yang/ietf-bgp-types\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp.yang > ../src/yang/ietf-bgp\@$(shell date +%Y-%m-%d).yang
 
-	cd ../src; ./gen-trees.sh; cd ..;
+	cd ../src; ./validate-and-gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
 
 .INTERMEDIATE: $(draft).xml
@@ -76,6 +74,7 @@ $(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/
 
 %.txt: %.xml
 	$(xml2rfc) $< -o $@ --text
+	$(idnits) $@
 
 ifeq "$(shell uname -s 2>/dev/null)" "Darwin"
 sed_i := sed -i ''

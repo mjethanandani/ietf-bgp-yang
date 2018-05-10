@@ -1,33 +1,21 @@
 module ietf-bgp {
-
-  yang-version "1";
-
-  // namespace
+  yang-version "1.1";
   namespace "urn:ietf:params:xml:ns:yang:ietf-bgp";
-
   prefix "bgp";
 
-  // import some basic inet types
   import ietf-routing-policy { 
-    prefix rpol; 
+    prefix rpol;
+    reference
+      "RFC ZZZZ: A YANG Data Model for Routing Policy Management";
   }
 
-  // Common: defines the groupings that are common across more than
-  //         one context (where contexts are neighbor, group, global)
   include ietf-bgp-common;
-  // Multiprotocol: defines the groupings that are common across more
-  //                than one context, and relate to Multiprotocol
   include ietf-bgp-common-multiprotocol;
-  // Structure: defines groupings that are shared but are solely used
-  //            for structural reasons.
   include ietf-bgp-common-structure;
-  // Include peer-group/neighbor/global - these define the groupings
-  // that are specific to one context
   include ietf-bgp-neighbor;
   include ietf-bgp-global;
   include ietf-bgp-peer-group;
 
-  // meta
   organization
     "IETF IDR Working Group";
 
@@ -35,23 +23,22 @@ module ietf-bgp {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-	 Authors: Keyur Patel,
-	          Mahesh Jethanandani,
-	          Susan Hares";
+     Authors: Keyur Patel (keyur at arrcus.com),
+              Mahesh Jethanandani (mjethanandani at gmail.com),
+              Susan Hares (shares at ndzh.com";
      
   description
     "This module describes a YANG model for BGP protocol
-    configuration. It is a limited subset of all of the configuration
-    parameters available in the variety of vendor implementations,
-    hence it is expected that it would be augmented with vendor-
-    specific configuration data as needed. Additional modules or
-    submodules to handle other aspects of BGP configuration,
-    including policy, VRFs, VPNs, and additional address families
-    are also expected.
+     configuration. It is a limited subset of all of the configuration
+     parameters available in the variety of vendor implementations,
+     hence it is expected that it would be augmented with vendor-
+     specific configuration data as needed. Additional modules or
+     submodules to handle other aspects of BGP configuration,
+     including policy, VRFs, VPNs, and additional address families
+     are also expected.
 
-    This model supports the following BGP configuration level
-    hierarchy:
+     This model supports the following BGP configuration level
+     hierarchy:
 
       BGP
         |
@@ -80,6 +67,7 @@ module ietf-bgp {
       "Top-level configuration for the BGP router";
 
     container global {
+      presence "Enables global configuration of BGP";
       description
         "Global configuration for the BGP router";
       uses bgp-global-base;

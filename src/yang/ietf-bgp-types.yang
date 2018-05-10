@@ -1,4 +1,5 @@
 module ietf-bgp-types {
+  yang-version "1.1";
   namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-types";
 
   prefix "bgp-types";
@@ -74,7 +75,7 @@ module ietf-bgp-types {
   identity AFI_SAFI_TYPE {
     description
       "Base identity type for AFI,SAFI tuples for BGP-4";
-    reference "RFC4760 - multiprotocol extensions for BGP-4";
+    reference "RFC4760 - multi-protocol extensions for BGP-4";
   }
 
   identity IPV4_UNICAST {
@@ -186,7 +187,7 @@ module ietf-bgp-types {
     base BGP_WELL_KNOWN_STD_COMMUNITY;
     description
       "An autonomous system receiving NLRI tagged with this community
-      is advised not to readvertise the NLRI to external bi-lateral
+      is advised not to re-advertise the NLRI to external bi-lateral
       peer autonomous systems. An AS may also filter received NLRI
       from bilateral peer sessions when they are tagged with this
       community value";
@@ -236,7 +237,7 @@ module ietf-bgp-types {
       }
     }
     description
-      "Type definition for standard commmunity attributes";
+      "Type definition for standard community attributes";
     reference "RFC 1997 - BGP Communities Attribute";
   }
 

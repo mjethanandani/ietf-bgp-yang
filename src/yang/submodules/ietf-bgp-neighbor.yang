@@ -1,4 +1,5 @@
 submodule ietf-bgp-neighbor {
+  yang-version "1.1";
   belongs-to ietf-bgp {
     prefix "bgp";
   }
@@ -48,7 +49,7 @@ submodule ietf-bgp-neighbor {
 
   grouping bgp-neighbor-use-multiple-paths {
     description
-      "Multipath configuration and state applicable to a BGP
+      "Multi-path configuration and state applicable to a BGP
        neighbor";
 
     container use-multiple-paths {
@@ -60,7 +61,7 @@ submodule ietf-bgp-neighbor {
 
       container ebgp {
         description
-          "Multipath configuration for eBGP";
+          "Multi-path configuration for eBGP";
         uses bgp-common-use-multiple-paths-ebgp-as-options-config;
       }
     }
@@ -207,7 +208,7 @@ submodule ietf-bgp-neighbor {
           enum ACTIVE {
             description
               "neighbor is down, and the local system is awaiting a
-               conncetion from the remote peer";
+               connection from the remote peer";
           }
           enum OPENSENT {
             description
