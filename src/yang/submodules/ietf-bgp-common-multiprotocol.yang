@@ -38,7 +38,7 @@ submodule ietf-bgp-common-multiprotocol {
       "RFC XXX, BGP Model for Service Provider Network.";
   }
 
-  grouping bgp-common-mp-afi-safi-graceful-restart-config {
+  grouping mp-afi-safi-graceful-restart-config {
     description
       "BGP graceful restart parameters that apply on a per-AFI-SAFI
       basis";
@@ -52,7 +52,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
   }
 
-  grouping bgp-common-mp-afi-safi-config {
+  grouping mp-afi-safi-config {
     description
       "Configuration parameters used for all BGP AFI-SAFIs";
 
@@ -72,7 +72,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
   }
 
-  grouping bgp-common-mp-all-afi-safi-list-contents {
+  grouping mp-all-afi-safi-list-contents {
     description
       "A common grouping used for contents of the list that is used
       for AFI-SAFI entries";
@@ -80,20 +80,20 @@ submodule ietf-bgp-common-multiprotocol {
     // import and export policy included for the afi/safi
     uses rpol:apply-policy-group;
 
-    uses bgp-common-mp-ipv4-unicast-group;
-    uses bgp-common-mp-ipv6-unicast-group;
-    uses bgp-common-mp-ipv4-labeled-unicast-group;
-    uses bgp-common-mp-ipv6-labeled-unicast-group;
-    uses bgp-common-mp-l3vpn-ipv4-unicast-group;
-    uses bgp-common-mp-l3vpn-ipv6-unicast-group;
-    uses bgp-common-mp-l3vpn-ipv4-multicast-group;
-    uses bgp-common-mp-l3vpn-ipv6-multicast-group;
-    uses bgp-common-mp-l2vpn-vpls-group;
-    uses bgp-common-mp-l2vpn-evpn-group;
+    uses mp-ipv4-unicast-group;
+    uses mp-ipv6-unicast-group;
+    uses mp-ipv4-labeled-unicast-group;
+    uses mp-ipv6-labeled-unicast-group;
+    uses mp-l3vpn-ipv4-unicast-group;
+    uses mp-l3vpn-ipv6-unicast-group;
+    uses mp-l3vpn-ipv4-multicast-group;
+    uses mp-l3vpn-ipv6-multicast-group;
+    uses mp-l2vpn-vpls-group;
+    uses mp-l2vpn-evpn-group;
   }
 
   // Groupings relating to each address family
-  grouping bgp-common-mp-ipv4-unicast-group {
+  grouping mp-ipv4-unicast-group {
     description
       "Group for IPv4 Unicast configuration options";
 
@@ -107,13 +107,13 @@ submodule ietf-bgp-common-multiprotocol {
       description "IPv4 unicast configuration options";
 
       // include common IPv[46] unicast options
-      uses bgp-common-mp-ipv4-ipv6-unicast-common;
+      uses mp-ipv4-ipv6-unicast-common;
 
       // placeholder for IPv4 unicast  specific configuration
     }
   }
 
-  grouping bgp-common-mp-ipv6-unicast-group {
+  grouping mp-ipv6-unicast-group {
     description
       "Group for IPv6 Unicast configuration options";
 
@@ -127,14 +127,14 @@ submodule ietf-bgp-common-multiprotocol {
       description "IPv6 unicast configuration options";
 
       // include common IPv[46] unicast options
-      uses bgp-common-mp-ipv4-ipv6-unicast-common;
+      uses mp-ipv4-ipv6-unicast-common;
 
       // placeholder for IPv6 unicast specific configuration
       // options
     }
   }
 
-  grouping bgp-common-mp-ipv4-labeled-unicast-group {
+  grouping mp-ipv4-labeled-unicast-group {
     description
       "Group for IPv4 Labeled Unicast configuration options";
 
@@ -147,14 +147,14 @@ submodule ietf-bgp-common-multiprotocol {
 
       description "IPv4 Labeled Unicast configuration options";
 
-      uses bgp-common-mp-all-afi-safi-common;
+      uses mp-all-afi-safi-common;
 
       // placeholder for IPv4 Labeled Unicast specific config
       // options
     }
   }
 
-  grouping bgp-common-mp-ipv6-labeled-unicast-group {
+  grouping mp-ipv6-labeled-unicast-group {
     description
       "Group for IPv6 Labeled Unicast configuration options";
 
@@ -167,14 +167,14 @@ submodule ietf-bgp-common-multiprotocol {
 
       description "IPv6 Labeled Unicast configuration options";
 
-      uses bgp-common-mp-all-afi-safi-common;
+      uses mp-all-afi-safi-common;
 
       // placeholder for IPv6 Labeled Unicast specific config
       // options.
     }
   }
 
-  grouping bgp-common-mp-l3vpn-ipv4-unicast-group {
+  grouping mp-l3vpn-ipv4-unicast-group {
     description
       "Group for IPv4 Unicast L3VPN configuration options";
 
@@ -188,13 +188,13 @@ submodule ietf-bgp-common-multiprotocol {
       description "Unicast IPv4 L3VPN configuration options";
 
       // include common L3VPN configuration options
-      uses bgp-common-mp-l3vpn-ipv4-ipv6-unicast-common;
+      uses mp-l3vpn-ipv4-ipv6-unicast-common;
 
       // placeholder for IPv4 Unicast L3VPN specific config options.
     }
   }
 
-  grouping bgp-common-mp-l3vpn-ipv6-unicast-group {
+  grouping mp-l3vpn-ipv6-unicast-group {
     description
       "Group for IPv6 Unicast L3VPN configuration options";
 
@@ -208,14 +208,14 @@ submodule ietf-bgp-common-multiprotocol {
       description "Unicast IPv6 L3VPN configuration options";
 
       // include common L3VPN configuration options
-      uses bgp-common-mp-l3vpn-ipv4-ipv6-unicast-common;
+      uses mp-l3vpn-ipv4-ipv6-unicast-common;
 
       // placeholder for IPv6 Unicast L3VPN specific configuration
       // options
     }
   }
 
-  grouping bgp-common-mp-l3vpn-ipv4-multicast-group {
+  grouping mp-l3vpn-ipv4-multicast-group {
     description
       "Group for IPv4 L3VPN multicast configuration options";
 
@@ -229,14 +229,14 @@ submodule ietf-bgp-common-multiprotocol {
       description "Multicast IPv4 L3VPN configuration options";
 
       // include common L3VPN multicast options
-      uses bgp-common-mp-l3vpn-ipv4-ipv6-multicast-common;
+      uses mp-l3vpn-ipv4-ipv6-multicast-common;
 
       // placeholder for IPv4 Multicast L3VPN specific configuration
       // options
     }
   }
 
-  grouping bgp-common-mp-l3vpn-ipv6-multicast-group {
+  grouping mp-l3vpn-ipv6-multicast-group {
     description
       "Group for IPv6 L3VPN multicast configuration options";
 
@@ -249,14 +249,14 @@ submodule ietf-bgp-common-multiprotocol {
       description "Multicast IPv6 L3VPN configuration options";
 
       // include common L3VPN multicast options
-      uses bgp-common-mp-l3vpn-ipv4-ipv6-multicast-common;
+      uses mp-l3vpn-ipv4-ipv6-multicast-common;
 
       // placeholder for IPv6 Multicast L3VPN specific configuration
       // options
     }
   }
 
-  grouping bgp-common-mp-l2vpn-vpls-group {
+  grouping mp-l2vpn-vpls-group {
     description
       "Group for BGP-signalled VPLS configuration options";
 
@@ -270,14 +270,14 @@ submodule ietf-bgp-common-multiprotocol {
       description "BGP-signalled VPLS configuration options";
 
       // include common L2VPN options
-      uses bgp-common-mp-l2vpn-common;
+      uses mp-l2vpn-common;
 
       // placeholder for BGP-signalled VPLS specific configuration
       // options
     }
   }
 
-  grouping bgp-common-mp-l2vpn-evpn-group {
+  grouping mp-l2vpn-evpn-group {
     description
       "Group for BGP EVPN configuration options";
 
@@ -291,14 +291,14 @@ submodule ietf-bgp-common-multiprotocol {
       description "BGP EVPN configuration options";
 
       // include common L2VPN options
-      uses bgp-common-mp-l2vpn-common;
+      uses mp-l2vpn-common;
 
       // placeholder for BGP EVPN specific configuration options
     }
   }
 
   // Common groupings across multiple AFI,SAFIs
-  grouping bgp-common-mp-all-afi-safi-common {
+  grouping mp-all-afi-safi-common {
     description
       "Grouping for configuration common to all AFI,SAFI";
 
@@ -332,13 +332,13 @@ submodule ietf-bgp-common-multiprotocol {
     }
   }
 
-  grouping bgp-common-mp-ipv4-ipv6-unicast-common {
+  grouping mp-ipv4-ipv6-unicast-common {
     description
       "Common configuration that is applicable for IPv4 and IPv6
       unicast";
 
     // include common afi-safi options.
-    uses bgp-common-mp-all-afi-safi-common;
+    uses mp-all-afi-safi-common;
 
     // configuration options that are specific to IPv[46] unicast
     leaf send-default-route {
@@ -349,38 +349,38 @@ submodule ietf-bgp-common-multiprotocol {
     }
   }
 
-  grouping bgp-common-mp-l3vpn-ipv4-ipv6-unicast-common {
+  grouping mp-l3vpn-ipv4-ipv6-unicast-common {
     description
       "Common configuration applied across L3VPN for IPv4
        and IPv6";
 
     // placeholder -- specific configuration options that are generic
     // across IPv[46] unicast address families.
-    uses bgp-common-mp-all-afi-safi-common;
+    uses mp-all-afi-safi-common;
   }
 
-  grouping bgp-common-mp-l3vpn-ipv4-ipv6-multicast-common {
+  grouping mp-l3vpn-ipv4-ipv6-multicast-common {
     description
       "Common configuration applied across L3VPN for IPv4
       and IPv6";
 
     // placeholder -- specific configuration options that are
     // generic across IPv[46] multicast address families.
-    uses bgp-common-mp-all-afi-safi-common;
+    uses mp-all-afi-safi-common;
   }
 
-  grouping bgp-common-mp-l2vpn-common {
+  grouping mp-l2vpn-common {
     description
       "Common configuration applied across L2VPN address
       families";
 
     // placeholder -- specific configuration options that are
     // generic across L2VPN address families
-    uses bgp-common-mp-all-afi-safi-common;
+    uses mp-all-afi-safi-common;
   }
 
   // Config groupings for common groups
-  grouping bgp-common-mp-all-afi-safi-common-prefix-limit-config {
+  grouping mp-all-afi-safi-common-prefix-limit-config {
     description
       "Configuration parameters relating to prefix-limits for an
       AFI-SAFI";

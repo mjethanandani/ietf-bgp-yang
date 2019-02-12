@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc category="std" docName="draft-ietf-idr-bgp-model-03" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-idr-bgp-model-04" ipr="trust200902">
   <?rfc toc="yes"?>
 
   <front>
-    <title abbrev="BGP Model">BGP Model for Service Provider Networks</title>
+    <title abbrev="BGP YANG Model">BGP YANG Model for Service Provider
+    Networks</title>
 
     <author fullname="Keyur Patel" initials="K.P." surname="Patel">
       <organization>Arrcus</organization>
@@ -26,7 +27,7 @@
 
     <author fullname="Mahesh Jethanandani" initials="M.J."
             surname="Jethanandani">
-      <organization/>
+      <organization>VMware</organization>
 
       <address>
         <postal>
@@ -71,7 +72,7 @@
       </address>
     </author>
 
-    <date day="10" month="May" year="2018"/>
+    <date day="28" month="February" year="2019"/>
 
     <area>Routing</area>
 
@@ -155,6 +156,22 @@
         the model specifies only a limited set of defaults and ranges with the
         expectation of being more prescriptive in future versions based on
         actual operator use.</t>
+      </section>
+
+      <section title="Note to RFC Editor">
+        <t>This document uses several placeholder values throughout the
+        document. Please replace them as follows and remove this note before
+        publication.</t>
+
+        <t>RFC XXXX, where XXXX is the number assigned to this document at the
+        time of publication.</t>
+
+        <t>YYYY-MM-DD with the actual date of the publication of this
+        document.</t>
+
+        <t>RFC ZZZZ, where ZZZZ is the number assigned to <xref
+        target="I-D.ietf-rtgwg-policy-model">A YANG Data Model for Routing
+        Policy Management</xref>.</t>
       </section>
     </section>
 
@@ -255,18 +272,18 @@
         <figure>
           <artwork><![CDATA[
         +--rw bgp!
-          +--rw global
+          +--rw global!
              +--rw afi-safis
                 +--rw afi-safi* [afi-safi-name]
-                   +--rw afi-safi-name    -> ../config/afi-safi-name
+                   +--rw afi-safi-name              identityref
                    |
                    +--rw ipv4-unicast
                    |     ...
                    +--rw ipv6-unicast
                    |     ...
-                   +--rw ipv4-labelled-unicast
+                   +--rw ipv4-labeled-unicast
                    |     ...
-                   +--rw ipv6-labelled-unicast
+                   +--rw ipv6-labeled-unicast
                    |     ...
                    +--rw l3vpn-ipv4-unicast
                    |     ...
@@ -285,7 +302,7 @@
       </section>
 
       <section anchor="overview.policy" title="Policy configuration overview">
-        <t>The BGP policy configuration model references the generic YANG
+        <t>The BGP policy configuration model augments the generic YANG
         routing policy model described in <xref
         target="I-D.ietf-rtgwg-policy-model">A YANG Data Model for Routing
         Policy Management </xref>, which represents a condition-action policy
@@ -314,10 +331,11 @@
           <artwork><![CDATA[
            +--rw bgp
               +--rw global
-              |  +--rw afi-safi
-              |  |  +--rw afi-safi* [afi-safi-name]
-              |  |     +--rw apply-policy
-              |  +--rw apply-policy
+              |  +--rw afi-safis
+              |     +--rw afi-safi
+              |     |  +--rw afi-safi* [afi-safi-name]
+              |     |     +--rw apply-policy
+              |     +--rw apply-policy
               +--rw neighbors
               |  +--rw neighbor* [neighbor-address]
               |     +--rw afi-safi
@@ -336,19 +354,10 @@
     </section>
 
     <section title="Relation to other YANG data models">
-      <t>The BGP model is intended to work within a larger framework model,
-      such as the Network Instance model <xref
-      target="I-D.ietf-rtgwg-ni-model">YANG Model for Network Instance </xref>
-      which provides a comprehensive model for defining VRFs, associated
-      routing protocols, multiple protocol instances, and inter-protocol and
-      inter-instance routing policies. The current version of the model
-      imports and instantiates the BGP model in its tree at
-      /network-instances/network-instance/vrf-root/rt:routing/control-plane-protocols/control-plane-protocol/bgp/...</t>
-
-      <t>It is also possible to integrate the BGP model with the Routing
-      Management model <xref target="RFC8349">A YANG Data Model for Routing
-      Management </xref> which defines the notion of routing instances, or
-      VRFs.</t>
+      <t>The BGP model augments the Routing Management model <xref
+      target="RFC8349">A YANG Data Model for Routing Management </xref> which
+      defines the notion of routing, routing protocols, and routing instances,
+      or VRFs.</t>
     </section>
 
     <section title="Security Considerations">
@@ -359,7 +368,7 @@
       transport layer, and the mandatory-to-implement secure transport is
       <xref target="RFC6242">Secure Shell (SSH)</xref>. The lowest RESTCONF
       layer is HTTPS, and the mandatory-to-implement secure transport is <xref
-      target="RFC5246">TLS</xref>. The <xref target="RFC8341">NETCONF Access
+      target="RFC8446">TLS</xref>. The <xref target="RFC8341">NETCONF Access
       Control Model (NACM) </xref> provides the means to restrict access for
       particular NETCONF or RESTCONF users to a preconfigured subset of all
       available NETCONF or RESTCONF protocol operations and content.</t>
@@ -466,7 +475,7 @@ reference: RFC XXXX
       <figure>
         <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../src/yang/ietf-bgp@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
@@ -475,7 +484,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-bgp@YYYY-MM-DD.yang)
       <figure>
         <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
@@ -484,7 +493,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
       <figure>
         <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
@@ -493,7 +502,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-common-multiprotocol@YYYY-
       <figure>
         <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-structure@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
@@ -502,7 +511,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-common-structure@YYYY-MM-D
       <figure>
         <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-peer-group@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-peer-group@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-peer-group@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
@@ -511,7 +520,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-peer-group@YYYY-MM-DD.yang
       <figure>
         <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-neighbor@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
@@ -520,7 +529,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
       <figure>
         <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-global@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-global@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-global@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
@@ -531,7 +540,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/submodules/ietf-bgp-global@YYYY-MM-DD.yang)
       <figure>
         <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-types@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../src/yang/ietf-bgp-types@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
 <CODE ENDS>
        
         ]]></artwork>
@@ -542,7 +551,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-bgp-types@YYYY-MM-DD.yang)
       <figure>
         <artwork><![CDATA[
     <CODE BEGINS> file "ietf-bgp-policy@YYYY-MM-DD.yang"
-    INSERT_TEXT_FROM_FILE(../src/yang/ietf-bgp-policy@YYYY-MM-DD.yang)
+    INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD.yang)
     <CODE ENDS>
     ]]></artwork>
       </figure>
@@ -562,6 +571,9 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-bgp-types@YYYY-MM-DD.yang)
       Moberg, Ashok Narayanan, Einar Nilsen-Nygaard, Adam Simpson, Puneet
       Sood, Jason Sterne, Jeff Tantsura, Jim Uttaro, and Gunter
       Vandevelde.</t>
+
+      <t>Special thanks to Robert Wilton who helped convert the YANG models to
+      a NMDA compatible model.</t>
     </section>
   </middle>
 
@@ -583,8 +595,6 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-bgp-types@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.5065'?>
 
-      <?rfc include='reference.RFC.5246'?>
-
       <?rfc include='reference.RFC.6020'?>
 
       <?rfc include='reference.RFC.6241'?>
@@ -603,7 +613,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/ietf-bgp-types@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.8349'?>
 
-      <?rfc include='reference.I-D.ietf-rtgwg-ni-model'?>
+      <?rfc include='reference.RFC.8446'?>
     </references>
 
     <references title="Informative references">

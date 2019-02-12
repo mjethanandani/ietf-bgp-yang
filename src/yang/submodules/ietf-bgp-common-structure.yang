@@ -35,7 +35,7 @@ submodule ietf-bgp-common-structure {
       "RFC XXX, BGP Model for Service Provider Network.";
   }
 
-  grouping bgp-common-structure-neighbor-group-logging-options {
+  grouping structure-neighbor-group-logging-options {
     description
       "Structural grouping used to include error handling
        configuration and state for both BGP neighbors and groups";
@@ -54,7 +54,7 @@ submodule ietf-bgp-common-structure {
       }
     }
   }
-  grouping bgp-common-structure-neighbor-group-ebgp-multihop {
+  grouping structure-neighbor-group-ebgp-multihop {
     description
       "Structural grouping used to include eBGP multi-hop
        configuration and state for both BGP neighbors and peer
@@ -83,7 +83,7 @@ submodule ietf-bgp-common-structure {
     }
   }
 
-  grouping bgp-common-structure-neighbor-group-route-reflector {
+  grouping structure-neighbor-group-route-reflector {
     description
       "Structural grouping used to include route reflector
        configuration and state for both BGP neighbors and peer
@@ -111,7 +111,7 @@ submodule ietf-bgp-common-structure {
     }
   }
 
-  grouping bgp-common-structure-neighbor-group-as-path-options {
+  grouping structure-neighbor-group-as-path-options {
     description
       "Structural grouping used to include AS_PATH manipulation
        configuration and state for both BGP neighbors and peer
@@ -140,7 +140,7 @@ submodule ietf-bgp-common-structure {
     }
   }
 
-  grouping bgp-common-structure-neighbor-group-add-paths {
+  grouping structure-neighbor-group-add-paths {
     description
       "Structural grouping used to include ADD-PATHs configuration
        and state for both BGP neighbors and peer groups";

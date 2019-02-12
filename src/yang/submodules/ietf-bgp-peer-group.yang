@@ -62,18 +62,18 @@ submodule ietf-bgp-peer-group {
         "AFI,SAFI configuration available for the
         neighbour or group";
 
-      uses bgp-common-mp-afi-safi-config;
+      uses mp-afi-safi-config;
 
       container graceful-restart {
         description
           "Parameters relating to BGP graceful-restart";
 
-        uses bgp-common-mp-afi-safi-graceful-restart-config;
+        uses mp-afi-safi-graceful-restart-config;
       }
 
-      uses bgp-common-route-selection-options;
-      uses bgp-common-global-group-use-multiple-paths;
-      uses bgp-common-mp-all-afi-safi-list-contents;
+      uses route-selection-options;
+      uses global-group-use-multiple-paths;
+      uses mp-all-afi-safi-list-contents;
     }
   }
 
@@ -82,43 +82,43 @@ submodule ietf-bgp-peer-group {
       "Parameters related to a BGP group";
 
     uses bgp-peer-group-config;
-    uses bgp-common-neighbor-group-config;
-    uses bgp-common-state;
+    uses neighbor-group-config;
+    uses state;
 
     container timers {
       description
         "Timers related to a BGP peer-group";
 
-      uses bgp-common-neighbor-group-timers-config;
+      uses neighbor-group-timers-config;
     }
 
     container transport {
       description
         "Transport session parameters for the BGP peer-group";
 
-      uses bgp-common-neighbor-group-transport-config;
+      uses neighbor-group-transport-config;
     }
 
     container error-handling {
       description
         "Error handling parameters used for the BGP peer-group";
 
-      uses bgp-common-neighbor-group-error-handling-config;
+      uses neighbor-group-error-handling-config;
     }
 
     container graceful-restart {
       description
         "Parameters relating the graceful restart mechanism for BGP";
 
-      uses bgp-common-graceful-restart-config;
+      uses graceful-restart-config;
     }
 
-    uses bgp-common-structure-neighbor-group-logging-options;
-    uses bgp-common-structure-neighbor-group-ebgp-multihop;
-    uses bgp-common-structure-neighbor-group-route-reflector;
-    uses bgp-common-structure-neighbor-group-as-path-options;
-    uses bgp-common-structure-neighbor-group-add-paths;
-    uses bgp-common-global-group-use-multiple-paths;
+    uses structure-neighbor-group-logging-options;
+    uses structure-neighbor-group-ebgp-multihop;
+    uses structure-neighbor-group-route-reflector;
+    uses structure-neighbor-group-as-path-options;
+    uses structure-neighbor-group-add-paths;
+    uses global-group-use-multiple-paths;
     uses rpol:apply-policy-group;
 
     container afi-safis {

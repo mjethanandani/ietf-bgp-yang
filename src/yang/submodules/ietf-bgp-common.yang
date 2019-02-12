@@ -32,10 +32,10 @@ submodule ietf-bgp-common {
     description
       "Initial Version";
     reference 
-      "RFC XXX, BGP Model for Service Provider Network.";
+      "RFC XXXX, BGP Model for Service Provider Network.";
   }
 
-  grouping bgp-common-neighbor-group-timers-config {
+  grouping neighbor-group-timers-config {
     description
       "Config parameters related to timers associated with the BGP
        peer";
@@ -92,7 +92,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-neighbor-group-config {
+  grouping neighbor-group-config {
     description
       "Neighbor level configuration items.";
 
@@ -160,7 +160,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-neighbor-group-transport-config {
+  grouping neighbor-group-transport-config {
     description
       "Configuration parameters relating to the transport protocol
        used by the BGP session to the peer";
@@ -203,7 +203,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-neighbor-group-error-handling-config {
+  grouping neighbor-group-error-handling-config {
     description
       "Configuration parameters relating to enhanced error handling
        behaviours for BGP";
@@ -219,7 +219,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-graceful-restart-config {
+  grouping graceful-restart-config {
     description
       "Configuration parameters relating to BGP graceful restart.";
 
@@ -265,7 +265,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-use-multiple-paths-config {
+  grouping use-multiple-paths-config {
     description
       "Generic configuration options relating to use of multiple
        paths for a referenced AFI-SAFI, group or neighbor";
@@ -280,7 +280,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-use-multiple-paths-ebgp-as-options-config {
+  grouping use-multiple-paths-ebgp-as-options-config {
     description
       "Configuration parameters specific to eBGP multi-path applicable
        to all contexts";
@@ -295,7 +295,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-global-group-use-multiple-paths {
+  grouping global-group-use-multiple-paths {
     description
       "Common grouping used for both global and groups which provides
        configuration and state parameters relating to use of multiple
@@ -306,7 +306,7 @@ submodule ietf-bgp-common {
         "Parameters related to the use of multiple paths for the
         same NLRI";
 
-      uses bgp-common-use-multiple-paths-config;
+      uses use-multiple-paths-config;
 
       container ebgp {
         description
@@ -345,7 +345,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-route-selection-options {
+  grouping route-selection-options {
     description
       "Configuration and state relating to route selection options";
 
@@ -408,7 +408,7 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping bgp-common-state {
+  grouping state {
     description
       "Grouping containing common counters relating to prefixes and
        paths";

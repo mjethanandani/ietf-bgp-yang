@@ -3,6 +3,16 @@ module ietf-bgp {
   namespace "urn:ietf:params:xml:ns:yang:ietf-bgp";
   prefix "bgp";
 
+  /*
+   * Import and Include
+   */
+  import ietf-routing {
+    prefix "rt";
+    reference
+      "RFC 8349 - A YANG Data Model for Routing Management
+       (NMDA Version)";
+  }
+
   import ietf-routing-policy { 
     prefix rpol;
     reference
@@ -60,30 +70,68 @@ module ietf-bgp {
   }
 
   /*
-   * Groupings
+   * Identity
    */
-  container bgp {
+  identity bgp-protocol {
+    base "rt:routing-protocol";
     description
-      "Top-level configuration for the BGP router";
+      "BGP protocol.";
+  }
 
-    container global {
-      presence "Enables global configuration of BGP";
-      description
-        "Global configuration for the BGP router";
-      uses bgp-global-base;
-      uses rpol:apply-policy-group;
-    }
+  /*
+   * Containers
+   */
 
-    container neighbors {
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol" {
+    when "derived-from(rt:type, 'bgp-protocol')" {
       description
-        "Configuration for BGP neighbors";
-      uses bgp-neighbor-list;
+        "This augmentation is valid for a routing protocol
+         instance of BGP.";
     }
+    description
+      "BGP protocol augmentation of ietf-routing module
+       control-plane-protocol.";
 
-    container peer-groups {
+    container bgp {
       description
-        "Configuration for BGP peer-groups";
-      uses bgp-peer-group-list;
+        "Top-level configuration for the BGP router";
+
+      container global {
+        presence "Enables global configuration of BGP";
+        description
+          "Global configuration for the BGP router";
+        uses bgp-global-base;
+        uses rpol:apply-policy-group;
+      }
+
+      container neighbors {
+        description
+          "Configuration for BGP neighbors";
+        uses bgp-neighbor-list;
+      }
+
+      container peer-groups {
+        description
+          "Configuration for BGP peer-groups";
+        uses bgp-peer-group-list;
+      }
     }
+  }
+
+  grouping route-content {
+    description
+      "This grouping defines BGP specific route attributes.";
+  }
+
+  augment "/rt:routing-state/rt:ribs/rt:rib/rt:routes/rt:route" {
+    when "derived-from(rt:source-protocol, 'bgp-protocol')" {
+      description
+        "This augmentation is only valid for a routes whose
+         source protocol is BGP.";
+    }
+    description
+      "BGP-specific route attributes.";
+    uses route-content;
   }
 }

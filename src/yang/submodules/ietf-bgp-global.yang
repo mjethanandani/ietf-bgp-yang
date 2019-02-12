@@ -64,7 +64,7 @@ submodule ietf-bgp-global {
     description
       "Operational state parameters for the BGP neighbor";
 
-    uses bgp-common-state;
+    uses state;
   }
 
   grouping bgp-global-default-route-distance-config {
@@ -129,19 +129,19 @@ submodule ietf-bgp-global {
         "AFI,SAFI configuration available for the
         neighbour or group";
 
-      uses bgp-common-mp-afi-safi-config;
-      uses bgp-common-state;
+      uses mp-afi-safi-config;
+      uses state;
 
       container graceful-restart {
         description
           "Parameters relating to BGP graceful-restart";
   
-        uses bgp-common-mp-afi-safi-graceful-restart-config;
+        uses mp-afi-safi-graceful-restart-config;
       }
 
-      uses bgp-common-route-selection-options;
-      uses bgp-common-global-group-use-multiple-paths;
-      uses bgp-common-mp-all-afi-safi-list-contents;
+      uses route-selection-options;
+      uses global-group-use-multiple-paths;
+      uses mp-all-afi-safi-list-contents;
     }
   }
 
@@ -173,11 +173,11 @@ submodule ietf-bgp-global {
     container graceful-restart {
       description
         "Parameters relating the graceful restart mechanism for BGP";
-      uses bgp-common-graceful-restart-config;
+      uses graceful-restart-config;
     }
 
-    uses bgp-common-global-group-use-multiple-paths;
-    uses bgp-common-route-selection-options;
+    uses global-group-use-multiple-paths;
+    uses route-selection-options;
 
     container afi-safis {
       description
