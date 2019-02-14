@@ -120,7 +120,7 @@
         policy features are intended to be used with the general routing
         policy model defined in <xref target="I-D.ietf-rtgwg-policy-model">A
         YANG Data Model for Routing Policy Management </xref>. The model
-        supports the <xref target="RFC8342">NMDA</xref> architecture.</t>
+        conforms to the <xref target="RFC8342">NMDA</xref> architecture.</t>
 
         <t>For the base BGP features, the focus of the model described in this
         document is on providing configuration and operational state
@@ -185,7 +185,7 @@
           hierarchy.</t>
 
           <t>multiprotocol configuration -- configuration affecting individual
-          address-families within BGP <xref target="RFC4760">Multiprotocl
+          address-families within BGP <xref target="RFC4760">Multiprotocol
           Extensions for BGP-4 </xref>.</t>
 
           <t>neighbor configuration -- configuration affecting an individual

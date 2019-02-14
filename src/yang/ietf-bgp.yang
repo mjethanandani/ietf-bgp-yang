@@ -118,20 +118,4 @@ module ietf-bgp {
       }
     }
   }
-
-  grouping route-content {
-    description
-      "This grouping defines BGP specific route attributes.";
-  }
-
-  augment "/rt:routing-state/rt:ribs/rt:rib/rt:routes/rt:route" {
-    when "derived-from(rt:source-protocol, 'bgp-protocol')" {
-      description
-        "This augmentation is only valid for a routes whose
-         source protocol is BGP.";
-    }
-    description
-      "BGP-specific route attributes.";
-    uses route-content;
-  }
 }

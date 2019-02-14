@@ -41,14 +41,14 @@ submodule ietf-bgp-common-multiprotocol {
   grouping mp-afi-safi-graceful-restart-config {
     description
       "BGP graceful restart parameters that apply on a per-AFI-SAFI
-      basis";
+       basis";
 
     leaf enabled {
       type boolean;
       default false;
       description
         "This leaf indicates whether graceful-restart is enabled for
-        this AFI-SAFI";
+         this AFI-SAFI";
     }
   }
 
@@ -58,7 +58,7 @@ submodule ietf-bgp-common-multiprotocol {
 
     leaf afi-safi-name {
       type identityref {
-        base bgp-types:AFI_SAFI_TYPE;
+        base bgp-types:afi-safi-type;
       }
       description "AFI,SAFI";
     }
@@ -80,51 +80,31 @@ submodule ietf-bgp-common-multiprotocol {
     // import and export policy included for the afi/safi
     uses rpol:apply-policy-group;
 
-    uses mp-ipv4-unicast-group;
-    uses mp-ipv6-unicast-group;
-    uses mp-ipv4-labeled-unicast-group;
-    uses mp-ipv6-labeled-unicast-group;
-    uses mp-l3vpn-ipv4-unicast-group;
-    uses mp-l3vpn-ipv6-unicast-group;
-    uses mp-l3vpn-ipv4-multicast-group;
-    uses mp-l3vpn-ipv6-multicast-group;
-    uses mp-l2vpn-vpls-group;
-    uses mp-l2vpn-evpn-group;
-  }
-
-  // Groupings relating to each address family
-  grouping mp-ipv4-unicast-group {
-    description
-      "Group for IPv4 Unicast configuration options";
-
     container ipv4-unicast {
       when "../afi-safi-name = 'bgp-types:IPV4_UNICAST'" {
         description
           "Include this container for IPv4 Unicast specific
-          configuration";
+           configuration";
       }
 
-      description "IPv4 unicast configuration options";
+      description
+        "IPv4 unicast configuration options";
 
       // include common IPv[46] unicast options
       uses mp-ipv4-ipv6-unicast-common;
 
       // placeholder for IPv4 unicast  specific configuration
     }
-  }
-
-  grouping mp-ipv6-unicast-group {
-    description
-      "Group for IPv6 Unicast configuration options";
 
     container ipv6-unicast {
       when "../afi-safi-name = 'bgp-types:IPV6_UNICAST'" {
         description
           "Include this container for IPv6 Unicast specific
-          configuration";
+           configuration";
       }
 
-      description "IPv6 unicast configuration options";
+      description
+        "IPv6 unicast configuration options";
 
       // include common IPv[46] unicast options
       uses mp-ipv4-ipv6-unicast-common;
@@ -132,80 +112,64 @@ submodule ietf-bgp-common-multiprotocol {
       // placeholder for IPv6 unicast specific configuration
       // options
     }
-  }
-
-  grouping mp-ipv4-labeled-unicast-group {
-    description
-      "Group for IPv4 Labeled Unicast configuration options";
 
     container ipv4-labeled-unicast {
       when "../afi-safi-name = 'bgp-types:IPV4_LABELED_UNICAST'" {
         description
           "Include this container for IPv4 Labeled Unicast specific
-          configuration";
+           configuration";
       }
 
-      description "IPv4 Labeled Unicast configuration options";
+      description
+        "IPv4 Labeled Unicast configuration options";
 
       uses mp-all-afi-safi-common;
 
       // placeholder for IPv4 Labeled Unicast specific config
       // options
     }
-  }
-
-  grouping mp-ipv6-labeled-unicast-group {
-    description
-      "Group for IPv6 Labeled Unicast configuration options";
 
     container ipv6-labeled-unicast {
       when "../afi-safi-name = 'bgp-types:IPV6_LABELED_UNICAST'" {
         description
           "Include this container for IPv6 Labeled Unicast specific
-          configuration";
+           configuration";
       }
 
-      description "IPv6 Labeled Unicast configuration options";
+      description
+        "IPv6 Labeled Unicast configuration options";
 
       uses mp-all-afi-safi-common;
 
       // placeholder for IPv6 Labeled Unicast specific config
       // options.
     }
-  }
-
-  grouping mp-l3vpn-ipv4-unicast-group {
-    description
-      "Group for IPv4 Unicast L3VPN configuration options";
 
     container l3vpn-ipv4-unicast {
       when "../afi-safi-name = 'bgp-types:L3VPN_IPV4_UNICAST'" {
         description
           "Include this container for IPv4 Unicast L3VPN specific
-          configuration";
+           configuration";
       }
 
-      description "Unicast IPv4 L3VPN configuration options";
+      description
+        "Unicast IPv4 L3VPN configuration options";
 
       // include common L3VPN configuration options
       uses mp-l3vpn-ipv4-ipv6-unicast-common;
 
       // placeholder for IPv4 Unicast L3VPN specific config options.
     }
-  }
-
-  grouping mp-l3vpn-ipv6-unicast-group {
-    description
-      "Group for IPv6 Unicast L3VPN configuration options";
 
     container l3vpn-ipv6-unicast {
       when "../afi-safi-name = 'bgp-types:L3VPN_IPV6_UNICAST'" {
         description
           "Include this container for unicast IPv6 L3VPN specific
-          configuration";
+           configuration";
       }
 
-      description "Unicast IPv6 L3VPN configuration options";
+      description
+        "Unicast IPv6 L3VPN configuration options";
 
       // include common L3VPN configuration options
       uses mp-l3vpn-ipv4-ipv6-unicast-common;
@@ -213,20 +177,16 @@ submodule ietf-bgp-common-multiprotocol {
       // placeholder for IPv6 Unicast L3VPN specific configuration
       // options
     }
-  }
-
-  grouping mp-l3vpn-ipv4-multicast-group {
-    description
-      "Group for IPv4 L3VPN multicast configuration options";
 
     container l3vpn-ipv4-multicast {
       when "../afi-safi-name = 'bgp-types:L3VPN_IPV4_MULTICAST'" {
         description
           "Include this container for multicast IPv6 L3VPN specific
-          configuration";
+           configuration";
       }
 
-      description "Multicast IPv4 L3VPN configuration options";
+      description
+        "Multicast IPv4 L3VPN configuration options";
 
       // include common L3VPN multicast options
       uses mp-l3vpn-ipv4-ipv6-multicast-common;
@@ -234,19 +194,15 @@ submodule ietf-bgp-common-multiprotocol {
       // placeholder for IPv4 Multicast L3VPN specific configuration
       // options
     }
-  }
-
-  grouping mp-l3vpn-ipv6-multicast-group {
-    description
-      "Group for IPv6 L3VPN multicast configuration options";
 
     container l3vpn-ipv6-multicast {
       when "../afi-safi-name = 'bgp-types:L3VPN_IPV6_MULTICAST'" {
         description
           "Include this container for multicast IPv6 L3VPN specific
-          configuration";
+           configuration";
       }
-      description "Multicast IPv6 L3VPN configuration options";
+      description
+        "Multicast IPv6 L3VPN configuration options";
 
       // include common L3VPN multicast options
       uses mp-l3vpn-ipv4-ipv6-multicast-common;
@@ -254,20 +210,16 @@ submodule ietf-bgp-common-multiprotocol {
       // placeholder for IPv6 Multicast L3VPN specific configuration
       // options
     }
-  }
-
-  grouping mp-l2vpn-vpls-group {
-    description
-      "Group for BGP-signalled VPLS configuration options";
 
     container l2vpn-vpls {
       when "../afi-safi-name = 'bgp-types:L2VPN_VPLS'" {
         description
           "Include this container for BGP-signalled VPLS specific
-          configuration";
+           configuration";
       }
 
-      description "BGP-signalled VPLS configuration options";
+      description
+        "BGP-signalled VPLS configuration options";
 
       // include common L2VPN options
       uses mp-l2vpn-common;
@@ -275,20 +227,16 @@ submodule ietf-bgp-common-multiprotocol {
       // placeholder for BGP-signalled VPLS specific configuration
       // options
     }
-  }
-
-  grouping mp-l2vpn-evpn-group {
-    description
-      "Group for BGP EVPN configuration options";
 
     container l2vpn-evpn {
       when "../afi-safi-name = 'bgp-types:L2VPN_EVPN'" {
         description
           "Include this container for BGP EVPN specific
-          configuration";
+           configuration";
       }
 
-      description "BGP EVPN configuration options";
+      description
+        "BGP EVPN configuration options";
 
       // include common L2VPN options
       uses mp-l2vpn-common;

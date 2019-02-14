@@ -206,7 +206,7 @@ submodule ietf-bgp-common {
   grouping neighbor-group-error-handling-config {
     description
       "Configuration parameters relating to enhanced error handling
-       behaviours for BGP";
+       behaviors for BGP";
 
     leaf treat-as-withdraw {
       type boolean;

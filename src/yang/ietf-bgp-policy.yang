@@ -268,7 +268,7 @@ module ietf-bgp-policy {
 
       leaf-list afi-safi-in {
         type identityref {
-          base bgp-types:AFI_SAFI_TYPE;
+          base bgp-types:afi-safi-type;
         }
         description
           "List of address families which the NLRI may be within";
