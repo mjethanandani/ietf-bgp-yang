@@ -27,17 +27,17 @@ do
 done
 rm ../bin/*-tree.txt.tmp
 
-#echo "Validating examples"
+echo "Validating examples"
 
-#for i in yang/example-bgp-configuration-*.xml
-#do
-#    name=$(echo $i | cut -f 1-3 -d '.')
-#    echo "Validating $name.xml"
-#    response=`yanglint -s -i -t auto -p ../../ yang/ietf-bgp\@$(date +%Y-%m-%d).yang $name.xml`
-#    if [ $? -ne 0 ]; then
-#       printf "failed (error code: $?)\n"
-#       printf "$response\n\n"
-#       echo
-#       exit 1
-#    fi
-#done
+for i in yang/example-bgp-configuration-*.xml
+do
+    name=$(echo $i | cut -f 1-2 -d '.')
+    echo "Validating $name.xml"
+    response=`yanglint -s -i -t auto -p ../../iana/yang-parameters -p ../bin -p ../bin/submodules ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang $name.xml`
+    if [ $? -ne 0 ]; then
+       printf "failed (error code: $?)\n"
+       printf "$response\n\n"
+       echo
+       exit 1
+    fi
+done

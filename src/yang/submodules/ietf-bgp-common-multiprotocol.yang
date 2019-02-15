@@ -57,7 +57,7 @@ submodule ietf-bgp-common-multiprotocol {
 
     leaf afi-safi-name {
       type identityref {
-        base bt:afi-safi-type;
+        base "bt:afi-safi-type";
       }
       description "AFI,SAFI";
     }

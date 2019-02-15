@@ -81,7 +81,7 @@ module ietf-bgp-rib {
   }
 
   augment "/rt:routing/rt:ribs" {
-    when "derived-from(rt:source-protocol, 'bgp-protocol')" {
+    when "derived-from-or-self(rt:source-protocol, 'bgp')" {
       description
 	"This augmentation is only valid for routes whose source
          protocol is BGP.";

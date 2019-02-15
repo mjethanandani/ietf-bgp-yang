@@ -685,6 +685,23 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-table-attributes@YYYY-MM-DD
       </section>
     </section>
 
+    <section title="Examples">
+      <t>This section tries to show some examples in how the model can be
+      used.</t>
+
+      <section title="Creating BGP Instance">
+        <t>This example shows how to enable BGP with the IPv4 unicast address
+        family, while adding one network to advertise.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.1.xml,68)
+
+]]></artwork>
+          </figure></t>
+      </section>
+    </section>
+
     <section title="Contributors">
       <t>Previous versions of this document saw contributions from Anees
       Shaikh, Rob Shakir, Kevin D'Souza, Alexander Clemm, Aleksandr Zhadkin,

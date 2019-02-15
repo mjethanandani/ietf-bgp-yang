@@ -72,7 +72,7 @@ module ietf-bgp {
   /*
    * Identity
    */
-  identity bgp-protocol {
+  identity bgp {
     base "rt:routing-protocol";
     description
       "BGP protocol.";
@@ -84,7 +84,7 @@ module ietf-bgp {
 
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol" {
-    when "derived-from(rt:type, 'bgp-protocol')" {
+    when "derived-from-or-self(rt:type, 'bgp')" {
       description
         "This augmentation is valid for a routing protocol
          instance of BGP.";
