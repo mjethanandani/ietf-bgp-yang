@@ -10,13 +10,12 @@ module ietf-bgp-rib-types {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
-    "Defines identity and type defintions associated with
+    "Defines identity and type definitions associated with
      the BGP RIB modules";
 
   revision "YYYY-MM-DD" {

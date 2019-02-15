@@ -2,7 +2,7 @@ module ietf-bgp-types {
   yang-version "1.1";
   namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-types";
 
-  prefix "bgp-types";
+  prefix "bt";
 
   import ietf-inet-types { 
     prefix inet; 
@@ -16,10 +16,9 @@ module ietf-bgp-types {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
     "This module contains general data definitions for use in BGP
@@ -401,7 +400,7 @@ module ietf-bgp-types {
   identity PRIVATE_AS_REMOVE_ALL {
     base REMOVE_PRIVATE_AS_OPTION;
     description
-      "Strip all private autonmous system numbers from the AS_PATH.
+      "Strip all private autonomous system numbers from the AS_PATH.
       This action is performed regardless of the other content of the
       AS_PATH attribute, and for all instances of private AS numbers
       within that attribute.";

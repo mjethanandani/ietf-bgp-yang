@@ -1,7 +1,7 @@
 module ietf-bgp-policy {
   yang-version "1.1";
   namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-policy";
-  prefix "bgp-pol";
+  prefix "bp";
 
   // import some basic types
   import ietf-inet-types { 
@@ -11,7 +11,7 @@ module ietf-bgp-policy {
     prefix rpol; 
   }
   import ietf-bgp-types { 
-    prefix bgp-types; 
+    prefix bt; 
   }
   
   import ietf-routing-types {
@@ -132,9 +132,9 @@ module ietf-bgp-policy {
 
           leaf-list community-member {
             type union {
-              type bgp-types:bgp-std-community-type;
-              type bgp-types:bgp-community-regexp-type;
-              type bgp-types:bgp-well-known-community-type;
+              type bt:bgp-std-community-type;
+              type bt:bgp-community-regexp-type;
+              type bt:bgp-well-known-community-type;
             }
             description
               "members of the community set";
@@ -161,7 +161,7 @@ module ietf-bgp-policy {
           leaf-list ext-community-member {
             type union {
               type rt-types:route-target;
-              type bgp-types:bgp-community-regexp-type;
+              type bt:bgp-community-regexp-type;
             }
             description
               "members of the extended community set";
@@ -253,7 +253,7 @@ module ietf-bgp-policy {
       }
 
       leaf origin-eq {
-        type bgp-types:bgp-origin-attr-type;
+        type bt:bgp-origin-attr-type;
         description
           "Condition to check if the route origin is equal to the
            specified value";
@@ -268,7 +268,7 @@ module ietf-bgp-policy {
 
       leaf-list afi-safi-in {
         type identityref {
-          base bgp-types:afi-safi-type;
+          base bt:afi-safi-type;
         }
         description
           "List of address families which the NLRI may be within";
@@ -318,8 +318,8 @@ module ietf-bgp-policy {
           type leafref {
             path 
               "/rpol:routing-policy/rpol:defined-sets/" +
-              "bgp-pol:bgp-defined-sets/bgp-pol:community-sets/" +
-              "bgp-pol:community-set/bgp-pol:community-set-name";
+              "bp:bgp-defined-sets/bp:community-sets/" +
+              "bp:community-set/bp:community-set-name";
           }
           description
             "References a defined community set";
@@ -337,9 +337,9 @@ module ietf-bgp-policy {
           type leafref {
             path 
               "/rpol:routing-policy/rpol:defined-sets/" +
-              "bgp-pol:bgp-defined-sets/bgp-pol:ext-community-sets/" +
-              "bgp-pol:ext-community-set/" +
-              "bgp-pol:ext-community-set-name";
+              "bp:bgp-defined-sets/bp:ext-community-sets/" +
+              "bp:ext-community-set/" +
+              "bp:ext-community-set-name";
           }
           description "References a defined extended community set";
         }
@@ -355,8 +355,8 @@ module ietf-bgp-policy {
         leaf as-path-set {
           type leafref {
             path "/rpol:routing-policy/rpol:defined-sets/" +
-              "bgp-pol:bgp-defined-sets/bgp-pol:as-path-sets/" +
-              "bgp-pol:as-path-set/bgp-pol:as-path-set-name";
+              "bp:bgp-defined-sets/bp:as-path-sets/" +
+              "bp:as-path-set/bp:as-path-set-name";
           }
           description
             "References a defined AS path set";
@@ -377,7 +377,7 @@ module ietf-bgp-policy {
         "Top-level container for BGP-specific actions";
 
       leaf set-route-origin {
-        type bgp-types:bgp-origin-attr-type;
+        type bt:bgp-origin-attr-type;
         description
           "set the origin attribute to the specified value";
       }
@@ -435,8 +435,8 @@ module ietf-bgp-policy {
 
           leaf-list communities {
             type union {
-              type bgp-types:bgp-std-community-type;
-              type bgp-types:bgp-well-known-community-type;
+              type bt:bgp-std-community-type;
+              type bt:bgp-well-known-community-type;
             }
             description
               "Set the community values for the update inline with a
@@ -456,9 +456,9 @@ module ietf-bgp-policy {
           leaf community-set-ref {
             type leafref {
               path "/rpol:routing-policy/rpol:defined-sets/" +
-                "bgp-pol:bgp-defined-sets/" +
-                "bgp-pol:community-sets/bgp-pol:community-set/" +
-                "bgp-pol:community-set-name";
+                "bp:bgp-defined-sets/" +
+                "bp:community-sets/bp:community-set/" +
+                "bp:community-set-name";
             }
             description
               "References a defined community set by name";
@@ -487,7 +487,7 @@ module ietf-bgp-policy {
           leaf-list communities {
             type union {
               type rt-types:route-target;
-              type bgp-types:bgp-well-known-community-type;
+              type bt:bgp-well-known-community-type;
             }
             description
               "Set the extended community values for the update inline
@@ -508,9 +508,9 @@ module ietf-bgp-policy {
             type leafref {
               path 
                 "/rpol:routing-policy/rpol:defined-sets/" +
-                "bgp-pol:bgp-defined-sets/bgp-pol:ext-community-sets/" +
-                "bgp-pol:ext-community-set/" +
-                "bgp-pol:ext-community-set-name";
+                "bp:bgp-defined-sets/bp:ext-community-sets/" +
+                "bp:ext-community-set/" +
+                "bp:ext-community-set-name";
             }
             description
               "References a defined extended community set by name";

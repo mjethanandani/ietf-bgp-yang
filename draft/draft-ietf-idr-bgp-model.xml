@@ -94,12 +94,12 @@
       <t>This document describes a <xref target="RFC7950">YANG</xref> data
       model for the <xref target="RFC4271">BGP</xref> protocol, including
       various protocol extensions, policy configuration, as well as defining
-      key operational state data. The model is intended to be vendor-neutral,
-      in order to allow operators to manage BGP configuration in heterogeneous
-      environments with routers supplied by multiple vendors. The model is
-      also intended to be readily mapped to existing implementations to
-      facilitate support from as large a set of routing hardware and software
-      vendors as possible.</t>
+      key operational state data, including Routing Information Base (RIB).
+      The model is intended to be vendor-neutral, in order to allow operators
+      to manage BGP configuration in heterogeneous environments with routers
+      supplied by multiple vendors. The model is also intended to be readily
+      mapped to existing implementations to facilitate support from as large a
+      set of routing hardware and software vendors as possible.</t>
 
       <section anchor="goals" title="Goals and approach">
         <t>The model covers the base BGP features that are deployed across
@@ -135,6 +135,8 @@
             <t>The policy configuration "hooks" and BGP-specific policy
             features that relate to a neighbor - controlling the import and
             export of NLRIs.</t>
+
+            <t>RIB contents.</t>
           </list></t>
 
         <t>As mentioned earlier, any configuration items that are deemed to be
@@ -351,13 +353,64 @@
             ]]></artwork>
         </figure>
       </section>
+
+      <section title="BGP RIB overview">
+        <t>The RIB data model represents the BGP RIB contents. The model
+        supports five logical RIBs per address family.</t>
+
+        <t>An abridged version of the tree showing the five logical RIBs is
+        shown below.</t>
+
+        <figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib@YYYY-MM-DD-tree.txt)
+
+]]></artwork>
+        </figure>
+
+        <section title="Local Routing">
+          <t>The loc-rib is the main BGP routing table for the local routing
+          instance, containing best-path selections for each prefix. The
+          loc-rib table may contain multiple routes for a given prefix, with
+          an attribute to indicate which was selected as the best path. Note
+          that multiple paths may be used or advertised even if only one path
+          is marked as best, e.g., when using BGP add-paths. An implementation
+          may choose to mark multiple paths in the RIB as best path by setting
+          the flag to true for multiple entries.</t>
+        </section>
+
+        <section title="Pre updates per-neighbor">
+          <t>The adj-rib-in-pre table is a per-neighbor table containing the
+          NLRI updates received from the neighbor before any local input
+          policy rules or filters have been applied. This can be considered
+          the 'raw' updates from a given neighbor.</t>
+        </section>
+
+        <section title="Post updates per-neighbor">
+          <t>The adj-rib-in-post table is a per-neighbor table containing the
+          routes received from the neighbor that are eligible for best-path
+          selection after local input policy rules have been applied.</t>
+        </section>
+
+        <section title="Pre route advertisements per-neighbor">
+          <t>The adj-rib-out-pre table is a per-neighbor table containing
+          routes eligible for sending (advertising) to the neighbor before
+          output policy rules have been applied.</t>
+        </section>
+
+        <section title="Post route advertisements per-neighbor">
+          <t>The adj-rib-out-post table is a per-neighbor table containing
+          routes eligible for sending (advertising) to the neighbor after
+          output policy rules have been applied</t>
+        </section>
+      </section>
     </section>
 
     <section title="Relation to other YANG data models">
       <t>The BGP model augments the Routing Management model <xref
       target="RFC8349">A YANG Data Model for Routing Management </xref> which
-      defines the notion of routing, routing protocols, and routing instances,
-      or VRFs.</t>
+      defines the notion of routing, routing protocols, routing instances, or
+      VRFs, and RIBs.</t>
     </section>
 
     <section title="Security Considerations">
@@ -394,7 +447,7 @@
     </section>
 
     <section title="IANA Considerations">
-      <t>This document registers three URIs and three YANG modules.</t>
+      <t>This document registers six URIs and six YANG modules.</t>
 
       <section title="URI Registration">
         <t>in the <xref target="RFC3688">IETF XML registry</xref> [RFC3688].
@@ -403,7 +456,9 @@
             <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bgp
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-types
-]]></artwork>
+URI: urn:ietf:params:xml:ns:yang:ietf-bgp-rib
+URI: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-ext
+URI: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-types]]></artwork>
           </figure></t>
 
         <t>Registrant Contact: The IESG. XML: N/A, the requested URI is an XML
@@ -422,12 +477,27 @@ reference: RFC XXXX
 
 name: ietf-bgp-policy
 namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
-prefix: bgp-pol
+prefix: bp
 reference: RFC XXXX
 
 name: ietf-bgp-types
 namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-types
-prefix: bgp-types
+prefix: bt
+reference: RFC XXXX
+
+name: ietf-bgp-rib
+namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-rib
+prefix: br
+reference: RFC XXXX
+
+name: ietf-bgp-rib-ext
+namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-ext
+prefix: bre
+reference: RFC XXXX
+
+name: ietf-bgp-rib-types
+namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-types
+prefix: brt
 reference: RFC XXXX
 ]]></artwork>
           </figure></t>
@@ -471,90 +541,148 @@ reference: RFC XXXX
         </list></t>
     </section>
 
-    <section title="BGP main module and submodule for base items">
-      <figure>
-        <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
-<CODE ENDS>
- 
-        ]]></artwork>
-      </figure>
+    <section title="Structure of the YANG modules">
+      <t>The YANG model can be subdivided between the main module for base
+      items, types, policy data, and the RIB module.</t>
 
-      <figure>
-        <artwork><![CDATA[
+      <section title="Main module and submodules for base items">
+        <t><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
-      </figure>
-
-      <figure>
-        <artwork><![CDATA[
+          </figure><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
-      </figure>
-
-      <figure>
-        <artwork><![CDATA[
+          </figure><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-structure@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
-      </figure>
-
-      <figure>
-        <artwork><![CDATA[
+          </figure><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-peer-group@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-peer-group@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
-      </figure>
-
-      <figure>
-        <artwork><![CDATA[
+          </figure><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-neighbor@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
-      </figure>
-
-      <figure>
-        <artwork><![CDATA[
+          </figure><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-global@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-global@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
-      </figure>
-    </section>
+          </figure></t>
+      </section>
 
-    <section title="BGP types">
-      <figure>
-        <artwork><![CDATA[
+      <section title="BGP types">
+        <t><figure>
+            <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-types@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
 <CODE ENDS>
        
         ]]></artwork>
-      </figure>
-    </section>
+          </figure></t>
+      </section>
 
-    <section title="BGP policy data">
-      <figure>
-        <artwork><![CDATA[
+      <section title="BGP policy data">
+        <t><figure>
+            <artwork><![CDATA[
     <CODE BEGINS> file "ietf-bgp-policy@YYYY-MM-DD.yang"
     INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD.yang)
     <CODE ENDS>
     ]]></artwork>
-      </figure>
+          </figure></t>
+      </section>
+
+      <section title="RIB modules">
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-rib@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+          </figure><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-rib-ext@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib-ext@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+          </figure></t>
+
+        <figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-rib-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+        </figure>
+
+        <figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-rib-attributes@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-attributes@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+        </figure>
+
+        <figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-rib-shared-attributes@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-shared-attributes@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+        </figure>
+
+        <figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-rib-table-attributes@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-table-attributes@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+        </figure>
+
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-rib-tables@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+          </figure></t>
+
+        <figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-rib-table-attributes@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-table-attributes@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+        </figure>
+      </section>
     </section>
 
     <section title="Contributors">
@@ -571,6 +699,9 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
       Moberg, Ashok Narayanan, Einar Nilsen-Nygaard, Adam Simpson, Puneet
       Sood, Jason Sterne, Jeff Tantsura, Jim Uttaro, and Gunter
       Vandevelde.</t>
+
+      <t>Credit is also due to authors of the OpenConfig, whose model was
+      relied upon to come up with this model.</t>
 
       <t>Special thanks to Robert Wilton who helped convert the YANG models to
       a NMDA compatible model.</t>

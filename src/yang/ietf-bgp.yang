@@ -33,8 +33,8 @@ module ietf-bgp {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Authors: Keyur Patel (keyur at arrcus.com),
-              Mahesh Jethanandani (mjethanandani at gmail.com),
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com";
      
   description

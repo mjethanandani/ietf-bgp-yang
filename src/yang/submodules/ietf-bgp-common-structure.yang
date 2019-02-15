@@ -4,7 +4,7 @@ submodule ietf-bgp-common-structure {
     prefix "bgp";
   }
 
-  import ietf-bgp-types { prefix bgp-types; }
+  import ietf-bgp-types { prefix bt; }
   import ietf-routing-policy { prefix rpol; }
   include ietf-bgp-common-multiprotocol;
   include ietf-bgp-common;
@@ -17,10 +17,9 @@ submodule ietf-bgp-common-structure {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
     "This sub-module contains groupings that are common across
@@ -94,7 +93,7 @@ submodule ietf-bgp-common-structure {
         "Route reflector parameters for the BGPgroup";
 
       leaf route-reflector-cluster-id {
-        type bgp-types:rr-cluster-id-type;
+        type bt:rr-cluster-id-type;
         description
           "route-reflector cluster id to use when local router is
            configured as a route reflector.  Commonly set at the

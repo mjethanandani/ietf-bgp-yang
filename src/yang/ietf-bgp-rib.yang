@@ -1,7 +1,7 @@
 module ietf-bgp-rib {
   yang-version "1.1";
   namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-rib";
-  prefix "bgp-rib";
+  prefix "br";
 
   /*
    * Import and Include
@@ -13,7 +13,7 @@ module ietf-bgp-rib {
   }
   
   import ietf-bgp-types {
-    prefix "bgpt";
+    prefix "bt";
     reference
       "RFC XXXX: BGP YANG Model for Service Provider Networks.";
   }
@@ -37,10 +37,9 @@ module ietf-bgp-rib {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
     "Defines a data model for representing BGP routing table (RIB)
@@ -111,13 +110,13 @@ module ietf-bgp-rib {
 
 	  leaf afi-safi-name {
 	    type identityref {
-	      base bgpt:afi-safi-type;
+	      base bt:afi-safi-type;
 	    }
 	    description "AFI,SAFI name.";
 	  }
 
 	  container ipv4-unicast {
-	    when "../afi-safi-name = 'bgpt:ipv4-unicast'" {
+	    when "../afi-safi-name = 'bt:ipv4-unicast'" {
 	      description
 		"Include this container for IPv4 unicast RIB";
 	    }
@@ -130,7 +129,7 @@ module ietf-bgp-rib {
 	  }
 
 	  container ipv6-unicast {
-	    when "../afi-safi-name = 'bgpt:ipv6-unicast'" {
+	    when "../afi-safi-name = 'bt:ipv6-unicast'" {
 	      description
 		"Include this container for IPv6 unicast RIB";
 	    }
@@ -143,7 +142,7 @@ module ietf-bgp-rib {
 	  }
 
 	  container ipv4-srte-policy {
-	    when "../afi-safi-name = 'bgpt:srte-policy-ipv4'" {
+	    when "../afi-safi-name = 'bt:srte-policy-ipv4'" {
 	      description
 		"Include this container only for the IPv4 AFI, SR-TE
                Policy SAFI.";
@@ -157,7 +156,7 @@ module ietf-bgp-rib {
 	  }
 
 	  container ipv6-srte-policy {
-	    when "../afi-safi-name = 'bgpt:srte-policy-ipv6'" {
+	    when "../afi-safi-name = 'bt:srte-policy-ipv6'" {
 	      description
 		"Include this container only for the IPv6 AFI,
                SR-TE Policy SAFI.";

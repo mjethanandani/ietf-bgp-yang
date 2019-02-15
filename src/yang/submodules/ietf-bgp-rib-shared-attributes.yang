@@ -1,7 +1,7 @@
 submodule ietf-bgp-rib-shared-attributes {
   yang-version "1.1";
   belongs-to ietf-bgp-rib {
-    prefix "bgp-rib";
+    prefix "br";
   }
 
   // import some basic types
@@ -14,10 +14,9 @@ submodule ietf-bgp-rib-shared-attributes {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
     "This submodule contains structural data definitions for

@@ -5,7 +5,7 @@ submodule ietf-bgp-common-multiprotocol {
   }
 
   import ietf-bgp-types { 
-    prefix bgp-types; 
+    prefix bt; 
   }
   import ietf-routing-policy { 
     prefix rpol; 
@@ -21,10 +21,9 @@ submodule ietf-bgp-common-multiprotocol {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
     "This sub-module contains groupings that are related to support
@@ -58,7 +57,7 @@ submodule ietf-bgp-common-multiprotocol {
 
     leaf afi-safi-name {
       type identityref {
-        base bgp-types:afi-safi-type;
+        base bt:afi-safi-type;
       }
       description "AFI,SAFI";
     }
@@ -81,7 +80,7 @@ submodule ietf-bgp-common-multiprotocol {
     uses rpol:apply-policy-group;
 
     container ipv4-unicast {
-      when "../afi-safi-name = 'bgp-types:IPV4_UNICAST'" {
+      when "../afi-safi-name = 'bt:IPV4_UNICAST'" {
         description
           "Include this container for IPv4 Unicast specific
            configuration";
@@ -97,7 +96,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container ipv6-unicast {
-      when "../afi-safi-name = 'bgp-types:IPV6_UNICAST'" {
+      when "../afi-safi-name = 'bt:IPV6_UNICAST'" {
         description
           "Include this container for IPv6 Unicast specific
            configuration";
@@ -114,7 +113,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container ipv4-labeled-unicast {
-      when "../afi-safi-name = 'bgp-types:IPV4_LABELED_UNICAST'" {
+      when "../afi-safi-name = 'bt:IPV4_LABELED_UNICAST'" {
         description
           "Include this container for IPv4 Labeled Unicast specific
            configuration";
@@ -130,7 +129,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container ipv6-labeled-unicast {
-      when "../afi-safi-name = 'bgp-types:IPV6_LABELED_UNICAST'" {
+      when "../afi-safi-name = 'bt:IPV6_LABELED_UNICAST'" {
         description
           "Include this container for IPv6 Labeled Unicast specific
            configuration";
@@ -146,7 +145,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container l3vpn-ipv4-unicast {
-      when "../afi-safi-name = 'bgp-types:L3VPN_IPV4_UNICAST'" {
+      when "../afi-safi-name = 'bt:L3VPN_IPV4_UNICAST'" {
         description
           "Include this container for IPv4 Unicast L3VPN specific
            configuration";
@@ -162,7 +161,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container l3vpn-ipv6-unicast {
-      when "../afi-safi-name = 'bgp-types:L3VPN_IPV6_UNICAST'" {
+      when "../afi-safi-name = 'bt:L3VPN_IPV6_UNICAST'" {
         description
           "Include this container for unicast IPv6 L3VPN specific
            configuration";
@@ -179,7 +178,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container l3vpn-ipv4-multicast {
-      when "../afi-safi-name = 'bgp-types:L3VPN_IPV4_MULTICAST'" {
+      when "../afi-safi-name = 'bt:L3VPN_IPV4_MULTICAST'" {
         description
           "Include this container for multicast IPv6 L3VPN specific
            configuration";
@@ -196,7 +195,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container l3vpn-ipv6-multicast {
-      when "../afi-safi-name = 'bgp-types:L3VPN_IPV6_MULTICAST'" {
+      when "../afi-safi-name = 'bt:L3VPN_IPV6_MULTICAST'" {
         description
           "Include this container for multicast IPv6 L3VPN specific
            configuration";
@@ -212,7 +211,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container l2vpn-vpls {
-      when "../afi-safi-name = 'bgp-types:L2VPN_VPLS'" {
+      when "../afi-safi-name = 'bt:L2VPN_VPLS'" {
         description
           "Include this container for BGP-signalled VPLS specific
            configuration";
@@ -229,7 +228,7 @@ submodule ietf-bgp-common-multiprotocol {
     }
 
     container l2vpn-evpn {
-      when "../afi-safi-name = 'bgp-types:L2VPN_EVPN'" {
+      when "../afi-safi-name = 'bt:L2VPN_EVPN'" {
         description
           "Include this container for BGP EVPN specific
            configuration";
@@ -260,7 +259,7 @@ submodule ietf-bgp-common-multiprotocol {
            neighbour";
       }
       leaf shutdown-threshold-pct {
-        type bgp-types:percentage;
+        type bt:percentage;
         description
           "Threshold on number of prefixes that can be received from
            a neighbour before generation of warning messages or log

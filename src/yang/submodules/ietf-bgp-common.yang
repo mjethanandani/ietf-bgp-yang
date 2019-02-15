@@ -5,7 +5,7 @@ submodule ietf-bgp-common {
   }
 
   import ietf-bgp-types { 
-    prefix bgp-types; 
+    prefix bt; 
   }
   import ietf-inet-types { 
     prefix inet; 
@@ -18,9 +18,9 @@ submodule ietf-bgp-common {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
     "This sub-module contains common groupings that are common across
@@ -112,7 +112,7 @@ submodule ietf-bgp-common {
     }
 
     leaf peer-type {
-        type bgp-types:peer-type;
+        type bt:peer-type;
         description
           "Explicitly designate the peer or peer group as internal
            (iBGP) or external (eBGP).";
@@ -129,7 +129,7 @@ submodule ietf-bgp-common {
       // could also make this a container with a flag to enable
       // remove-private and separate option.  here, option implies
       // remove-private is enabled.
-      type bgp-types:remove-private-as-option;
+      type bt:remove-private-as-option;
       description
         "Remove private AS numbers from updates sent to peers - when
          this leaf is not specified, the AS_PATH attribute should be
@@ -144,7 +144,7 @@ submodule ietf-bgp-common {
     }
 
     leaf send-community {
-      type bgp-types:community-type;
+      type bt:community-type;
       default "NONE";
       description
         "Specify which types of community should be sent to the
@@ -213,7 +213,7 @@ submodule ietf-bgp-common {
       default "false";
       description
         "Specify whether erroneous UPDATE messages for which the NLRI
-         can be extracted are reated as though the NLRI is withdrawn
+         can be extracted are treated as though the NLRI is withdrawn
          - avoiding session reset";
       reference "draft-ietf-idr-error-handling-16";
     }

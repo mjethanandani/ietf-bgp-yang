@@ -8,7 +8,7 @@ submodule ietf-bgp-neighbor {
     prefix rpol; 
   }
   import ietf-bgp-types { 
-    prefix bgp-types; 
+    prefix bt; 
   }
   import ietf-inet-types { 
     prefix inet; 
@@ -31,10 +31,9 @@ submodule ietf-bgp-neighbor {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
     "This sub-module contains groupings that are specific to the
@@ -105,7 +104,7 @@ submodule ietf-bgp-neighbor {
         config false;
         description
           "This value indicates whether a particular AFI-SAFI has
-           been succesfully negotiated with the peer. An AFI-SAFI may
+           been successfully negotiated with the peer. An AFI-SAFI may
            be enabled in the current running configuration, but a
            session restart may be required in order to negotiate the
            new capability.";
@@ -262,7 +261,7 @@ submodule ietf-bgp-neighbor {
 
     leaf-list supported-capabilities {
       type identityref {
-        base bgp-types:BGP_CAPABILITY;
+        base bt:BGP_CAPABILITY;
       }
       config false;
       description

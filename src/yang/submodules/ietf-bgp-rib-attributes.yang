@@ -1,7 +1,7 @@
 submodule ietf-bgp-rib-attributes {
   yang-version "1.1";
   belongs-to ietf-bgp-rib {
-    prefix "bgp-rib";
+    prefix "br";
   }
 
   // import some basic types
@@ -25,10 +25,9 @@ submodule ietf-bgp-rib-attributes {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
-     Authors: Keyur Patel,
-              Mahesh Jethanandani,
-              Susan Hares";
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com";
 
   description
     "This submodule contains common data definitions for BGP
@@ -37,7 +36,7 @@ submodule ietf-bgp-rib-attributes {
 
   revision "YYYY-MM-DD" {
     description
-      "IETF BGP RIB refactor";
+      "Initial version";
     reference
       "RFC XXXX: BGP YANG Model for Service Provider Network";
   }
@@ -167,14 +166,14 @@ submodule ietf-bgp-rib-attributes {
       leaf as {
 	type inet:as-number;
 	description
-	  "AS number of the autnonomous system that performed the
+	  "AS number of the autonomous system that performed the
            aggregation.";
       }
 
       leaf as4 {
 	type inet:as-number;
 	description
-	  "AS number of the autnonomous system that performed the
+	  "AS number of the autonomous system that performed the
            aggregation (4-octet representation).  This value is
            populated if an upstream router is not 4-octet capable.
            Its semantics are similar to the AS4_PATH optional
@@ -285,7 +284,7 @@ submodule ietf-bgp-rib-attributes {
       description
         "Defines whether an optional attribute is transitive
         (if set to true) or non-transitive (if set to false).  For
-        well-known attributes, the transitive flag MUST be set to
+        well-known attributes, the transitive flag must be set to
         true.  Set in the second high-order bit of the BGP attribute
         flags octet.";
       reference
@@ -468,13 +467,13 @@ submodule ietf-bgp-rib-attributes {
 	      leaf-list colors {
 		when "../type = 'bgprt:TUNNEL_COLOR'" {
 		  description
-		    "Only allow list of colours to be specified when
-                     the sub-TLV specifies colours associated with the
+		    "Only allow list of colors to be specified when
+                     the sub-TLV specifies colors associated with the
                      tunnel encapsulation attribute.";
 		}
 		type uint32;
 		description
-		  "The colours associated with the tunnel encapsulation
+		  "The colors associated with the tunnel encapsulation
                    attribute, as described by RFC5512.";
 	      }
 

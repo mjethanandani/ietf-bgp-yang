@@ -21,7 +21,6 @@ submodule ietf-bgp-global {
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
-     Editor:  Mahesh Jethanandani (mjethanandani@gmail.com)
      Authors: Keyur Patel,
               Mahesh Jethanandani,
               Susan Hares";
