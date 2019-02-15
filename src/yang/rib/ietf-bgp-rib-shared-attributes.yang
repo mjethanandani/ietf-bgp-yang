@@ -45,30 +45,16 @@ submodule ietf-bgp-rib-shared-attributes {
           "List of path attributes that may be in use by multiple
           routes in the table";
 
-        leaf index {
-          type leafref {
-            path "../state/index";
-          }
-          description
-            "Reference to list key";
-        }
-
-        container state {
-          config false;
-          description
-            "Operational state for common path attributes";
-
-          leaf index {
-            type uint64;
-            description
-              "System generated index for each attribute set.  The
+	leaf index {
+	  type uint64;
+	  description
+	    "System generated index for each attribute set.  The
               index is used to reference an attribute set from a
               specific path.  Multiple paths may reference the same
               attribute set.";
-          }
+	}
 
-          uses bgp-shared-common-attr-state;
-        }
+	uses bgp-shared-common-attr-state;
         uses bgp-aggregator-attr-top;
         uses bgp-as-path-attr-top;
         uses bgp-as4-path-attr-top;
@@ -90,34 +76,21 @@ submodule ietf-bgp-rib-shared-attributes {
       list community {
         key "index";
 
+	config false;
         description
           "List of path attributes that may be in use by multiple
           routes in the table";
 
-        leaf index {
-          type leafref {
-            path "../state/index";
-          }
-          description
-            "Reference to the list key";
-        }
-
-        container state {
-          config false;
-          description
-            "Operational state for shared BGP community attribute";
-
-          leaf index {
-            type uint64;
-            description
-              "System generated index for each attribute set.  The
+	leaf index {
+	  type uint64;
+	  description
+	    "System generated index for each attribute set.  The
               index is used to reference an attribute set from a
               specific path.  Multiple paths may reference the same
               attribute set.";
-          }
+	}
 
-          uses bgp-community-attr-state;
-        }
+	uses bgp-community-attr-state;
       }
     }
   }
@@ -135,35 +108,21 @@ submodule ietf-bgp-rib-shared-attributes {
       list ext-community {
         key "index";
 
+	config false;
         description
           "List of path attributes that may be in use by multiple
           routes in the table";
 
-        leaf index {
-          type leafref {
-            path "../state/index";
-          }
-          description
-            "Reference to the list key";
-        }
-
-        container state {
-          config false;
-          description
-            "Operational state for shared BGP extended community
-            attribute";
-
-          leaf index {
-            type uint64;
-            description
-              "System generated index for each attribute set.  The
+	leaf index {
+	  type uint64;
+	  description
+	    "System generated index for each attribute set.  The
               index is used to reference an attribute set from a
               specific path.  Multiple paths may reference the same
               attribute set.";
-          }
+	}
 
-          uses bgp-extended-community-attr-state;
-        }
+	uses bgp-extended-community-attr-state;
       }
     }
   }

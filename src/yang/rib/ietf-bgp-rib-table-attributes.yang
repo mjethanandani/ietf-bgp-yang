@@ -93,19 +93,12 @@ submodule ietf-bgp-rib-table-attributes {
   }
 
   grouping bgp-common-table-attrs-top {
-    description
-      "Operational state data for common attributes attached to
-      all routing tables";
     // no enclosing container as this data will fit under an
     // existing LOC-RIB container
 
-    container state {
-      config false;
-      description
-        "Operational state data for data related to the entire
-        LOC-RIB";
-
-      uses bgp-common-table-attrs-state;
-    }
+    uses bgp-common-table-attrs-state;
+    description
+      "Operational state data for data related to the entire
+       LOC-RIB";
   }
 }

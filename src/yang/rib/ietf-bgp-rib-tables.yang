@@ -50,8 +50,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf attr-index {
       type leafref {
-        path "../../../../../../../../../../attr-sets/attr-set/" +
-          "state/index";
+        path "../../../../../../../../../attr-sets/attr-set/" +
+          "index";
       }
       description
         "Reference to the common attribute group for the
@@ -60,8 +60,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf community-index {
       type leafref {
-        path "../../../../../../../../../../communities/community/" +
-          "state/index";
+        path "../../../../../../../../../communities/community/" +
+          "index";
       }
       description
         "Reference to the community attribute for the route";
@@ -69,8 +69,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf ext-community-index {
       type leafref {
-        path "../../../../../../../../../../ext-communities/" +
-          "ext-community/state/index";
+        path "../../../../../../../../../ext-communities/" +
+          "ext-community/index";
       }
       description
         "Reference to the extended community attribute for the
@@ -85,8 +85,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf attr-index {
       type leafref {
-        path "../../../../../../../../attr-sets/attr-set/" +
-          "state/index";
+        path "../../../../../../../attr-sets/attr-set/" +
+          "index";
       }
       description
         "Reference to the common attribute group for the
@@ -95,8 +95,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf community-index {
       type leafref {
-        path "../../../../../../../../communities/community/" +
-          "state/index";
+        path "../../../../../../../communities/community/" +
+          "index";
       }
       description
         "Reference to the community attribute for the route";
@@ -104,8 +104,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf ext-community-index {
       type leafref {
-        path "../../../../../../../../ext-communities/" +
-          "ext-community/state/index";
+        path "../../../../../../../ext-communities/" +
+          "ext-community/index";
       }
       description
         "Reference to the extended community attribute for the
@@ -146,36 +146,6 @@ submodule ietf-bgp-rib-tables {
     }
   }
 
-  grouping bgp-loc-rib-key-refs {
-    description
-      "Key references to support operational state structure for
-      the BGP LOC-RIB table";
-
-    leaf prefix {
-      type leafref {
-        path "../state/prefix";
-      }
-      description
-        "Reference to the prefix list key";
-    }
-
-    leaf origin {
-      type leafref {
-        path "../state/origin";
-      }
-      description
-        "Reference to the origin list key";
-    }
-
-    leaf path-id {
-      type leafref {
-        path "../state/path-id";
-      }
-      description
-        "Reference to the path-id list key";
-    }
-  }
-
   grouping ipv4-loc-rib {
     description
       "Top-level grouping for IPv4 routing tables";
@@ -204,28 +174,18 @@ submodule ietf-bgp-rib-tables {
             for the same prefix received from a neighbor (e.g.,
             if add-paths is eanbled).";
 
-          uses bgp-loc-rib-key-refs;
+	  leaf prefix {
+	    type inet:ipv4-prefix;
+	    description
+	      "The IPv4 prefix corresponding to the route";
+	  }
 
-          container state {
-            description
-              "Operational state data for route entries in the
-              BGP LOC-RIB";
-
-            leaf prefix {
-              type inet:ipv4-prefix;
-              description
-                "The IPv4 prefix corresponding to the route";
-            }
-
-            uses bgp-loc-rib-common-keys;
-            uses bgp-loc-rib-common-attr-refs;
-            uses bgp-loc-rib-attr-state;
-            uses bgp-common-route-annotations-state;
-            uses bgp-loc-rib-route-annotations-state;
-
-           }
-
-           uses bgp-unknown-attr-top;
+	  uses bgp-loc-rib-common-keys;
+	  uses bgp-loc-rib-common-attr-refs;
+	  uses bgp-loc-rib-attr-state;
+	  uses bgp-common-route-annotations-state;
+	  uses bgp-loc-rib-route-annotations-state;
+	  uses bgp-unknown-attr-top;
 
         }
       }
@@ -260,52 +220,20 @@ submodule ietf-bgp-rib-tables {
             for the same prefix received from a neighbor (e.g.,
             if add-paths is eanbled).";
 
-          uses bgp-loc-rib-key-refs;
+	  leaf prefix {
+	    type inet:ipv6-prefix;
+	    description
+	      "The IPv6 prefix corresponding to the route";
+	  }
 
-          container state {
-            description
-              "Operational state data for route entries in the
-              BGP LOC-RIB";
-
-            leaf prefix {
-              type inet:ipv6-prefix;
-              description
-                "The IPv6 prefix corresponding to the route";
-            }
-
-            uses bgp-loc-rib-common-keys;
-            uses bgp-loc-rib-common-attr-refs;
-            uses bgp-loc-rib-attr-state;
-            uses bgp-common-route-annotations-state;
-            uses bgp-loc-rib-route-annotations-state;
-
-          }
-
+	  uses bgp-loc-rib-common-keys;
+	  uses bgp-loc-rib-common-attr-refs;
+	  uses bgp-loc-rib-attr-state;
+	  uses bgp-common-route-annotations-state;
+	  uses bgp-loc-rib-route-annotations-state;
           uses bgp-unknown-attr-top;
         }
       }
-    }
-  }
-
-  grouping bgp-adj-rib-key-refs {
-    description
-      "Key references to support operational state structure for
-      the BGP Adj-RIB tables";
-
-    leaf prefix {
-      type leafref {
-        path "../state/prefix";
-      }
-      description
-        "Reference to the prefix list key";
-    }
-
-    leaf path-id {
-      type leafref {
-        path "../state/path-id";
-      }
-      description
-        "Reference to the path-id list key";
     }
   }
 
@@ -330,23 +258,15 @@ submodule ietf-bgp-rib-tables {
           routes received from a neighbor for the same prefix,
           e.g., when BGP add-paths is enabled.";
 
-        uses bgp-adj-rib-key-refs;
+	leaf prefix {
+	  type inet:ipv4-prefix;
+	  description
+	    "Prefix for the route";
+	}
 
-        container state {
-          description
-            "Operational state data for BGP Adj-RIB entries";
-
-          leaf prefix {
-            type inet:ipv4-prefix;
-            description
-              "Prefix for the route";
-          }
-
-          uses bgp-adj-rib-attr-state;
-          uses bgp-adj-rib-common-attr-refs;
-          uses bgp-common-route-annotations-state;
-        }
-
+	uses bgp-adj-rib-attr-state;
+	uses bgp-adj-rib-common-attr-refs;
+	uses bgp-common-route-annotations-state;
         uses bgp-unknown-attr-top;
 
       }
@@ -375,24 +295,16 @@ submodule ietf-bgp-rib-tables {
           routes received from a neighbor for the same prefix,
           e.g., when BGP add-paths is enabled.";
 
-        uses bgp-adj-rib-key-refs;
+	leaf prefix {
+	  type inet:ipv4-prefix;
+	  description
+	    "Prefix for the route";
+	}
 
-        container state {
-          description
-            "Operational state data for BGP Adj-RIB entries";
-
-          leaf prefix {
-            type inet:ipv4-prefix;
-            description
-              "Prefix for the route";
-          }
-
-          uses bgp-adj-rib-attr-state;
-          uses bgp-adj-rib-common-attr-refs;
-          uses bgp-common-route-annotations-state;
-          uses bgp-adj-rib-in-post-route-annotations-state;
-        }
-
+	uses bgp-adj-rib-attr-state;
+	uses bgp-adj-rib-common-attr-refs;
+	uses bgp-common-route-annotations-state;
+	uses bgp-adj-rib-in-post-route-annotations-state;
         uses bgp-unknown-attr-top;
       }
     }
@@ -413,24 +325,11 @@ submodule ietf-bgp-rib-tables {
         description
           "List of neighbors (peers) of the local BGP speaker";
 
-        leaf neighbor-address {
-          type leafref {
-            path "../state/neighbor-address";
-          }
-          description
-            "Reference to the list key";
-        }
-
-        container state {
-          description
-            "Operational state for each neighbor BGP Adj-RIB";
-
-          leaf neighbor-address {
-            type inet:ip-address;
-            description
-              "IP address of the BGP neighbor or peer";
-          }
-        }
+	leaf neighbor-address {
+	  type inet:ip-address;
+	  description
+	    "IP address of the BGP neighbor or peer";
+	}
 
         container adj-rib-in-pre {
           description
@@ -493,23 +392,15 @@ submodule ietf-bgp-rib-tables {
         description
           "List of routes in the table";
 
-        uses bgp-adj-rib-key-refs;
+	leaf prefix {
+	  type inet:ipv6-prefix;
+	  description
+	    "Prefix for the route";
+	}
 
-        container state {
-          description
-            "Operational state data for BGP Adj-RIB entries";
-
-          leaf prefix {
-            type inet:ipv6-prefix;
-            description
-              "Prefix for the route";
-          }
-
-          uses bgp-adj-rib-attr-state;
-          uses bgp-adj-rib-common-attr-refs;
-          uses bgp-common-route-annotations-state;
-        }
-
+	uses bgp-adj-rib-attr-state;
+	uses bgp-adj-rib-common-attr-refs;
+	uses bgp-common-route-annotations-state;
         uses bgp-unknown-attr-top;
       }
     }
@@ -534,24 +425,16 @@ submodule ietf-bgp-rib-tables {
         description
           "List of routes in the table";
 
-        uses bgp-adj-rib-key-refs;
+	leaf prefix {
+	  type inet:ipv6-prefix;
+	  description
+	    "Prefix for the route";
+	}
 
-        container state {
-          description
-            "Operational state data for BGP Adj-RIB entries";
-
-          leaf prefix {
-            type inet:ipv6-prefix;
-            description
-              "Prefix for the route";
-          }
-
-          uses bgp-adj-rib-attr-state;
-          uses bgp-adj-rib-common-attr-refs;
-          uses bgp-common-route-annotations-state;
-          uses bgp-adj-rib-in-post-route-annotations-state;
-        }
-
+	uses bgp-adj-rib-attr-state;
+	uses bgp-adj-rib-common-attr-refs;
+	uses bgp-common-route-annotations-state;
+	uses bgp-adj-rib-in-post-route-annotations-state;
         uses bgp-unknown-attr-top;
       }
     }
@@ -571,24 +454,11 @@ submodule ietf-bgp-rib-tables {
         description
           "List of neighbors (peers) of the local BGP speaker";
 
-        leaf neighbor-address {
-          type leafref {
-            path "../state/neighbor-address";
-          }
-          description
-            "Reference to the list key";
-        }
-
-        container state {
-          description
-            "Operational state for each neighbor BGP Adj-RIB";
-
-          leaf neighbor-address {
-            type inet:ip-address;
-            description
-              "IP address of the BGP neighbor or peer";
-          }
-        }
+	leaf neighbor-address {
+	  type inet:ip-address;
+	  description
+	    "IP address of the BGP neighbor or peer";
+	}
 
         container adj-rib-in-pre {
           description
@@ -651,21 +521,7 @@ submodule ietf-bgp-rib-tables {
           "An individual neighbour that is enabled for the SR-TE
           Policy SAFI.";
 
-        leaf neighbor-address {
-          type leafref {
-            path "../state/neighbor-address";
-          }
-          description
-            "Reference to the address of the neighbour for which the
-            Adj-RIBs specified are maintained.";
-        }
-
-        container state {
-          description
-            "Operational state parameters of the BGP neighbour for
-            which the SR-TE Policy SAFI is enabled.";
-          uses ipvX-srte-policy-adjrib-neighbor-state;
-        }
+	uses ipvX-srte-policy-adjrib-neighbor-state;
 
         container adj-rib-in-pre {
           description
@@ -735,18 +591,9 @@ submodule ietf-bgp-rib-tables {
           the endpoint. The colour and endpoint are extracted from
           the NLRI.";
 
-        uses ipvX-srte-policy-common-keys;
-
-        container state {
-          description
-            "State parameters for entries within the Adj-RIB used
-            to store SR-TE Policy SAFI routes.";
-
-          uses ipvX-srte-policy-common-route-state;
-          uses bgp-adj-rib-common-attr-refs;
-          uses bgp-common-route-annotations-state;
-        }
-
+	uses ipvX-srte-policy-common-route-state;
+	uses bgp-adj-rib-common-attr-refs;
+	uses bgp-common-route-annotations-state;
         uses bgp-unknown-attr-top;
       }
     }
@@ -781,40 +628,6 @@ submodule ietf-bgp-rib-tables {
     }
   }
 
-  grouping ipvX-srte-policy-common-keys {
-    description
-      "Common grouping of the keys used for lists of SR-TE policy
-      SAFI routes.";
-
-    leaf path-id {
-      type leafref {
-        path "../state/path-id";
-      }
-      description
-        "Reference to the path identifier for the SR-TE Policy SAFI
-        route. The value is only non-zero if ADD-PATHS is not being
-        used.";
-    }
-
-    leaf endpoint {
-      type leafref {
-        path "../state/endpoint";
-      }
-      description
-        "Reference to the endpoint used for the SR-TE Policy SAFI
-        route within the NLRI.";
-    }
-
-    leaf color {
-      type leafref {
-        path "../state/color";
-      }
-      description
-        "Reference to the colour used for the SR-TE policy SAFI
-        route within the NLRI.";
-    }
-  }
-
   grouping ipvX-srte-policy-adjrib-in-post {
     description
       "Grouping for the post-policy Adj-RIB-In for SR-TE Policy SAFI
@@ -833,20 +646,10 @@ submodule ietf-bgp-rib-tables {
           BGP neighbour within the SR-TE Policy SAFI for the specified
           address family.";
 
-        uses ipvX-srte-policy-common-keys;
-
-        container state {
-          description
-            "Operational state attributes related to the route within
-            the SR-TE Policy SAFI Adj-RIB-In-Post for the specified
-            neighbour.";
-
-          uses ipvX-srte-policy-common-route-state;
-          uses bgp-adj-rib-common-attr-refs;
-          uses bgp-common-route-annotations-state;
-          uses bgp-adj-rib-in-post-route-annotations-state;
-        }
-
+	uses ipvX-srte-policy-common-route-state;
+	uses bgp-adj-rib-common-attr-refs;
+	uses bgp-common-route-annotations-state;
+	uses bgp-adj-rib-in-post-route-annotations-state;
         uses bgp-unknown-attr-top;
       }
     }
@@ -874,18 +677,9 @@ submodule ietf-bgp-rib-tables {
             "Route within the specified address family for the SR-TE
             Policy SAFI.";
 
-          uses ipvX-srte-policy-common-keys;
-
-          container state {
-            description
-              "Operational state attributes for each route within the
-              IPv4 or IPv6 Unicast SR-TE Policy SAFI.";
-
-            uses ipvX-srte-policy-common-route-state;
-            uses bgp-loc-rib-common-attr-refs;
-            uses bgp-common-route-annotations-state;
-          }
-
+	  uses ipvX-srte-policy-common-route-state;
+	  uses bgp-loc-rib-common-attr-refs;
+	  uses bgp-common-route-annotations-state;
           uses bgp-unknown-attr-top;
         }
       }
