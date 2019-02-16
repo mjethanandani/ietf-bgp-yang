@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <routing
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+    <control-plane-protocols>
+      <control-plane-protocol>
+	<type
+	    xmlns:bgp="urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp
+	</type>
+	<name>name:BGP</name>
+	<bgp
+	    xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
+	  <global>
+	    <as>64496</as>
+	    <afi-safis>
+	      <afi-safi>
+		<afi-safi-name
+		    xmlns:bt="urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:IPV4_UNICAST
+		</afi-safi-name>
+	      </afi-safi>
+	    </afi-safis>
+	  </global>
+	  <neighbors>
+	    <neighbor>
+	      <neighbor-address>192.0.2.1</neighbor-address>
+	      <peer-as>64497</peer-as>
+	      <description>"Peer Router B"</description>
+	      <afi-safis>
+		<afi-safi>
+		  <afi-safi-name
+		      xmlns:bt="urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:IPV4_UNICAST
+		  </afi-safi-name>
+		</afi-safi>
+	      </afi-safis>
+	    </neighbor>
+	  </neighbors>
+	</bgp>
+      </control-plane-protocol>
+    </control-plane-protocols>
+  </routing>
+</config>

@@ -218,8 +218,8 @@
 
         <figure>
           <artwork><![CDATA[
-              +--rw bgp!
-                 +--rw global
+              +--rw bgp
+                 +--rw global!
                  |  +-- (global-configuration-options)
                  +--rw neighbors
                  |  +--rw neighbor* [neighbor-address]
@@ -273,7 +273,7 @@
 
         <figure>
           <artwork><![CDATA[
-        +--rw bgp!
+        +--rw bgp
           +--rw global!
              +--rw afi-safis
                 +--rw afi-safi* [afi-safi-name]
@@ -332,7 +332,7 @@
         <figure>
           <artwork><![CDATA[
            +--rw bgp
-              +--rw global
+              +--rw global!
               |  +--rw afi-safis
               |     +--rw afi-safi
               |     |  +--rw afi-safi* [afi-safi-name]
@@ -358,8 +358,8 @@
         <t>The RIB data model represents the BGP RIB contents. The model
         supports five logical RIBs per address family.</t>
 
-        <t>An abridged version of the tree showing the five logical RIBs is
-        shown below.</t>
+        <t>A version of the tree showing the five logical RIBs is shown
+        below.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -696,6 +696,17 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-table-attributes@YYYY-MM-DD
         <t><figure>
             <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.1.xml,68)
+
+]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="Neighbor Address Family Configuration">
+        <t>This example shows how to configure a neighbor.</t>
+
+        <t><figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.2.xml,68)
 
 ]]></artwork>
           </figure></t>
