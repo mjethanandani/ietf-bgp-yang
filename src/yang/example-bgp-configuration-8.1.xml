@@ -12,11 +12,10 @@
 	    xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
 	  <global>
 	    <as>64496</as>
-	    <router-id>192.0.2.0</router-id>
 	    <afi-safis>
 	      <afi-safi>
 		<afi-safi-name
-		    xmlns:bt="urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:IPV4_UNICAST
+		    xmlns:bt="urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:ipv4-unicast
 		</afi-safi-name>
 	      </afi-safi>
 	    </afi-safis>

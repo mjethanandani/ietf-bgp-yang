@@ -77,14 +77,14 @@ module ietf-bgp-types {
     reference "RFC4760 - multi-protocol extensions for BGP-4";
   }
 
-  identity IPV4_UNICAST {
+  identity ipv4-unicast {
     base afi-safi-type;
     description
       "IPv4 unicast (AFI,SAFI = 1,1)";
     reference "RFC4760";
   }
 
-  identity IPV6_UNICAST {
+  identity ipv6-unicast {
     base afi-safi-type;
     description
       "IPv6 unicast (AFI,SAFI = 2,1)";

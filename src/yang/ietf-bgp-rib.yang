@@ -81,10 +81,11 @@ module ietf-bgp-rib {
   }
 
   augment "/rt:routing/rt:ribs" {
-    when "derived-from-or-self(rt:source-protocol, 'bgp')" {
+    when "derived-from-or-self(../rt:control-plane-protocols/" +
+      "rt:control-plane-protocol/rt:type, 'bgp')" {
       description
-	"This augmentation is only valid for routes whose source
-         protocol is BGP.";
+	"This augmentation is only valid for routes whose control
+         plane protocol is BGP.";
     }
     description
       "Support for RIBS.";

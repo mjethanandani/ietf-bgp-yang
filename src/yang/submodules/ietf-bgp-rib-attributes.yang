@@ -465,7 +465,7 @@ submodule ietf-bgp-rib-attributes {
 	      }
 
 	      leaf-list colors {
-		when "../type = 'bgprt:TUNNEL_COLOR'" {
+		when "../type = 'bgprt:tunnel-color'" {
 		  description
 		    "Only allow list of colors to be specified when
                      the sub-TLV specifies colors associated with the
@@ -478,7 +478,7 @@ submodule ietf-bgp-rib-attributes {
 	      }
 
 	      leaf preference {
-		when "../type = 'bgprt:SRTE_PREFERENCE'" {
+		when "../type = 'bgprt:srte-preference'" {
 		  description
 		    "Only allow the preference to be specified when the
                      sub-TLV specifies the preference associated with
@@ -493,7 +493,7 @@ submodule ietf-bgp-rib-attributes {
 	      }
 
 	      leaf binding-sid {
-		when "../type = 'bgprt:SRTE_BINDING_SID'" {
+		when "../type = 'bgprt:srte-binding-sid'" {
 		  description
 		    "Only allow the binding SID to be specified when the
                      sub-TLV is specified to be the of the relevant
@@ -508,8 +508,7 @@ submodule ietf-bgp-rib-attributes {
 	      }
 
               container remote-endpoints {
-                when "../state/type = " +
-		  "'bgprt:TUNNEL_REMOTE_ENDPOINT'" {
+                when "../type = 'bgprt:tunnel-remote-endpoint'" {
                   description
                     "Only allow the remote endpoint to be specified
                      when the subTLV is specified to describe remote
@@ -543,7 +542,7 @@ submodule ietf-bgp-rib-attributes {
               }
 
               container segment-lists {
-                when "../state/type = 'bgprt:SRTE_SEGMENT_LIST'" {
+                when "../type = 'bgprt:srte-segment-list'" {
                   description
                     "Only allow the segment lists to be specified when
                      the sub-TLV is of the relevant type.";
@@ -658,7 +657,7 @@ submodule ietf-bgp-rib-attributes {
 		      }
 
 		      leaf sid {
-			//      type sr:sr-sid-type;
+			// TODO:     type sr:sr-sid-type;
 			// using string till this is resolved.
 			type string;
 			description
@@ -713,8 +712,8 @@ submodule ietf-bgp-rib-attributes {
 
 		      leaf remote-ipv4-address {
 			when "../type = 'IPV4_NODE_ADDRESS' or" +
-			  "../type='../IPV4_ADDRESS_INDEX'" +
-			  "or ../type='IPV4_LOCAL_INTF_ID' or " +
+			  //  "../type='../IPV4_ADDRESS_INDEX' or" +
+			  "../type='IPV4_LOCAL_INTF_ID' or " +
 			  "../type='IPV4_LOCAL_REMOTE_ADDR'" {
 			  description
 			    "An IPv4 address can only be associated
@@ -749,8 +748,8 @@ submodule ietf-bgp-rib-attributes {
 
 		      leaf remote-ipv6-address {
 			when "../type = 'IPV6_NODE_ADDRESS' or" +
-			  "../type='IPV6_ADDRESS_INDEX'" +
-			  "or ../type='IPV6_LOCAL_INTF_ID' or " +
+			  //  "../type='IPV6_ADDRESS_INDEX' or" +
+			  "../type='IPV6_LOCAL_INTF_ID' or " +
 			  "../type='IPV6_LOCAL_REMOTE_ADDR'" {
 			  description
 			    "An IPv6 address can only be specified with

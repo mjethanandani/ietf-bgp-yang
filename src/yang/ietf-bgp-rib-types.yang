@@ -152,7 +152,30 @@ module ietf-bgp-rib-types {
        Encapsulation attribute";
     reference
       "RFC5512";
-    }
+  }
+
+  identity srte-policy {
+    description
+      "Segment Routing Traffic Engineering Policy.";
+    reference
+      "TODO: Insert reference here.";
+  }
+
+  identity srte-policy-ipv4 {
+    base srte-policy;
+    description
+      "Segment Routing Traffice Engineering Policy for IPv4.";
+    reference
+      "TODO: Insert reference here.";
+  }
+
+  identity srte-policy-ipv6 {
+    base srte-policy;
+    description
+      "Segment Routing Traffic Engineering Policy for IPv6.";
+    reference
+      "TODO: Insert reference here.";
+  }
 
   identity srte-policy-tunnel {
     base tunnel-encapsulation-type;

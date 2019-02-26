@@ -135,7 +135,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf path-id {
       type uint32;
-      default 0;
+      // TODO: YANG does not allow default values for key
+      // default 0;
       description
         "If the route is learned from a neighbor, the path-id
         corresponds to the path-id for the route in the
@@ -605,7 +606,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf path-id {
       type uint32;
-      default 0;
+      // TODO: YANG does not allow default values for key
+      // default 0;
       description
         "Identifier for the path when using BGP ADD-PATHS for the SR-TE
         policy SAFI.";
