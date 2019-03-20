@@ -18,6 +18,12 @@ module ietf-bgp-rib {
       "RFC XXXX: BGP YANG Model for Service Provider Networks.";
   }
 
+  import ietf-bgp-rib-types {
+    prefix brt;
+    reference
+      "RFC XXXX: BGP YANG Model for Service Provider Networks.";
+  }
+
   include ietf-bgp-rib-tables;
   include ietf-bgp-rib-shared-attributes;
 
@@ -143,7 +149,7 @@ module ietf-bgp-rib {
 	  }
 
 	  container ipv4-srte-policy {
-	    when "../afi-safi-name = 'bt:srte-policy-ipv4'" {
+	    when "../afi-safi-name = 'brt:srte-policy-ipv4'" {
 	      description
 		"Include this container only for the IPv4 AFI, SR-TE
                Policy SAFI.";
@@ -157,7 +163,7 @@ module ietf-bgp-rib {
 	  }
 
 	  container ipv6-srte-policy {
-	    when "../afi-safi-name = 'bt:srte-policy-ipv6'" {
+	    when "../afi-safi-name = 'brt:srte-policy-ipv6'" {
 	      description
 		"Include this container only for the IPv6 AFI,
                SR-TE Policy SAFI.";

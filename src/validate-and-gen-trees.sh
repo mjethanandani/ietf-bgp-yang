@@ -17,7 +17,7 @@ do
         exit 1
     fi
     fold -w 71 $name-tree.txt.tmp > $name-tree.txt
-    response=`yanglint -p ../../iana/yang-parameters -p ../src/yang/submodules -p ../src/yang $name.yang -i`
+    response=`yanglint -p ../../iana/yang-parameters -p ../src/yang $name.yang -i`
     if [ $? -ne 0 ]; then
         printf "$name.yang failed yanglint validation\n"
         printf "$response\n\n"

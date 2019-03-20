@@ -13,7 +13,7 @@ module ietf-bgp-rib-ext {
     prefix bgprib;
   }
   import ietf-bgp-rib-types {
-    prefix bgpribt;
+    prefix brt;
   }
 
   organization
@@ -47,10 +47,10 @@ module ietf-bgp-rib-ext {
     leaf reject-reason {
       type union {
         type identityref {
-          base bgpribt:bgp-not-selected-bestpath;
+          base brt:bgp-not-selected-bestpath;
         }
         type identityref {
-          base bgpribt:bgp-not-selected-policy;
+          base brt:bgp-not-selected-policy;
         }
       }
       description

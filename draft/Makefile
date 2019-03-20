@@ -35,7 +35,7 @@ default: $(next).xml $(next).txt $(next).html rib
 idnits: $(next).txt
 	$(idnits) $<
 
-clean: rib-clean
+clean:
 	-rm -f $(draft).txt $(draft).html index.html
 	-rm -f $(next).txt $(next).html
 	-rm -f $(draft)-[0-9][0-9].xml
@@ -49,20 +49,16 @@ endif
 	-rm -f ../bin/*\@$(shell date +%Y)-*-*.yang
 	-rm -f ../bin/submodules/*\@$(shell date +%Y)-*-*.yang
 
-rib-clean:
-	-rm -f ../bin/rib/*\@$(shell date +%Y)-*-*-tree.txt*
-	-rm -f ../bin/rib/*\@$(shell date +%Y)-*-*.yang
-	-rm -f ../bin/rib/submodules/*\@$(shell date +%Y)-*-*.yang
-
-$(next).xml: $(draft).xml ../src/yang/submodules/ietf-bgp-common-multiprotocol.yang ../src/yang/submodules/ietf-bgp-common-structure.yang ../src/yang/submodules/ietf-bgp-common.yang ../src/yang/submodules/ietf-bgp-global.yang ../src/yang/submodules/ietf-bgp-neighbor.yang ../src/yang/submodules/ietf-bgp-peer-group.yang ../src/yang/ietf-bgp-policy.yang ../src/yang/ietf-bgp-types.yang ../src/yang/ietf-bgp.yang rib
+$(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/yang/ietf-bgp-common-structure.yang ../src/yang/ietf-bgp-common.yang ../src/yang/ietf-bgp-global.yang ../src/yang/ietf-bgp-neighbor.yang ../src/yang/ietf-bgp-peer-group.yang ../src/yang/ietf-bgp-policy.yang ../src/yang/ietf-bgp-types.yang ../src/yang/ietf-bgp.yang rib
 	-mkdir -p ../bin
+	-mkdir -p ../bin/submodules
 	sed -e"s/$(basename $<)-latest/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-common-multiprotocol.yang > ../bin/submodules/ietf-bgp-common-multiprotocol\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-common-structure.yang > ../bin/submodules/ietf-bgp-common-structure\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-common.yang > ../bin/submodules/ietf-bgp-common\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-global.yang > ../bin/submodules/ietf-bgp-global\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-neighbor.yang > ../bin/submodules/ietf-bgp-neighbor\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-peer-group.yang > ../bin/submodules/ietf-bgp-peer-group\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-common-multiprotocol.yang > ../bin/submodules/ietf-bgp-common-multiprotocol\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-common-structure.yang > ../bin/submodules/ietf-bgp-common-structure\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-common.yang > ../bin/submodules/ietf-bgp-common\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-global.yang > ../bin/submodules/ietf-bgp-global\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-neighbor.yang > ../bin/submodules/ietf-bgp-neighbor\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-peer-group.yang > ../bin/submodules/ietf-bgp-peer-group\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-policy.yang > ../bin/ietf-bgp-policy\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-types.yang > ../bin/ietf-bgp-types\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp.yang > ../bin/ietf-bgp\@$(shell date +%Y-%m-%d).yang
@@ -70,13 +66,13 @@ $(next).xml: $(draft).xml ../src/yang/submodules/ietf-bgp-common-multiprotocol.y
 	cd ../src; ./validate-and-gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
 
-rib: ../src/yang/ietf-bgp-rib.yang ../src/yang/submodules/ietf-bgp-rib-attributes.yang ../src/yang/ietf-bgp-rib-ext.yang ../src/yang/submodules/ietf-bgp-rib-shared-attributes.yang ../src/yang/submodules/ietf-bgp-rib-table-attributes.yang ../src/yang/submodules/ietf-bgp-rib-tables.yang ../src/yang/ietf-bgp-rib-types.yang
+rib: ../src/yang/ietf-bgp-rib.yang ../src/yang/ietf-bgp-rib-attributes.yang ../src/yang/ietf-bgp-rib-ext.yang ../src/yang/ietf-bgp-rib-shared-attributes.yang ../src/yang/ietf-bgp-rib-table-attributes.yang ../src/yang/ietf-bgp-rib-tables.yang ../src/yang/ietf-bgp-rib-types.yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib.yang > ../bin/ietf-bgp-rib\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-rib-attributes.yang > ../bin/submodules/ietf-bgp-rib-attributes\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-attributes.yang > ../bin/submodules/ietf-bgp-rib-attributes\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-ext.yang > ../bin/ietf-bgp-rib-ext\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-rib-shared-attributes.yang > ../bin/submodules/ietf-bgp-rib-shared-attributes\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-rib-table-attributes.yang > ../bin/submodules/ietf-bgp-rib-table-attributes\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/submodules/ietf-bgp-rib-tables.yang > ../bin/submodules/ietf-bgp-rib-tables\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-shared-attributes.yang > ../bin/submodules/ietf-bgp-rib-shared-attributes\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-table-attributes.yang > ../bin/submodules/ietf-bgp-rib-table-attributes\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-tables.yang > ../bin/submodules/ietf-bgp-rib-tables\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-types.yang > ../bin/ietf-bgp-rib-types\@$(shell date +%Y-%m-%d).yang
 
 .INTERMEDIATE: $(draft).xml
