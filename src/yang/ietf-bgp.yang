@@ -25,6 +25,12 @@ module ietf-bgp {
   include ietf-bgp-neighbor;
   include ietf-bgp-global;
   include ietf-bgp-peer-group;
+  include ietf-bgp-rib;
+  include ietf-bgp-rib-ext;
+  include ietf-bgp-rib-shared-attributes;
+  include ietf-bgp-rib-attributes;
+  include ietf-bgp-rib-table-attributes;
+  include ietf-bgp-rib-tables;
 
   organization
     "IETF IDR Working Group";
@@ -116,6 +122,8 @@ module ietf-bgp {
           "Configuration for BGP peer-groups";
         uses bgp-peer-group-list;
       }
+
+      uses rib;
     }
   }
 }

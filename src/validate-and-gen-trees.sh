@@ -27,6 +27,48 @@ do
 done
 rm ../bin/*-tree.txt.tmp
 
+echo "Generating abridged tree diagram for bgp"
+for i in ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang
+do
+    name=$(echo $i | cut -f 1-3 -d '.')
+    echo "Validating $name.yang"
+    if test "${name#^example}" = "$name"; then
+        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=72 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
+    else            
+        response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=72 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
+    fi
+    if [ $? -ne 0 ]; then
+        printf "$name.yang failed generation of sub-tree diagram\n"
+        printf "$response\n\n"
+        echo
+	rm yang/*-sub-tree.txt.tmp
+        exit 1
+    fi
+    fold -w 71 $name-sub-tree.txt.tmp > $name-sub-tree.txt
+done
+rm ../bin/*-sub-tree.txt.tmp
+
+echo "Generating sub-tree diagram for rib"
+for i in ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang
+do
+    name=$(echo $i | cut -f 1-3 -d '.')
+    echo "Validating $name.yang"
+    if test "${name#^example}" = "$name"; then
+        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 --max-line-length=72 --tree-line-length=69 $name.yang > $name-rib-tree.txt.tmp`
+    else            
+        response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 --max-line-length=72 --tree-line-length=69 $name.yang > $name-rib-tree.txt.tmp`
+    fi
+    if [ $? -ne 0 ]; then
+        printf "$name.yang failed generation of sub-tree diagram for rib\n"
+        printf "$response\n\n"
+        echo
+	rm yang/*-rib-tree.txt.tmp
+        exit 1
+    fi
+    fold -w 71 $name-rib-tree.txt.tmp > $name-rib-tree.txt
+done
+rm ../bin/*-rib-tree.txt.tmp
+
 echo "Validating examples"
 
 for i in yang/example-bgp-configuration-*.xml

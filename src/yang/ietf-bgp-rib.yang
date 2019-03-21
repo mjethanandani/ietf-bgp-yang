@@ -1,17 +1,12 @@
-module ietf-bgp-rib {
+submodule ietf-bgp-rib {
   yang-version "1.1";
-  namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-rib";
-  prefix "br";
+  belongs-to ietf-bgp {
+    prefix "br";
+  }
 
   /*
    * Import and Include
    */
-  import ietf-routing {
-    prefix "rt";
-    reference
-      "RFC 8349: YANG Route Management.";
-  }
-  
   import ietf-bgp-types {
     prefix "bt";
     reference
@@ -86,15 +81,9 @@ module ietf-bgp-rib {
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
   }
 
-  augment "/rt:routing/rt:ribs" {
-    when "derived-from-or-self(../rt:control-plane-protocols/" +
-      "rt:control-plane-protocol/rt:type, 'bgp')" {
-      description
-	"This augmentation is only valid for routes whose control
-         plane protocol is BGP.";
-    }
+  grouping rib {
     description
-      "Support for RIBS.";
+      "Grouping for rib.";
 
     container rib {
       config false;

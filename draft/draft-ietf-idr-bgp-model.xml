@@ -218,15 +218,7 @@
 
         <figure>
           <artwork><![CDATA[
-              +--rw bgp
-                 +--rw global!
-                 |  +-- (global-configuration-options)
-                 +--rw neighbors
-                 |  +--rw neighbor* [neighbor-address]
-                 |  +-- (neighbor-configuration-options)
-                 +--rw peer-groups
-                    +--rw peer-group* [peer-group-name]
-                    +-- (neighbor-configuration-options)
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
             ]]></artwork>
         </figure>
 
@@ -345,11 +337,11 @@
               |     |     +--rw apply-policy
               |     +--rw apply-policy
               +--rw peer-groups
-                 +--rw peer-group* [peer-group-name]
-                    +--rw afi-safi
-                    |  +--rw afi-safi* [afi-safi-name]
-                    |     +--rw apply-policy
-                    +--rw apply-policy
+              |  +--rw peer-group* [peer-group-name]
+              |     +--rw afi-safi
+              |     |  +--rw afi-safi* [afi-safi-name]
+              |     |     +--rw apply-policy
+              |     +--rw apply-policy
             ]]></artwork>
         </figure>
       </section>
@@ -358,15 +350,15 @@
         <t>The RIB data model represents the BGP RIB contents. The model
         supports five logical RIBs per address family.</t>
 
-        <t>A version of the tree showing the five logical RIBs is shown
-        below.</t>
+        <t>A abridged version of the tree shows the RIB portion of the tree
+        diagram.</t>
 
-        <figure>
-          <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib@YYYY-MM-DD-tree.txt)
+        <t><figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 
 ]]></artwork>
-        </figure>
+          </figure></t>
 
         <section title="Local Routing">
           <t>The loc-rib is the main BGP routing table for the local routing
@@ -624,14 +616,14 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
         <t><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
           </figure><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-ext@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib-ext@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-ext@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
