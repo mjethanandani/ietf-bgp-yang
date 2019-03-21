@@ -85,9 +85,18 @@ module ietf-bgp {
   }
 
   /*
+   * Features
+   */
+  feature ttl-security {
+    description
+      "BGP Time To Live (TTL) security check support.";
+    reference
+      "RFC 5082, The Generalized TTL Security Mechanism (GTSM)";
+  }
+
+  /*
    * Containers
    */
-
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol" {
     when "derived-from-or-self(rt:type, 'bgp')" {
