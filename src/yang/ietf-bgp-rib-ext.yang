@@ -4,10 +4,8 @@ submodule ietf-bgp-rib-ext {
     prefix "bre";
   }
 
-  import ietf-bgp-rib-types {
-    prefix brt;
-  }
-
+  include ietf-bgp-rib-types;
+  
   organization
     "IETF IDR Working Group";
 
@@ -39,10 +37,10 @@ submodule ietf-bgp-rib-ext {
     leaf reject-reason {
       type union {
         type identityref {
-          base brt:bgp-not-selected-bestpath;
+          base bgp-not-selected-bestpath;
         }
         type identityref {
-          base brt:bgp-not-selected-policy;
+          base bgp-not-selected-policy;
         }
       }
       description

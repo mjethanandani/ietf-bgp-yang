@@ -73,7 +73,7 @@ rib: ../src/yang/ietf-bgp-rib.yang ../src/yang/ietf-bgp-rib-attributes.yang ../s
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-shared-attributes.yang > ../bin/submodules/ietf-bgp-rib-shared-attributes\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-table-attributes.yang > ../bin/submodules/ietf-bgp-rib-table-attributes\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-tables.yang > ../bin/submodules/ietf-bgp-rib-tables\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-types.yang > ../bin/ietf-bgp-rib-types\@$(shell date +%Y-%m-%d).yang
+	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-types.yang > ../bin/submodules/ietf-bgp-rib-types\@$(shell date +%Y-%m-%d).yang
 
 .INTERMEDIATE: $(draft).xml
 %.xml: %.md

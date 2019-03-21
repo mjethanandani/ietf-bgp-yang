@@ -237,6 +237,25 @@ module ietf-bgp-types {
       "RFC 5065";
   }
 
+  /*
+   * Features.
+   */
+  feature ttl-security {
+    description
+      "BGP Time To Live (TTL) security check support.";
+    reference
+      "RFC 5082, The Generalized TTL Security Mechanism (GTSM)";
+  }
+
+  feature bfd {
+    description
+      "Support for BFD detection of BGP neighbor reachability.";
+    reference
+      "RFC 5880, Bidirectional Forward Detection (BFD),
+       RFC 5881, Bidirectional Forward Detection for IPv4 and IPv6
+                 (Single Hop).";
+  }
+
   typedef bgp-session-direction {
     type enumeration {
       enum INBOUND {

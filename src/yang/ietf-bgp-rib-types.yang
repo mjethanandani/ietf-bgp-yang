@@ -1,7 +1,8 @@
-module ietf-bgp-rib-types {
+submodule ietf-bgp-rib-types {
   yang-version "1.1";
-  namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-rib-types";
-  prefix "brt";
+  belongs-to ietf-bgp {
+    prefix "br";
+  }
 
   organization
     "IETF IDR Working Group";
@@ -22,7 +23,7 @@ module ietf-bgp-rib-types {
     description
       "Initial Version";
     reference 
-      "RFC XXX, BGP Model for Service Provider Network.";
+      "RFC XXXX, BGP Model for Service Provider Network.";
   }
 
   identity invalid-route-reason {

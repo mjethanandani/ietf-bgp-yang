@@ -48,6 +48,27 @@ do
 done
 rm ../bin/*-sub-tree.txt.tmp
 
+echo "Generating sub-tree diagram for policy"
+for i in ../bin/ietf-bgp-policy\@$(date +%Y-%m-%d).yang
+do
+    name=$(echo $i | cut -f 1-3 -d '.')
+    echo "Validating $name.yang"
+    if test "${name#^example}" = "$name"; then
+        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=1 --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
+    else            
+        response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=1 --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
+    fi
+    if [ $? -ne 0 ]; then
+        printf "$name.yang failed generation of sub-tree diagram\n"
+        printf "$response\n\n"
+        echo
+	rm yang/*-tree.txt.tmp
+        exit 1
+    fi
+    fold -w 71 $name-tree.txt.tmp > $name-tree.txt
+done
+rm ../bin/*-tree.txt.tmp
+
 echo "Generating sub-tree diagram for rib"
 for i in ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang
 do
