@@ -190,11 +190,10 @@ submodule ietf-bgp-common {
     leaf local-address {
       type union {
         type inet:ip-address;
-        type string;
+        type leafref {
+          path "../../../../interfaces/interface/name";
+	}
       }
-      //TODO:  the string should be converted to a leafref type
-      //to point to an interface when YANG 1.1 is available with
-      //leafrefs in union types.
       description
         "Set the local IP (either IPv4 or IPv6) address to use for
          the session when sending BGP update messages.  This may be

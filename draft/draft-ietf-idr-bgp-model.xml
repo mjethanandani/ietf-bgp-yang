@@ -7,24 +7,6 @@
     <title abbrev="BGP YANG Model">BGP YANG Model for Service Provider
     Networks</title>
 
-    <author fullname="Keyur Patel" initials="K.P." surname="Patel">
-      <organization>Arrcus</organization>
-
-      <address>
-        <postal>
-          <street/>
-
-          <city/>
-
-          <region>CA</region>
-
-          <country>USA</country>
-        </postal>
-
-        <email>keyur@arrcus.com</email>
-      </address>
-    </author>
-
     <author fullname="Mahesh Jethanandani" initials="M.J."
             surname="Jethanandani">
       <organization>VMware</organization>
@@ -49,6 +31,24 @@
         <email>mjethanandani@gmail.com</email>
 
         <uri/>
+      </address>
+    </author>
+
+    <author fullname="Keyur Patel" initials="K.P." surname="Patel">
+      <organization>Arrcus</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city/>
+
+          <region>CA</region>
+
+          <country>USA</country>
+        </postal>
+
+        <email>keyur@arrcus.com</email>
       </address>
     </author>
 
