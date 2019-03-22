@@ -198,7 +198,7 @@ module ietf-bgp-types {
       "Base AS Path Segment Type. In [BGP-4], the path segment type
        is a 1-octet field with the following values defined.";
     reference
-      "RFC 5065";
+      "RFC 5065, Autonomous System Configuration for BGP.";
   }
 
   identity as-set {
@@ -207,7 +207,7 @@ module ietf-bgp-types {
       "Unordered set of autonomous systems that a route in the UPDATE
        message has traversed.";
     reference
-      "RFC 5065";
+      "RFC 5065, Autonomous System Configuration for BGP.";
   }
 
   identity as-sequence {
@@ -216,7 +216,7 @@ module ietf-bgp-types {
       "Ordered set of autonomous systems that a route in the UPDATE
        message has traversed.";
     reference
-      "RFC 5065";
+      "RFC 5065, Autonomous System Configuration for BGP.";
   }
 
   identity as-confed-sequence {
@@ -225,7 +225,7 @@ module ietf-bgp-types {
       "Ordered set of Member Autonomous Systems in the local
        confederation that the UPDATE message has traversed.";
     reference
-      "RFC 5065";
+      "RFC 5065, Autonomous System Configuration for BGP.";
   }
 
   identity as-confed-set {
@@ -234,7 +234,7 @@ module ietf-bgp-types {
       "Unordered set of Member Autonomous Systems in the local
        confederation that the UPDATE message has traversed.";
     reference
-      "RFC 5065";
+      "RFC 5065, Autonomous System Configuration for BGP.";
   }
 
   /*
@@ -300,7 +300,8 @@ module ietf-bgp-types {
     }
     description
       "Type definition for standard community attributes";
-    reference "RFC 1997 - BGP Communities Attribute";
+    reference
+      "RFC 1997 - BGP Communities Attribute";
   }
 
   typedef bgp-ext-community-type {
@@ -365,17 +366,17 @@ module ietf-bgp-types {
     }
     description
       "Type definition for extended community attributes";
-    reference "RFC 4360 - BGP Extended Communities Attribute";
+    reference
+      "RFC 4360 - BGP Extended Communities Attribute";
   }
 
   typedef bgp-community-regexp-type {
     // TODO: needs more work to decide what format these regexps can
     // take.
-    //type oc-types:std-regexp;
     type string;
     description
       "Type definition for communities specified as regular
-      expression patterns";
+       expression patterns";
   }
 
   typedef bgp-origin-attr-type {
@@ -392,8 +393,8 @@ module ietf-bgp-types {
     }
     description
       "Type definition for standard BGP origin attribute";
-    reference "RFC 4271 - A Border Gateway Protocol 4 (BGP-4),
-      Sec 4.3";
+    reference
+      "RFC 4271 - A Border Gateway Protocol 4 (BGP-4), Sec 4.3";
   }
 
   typedef peer-type {

@@ -74,7 +74,7 @@ submodule ietf-bgp-common-multiprotocol {
   grouping mp-all-afi-safi-list-contents {
     description
       "A common grouping used for contents of the list that is used
-      for AFI-SAFI entries";
+       for AFI-SAFI entries";
 
     // import and export policy included for the afi/safi
     uses rpol:apply-policy-group;
