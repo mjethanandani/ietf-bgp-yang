@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc category="std" docName="draft-ietf-idr-bgp-model-04" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-idr-bgp-model-05" ipr="trust200902">
   <?rfc toc="yes"?>
 
   <front>
     <title abbrev="BGP YANG Model">BGP YANG Model for Service Provider
     Networks</title>
-
-    <author fullname="Keyur Patel" initials="K.P." surname="Patel">
-      <organization>Arrcus</organization>
-
-      <address>
-        <postal>
-          <street/>
-
-          <city/>
-
-          <region>CA</region>
-
-          <country>USA</country>
-        </postal>
-
-        <email>keyur@arrcus.com</email>
-      </address>
-    </author>
 
     <author fullname="Mahesh Jethanandani" initials="M.J."
             surname="Jethanandani">
@@ -52,6 +34,24 @@
       </address>
     </author>
 
+    <author fullname="Keyur Patel" initials="K.P." surname="Patel">
+      <organization>Arrcus</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city/>
+
+          <region>CA</region>
+
+          <country>USA</country>
+        </postal>
+
+        <email>keyur@arrcus.com</email>
+      </address>
+    </author>
+
     <author fullname="Susan Hares" initials="S." surname="Hares">
       <organization>Huawei</organization>
 
@@ -72,7 +72,7 @@
       </address>
     </author>
 
-    <date day="25" month="February" year="2019"/>
+    <date day="25" month="March" year="2019"/>
 
     <area>Routing</area>
 
@@ -84,8 +84,9 @@
 
     <abstract>
       <t>This document defines a YANG data model for configuring and managing
-      BGP, including protocol, policy, and operational aspects based on data
-      center, carrier and content provider operational requirements.</t>
+      BGP, including protocol, policy, and operational aspects, such as RIB,
+      based on data center, carrier and content provider operational
+      requirements.</t>
     </abstract>
   </front>
 
@@ -120,7 +121,10 @@
         policy features are intended to be used with the general routing
         policy model defined in <xref target="I-D.ietf-rtgwg-policy-model">A
         YANG Data Model for Routing Policy Management </xref>. The model
-        conforms to the <xref target="RFC8342">NMDA</xref> architecture.</t>
+        conforms to the <xref target="RFC8342">NMDA</xref> architecture and
+        has support for configuring <xref target="RFC5880">Bidirectional
+        Forward Detection (BFD) </xref> for fast next hop liveliness
+        check.</t>
 
         <t>For the base BGP features, the focus of the model described in this
         document is on providing configuration and operational state
@@ -174,6 +178,45 @@
         <t>RFC ZZZZ, where ZZZZ is the number assigned to <xref
         target="I-D.ietf-rtgwg-policy-model">A YANG Data Model for Routing
         Policy Management</xref>.</t>
+
+        <t>RFC AAAA, where AAAA is the number assigned to <xref
+        target="I-D.ietf-grow-bmp">BGP Monitoring Protocol </xref>.</t>
+
+        <t>RFC BBBB, where BBBB is the number assigned to <xref
+        target="I-D.ietf-bfd-yang">YANG Data Model for Bidirectional Forward
+        Detection</xref>.</t>
+      </section>
+
+      <section title="Abbreviations">
+        <texttable>
+          <ttcol>Abbreviation</ttcol>
+
+          <ttcol/>
+
+          <c>AFI</c>
+
+          <c>Address Family Identifier</c>
+
+          <c>BFD</c>
+
+          <c>Bidirectional Forward Detection</c>
+
+          <c>NLRI</c>
+
+          <c>Network Layer Reachability Information</c>
+
+          <c>NMDA</c>
+
+          <c>Network Management Datastore Architecture</c>
+
+          <c>RIB</c>
+
+          <c>Routing Information Base</c>
+
+          <c>SAFI</c>
+
+          <c>Subsequent Address Family Identifier</c>
+        </texttable>
       </section>
     </section>
 
@@ -218,16 +261,9 @@
 
         <figure>
           <artwork><![CDATA[
-              +--rw bgp
-                 +--rw global!
-                 |  +-- (global-configuration-options)
-                 +--rw neighbors
-                 |  +--rw neighbor* [neighbor-address]
-                 |  +-- (neighbor-configuration-options)
-                 +--rw peer-groups
-                    +--rw peer-group* [peer-group-name]
-                    +-- (neighbor-configuration-options)
-            ]]></artwork>
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
+
+]]></artwork>
         </figure>
 
         <t>Users may specify configuration at a higher level and have it apply
@@ -331,25 +367,7 @@
 
         <figure>
           <artwork><![CDATA[
-           +--rw bgp
-              +--rw global!
-              |  +--rw afi-safis
-              |     +--rw afi-safi
-              |     |  +--rw afi-safi* [afi-safi-name]
-              |     |     +--rw apply-policy
-              |     +--rw apply-policy
-              +--rw neighbors
-              |  +--rw neighbor* [neighbor-address]
-              |     +--rw afi-safi
-              |     |  +--rw afi-safi* [afi-safi-name]
-              |     |     +--rw apply-policy
-              |     +--rw apply-policy
-              +--rw peer-groups
-                 +--rw peer-group* [peer-group-name]
-                    +--rw afi-safi
-                    |  +--rw afi-safi* [afi-safi-name]
-                    |     +--rw apply-policy
-                    +--rw apply-policy
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
             ]]></artwork>
         </figure>
       </section>
@@ -358,15 +376,15 @@
         <t>The RIB data model represents the BGP RIB contents. The model
         supports five logical RIBs per address family.</t>
 
-        <t>A version of the tree showing the five logical RIBs is shown
-        below.</t>
+        <t>A abridged version of the tree shows the RIB portion of the tree
+        diagram.</t>
 
-        <figure>
-          <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib@YYYY-MM-DD-tree.txt)
+        <t><figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 
 ]]></artwork>
-        </figure>
+          </figure></t>
 
         <section title="Local Routing">
           <t>The loc-rib is the main BGP routing table for the local routing
@@ -447,7 +465,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib@YYYY-MM-DD-tree.txt)
     </section>
 
     <section title="IANA Considerations">
-      <t>This document registers six URIs and six YANG modules.</t>
+      <t>This document registers three URIs and three YANG modules.</t>
 
       <section title="URI Registration">
         <t>in the <xref target="RFC3688">IETF XML registry</xref> [RFC3688].
@@ -456,9 +474,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib@YYYY-MM-DD-tree.txt)
             <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bgp
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-types
-URI: urn:ietf:params:xml:ns:yang:ietf-bgp-rib
-URI: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-ext
-URI: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-types]]></artwork>
+]]></artwork>
           </figure></t>
 
         <t>Registrant Contact: The IESG. XML: N/A, the requested URI is an XML
@@ -483,21 +499,6 @@ reference: RFC XXXX
 name: ietf-bgp-types
 namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-types
 prefix: bt
-reference: RFC XXXX
-
-name: ietf-bgp-rib
-namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-rib
-prefix: br
-reference: RFC XXXX
-
-name: ietf-bgp-rib-ext
-namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-ext
-prefix: bre
-reference: RFC XXXX
-
-name: ietf-bgp-rib-types
-namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-types
-prefix: brt
 reference: RFC XXXX
 ]]></artwork>
           </figure></t>
@@ -531,7 +532,11 @@ reference: RFC XXXX
 
           <t>ietf-bgp-neighbor - groupings with data specific to the neighbor
           context</t>
-        </list> Additional modules include: <list style="symbols">
+
+          <t>ietf-bgp-rib - grouping for representing BGP RIB.</t>
+        </list> </t>
+
+      <t>Additionally, modules include: <list style="symbols">
           <t>ietf-bgp-types - common type and identity definitions for BGP,
           including BGP policy</t>
 
@@ -547,6 +552,14 @@ reference: RFC XXXX
 
       <section title="Main module and submodules for base items">
         <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+
+]]></artwork>
+          </figure><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
@@ -616,14 +629,14 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
         <t><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
           </figure><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-ext@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib-ext@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-ext@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
@@ -632,7 +645,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib-ext@YYYY-MM-DD.yang)
         <figure>
           <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-types@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib-types@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-types@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
@@ -776,11 +789,17 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.2.xml,68)
     </references>
 
     <references title="Informative references">
-      <?rfc include='reference.I-D.ietf-rtgwg-policy-model'?>
+      <?rfc include='reference.RFC.5880'?>
 
       <?rfc include='reference.RFC.8342'?>
 
       <?rfc include='reference.RFC.8349?>
+
+      <?rfc include='reference.I-D.ietf-rtgwg-policy-model'?>
+
+      <?rfc include='reference.I-D.ietf-grow-bmp'?>
+
+      <?rfc include='reference.I-D.ietf-bfd-yang'?>
     </references>
   </back>
 </rfc>

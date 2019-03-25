@@ -1,6 +1,6 @@
 submodule ietf-bgp-rib-attributes {
   yang-version "1.1";
-  belongs-to ietf-bgp-rib {
+  belongs-to ietf-bgp {
     prefix "br";
   }
 
@@ -9,14 +9,12 @@ submodule ietf-bgp-rib-attributes {
     prefix bgpt;
   }
 
-  import ietf-bgp-rib-types {
-    prefix bgprt;
-  }
-
   import ietf-inet-types {
     prefix inet;
   }
 
+  include ietf-bgp-rib-types;
+  
   // meta
   organization
     "IETF IDR Working Group";
@@ -436,7 +434,7 @@ submodule ietf-bgp-rib-attributes {
 
 	  leaf type {
 	    type identityref {
-	      base "bgprt:tunnel-encapsulation-type";
+	      base "tunnel-encapsulation-type";
 	    }
 	    description
 	      "Type of the tunnel described within the tunnel
@@ -457,7 +455,7 @@ submodule ietf-bgp-rib-attributes {
 
 	      leaf type {
 		type identityref {
-		  base "bgprt:tunnel-encapsulation-subtlv-type";
+		  base "tunnel-encapsulation-subtlv-type";
 		}
 		description
 		  "Type of the sub-TLV within the tunnel encapsulation
@@ -465,7 +463,7 @@ submodule ietf-bgp-rib-attributes {
 	      }
 
 	      leaf-list colors {
-		when "../type = 'bgprt:tunnel-color'" {
+		when "../type = 'tunnel-color'" {
 		  description
 		    "Only allow list of colors to be specified when
                      the sub-TLV specifies colors associated with the
@@ -478,7 +476,7 @@ submodule ietf-bgp-rib-attributes {
 	      }
 
 	      leaf preference {
-		when "../type = 'bgprt:srte-preference'" {
+		when "../type = 'srte-preference'" {
 		  description
 		    "Only allow the preference to be specified when the
                      sub-TLV specifies the preference associated with
@@ -493,7 +491,7 @@ submodule ietf-bgp-rib-attributes {
 	      }
 
 	      leaf binding-sid {
-		when "../type = 'bgprt:srte-binding-sid'" {
+		when "../type = 'srte-binding-sid'" {
 		  description
 		    "Only allow the binding SID to be specified when the
                      sub-TLV is specified to be the of the relevant
@@ -508,7 +506,7 @@ submodule ietf-bgp-rib-attributes {
 	      }
 
               container remote-endpoints {
-                when "../type = 'bgprt:tunnel-remote-endpoint'" {
+                when "../type = 'tunnel-remote-endpoint'" {
                   description
                     "Only allow the remote endpoint to be specified
                      when the subTLV is specified to describe remote
@@ -542,7 +540,7 @@ submodule ietf-bgp-rib-attributes {
               }
 
               container segment-lists {
-                when "../type = 'bgprt:srte-segment-list'" {
+                when "../type = 'srte-segment-list'" {
                   description
                     "Only allow the segment lists to be specified when
                      the sub-TLV is of the relevant type.";

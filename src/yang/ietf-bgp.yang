@@ -9,14 +9,32 @@ module ietf-bgp {
   import ietf-routing {
     prefix "rt";
     reference
-      "RFC 8349 - A YANG Data Model for Routing Management
+      "RFC 8349, A YANG Data Model for Routing Management
        (NMDA Version)";
   }
 
   import ietf-routing-policy { 
     prefix rpol;
     reference
-      "RFC ZZZZ: A YANG Data Model for Routing Policy Management";
+      "RFC ZZZZ, A YANG Data Model for Routing Policy Management";
+  }
+
+  import ietf-interfaces {
+    prefix if;
+    reference
+      "RFC 8343, A YANG Data Model for Interface Management.";
+  }
+
+  import ietf-bgp-types {
+    prefix bt;
+    reference
+      "RFC XXXX, BGP YANG Model for Service Provider Network.";
+  }
+
+  import ietf-bfd-types {
+    prefix bfd;
+    reference
+      "RFC BBBB, YANG Data Model for Bidirectional Forward Detection.";
   }
 
   include ietf-bgp-common;
@@ -25,6 +43,13 @@ module ietf-bgp {
   include ietf-bgp-neighbor;
   include ietf-bgp-global;
   include ietf-bgp-peer-group;
+  include ietf-bgp-rib-types;
+  include ietf-bgp-rib;
+  include ietf-bgp-rib-ext;
+  include ietf-bgp-rib-shared-attributes;
+  include ietf-bgp-rib-attributes;
+  include ietf-bgp-rib-table-attributes;
+  include ietf-bgp-rib-tables;
 
   organization
     "IETF IDR Working Group";
@@ -81,7 +106,6 @@ module ietf-bgp {
   /*
    * Containers
    */
-
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol" {
     when "derived-from-or-self(rt:type, 'bgp')" {
@@ -116,6 +140,33 @@ module ietf-bgp {
           "Configuration for BGP peer-groups";
         uses bgp-peer-group-list;
       }
+
+      container interfaces {
+	list interface {
+	  key "name";
+
+	  leaf name {
+	    type if:interface-ref;
+	    description
+	      "Reference to the interface within the routing instance.";
+	  }
+
+	  container bfd {
+	    if-feature bt:bfd;
+	    uses bfd:client-cfg-parms;
+	    description
+	      "BFD client configuration.";
+	    reference
+	      "RFC BBBB - YANG Data Model for Bidirectional Forwarding
+               Detection.";
+	  }
+	  description
+	    "List of interfaces within the routing instance.";
+	}
+	description
+	  "Interface specific parameters.";
+      }
+      uses rib;
     }
   }
 }

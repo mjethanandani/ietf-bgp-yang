@@ -1,6 +1,6 @@
 submodule ietf-bgp-rib-tables {
   yang-version "1.1";
-  belongs-to ietf-bgp-rib {
+  belongs-to ietf-bgp {
     prefix "br";
   }
 
@@ -14,7 +14,8 @@ submodule ietf-bgp-rib-tables {
     reference
       "RFC 8022: A YANG Data Model for Routing Management";
   }
-  
+
+  include ietf-bgp-rib-ext;
   include ietf-bgp-rib-attributes;
   include ietf-bgp-rib-shared-attributes;
   include ietf-bgp-rib-table-attributes;
@@ -181,13 +182,13 @@ submodule ietf-bgp-rib-tables {
 	      "The IPv4 prefix corresponding to the route";
 	  }
 
-	  uses bgp-loc-rib-common-keys;
-	  uses bgp-loc-rib-common-attr-refs;
-	  uses bgp-loc-rib-attr-state;
-	  uses bgp-common-route-annotations-state;
-	  uses bgp-loc-rib-route-annotations-state;
-	  uses bgp-unknown-attr-top;
-
+          uses bgp-loc-rib-common-keys;
+          uses bgp-loc-rib-common-attr-refs;
+          uses bgp-loc-rib-attr-state;
+          uses bgp-common-route-annotations-state;
+          uses bgp-loc-rib-route-annotations-state;
+          uses bgp-unknown-attr-top;
+          uses rib-ext-route-annotations;
         }
       }
     }
@@ -227,12 +228,13 @@ submodule ietf-bgp-rib-tables {
 	      "The IPv6 prefix corresponding to the route";
 	  }
 
-	  uses bgp-loc-rib-common-keys;
-	  uses bgp-loc-rib-common-attr-refs;
-	  uses bgp-loc-rib-attr-state;
-	  uses bgp-common-route-annotations-state;
-	  uses bgp-loc-rib-route-annotations-state;
+          uses bgp-loc-rib-common-keys;
+          uses bgp-loc-rib-common-attr-refs;
+          uses bgp-loc-rib-attr-state;
+          uses bgp-common-route-annotations-state;
+          uses bgp-loc-rib-route-annotations-state;
           uses bgp-unknown-attr-top;
+          uses rib-ext-route-annotations;
         }
       }
     }
@@ -265,11 +267,11 @@ submodule ietf-bgp-rib-tables {
 	    "Prefix for the route";
 	}
 
-	uses bgp-adj-rib-attr-state;
-	uses bgp-adj-rib-common-attr-refs;
-	uses bgp-common-route-annotations-state;
+        uses bgp-adj-rib-attr-state;
+        uses bgp-adj-rib-common-attr-refs;
+        uses bgp-common-route-annotations-state;
         uses bgp-unknown-attr-top;
-
+	uses rib-ext-route-annotations;
       }
     }
   }
@@ -302,11 +304,12 @@ submodule ietf-bgp-rib-tables {
 	    "Prefix for the route";
 	}
 
-	uses bgp-adj-rib-attr-state;
-	uses bgp-adj-rib-common-attr-refs;
-	uses bgp-common-route-annotations-state;
-	uses bgp-adj-rib-in-post-route-annotations-state;
+        uses bgp-adj-rib-attr-state;
+        uses bgp-adj-rib-common-attr-refs;
+        uses bgp-common-route-annotations-state;
+        uses bgp-adj-rib-in-post-route-annotations-state;
         uses bgp-unknown-attr-top;
+	uses rib-ext-route-annotations;
       }
     }
   }
@@ -399,10 +402,11 @@ submodule ietf-bgp-rib-tables {
 	    "Prefix for the route";
 	}
 
-	uses bgp-adj-rib-attr-state;
-	uses bgp-adj-rib-common-attr-refs;
-	uses bgp-common-route-annotations-state;
+        uses bgp-adj-rib-attr-state;
+        uses bgp-adj-rib-common-attr-refs;
+        uses bgp-common-route-annotations-state;
         uses bgp-unknown-attr-top;
+	uses rib-ext-route-annotations;
       }
     }
   }
@@ -432,11 +436,12 @@ submodule ietf-bgp-rib-tables {
 	    "Prefix for the route";
 	}
 
-	uses bgp-adj-rib-attr-state;
-	uses bgp-adj-rib-common-attr-refs;
-	uses bgp-common-route-annotations-state;
-	uses bgp-adj-rib-in-post-route-annotations-state;
+        uses bgp-adj-rib-attr-state;
+        uses bgp-adj-rib-common-attr-refs;
+        uses bgp-common-route-annotations-state;
+        uses bgp-adj-rib-in-post-route-annotations-state;
         uses bgp-unknown-attr-top;
+	uses rib-ext-route-annotations;
       }
     }
   }

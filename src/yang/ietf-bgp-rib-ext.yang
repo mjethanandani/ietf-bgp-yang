@@ -1,21 +1,11 @@
-module ietf-bgp-rib-ext {
+submodule ietf-bgp-rib-ext {
   yang-version "1.1";
-  namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-rib-ext";
-
-  prefix "bre";
-
-  import ietf-routing {
-    prefix "rt";
-    reference
-      "RFC 8349: YANG Routing Management.";
-  }
-  import ietf-bgp-rib {
-    prefix bgprib;
-  }
-  import ietf-bgp-rib-types {
-    prefix bgpribt;
+  belongs-to ietf-bgp {
+    prefix "bre";
   }
 
+  include ietf-bgp-rib-types;
+  
   organization
     "IETF IDR Working Group";
 
@@ -47,113 +37,15 @@ module ietf-bgp-rib-ext {
     leaf reject-reason {
       type union {
         type identityref {
-          base bgpribt:bgp-not-selected-bestpath;
+          base bgp-not-selected-bestpath;
         }
         type identityref {
-          base bgpribt:bgp-not-selected-policy;
+          base bgp-not-selected-policy;
         }
       }
       description
         "Indicates the reason the route is not used, either due to
         policy filtering or bestpath selection";
     }
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv4-unicast/bgprib:loc-rib/" +
-    "bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to the Loc-RIB for IPv4";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv6-unicast/bgprib:loc-rib/" +
-    "bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to the Loc-RIB for IPv6";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv4-unicast/" +
-    "bgprib:neighbors/bgprib:neighbor/" +
-    "bgprib:adj-rib-in-pre/bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to Adj-RIB for IPv4";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv4-unicast/" +
-    "bgprib:neighbors/bgprib:neighbor/" +
-    "bgprib:adj-rib-in-post/bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to Adj-RIB for IPv4";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv4-unicast/" +
-    "bgprib:neighbors/bgprib:neighbor/" +
-    "bgprib:adj-rib-out-pre/bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to Adj-RIB for IPv4";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv4-unicast/" +
-    "bgprib:neighbors/bgprib:neighbor/" +
-    "bgprib:adj-rib-out-post/bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to Adj-RIB for IPv4";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv6-unicast/" +
-    "bgprib:neighbors/bgprib:neighbor/" +
-    "bgprib:adj-rib-in-pre/bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to Adj-RIB for IPv6";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv6-unicast/" +
-    "bgprib:neighbors/bgprib:neighbor/" +
-    "bgprib:adj-rib-in-post/bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to Adj-RIB for IPv6";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv6-unicast/" +
-    "bgprib:neighbors/bgprib:neighbor/" +
-    "bgprib:adj-rib-out-pre/bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to Adj-RIB for IPv6";
-
-      uses rib-ext-route-annotations;
-  }
-
-  augment "/rt:routing/rt:ribs/bgprib:rib/bgprib:afi-safis/" +
-    "bgprib:afi-safi/bgprib:ipv6-unicast/" +
-    "bgprib:neighbors/bgprib:neighbor/" +
-    "bgprib:adj-rib-out-post/bgprib:routes/bgprib:route" {
-      description
-        "Add extended annotations to Adj-RIB for IPv6";
-
-      uses rib-ext-route-annotations;
   }
 }
