@@ -1,41 +1,49 @@
 module ietf-bgp {
-  yang-version "1.1";
+  yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-bgp";
-  prefix "bgp";
+  prefix bgp;
 
   /*
    * Import and Include
    */
+
   import ietf-routing {
-    prefix "rt";
+    prefix rt;
     reference
       "RFC 8349, A YANG Data Model for Routing Management
        (NMDA Version)";
   }
-
-  import ietf-routing-policy { 
+  import ietf-routing-policy {
     prefix rpol;
     reference
       "RFC ZZZZ, A YANG Data Model for Routing Policy Management";
   }
-
   import ietf-interfaces {
     prefix if;
     reference
       "RFC 8343, A YANG Data Model for Interface Management.";
   }
-
   import ietf-bgp-types {
     prefix bt;
     reference
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
   }
-
   import ietf-bfd-types {
     prefix bfd;
     reference
       "RFC BBBB, YANG Data Model for Bidirectional Forward Detection.";
   }
+  import ietf-inet-types { 
+    prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types.";
+  }
+  import ietf-yang-types { 
+    prefix yang; 
+    reference
+      "RFC 6991: Common YANG Data Types.";
+  }
+
 
   include ietf-bgp-common;
   include ietf-bgp-common-multiprotocol;
@@ -53,7 +61,6 @@ module ietf-bgp {
 
   organization
     "IETF IDR Working Group";
-
   contact
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
@@ -61,7 +68,6 @@ module ietf-bgp {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com";
-     
   description
     "This module describes a YANG model for BGP protocol
      configuration. It is a limited subset of all of the configuration
@@ -87,18 +93,19 @@ module ietf-bgp {
           +-> [ optional pointer to peer-group ]
           +-> AFI / SAFI [ per-AFI overrides ]";
 
-  revision "YYYY-MM-DD" {
+  revision YYYY-MM-DD {
     description
       "Initial Version";
-    reference 
+    reference
       "RFC XXXX, BGP Model for Service Provider Network ";
   }
 
   /*
    * Identity
    */
+
   identity bgp {
-    base "rt:routing-protocol";
+    base rt:routing-protocol;
     description
       "BGP protocol.";
   }
@@ -106,8 +113,9 @@ module ietf-bgp {
   /*
    * Containers
    */
-  augment "/rt:routing/rt:control-plane-protocols/" +
-          "rt:control-plane-protocol" {
+
+  augment "/rt:routing/rt:control-plane-protocols/"
+        + "rt:control-plane-protocol" {
     when "derived-from-or-self(rt:type, 'bgp')" {
       description
         "This augmentation is valid for a routing protocol
@@ -120,7 +128,6 @@ module ietf-bgp {
     container bgp {
       description
         "Top-level configuration for the BGP router";
-
       container global {
         presence "Enables global configuration of BGP";
         description
@@ -132,7 +139,296 @@ module ietf-bgp {
       container neighbors {
         description
           "Configuration for BGP neighbors";
-        uses bgp-neighbor-list;
+
+	list neighbor {
+          key "neighbor-address";
+          description
+            "List of BGP neighbors configured on the local system,
+             uniquely identified by peer IPv[46] address";
+
+	  leaf peer-group {
+            type leafref {
+              path "../../../peer-groups/peer-group/peer-group-name";
+            }
+            description
+              "The peer-group with which this neighbor is associated";
+          }
+
+	  leaf neighbor-address {
+            type inet:ip-address;
+            description
+              "Address of the BGP peer, either in IPv4 or IPv6";
+          }
+
+	  leaf enabled {
+            type boolean;
+            default "true";
+            description
+              "Whether the BGP peer is enabled. In cases where the
+               enabled leaf is set to false, the local system should
+               not initiate connections to the neighbor, and should
+               not respond to TCP connections attempts from the
+               neighbor. If the state of the BGP session is
+               ESTABLISHED at the time that this leaf is set to false,
+               the BGP session should be ceased.";
+          }
+
+	  uses neighbor-group-config;
+
+	  leaf session-state {
+            type enumeration {
+              enum IDLE {
+                description
+                  "Neighbor is down, and in the Idle state of the FSM";
+              }
+              enum CONNECT {
+                description
+                  "Neighbor is down, and the session is waiting for the
+                   underlying transport session to be established";
+              }
+              enum ACTIVE {
+                description
+                  "Neighbor is down, and the local system is awaiting a
+                   connection from the remote peer";
+              }
+              enum OPENSENT {
+                description
+                  "Neighbor is in the process of being established.  The
+                   local system has sent an OPEN message";
+              }
+              enum OPENCONFIRM {
+                description
+                  "Neighbor is in the process of being established.
+                   The local system is awaiting a NOTIFICATION or
+                   KEEPALIVE message";
+              }
+              enum ESTABLISHED {
+                description
+                  "Neighbor is up - the BGP session with the peer is
+                   established";
+              }
+            }
+            config false;
+            description
+              "Operational state of the BGP peer";
+          }
+
+	  leaf last-established {
+            type uint64;
+            config false;
+            description
+              "This timestamp indicates the time that the BGP session
+               last transitioned in or out of the Established state.
+               The value is the timestamp in seconds relative to the
+               Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+
+               The BGP session uptime can be computed by clients as
+               the difference between this value and the current time
+               in UTC (assuming the session is in the ESTABLISHED
+               state, per the session-state leaf).";
+          }
+
+	  leaf established-transitions {
+            type yang:counter64;
+            config false;
+            description
+              "Number of transitions to the Established state for the
+               neighbor session.  This value is analogous to the
+               bgpPeerFsmEstablishedTransitions object from the standard
+               BGP-4 MIB";
+            reference
+              "RFC 4273 - Definitions of Managed Objects for BGP-4";
+          }
+
+	  leaf-list supported-capabilities {
+            type identityref {
+              base bt:BGP_CAPABILITY;
+            }
+            config false;
+            description
+              "BGP capabilities negotiated as supported with the peer";
+          }
+
+	  container messages {
+            config false;
+            description
+              "Counters for BGP messages sent and received from the
+               neighbor";
+            container sent {
+              description
+                "Counters relating to BGP messages sent to the
+                 neighbor";
+              uses bgp-neighbor-counters-message-types-state;
+            }
+            container received {
+              description
+                "Counters for BGP messages received from the neighbor";
+              uses bgp-neighbor-counters-message-types-state;
+            }
+          }
+
+	  container queues {
+            config false;
+            description
+              "Counters related to queued messages associated with the
+               BGP neighbor";
+
+	    leaf input {
+              type uint32;
+              description
+                "The number of messages received from the peer currently
+                 queued";
+            }
+
+	    leaf output {
+              type uint32;
+              description
+                "The number of messages queued to be sent to the peer";
+            }
+          }
+
+	  container timers {
+            description
+              "Timers related to a BGP neighbor";
+
+	    uses neighbor-group-timers-config;
+
+	    leaf negotiated-hold-time {
+              type decimal64 {
+                fraction-digits 2;
+              }
+              config false;
+              description
+                "The negotiated hold-time for the BGP session";
+            }
+          }
+          container transport {
+            description
+              "Transport session parameters for the BGP neighbor";
+
+	    uses neighbor-group-transport-config;
+
+	    leaf local-port {
+              type inet:port-number;
+              config false;
+              description
+                "Local TCP port being used for the TCP session
+                 supporting the BGP session";
+            }
+
+	    leaf remote-address {
+              type inet:ip-address;
+              config false;
+              description
+                "Remote address to which the BGP session has been
+                 established";
+            }
+
+	    leaf remote-port {
+              type inet:port-number;
+              config false;
+              description
+                "Remote port being used by the peer for the TCP session
+                 supporting the BGP session";
+            }
+          }
+
+	  container error-handling {
+            description
+              "Error handling parameters used for the BGP neighbor or
+               group";
+
+	    uses neighbor-group-error-handling-config;
+
+	    leaf erroneous-update-messages {
+              type uint32;
+              config false;
+              description
+                "The number of BGP UPDATE messages for which the
+                 treat-as-withdraw mechanism has been applied based on
+                 erroneous message contents";
+            }
+          }
+          container graceful-restart {
+            description
+              "Parameters relating the graceful restart mechanism for
+               BGP";
+
+	    uses graceful-restart-config;
+
+	    leaf peer-restart-time {
+              type uint16 {
+                range "0..4096";
+              }
+              config false;
+              description
+                "The period of time (advertised by the peer) that the
+                 peer expects a restart of a BGP session to take";
+            }
+
+	    leaf peer-restarting {
+              type boolean;
+              config false;
+              description
+                "This flag indicates whether the remote neighbor is
+                 currently in the process of restarting, and hence
+                 received routes are currently stale";
+            }
+
+	    leaf local-restarting {
+              type boolean;
+              config false;
+              description
+                "This flag indicates whether the local neighbor is
+                 currently restarting. The flag is unset after all NLRI
+                 have been advertised to the peer, and the End-of-RIB
+                 (EOR) marker has been unset";
+            }
+
+            leaf mode {
+              type enumeration {
+                enum HELPER_ONLY {
+                  description
+                    "The local router is operating in helper-only
+                     mode, and hence will not retain forwarding state
+                     during a local session restart, but will do so
+                     during a restart of the remote peer";
+                }
+                enum BILATERAL {
+                  description
+                    "The local router is operating in both helper
+                     mode, and hence retains forwarding state during
+                     a remote restart, and also maintains forwarding
+                     state during local session restart";
+                }
+                enum REMOTE_HELPER {
+                  description
+                    "The local system is able to retain routes during
+                     restart but the remote system is only able to
+                     act as a helper";
+                }
+              }
+              config false;
+              description
+                "This leaf indicates the mode of operation of BGP
+                 graceful restart with the peer";
+            }
+          }
+          uses structure-neighbor-group-logging-options;
+          uses structure-neighbor-group-ebgp-multihop;
+          uses structure-neighbor-group-route-reflector;
+          uses structure-neighbor-group-as-path-options;
+          uses structure-neighbor-group-add-paths;
+          uses bgp-neighbor-use-multiple-paths;
+          uses rpol:apply-policy-group;
+
+          container afi-safis {
+            description
+              "Per-address-family configuration parameters associated
+               with the neighbor";
+            uses bgp-neighbor-afi-safi-list;
+          }
+        }
       }
 
       container peer-groups {
@@ -142,29 +438,30 @@ module ietf-bgp {
       }
 
       container interfaces {
-	list interface {
-	  key "name";
+        list interface {
+          key "name";
 
 	  leaf name {
-	    type if:interface-ref;
-	    description
-	      "Reference to the interface within the routing instance.";
-	  }
+            type if:interface-ref;
+            description
+              "Reference to the interface within the routing instance.";
+          }
 
 	  container bfd {
-	    if-feature bt:bfd;
+            if-feature "bt:bfd";
+
 	    uses bfd:client-cfg-parms;
-	    description
-	      "BFD client configuration.";
-	    reference
-	      "RFC BBBB - YANG Data Model for Bidirectional Forwarding
+            description
+              "BFD client configuration.";
+            reference
+              "RFC BBBB - YANG Data Model for Bidirectional Forwarding
                Detection.";
-	  }
-	  description
-	    "List of interfaces within the routing instance.";
-	}
-	description
-	  "Interface specific parameters.";
+          }
+          description
+            "List of interfaces within the routing instance.";
+        }
+        description
+          "Interface specific parameters.";
       }
       uses rib;
     }

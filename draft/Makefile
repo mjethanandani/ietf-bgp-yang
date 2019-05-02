@@ -66,11 +66,10 @@ $(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/
 	cd ../src; ./validate-and-gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
 
-rib: ../src/yang/ietf-bgp-rib.yang ../src/yang/ietf-bgp-rib-attributes.yang ../src/yang/ietf-bgp-rib-ext.yang ../src/yang/ietf-bgp-rib-shared-attributes.yang ../src/yang/ietf-bgp-rib-table-attributes.yang ../src/yang/ietf-bgp-rib-tables.yang ../src/yang/ietf-bgp-rib-types.yang
+rib: ../src/yang/ietf-bgp-rib.yang ../src/yang/ietf-bgp-rib-attributes.yang ../src/yang/ietf-bgp-rib-ext.yang ../src/yang/ietf-bgp-rib-table-attributes.yang ../src/yang/ietf-bgp-rib-tables.yang ../src/yang/ietf-bgp-rib-types.yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib.yang > ../bin/submodules/ietf-bgp-rib\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-attributes.yang > ../bin/submodules/ietf-bgp-rib-attributes\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-ext.yang > ../bin/submodules/ietf-bgp-rib-ext\@$(shell date +%Y-%m-%d).yang
-	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-shared-attributes.yang > ../bin/submodules/ietf-bgp-rib-shared-attributes\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-table-attributes.yang > ../bin/submodules/ietf-bgp-rib-table-attributes\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-tables.yang > ../bin/submodules/ietf-bgp-rib-tables\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-types.yang > ../bin/submodules/ietf-bgp-rib-types\@$(shell date +%Y-%m-%d).yang
