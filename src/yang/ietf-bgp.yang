@@ -54,7 +54,6 @@ module ietf-bgp {
   include ietf-bgp-rib-types;
   include ietf-bgp-rib;
   include ietf-bgp-rib-ext;
-  include ietf-bgp-rib-shared-attributes;
   include ietf-bgp-rib-attributes;
   include ietf-bgp-rib-table-attributes;
   include ietf-bgp-rib-tables;
@@ -132,7 +131,57 @@ module ietf-bgp {
         presence "Enables global configuration of BGP";
         description
           "Global configuration for the BGP router";
-        uses bgp-global-base;
+
+	leaf as {
+	  type inet:as-number;
+	  mandatory true;
+	  description
+	    "Local autonomous system number of the router.  Uses
+             the 32-bit as-number type from the model in RFC 6991.";
+	}
+
+	leaf router-id {
+	  type yang:dotted-quad;
+	  description
+	    "Router id of the router - an unsigned 32-bit integer
+             expressed in dotted quad notation.";
+	  reference
+	    "RFC4271 - A Border Gateway Protocol 4 (BGP-4),
+             Section 4.2";
+	}
+	uses state;
+
+	container default-route-distance {
+	  description
+	    "Administrative distance (or preference) assigned to
+             routes received from different sources
+             (external, internal, and local).";
+
+	  uses bgp-global-default-route-distance-config;
+	}
+
+	container confederation {
+	  description
+	    "Parameters indicating whether the local system acts as part
+             of a BGP confederation";
+
+	  uses bgp-global-confederation-config;
+	}
+
+	container graceful-restart {
+	  description
+	    "Parameters relating the graceful restart mechanism for BGP";
+	  uses graceful-restart-config;
+	}
+
+	uses global-group-use-multiple-paths;
+	uses route-selection-options;
+
+	container afi-safis {
+	  description
+	    "Address family specific configuration";
+	  uses bgp-global-afi-safi-list;
+	}
         uses rpol:apply-policy-group;
       }
 
@@ -141,7 +190,7 @@ module ietf-bgp {
           "Configuration for BGP neighbors";
 
 	list neighbor {
-          key "neighbor-address";
+          key "remote-address";
           description
             "List of BGP neighbors configured on the local system,
              uniquely identified by peer IPv[46] address";
@@ -154,7 +203,7 @@ module ietf-bgp {
               "The peer-group with which this neighbor is associated";
           }
 
-	  leaf neighbor-address {
+	  leaf remote-address {
             type inet:ip-address;
             description
               "Address of the BGP peer, either in IPv4 or IPv6";
@@ -170,47 +219,60 @@ module ietf-bgp {
                not respond to TCP connections attempts from the
                neighbor. If the state of the BGP session is
                ESTABLISHED at the time that this leaf is set to false,
-               the BGP session should be ceased.";
+               the BGP session should be ceased.
+
+               A transition from 'false' to 'true' will cause
+               the BGP Manual Start Event to be generated.
+               A transition from 'true' to 'false' will cause
+               the BGP Manual Stop Event to be generated.
+               This parameter can be used to restart BGP peer
+               connections. Care should be used in providing
+               write access to this object without adequate
+               authentication.";
+	    reference
+	      "RFC 4271, Section 8.1.2.";
           }
 
 	  uses neighbor-group-config;
 
 	  leaf session-state {
             type enumeration {
-              enum IDLE {
+              enum idle {
                 description
                   "Neighbor is down, and in the Idle state of the FSM";
               }
-              enum CONNECT {
+              enum connect {
                 description
                   "Neighbor is down, and the session is waiting for the
                    underlying transport session to be established";
               }
-              enum ACTIVE {
+              enum active {
                 description
                   "Neighbor is down, and the local system is awaiting a
                    connection from the remote peer";
               }
-              enum OPENSENT {
+              enum opensent {
                 description
                   "Neighbor is in the process of being established.  The
                    local system has sent an OPEN message";
               }
-              enum OPENCONFIRM {
+              enum openconfirm {
                 description
                   "Neighbor is in the process of being established.
                    The local system is awaiting a NOTIFICATION or
                    KEEPALIVE message";
               }
-              enum ESTABLISHED {
+              enum established {
                 description
                   "Neighbor is up - the BGP session with the peer is
                    established";
               }
             }
-            config false;
+	    config false;
             description
-              "Operational state of the BGP peer";
+              "The BGP peer connection state.";
+	    reference
+	      "RFC 4271, Section 8.1.2.";
           }
 
 	  leaf last-established {

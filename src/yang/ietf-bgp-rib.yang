@@ -28,7 +28,6 @@ submodule ietf-bgp-rib {
 
   include ietf-bgp-rib-types;
   include ietf-bgp-rib-tables;
-  include ietf-bgp-rib-shared-attributes;
 
   // groupings of attributes in three categories:
   //  - shared across multiple routes

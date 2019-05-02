@@ -7,9 +7,6 @@ submodule ietf-bgp-global {
   import ietf-inet-types { 
     prefix inet; 
   }
-  import ietf-yang-types { 
-    prefix yang; 
-  }
 
   include ietf-bgp-common;
   include ietf-bgp-common-multiprotocol;
@@ -113,62 +110,4 @@ submodule ietf-bgp-global {
       uses mp-all-afi-safi-list-contents;
     }
   }
-
-  // Structural groupings
-  grouping bgp-global-base {
-    description
-      "Global configuration parameters for the BGP router";
-
-    leaf as {
-      type inet:as-number;
-      mandatory true;
-      description
-        "Local autonomous system number of the router.  Uses
-        the 32-bit as-number type from the model in RFC 6991.";
-    }
-
-    leaf router-id {
-      type yang:dotted-quad;
-      description
-        "Router id of the router - an unsigned 32-bit integer
-        expressed in dotted quad notation.";
-      reference
-        "RFC4271 - A Border Gateway Protocol 4 (BGP-4),
-        Section 4.2";
-    }
-    uses state;
-
-    container default-route-distance {
-      description
-        "Administrative distance (or preference) assigned to
-        routes received from different sources
-        (external, internal, and local).";
-
-      uses bgp-global-default-route-distance-config;
-    }
-
-    container confederation {
-      description
-        "Parameters indicating whether the local system acts as part
-        of a BGP confederation";
-
-      uses bgp-global-confederation-config;
-    }
-
-    container graceful-restart {
-      description
-        "Parameters relating the graceful restart mechanism for BGP";
-      uses graceful-restart-config;
-    }
-
-    uses global-group-use-multiple-paths;
-    uses route-selection-options;
-
-    container afi-safis {
-      description
-        "Address family specific configuration";
-      uses bgp-global-afi-safi-list;
-    }
-  }
-
 }

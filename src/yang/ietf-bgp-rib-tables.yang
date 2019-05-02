@@ -17,7 +17,6 @@ submodule ietf-bgp-rib-tables {
 
   include ietf-bgp-rib-ext;
   include ietf-bgp-rib-attributes;
-  include ietf-bgp-rib-shared-attributes;
   include ietf-bgp-rib-table-attributes;
 
   organization
