@@ -32,40 +32,40 @@ module ietf-bgp-types {
       "RFC XXX, BGP Model for Service Provider Network.";
   }
 
-  identity BGP_CAPABILITY {
+  identity bgp-capability {
     description "Base identity for a BGP capability";
   }
 
-  identity MPBGP {
-    base BGP_CAPABILITY;
+  identity mp-bgp {
+    base bgp-capability;
     description
       "Multi-protocol extensions to BGP";
     reference "RFC2858";
   }
 
-  identity ROUTE_REFRESH {
-    base BGP_CAPABILITY;
+  identity route-refresh {
+    base bgp-capability;
     description
       "The BGP route-refresh functionality";
     reference "RFC2918";
   }
 
-  identity ASN32 {
-    base BGP_CAPABILITY;
+  identity asn32 {
+    base bgp-capability;
     description
       "4-byte (32-bit) AS number functionality";
     reference "RFC6793";
   }
 
-  identity GRACEFUL_RESTART {
-    base BGP_CAPABILITY;
+  identity graceful-restart {
+    base bgp-capability;
     description
       "Graceful restart functionality";
     reference "RFC4724";
   }
 
-  identity ADD_PATHS {
-    base BGP_CAPABILITY;
+  identity add-paths {
+    base bgp-capability;
     description
       "BGP add-paths";
     reference "draft-ietf-idr-add-paths";

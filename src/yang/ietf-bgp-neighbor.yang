@@ -58,14 +58,14 @@ submodule ietf-bgp-neighbor {
       "Grouping of BGP message types, included for re-use across
        counters";
 
-    leaf UPDATE {
+    leaf update {
       type uint64;
       description
         "Number of BGP UPDATE messages announcing, withdrawing or
          modifying paths exchanged.";
     }
 
-    leaf NOTIFICATION {
+    leaf notification {
       type uint64;
       description
         "Number of BGP NOTIFICATION messages indicating an error

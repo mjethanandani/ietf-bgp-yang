@@ -417,7 +417,7 @@ module ietf-bgp-policy {
 
         uses set-community-action-common;
         container inline {
-          when "../config/method=INLINE" {
+          when "../method = 'INLINE'" {
             description
               "Active only when the set-community method is INLINE";
           }
@@ -437,7 +437,7 @@ module ietf-bgp-policy {
         }
 
         container reference {
-          when "../config/method=REFERENCE" {
+          when "../method = 'REFERENCE'" {
             description
               "Active only when the set-community method is REFERENCE";
           }
@@ -468,7 +468,7 @@ module ietf-bgp-policy {
 
         uses set-community-action-common;
         container inline {
-          when "../config/method=INLINE" {
+          when "../method = 'INLINE'" {
             description
               "Active only when the set-community method is INLINE";
           }
@@ -488,7 +488,7 @@ module ietf-bgp-policy {
         }
 
         container reference {
-          when "../config/method=REFERENCE" {
+          when "../method = 'REFERENCE'" {
             description
               "Active only when the set-community method is REFERENCE";
           }

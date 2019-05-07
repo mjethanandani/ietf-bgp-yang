@@ -6,7 +6,7 @@ set -e
 
 source /opt/confd/confdrc
 cd src
-FXS="iana-bfd-types ietf-bfd-types ietf-key-chain ietf-routing ietf-interfaces ietf-bgp-types ietf-routing-policy ietf-if-l3-vlan ieee802-dot1q-types ietf-interfaces-common iana-if-type ietf-routing-types ietf-bgp"
+FXS="iana-bfd-types ietf-bfd-types ietf-key-chain ietf-routing ietf-interfaces ietf-bgp-types ietf-routing-policy ietf-if-l3-vlan ieee802-dot1q-types ietf-interfaces-common iana-if-type ietf-routing-types ietf-bgp ietf-bgp-policy"
 
 echo "Testing compilation"
 CONFD_OPTS="--fail-on-warnings"
