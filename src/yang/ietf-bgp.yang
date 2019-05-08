@@ -592,6 +592,87 @@ module ietf-bgp {
             uses bgp-neighbor-afi-safi-list;
           }
         }
+
+	notification established {
+          description
+            "The established event is generated
+             when the BGP FSM enters the established state.";
+
+          leaf remote-address {
+            type leafref {
+              path "../../neighbor/remote-address";
+            }
+            description
+              "IP address of the neighbor that went into established
+               state.";
+          }
+
+          leaf last-error {
+            type leafref {
+	      path "../../neighbor/last-error";
+            }
+            description
+              "The last error code and subcode seen by this
+               peer on this connection.  If no error has
+               occurred, this field is zero.  Otherwise, the
+               first byte of this two byte OCTET STRING
+               contains the error code, and the second byte
+               contains the subcode.";
+            reference
+              "RFC 4271, Section 4.5.";
+          }
+
+          leaf session-state {
+	    type leafref {
+	      path "../../neighbor/session-state";
+            }
+            description
+              "The BGP peer connection state.";
+            reference
+              "RFC 4271, Section 8.2.2.";
+          }
+        }
+
+        notification backward-transition {
+          description
+            "The backward-transition event is
+             generated when the BGP FSM moves from a higher
+             numbered state to a lower numbered state.";
+
+	  leaf remote-addr {
+	    type leafref {
+              path "../../neighbor/remote-address";
+	    }
+	    description
+              "IP address of the neighbor that went away from
+               established state.";
+          }
+
+	  leaf last-error {
+            type leafref {
+	      path "../../neighbor/last-error";
+            }
+	    description
+	      "The last error code and subcode seen by this
+               peer on this connection.  If no error has
+               occurred, this field is zero.  Otherwise, the
+               first byte of this two byte OCTET STRING
+               contains the error code, and the second byte
+               contains the subcode.";
+	    reference
+	      "RFC 4271, Section 4.5.";
+	  }
+
+	  leaf session-state {
+	    type leafref {
+	      path "../../neighbor/session-state";
+            }
+            description
+              "The BGP peer connection state.";
+            reference
+              "RFC 4271, Section 8.2.2.";
+	  }
+        }
       }
 
       container peer-groups {
@@ -629,4 +710,6 @@ module ietf-bgp {
       uses rib;
     }
   }
+
+
 }
