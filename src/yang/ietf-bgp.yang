@@ -110,6 +110,24 @@ module ietf-bgp {
   }
 
   /*
+   * Feature(s)
+   */
+  feature clear-routes {
+    description
+      "Clearing of BGP routes is supported.";
+  }
+
+  feature clear-neighbors {
+    description
+      "Clearing of BGP neighbors is supported.";
+  }
+
+  feature clear-statistics {
+    description
+      "Clearing of BGP statistics is supported.";
+  }
+
+  /*
    * Containers
    */
 
@@ -312,7 +330,7 @@ module ietf-bgp {
                    established";
               }
             }
-            config false;
+	    //  config false;
             description
               "The BGP peer connection state.";
             reference
@@ -332,18 +350,6 @@ module ietf-bgp {
                the difference between this value and the current time
                in UTC (assuming the session is in the ESTABLISHED
                state, per the session-state leaf).";
-          }
-
-          leaf established-transitions {
-            type yang:counter64;
-            config false;
-            description
-              "Number of transitions to the Established state for the
-               neighbor session.  This value is analogous to the
-               bgpPeerFsmEstablishedTransitions object from the standard
-               BGP-4 MIB";
-            reference
-              "RFC 4273 - Definitions of Managed Objects for BGP-4";
           }
 
           leaf-list supported-capabilities {
@@ -368,7 +374,8 @@ module ietf-bgp {
             type binary {
               length "2";
             }
-            config false;
+	    // notification does not like non-config statement.
+	    // config false;
             description 
               "The last error code and subcode seen by this
                peer on this connection.  If no error has
@@ -378,17 +385,6 @@ module ietf-bgp {
                contains the subcode.";
             reference   
               "RFC 4271, Section 4.5.";
-          }
-
-          leaf fsm-established-transitions {
-            type yang:counter32;
-            config false;
-            description 
-              "The total number of times the BGP FSM
-               transitioned into the established state
-               for this peer.";
-            reference   
-              "RFC 4271, Section 8.";
           }
 
           leaf fsm-established-time {
@@ -405,79 +401,6 @@ module ietf-bgp {
                booted.";
             reference   
               "RFC 4271, Section 8.";
-          }
-
-	  container messages {
-            config false;
-            description
-              "Counters for BGP messages sent and received from the
-               neighbor";
-
-            leaf in-total-messages {
-              type yang:counter32;
-              config false;
-              description 
-                "The total number of messages received
-                 from the remote peer on this connection.";
-              reference   
-                "RFC 4271, Section 4.";
-            }
-
-            leaf out-total-messages {
-              type yang:counter32;
-              config false;
-              description 
-                "The total number of messages transmitted to
-                 the remote peer on this connection.";
-              reference   
-                "RFC 4271, Section 4.";
-            }
-
-            leaf in-update-elapsed-time {
-              type yang:gauge32;
-              units "seconds";
-              config false;
-              description 
-                "Elapsed time (in seconds) since the last BGP
-                 UPDATE message was received from the peer.
-                 Each time in-updates is incremented,
-                 the value of this object is set to zero (0).";
-              reference   
-                "RFC 4271, Section 4.3.
-                 RFC 4271, Section 8.2.2, Established state.";
-            }
-
-            container sent {
-              description
-                "Counters relating to BGP messages sent to the
-                 neighbor";
-              uses bgp-neighbor-counters-message-types-state;
-            }
-            container received {
-              description
-                "Counters for BGP messages received from the neighbor";
-              uses bgp-neighbor-counters-message-types-state;
-            }
-          }
-
-          container queues {
-            config false;
-            description
-              "Counters related to queued messages associated with the
-               BGP neighbor";
-
-            leaf input {
-              type uint32;
-              description
-                "The number of messages received from the peer currently
-                 queued";
-            }
-
-            leaf output {
-              type uint32;
-              description
-                "The number of messages queued to be sent to the peer";
-            }
           }
 
           container timers {
@@ -591,6 +514,124 @@ module ietf-bgp {
                with the neighbor";
             uses bgp-neighbor-afi-safi-list;
           }
+
+	  container statistics {
+
+            leaf established-transitions {
+              type yang:counter64;
+              config false;
+              description
+                "Number of transitions to the Established state for the
+               neighbor session.  This value is analogous to the
+               bgpPeerFsmEstablishedTransitions object from the standard
+               BGP-4 MIB";
+              reference
+                "RFC 4273 - Definitions of Managed Objects for BGP-4";
+            }
+
+            leaf fsm-established-transitions {
+              type yang:counter32;
+              config false;
+              description
+                "The total number of times the BGP FSM
+               transitioned into the established state
+               for this peer.";
+              reference
+                "RFC 4271, Section 8.";
+            }
+
+            container messages {
+              config false;
+              description
+                "Counters for BGP messages sent and received from the
+               neighbor";
+
+              leaf in-total-messages {
+                type yang:counter32;
+                config false;
+                description
+                  "The total number of messages received
+                 from the remote peer on this connection.";
+                reference
+                  "RFC 4271, Section 4.";
+              }
+
+              leaf out-total-messages {
+                type yang:counter32;
+                config false;
+                description
+                  "The total number of messages transmitted to
+                 the remote peer on this connection.";
+                reference
+                  "RFC 4271, Section 4.";
+              }
+
+              leaf in-update-elapsed-time {
+                type yang:gauge32;
+                units "seconds";
+                config false;
+                description
+                  "Elapsed time (in seconds) since the last BGP
+                 UPDATE message was received from the peer.
+                 Each time in-updates is incremented,
+                 the value of this object is set to zero (0).";
+                reference
+                  "RFC 4271, Section 4.3.
+                 RFC 4271, Section 8.2.2, Established state.";
+              }
+
+              container sent {
+                description
+                  "Counters relating to BGP messages sent to the
+                 neighbor";
+                uses bgp-neighbor-counters-message-types-state;
+              }
+
+              container received {
+                description
+                  "Counters for BGP messages received from the neighbor";
+                uses bgp-neighbor-counters-message-types-state;
+              }
+            }
+
+            container queues {
+              config false;
+              description
+                "Counters related to queued messages associated with the
+               BGP neighbor";
+
+              leaf input {
+                type uint32;
+                description
+                  "The number of messages received from the peer currently
+                 queued";
+              }
+
+              leaf output {
+                type uint32;
+                description
+                  "The number of messages queued to be sent to the peer";
+              }
+            }
+
+	    container clear-statistics {
+	      if-feature "clear-statistics";
+
+	      action clear {
+		input {
+		  leaf clear-at {
+		    type yang:date-and-time;
+		  }
+		}
+
+		output {
+		  leaf clear-finished-at {
+		    type yang:date-and-time;
+		  }
+		}
+	      }
+	    }
+	  }
         }
 
 	notification established {
@@ -672,6 +713,24 @@ module ietf-bgp {
             reference
               "RFC 4271, Section 8.2.2.";
 	  }
+        }
+
+        container clear-neighbors {
+          if-feature "clear-neighbors";
+
+          action clear {
+            input {
+              leaf clear-at {
+                type yang:date-and-time;
+              }
+            }
+
+            output {
+              leaf clear-finished-at {
+                type yang:date-and-time;
+              }
+            }
+          }
         }
       }
 

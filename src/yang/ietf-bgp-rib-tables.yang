@@ -7,6 +7,14 @@ submodule ietf-bgp-rib-tables {
   // import some basic types
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types.";
+  }
+
+  import ietf-yang-types {
+    prefix yang;
+    reference
+      "RFC 6991: Common YANG Data Types.";
   }
   
   import ietf-routing {
@@ -50,8 +58,8 @@ submodule ietf-bgp-rib-tables {
 
     leaf attr-index {
       type leafref {
-        path "../../../../../../../../../attr-sets/attr-set/" +
-          "index";
+        path "../../../../../../../../../attr-sets/" +
+	     "attr-set/index";
       }
       description
         "Reference to the common attribute group for the
@@ -147,6 +155,29 @@ submodule ietf-bgp-rib-tables {
     }
   }
 
+  grouping clear-routes {
+    description
+      "Action to clear BGP routes.";
+
+    container clear-routes {
+      if-feature "clear-routes";
+
+      action clear {
+        input {
+          leaf clear-at {
+            type yang:date-and-time;
+          }
+        }
+
+        output {
+          leaf clear-finished-at {
+            type yang:date-and-time;
+          }
+        }
+      }
+    }
+  }
+
   grouping ipv4-loc-rib {
     description
       "Top-level grouping for IPv4 routing tables";
@@ -189,6 +220,8 @@ submodule ietf-bgp-rib-tables {
           uses bgp-unknown-attr-top;
           uses rib-ext-route-annotations;
         }
+
+	uses clear-routes;
       }
     }
   }
@@ -235,6 +268,8 @@ submodule ietf-bgp-rib-tables {
           uses bgp-unknown-attr-top;
           uses rib-ext-route-annotations;
         }
+
+	uses clear-routes;
       }
     }
   }
@@ -272,6 +307,8 @@ submodule ietf-bgp-rib-tables {
         uses bgp-unknown-attr-top;
 	uses rib-ext-route-annotations;
       }
+
+      uses clear-routes;
     }
   }
 
@@ -407,6 +444,8 @@ submodule ietf-bgp-rib-tables {
         uses bgp-unknown-attr-top;
 	uses rib-ext-route-annotations;
       }
+
+      uses clear-routes;
     }
   }
 
