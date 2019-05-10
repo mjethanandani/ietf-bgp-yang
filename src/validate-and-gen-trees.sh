@@ -5,7 +5,8 @@ do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.yang"
     if test "${name#^example}" = "$name"; then
-        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
+#        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
+        response=`yanger --strict -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree $name.yang > $name-tree.txt.tmp`
     else            
         response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
     fi
@@ -27,13 +28,13 @@ do
 done
 rm ../bin/*-tree.txt.tmp
 
-echo "Generating abridged tree diagram for bgp"
 for i in ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang
 do
     name=$(echo $i | cut -f 1-3 -d '.')
-    echo "Validating $name.yang"
+    echo "Generating abridged tree diagram for $name.yang"
     if test "${name#^example}" = "$name"; then
-        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=72 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
+#       response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=72 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
+        response=`yanger --strict -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 $name.yang > $name-sub-tree.txt.tmp`
     else            
         response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=72 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
     fi
@@ -69,13 +70,13 @@ do
 done
 rm ../bin/*-tree.txt.tmp
 
-echo "Generating sub-tree diagram for rib"
 for i in ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang
 do
     name=$(echo $i | cut -f 1-3 -d '.')
-    echo "Validating $name.yang"
+    echo "Generating sub-tree diagram for rib from  $name.yang"
     if test "${name#^example}" = "$name"; then
-        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 --max-line-length=72 --tree-line-length=69 $name.yang > $name-rib-tree.txt.tmp`
+	#        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 --max-line-length=72 --tree-line-length=69 $name.yang > $name-rib-tree.txt.tmp`
+        response=`yanger --strict -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 $name.yang > $name-rib-tree.txt.tmp`
     else            
         response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 --max-line-length=72 --tree-line-length=69 $name.yang > $name-rib-tree.txt.tmp`
     fi

@@ -5,9 +5,9 @@
     <control-plane-protocols>
       <control-plane-protocol>
 	<type
-	    xmlns:bgp="urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp
+	    xmlns:bgpm="urn:ietf:params:xml:ns:yang:ietf-bgp">bgpm:bgp
 	</type>
-	<name>name:BGP</name>
+	<name>BGP</name>
 	<bgp
 	    xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
 	  <global>

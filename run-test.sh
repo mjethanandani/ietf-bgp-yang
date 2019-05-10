@@ -22,7 +22,7 @@ confd
 confd --wait-started
 
 echo "Loading Data"
-netconf-console --edit-config=example-bgp-configuration-8.1.xml
+confd_load -l -m example-bgp-configuration-8.1.xml
 
 # Don't do this in the actual test, just waste of cycles
 # echo "Stopping ConfD"

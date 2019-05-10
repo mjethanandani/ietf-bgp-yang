@@ -534,7 +534,7 @@ reference: RFC XXXX
           context</t>
 
           <t>ietf-bgp-rib - grouping for representing BGP RIB.</t>
-        </list> </t>
+        </list></t>
 
       <t>Additionally, modules include: <list style="symbols">
           <t>ietf-bgp-types - common type and identity definitions for BGP,
@@ -593,14 +593,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-peer-group@YYYY-MM-DD.yang)
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
 <CODE ENDS>
  
-        ]]></artwork>
-          </figure><figure>
-            <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp-global@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-global@YYYY-MM-DD.yang)
-<CODE ENDS>
- 
-        ]]></artwork>
+
+]]></artwork>
           </figure></t>
       </section>
 
@@ -662,15 +656,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-attributes@YYYY-MM-DD.yang)
 
         <figure>
           <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp-rib-shared-attributes@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-shared-attributes@YYYY-MM-DD.yang)
-<CODE ENDS>
-
-]]></artwork>
-        </figure>
-
-        <figure>
-          <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-table-attributes@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-table-attributes@YYYY-MM-DD.yang)
 <CODE ENDS>
@@ -715,7 +700,9 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.1.xml,68)
       </section>
 
       <section title="Neighbor Address Family Configuration">
-        <t>This example shows how to configure a neighbor.</t>
+        <t>This example shows how to configure a BGP peer, where the remote
+        address is 192.0.2.1, the remote AS number is 64497, and the address
+        family of the peer is IPv4 unicast.</t>
 
         <t><figure>
             <artwork><![CDATA[

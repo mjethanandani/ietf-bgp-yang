@@ -49,7 +49,6 @@ module ietf-bgp {
   include ietf-bgp-common-multiprotocol;
   include ietf-bgp-common-structure;
   include ietf-bgp-neighbor;
-  include ietf-bgp-global;
   include ietf-bgp-peer-group;
   include ietf-bgp-rib-types;
   include ietf-bgp-rib;
@@ -176,15 +175,49 @@ module ietf-bgp {
              routes received from different sources
              (external, internal, and local).";
 
-          uses bgp-global-default-route-distance-config;
+          leaf external-route-distance {
+            type uint8 {
+              range "1..255";
+            }
+            description
+              "Administrative distance for routes learned from
+               external BGP (eBGP).";
+          }
+          leaf internal-route-distance {
+            type uint8 {
+              range "1..255";
+            }
+            description
+              "Administrative distance for routes learned from
+               internal BGP (iBGP).";
+          }
         }
 
         container confederation {
           description
-            "Parameters indicating whether the local system acts as part
-             of a BGP confederation";
+            "Configuration options specifying parameters when the
+             local router is within an autonomous system which is
+             part of a BGP confederation.";
 
-          uses bgp-global-confederation-config;
+          leaf enabled {
+            type boolean;
+            description
+              "When this leaf is set to true it indicates that
+               the local-AS is part of a BGP confederation";
+          }
+
+          leaf identifier {
+            type inet:as-number;
+            description
+              "Confederation identifier for the autonomous system.";
+          }
+
+          leaf-list member-as {
+            type inet:as-number;
+            description
+              "Remote autonomous systems that are to be treated
+               as part of the local confederation.";
+          }
         }
 
         container graceful-restart {
@@ -199,8 +232,29 @@ module ietf-bgp {
 
         container afi-safis {
           description
-            "Address family specific configuration";
-          uses bgp-global-afi-safi-list;
+	    "List of address-families associated with the BGP
+             instance";
+          list afi-safi {
+            key "afi-safi-name";
+
+            description
+              "AFI,SAFI configuration available for the
+               neighbour or group";
+
+            uses mp-afi-safi-config;
+            uses state;
+
+            container graceful-restart {
+              description
+                "Parameters relating to BGP graceful-restart";
+
+              uses mp-afi-safi-graceful-restart-config;
+            }
+
+            uses route-selection-options;
+            uses global-group-use-multiple-paths;
+            uses mp-all-afi-safi-list-contents;
+          }
         }
         uses rpol:apply-policy-group;
         uses state;
@@ -330,6 +384,7 @@ module ietf-bgp {
                    established";
               }
             }
+	    //  notification does not like a non-config statement.
 	    //  config false;
             description
               "The BGP peer connection state.";
@@ -589,7 +644,8 @@ module ietf-bgp {
 
               container received {
                 description
-                  "Counters for BGP messages received from the neighbor";
+                  "Counters for BGP messages received from the
+                   neighbor";
                 uses bgp-neighbor-counters-message-types-state;
               }
             }
@@ -597,20 +653,21 @@ module ietf-bgp {
             container queues {
               config false;
               description
-                "Counters related to queued messages associated with the
-               BGP neighbor";
+                "Counters related to queued messages associated with
+                 the BGP neighbor";
 
               leaf input {
                 type uint32;
                 description
-                  "The number of messages received from the peer currently
-                 queued";
+                  "The number of messages received from the peer
+                   currently queued";
               }
 
               leaf output {
                 type uint32;
                 description
-                  "The number of messages queued to be sent to the peer";
+                  "The number of messages queued to be sent to the
+                   peer";
               }
             }
 
@@ -621,16 +678,25 @@ module ietf-bgp {
 		input {
 		  leaf clear-at {
 		    type yang:date-and-time;
+		    description
+		      "Time when the clear action needs to be
+                       executed.";
 		  }
 		}
 
 		output {
 		  leaf clear-finished-at {
 		    type yang:date-and-time;
+		    description
+		      "Time when the clear action command completed.";
 		  }
 		}
 	      }
+	      description
+		"Clear statistics action command.";
 	    }
+	    description
+	      "Statistics per neighbor.";
 	  }
         }
 
@@ -722,15 +788,22 @@ module ietf-bgp {
             input {
               leaf clear-at {
                 type yang:date-and-time;
+		description
+		  "Time when the clear action command needs to be
+                   executed.";
               }
             }
 
             output {
               leaf clear-finished-at {
                 type yang:date-and-time;
+		description
+		  "Time when the clear action command completed.";
               }
             }
           }
+	  description
+	    "Clear neighbors action.";
         }
       }
 
