@@ -91,56 +91,56 @@ module ietf-bgp-types {
     reference "RFC4760";
   }
 
-  identity IPV4_LABELED_UNICAST {
+  identity ipv4-labeled-unicast {
     base afi-safi-type;
     description
       "Labeled IPv4 unicast (AFI,SAFI = 1,4)";
     reference "RFC3107";
   }
 
-  identity IPV6_LABELED_UNICAST {
+  identity ipv6-labeled-unicast {
     base afi-safi-type;
     description
       "Labeled IPv6 unicast (AFI,SAFI = 2,4)";
     reference "RFC3107";
   }
 
-  identity L3VPN_IPV4_UNICAST {
+  identity l3vpn-ipv4-unicast {
     base afi-safi-type;
     description
       "Unicast IPv4 MPLS L3VPN (AFI,SAFI = 1,128)";
     reference "RFC4364";
   }
 
-  identity L3VPN_IPV6_UNICAST {
+  identity l3vpn-ipv6-unicast {
     base afi-safi-type;
     description
       "Unicast IPv6 MPLS L3VPN (AFI,SAFI = 2,128)";
     reference "RFC4659";
   }
 
-  identity L3VPN_IPV4_MULTICAST {
+  identity l3vpn-ipv4-multicast {
     base afi-safi-type;
     description
       "Multicast IPv4 MPLS L3VPN (AFI,SAFI = 1,129)";
     reference "RFC6514";
   }
 
-  identity L3VPN_IPV6_MULTICAST {
+  identity l3vpn-ipv6-multicast {
     base afi-safi-type;
     description
       "Multicast IPv6 MPLS L3VPN (AFI,SAFI = 2,129)";
     reference "RFC6514";
   }
 
-  identity L2VPN_VPLS {
+  identity l2vpn-vpls {
     base afi-safi-type;
     description
       "BGP-signalled VPLS (AFI,SAFI = 25,65)";
     reference "RFC4761";
   }
 
-  identity L2VPN_EVPN {
+  identity l2vpn-evpn {
     base afi-safi-type;
     description
       "BGP MPLS Based Ethernet VPN (AFI,SAFI = 25,70)";

@@ -289,10 +289,9 @@ submodule ietf-bgp-common {
     leaf local-address {
       type union {
         type inet:ip-address;
-	type string;
-	//        type leafref {
-	//          path "../../../../interfaces/interface/name";
-	//	}
+        type leafref {
+          path "../../../../interfaces/interface/name";
+        }
       }
       description
         "Set the local IP (either IPv4 or IPv6) address to use for

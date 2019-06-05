@@ -75,8 +75,7 @@ do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Generating sub-tree diagram for rib from  $name.yang"
     if test "${name#^example}" = "$name"; then
-	#        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 --max-line-length=72 --tree-line-length=69 $name.yang > $name-rib-tree.txt.tmp`
-        response=`yanger --strict -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 $name.yang > $name-rib-tree.txt.tmp`
+	response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 --max-line-length=72 --tree-line-length=69 $name.yang > $name-rib-tree.txt.tmp`
     else            
         response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-path=rib/afi-safis --tree-depth=8 --max-line-length=72 --tree-line-length=69 $name.yang > $name-rib-tree.txt.tmp`
     fi
@@ -84,8 +83,8 @@ do
         printf "$name.yang failed generation of sub-tree diagram for rib\n"
         printf "$response\n\n"
         echo
-	rm yang/*-rib-tree.txt.tmp
-        exit 1
+	#rm yang/*-rib-tree.txt.tmp
+        #exit 1
     fi
     fold -w 71 $name-rib-tree.txt.tmp > $name-rib-tree.txt
 done

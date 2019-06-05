@@ -266,11 +266,12 @@ module ietf-bgp {
 
         list neighbor {
           key "remote-address";
+	  
           description
             "List of BGP neighbors configured on the local system,
-             uniquely identified by peer IPv[46] address";
+             uniquely identified by remote IPv[46] address";
 
-	  leaf local-addr {
+	  leaf local-address {
 	    type inet:ip-address;
 	    config false;
 	    description 
@@ -293,6 +294,18 @@ module ietf-bgp {
             }
             description
               "The peer-group with which this neighbor is associated";
+          }
+
+          leaf identifier {
+            type yang:dotted-quad;
+            config false;
+            description 
+              "The BGP Identifier of this entry's BGP peer.
+               This entry MUST be 0.0.0.0 unless the
+               sessionstate is in the openconfirm or the
+               established state.";
+            reference   
+              "RFC 4271, Section 4.2, 'BGP Identifier'.";
           }
 
           leaf remote-address {
@@ -842,6 +855,4 @@ module ietf-bgp {
       uses rib;
     }
   }
-
-
 }
