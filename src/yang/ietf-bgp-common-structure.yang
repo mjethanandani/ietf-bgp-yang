@@ -19,7 +19,7 @@ submodule ietf-bgp-common-structure {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com";
+              Susan Hares (shares at ndzh.com)";
 
   description
     "This sub-module contains groupings that are common across
@@ -44,6 +44,7 @@ submodule ietf-bgp-common-structure {
         "Logging options for events related to the BGP neighbor or
         group";
 
+// XXX JMH - the MIB had this backwards transition thing.  It was problematic.  Not sure if we want to have a version of that here.
       leaf log-neighbor-state-changes {
         type boolean;
         default "true";
@@ -101,6 +102,8 @@ submodule ietf-bgp-common-structure {
            for each neighbor.";
       }
 
+// XXX JMH - the existence of no-client-reflect options needs to be dealt with here.
+// XXX JMH - these all need references.
       leaf route-reflector-client {
         type boolean;
         default "false";
@@ -157,6 +160,7 @@ submodule ietf-bgp-common-structure {
            an NLRI from the neighbor or group";
       }
 
+// XXX JMH - how do you do add-paths all?
       leaf send-max {
         type uint8;
         description

@@ -23,11 +23,12 @@ submodule ietf-bgp-peer-group {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com";
+              Susan Hares (shares at ndzh.com)";
 
+  // XXX OpenConfig?
   description
     "This sub-module contains groupings that are specific to the
-    peer-group context of the OpenConfig BGP module.";
+     peer-group context of the OpenConfig BGP module.";
 
   revision "YYYY-MM-DD" {
     description
@@ -47,7 +48,6 @@ submodule ietf-bgp-peer-group {
       description
         "Name of the BGP peer-group";
     }
-
   }
 
   grouping bgp-peer-group-afi-safi-list {
@@ -59,7 +59,7 @@ submodule ietf-bgp-peer-group {
 
       description
         "AFI,SAFI configuration available for the
-        neighbour or group";
+         neighbour or group";
 
       uses mp-afi-safi-config;
 
@@ -123,7 +123,7 @@ submodule ietf-bgp-peer-group {
     container afi-safis {
       description
         "Per-address-family configuration parameters associated with
-        thegroup";
+         thegroup";
       uses bgp-peer-group-afi-safi-list;
     }
   }

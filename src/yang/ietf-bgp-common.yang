@@ -20,7 +20,7 @@ submodule ietf-bgp-common {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com";
+              Susan Hares (shares at ndzh.com)";
 
   description
     "This sub-module contains common groupings that are common across
@@ -40,6 +40,8 @@ submodule ietf-bgp-common {
       "Config parameters related to timers associated with the BGP
        peer";
 
+// XXX JMH - why are these int rather than uint?
+// XXX JMH - the limits on these values is per the BGP MIB rather than 4271.
     leaf connect-retry-interval {
       type int32 {
 	range "1..65535";
@@ -159,6 +161,7 @@ submodule ietf-bgp-common {
          RFC 4271, Section 10.";
     }
 
+// XXX JMH - actual implementations have zero-second timers these days.  time to update?
     leaf min-as-origination-interval {
       type int32 {
         range "1..65535";
@@ -217,6 +220,9 @@ submodule ietf-bgp-common {
            (iBGP) or external (eBGP).";
     }
 
+// XXX JMH - the authentication here should be specified by feature and likely sub-module.
+// XXX JMH - md5 is a reasonable minimum.  However, this often integrates with various vendor keychains.
+// XXX JMH - probably belongs in neighbor transport config?
     leaf auth-password {
       type string;
       description
@@ -235,6 +241,7 @@ submodule ietf-bgp-common {
          sent to the peer unchanged";
     }
 
+// XXX JMH - damping often requires a large number of parameters besides just enabling it.  They're not vendor general either.
     leaf route-flap-damping {
       type boolean;
       default false;
@@ -242,6 +249,7 @@ submodule ietf-bgp-common {
         "Enable route flap damping.";
     }
 
+// XXX JMH - this feature isn't vendor neutral
     leaf send-community {
       type bt:community-type;
       default "NONE";
@@ -301,6 +309,7 @@ submodule ietf-bgp-common {
     }
   }
 
+// XXX JMH - this one will be contentious.
   grouping neighbor-group-error-handling-config {
     description
       "Configuration parameters relating to enhanced error handling
@@ -339,6 +348,7 @@ submodule ietf-bgp-common {
          default value is <= the hold-time value.";
     }
 
+// XXX JMH - what is the motivation to go with decimal64 here?
     leaf stale-routes-time {
       type decimal64 {
         fraction-digits 2;
@@ -353,6 +363,7 @@ submodule ietf-bgp-common {
          Selection_Deferral_Timer in RFC4724";
     }
 
+// XXX JMH - this likely needs a default?
     leaf helper-only {
       type boolean;
       description
@@ -451,6 +462,7 @@ submodule ietf-bgp-common {
       description
         "Parameters relating to options for route selection";
 
+// XXX JMH - this one is slightly problematic.  What do we reference as the reason this exists, beyond common implementation?
       leaf always-compare-med {
         type boolean;
         default "false";
@@ -461,6 +473,7 @@ submodule ietf-bgp-common {
            the same AS.";
       }
 
+// XXX JMH - this one is slightly problematic.  What do we reference as the reason this exists, beyond common implementation?
       leaf ignore-as-path-length {
         type boolean;
         default "false";
@@ -470,6 +483,7 @@ submodule ietf-bgp-common {
            with shorter length.";
       }
 
+// XXX JMH - this one is slightly problematic.  What do we reference as the reason this exists, beyond common implementation?
       leaf external-compare-router-id {
         type boolean;
         default "true";
@@ -479,6 +493,7 @@ submodule ietf-bgp-common {
            active path.";
       }
 
+// XXX JMH - this one is slightly problematic.  The best-external draft covers one case here.  What do we document as the reference?
       leaf advertise-inactive-routes {
         type boolean;
         default "false";
@@ -495,6 +510,7 @@ submodule ietf-bgp-common {
            attribute in routing updates";
       }
       
+// XXX JMH - this one is slightly problematic.  What do we reference as the reason this exists, beyond common implementation?
       leaf ignore-next-hop-igp-metric {
         type boolean;
         default "false";
@@ -506,6 +522,7 @@ submodule ietf-bgp-common {
     }
   }
 
+// XXX JMH - is this useful as a summary across all afi/safi?  Should this be broken out?
   grouping state {
     description
       "Grouping containing common counters relating to prefixes and

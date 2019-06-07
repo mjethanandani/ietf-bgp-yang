@@ -23,7 +23,7 @@ submodule ietf-bgp-common-multiprotocol {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com";
+              Susan Hares (shares at ndzh.com)";
 
   description
     "This sub-module contains groupings that are related to support
@@ -71,6 +71,8 @@ submodule ietf-bgp-common-multiprotocol {
     }
   }
 
+// XXX JMH - a number of these require additional references to RFCs.
+// XXX JMH - the inclusion of some of these potentially also imply other knobs needed to run features.  Should they be in here?
   grouping mp-all-afi-safi-list-contents {
     description
       "A common grouping used for contents of the list that is used
@@ -266,6 +268,8 @@ submodule ietf-bgp-common-multiprotocol {
            entries. Expressed as a percentage of max-prefixes";
       }
         
+// XXX JMH - why decimal64?
+// XXX JMH - the restart timer varies across implementations.  Some do backoff.
       leaf restart-timer {
         type decimal64 {
           fraction-digits 2;

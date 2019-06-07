@@ -47,7 +47,7 @@ submodule ietf-bgp-rib {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com";
+              Susan Hares (shares at ndzh.com)";
 
   description
     "Defines a submodule for representing BGP routing table (RIB)
@@ -127,9 +127,11 @@ submodule ietf-bgp-rib {
             type boolean;
             description
               "BGP attribute indicating that the prefix is an atomic
-               aggregate, i.e., the peer selected a less specific
+               aggregate; i.e., the peer selected a less specific
                route without selecting a more specific route that is
                included in it.";
+	    reference
+	      "RFC 4271, sec. 5.1.6";
           }
 
           leaf next-hop {
@@ -138,6 +140,8 @@ submodule ietf-bgp-rib {
               "BGP next hop attribute defining the IP address of the
                router that should be used as the next hop to the
                destination";
+	    reference
+	      "RFC 4271, sec. 5.1.3";
           }
 
           leaf med {
@@ -145,6 +149,8 @@ submodule ietf-bgp-rib {
             description
               "BGP multi-exit discriminator attribute used in BGP route
                selection process";
+	    reference
+	      "RFC 4271, sec. 5.1.4";
           }
 
           leaf local-pref {
@@ -154,10 +160,12 @@ submodule ietf-bgp-rib {
                indicate the degree of preference for externally learned
                routes.  The route with the highest local preference
                value is preferred.";
+	    reference
+	      "RFC 4271, sec. 5.1.5";
           }
 
           leaf originator-id {
-            type inet:ipv4-address;
+            type yang:dotted-quad;
             description
               "BGP attribute that provides the id as an IPv4 address
                of the originator of the announcement.";
@@ -167,7 +175,7 @@ submodule ietf-bgp-rib {
           }
 
           leaf-list cluster-list {
-            type inet:ipv4-address;
+            type yang:dotted-quad;
             description
               "Represents the reflection path that the route has
                passed.";
@@ -176,7 +184,7 @@ submodule ietf-bgp-rib {
                Mesh Internal BGP (IBGP)";
           }
 
-          leaf aigp {
+          leaf aigp-metric {
             type uint64;
             description
               "BGP path attribute representing the accumulated IGP
@@ -189,6 +197,8 @@ submodule ietf-bgp-rib {
             description
               "BGP attribute indicating the prefix has been
                aggregated by the specified AS and router.";
+	    reference
+	      "RFC 4271, sec. 5.1.7";
 
             leaf as {
               type inet:as-number;
@@ -216,6 +226,7 @@ submodule ietf-bgp-rib {
                  aggregation.";
             }
           }
+	  // XXX JMH - discussion point: when working in transitional mode, we really have received as-path, received as4-path and calculated as-path (4byte)
           container as-path {
             description
               "Enclosing container for the list of AS path segments.
@@ -265,6 +276,7 @@ submodule ietf-bgp-rib {
             }
           }
 
+	  // XXX JMH - this container shouldn't be in the core module.
           container tunnel-encapsulation {
             config false;
             description
@@ -459,7 +471,7 @@ submodule ietf-bgp-rib {
 	    }
 	    description
 	      "Routing tables for IPv4 unicast -- active when the
-             afi-safi name is ipv4-unicast";
+               afi-safi name is ipv4-unicast";
 
 	    uses ipv4-loc-rib;
 	    uses ipv4-adj-rib;
@@ -472,7 +484,7 @@ submodule ietf-bgp-rib {
 	    }
 	    description
 	      "Routing tables for IPv6 unicast -- active when the
-             afi-safi name is ipv6-unicast";
+               afi-safi name is ipv6-unicast";
 
 	    uses ipv6-loc-rib;
 	    uses ipv6-adj-rib;

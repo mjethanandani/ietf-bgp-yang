@@ -20,7 +20,7 @@ submodule ietf-bgp-neighbor {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com";
+              Susan Hares (shares at ndzh.com)";
 
   description
     "This sub-module contains groupings that are specific to the
@@ -58,13 +58,39 @@ submodule ietf-bgp-neighbor {
       "Grouping of BGP message types, included for re-use across
        counters";
 
-    leaf update {
+    leaf updates-received {
       type uint64;
       description
-        "Number of BGP UPDATE messages announcing, withdrawing or
-         modifying paths exchanged.";
+        "Number of BGP UPDATE messages received from this neighbor";
+      reference
+        "RFC 4273 - bgpPeerInUpdates";
     }
 
+    leaf updates-sent {
+      type uint64;
+      description
+        "Number of BGP UPDATE messages sent to this neighbor";
+      reference
+        "RFC 4273 - bgpPeerOutUpdates";
+    }
+
+    leaf messages-received {
+      type uint64;
+      description
+        "Number of BGP messages received from thsi neighbor";
+      reference
+        "RFC 4273 - bgpPeerInTotalMessages";
+    }
+
+    leaf messages-sent {
+      type uint64;
+      description
+        "Number of BGP messages received from thsi neighbor";
+      reference
+        "RFC 4273 - bgpPeerOutTotalMessages";
+    }
+
+    // XXX JMH - not sure this is useful, especially if we send stats back
     leaf notification {
       type uint64;
       description
@@ -81,7 +107,7 @@ submodule ietf-bgp-neighbor {
       key "afi-safi-name";
 
       description
-        "AFI,SAFI configuration available for the neighbour or
+        "AFI,SAFI configuration available for the neighbor or
          group";
 
       uses mp-afi-safi-config;
@@ -100,6 +126,7 @@ submodule ietf-bgp-neighbor {
       container prefixes {
         config false;
         description "Prefix counters for the BGP session";
+
         leaf received {
           type uint32;
           description

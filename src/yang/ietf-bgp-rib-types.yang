@@ -53,6 +53,7 @@ submodule ietf-bgp-rib-types {
        local router as originator";
   }
 
+  // XXX JMH - this is really just another flavor of invalid-as-loop.  Likely should drop.
   identity invalid-confed {
     base invalid-route-reason;
     description
@@ -147,6 +148,7 @@ submodule ietf-bgp-rib-types {
       "Route was rejected after apply import policies";
   }
 
+  // XXX JMH - likely doesn't belong in base module.
   identity tunnel-encapsulation-type {
     description
       "Types of tunnel encapsulation, as described by the Tunnel
