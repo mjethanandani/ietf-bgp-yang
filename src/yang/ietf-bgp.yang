@@ -486,21 +486,13 @@ module ietf-bgp {
             uses neighbor-group-transport-config;
           }
 
-          container error-handling {
+	  leaf erroneous-update-messages {
+            type uint32;
+            config false;
             description
-              "Error handling parameters used for the BGP neighbor or
-               group";
-
-            uses neighbor-group-error-handling-config;
-
-            leaf erroneous-update-messages {
-              type uint32;
-              config false;
-              description
-                "The number of BGP UPDATE messages for which the
-                 treat-as-withdraw mechanism has been applied based on
-                 erroneous message contents";
-            }
+              "The number of BGP UPDATE messages for which the
+               treat-as-withdraw mechanism has been applied based on
+               erroneous message contents";
           }
 
           container graceful-restart {
@@ -568,7 +560,7 @@ module ietf-bgp {
                  graceful restart with the peer";
             }
           }
-          uses structure-neighbor-group-logging-options;
+
           uses structure-neighbor-group-ebgp-multihop;
           uses structure-neighbor-group-route-reflector;
           uses structure-neighbor-group-as-path-options;

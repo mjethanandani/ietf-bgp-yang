@@ -41,7 +41,7 @@ submodule ietf-bgp-common {
        peer";
 
     leaf connect-retry-interval {
-      type int32 {
+      type uint32 {
 	range "1..65535";
       }
       units "seconds";
@@ -55,7 +55,7 @@ submodule ietf-bgp-common {
     }
 
     leaf hold-time {
-      type int32 {
+      type uint32 {
         range "0 | 3..65535";
       }
       units "seconds";
@@ -82,7 +82,7 @@ submodule ietf-bgp-common {
     }
 
     leaf keepalive-interval {
-      type int32 {
+      type uint32 {
         range "0..21845";
       }
       units "seconds";
@@ -108,7 +108,7 @@ submodule ietf-bgp-common {
     }
 
     leaf hold-time-configured {
-      type int32 {
+      type uint32 {
         range "0 | 3..65535";
       }
       units "seconds";
@@ -132,7 +132,7 @@ submodule ietf-bgp-common {
     }
 
     leaf keep-alive-configured {
-      type int32 {
+      type uint32 {
         range "0..21845";
       }
       units "seconds";
@@ -160,8 +160,8 @@ submodule ietf-bgp-common {
     }
 
     leaf min-as-origination-interval {
-      type int32 {
-        range "1..65535";
+      type uint32 {
+        range "0..65535";
       }
       units "seconds";
       description
@@ -175,8 +175,8 @@ submodule ietf-bgp-common {
     }
 
     leaf min-route-advertisement-interval {
-      type int32 {
-        range "1..65535";
+      type uint32 {
+        range "0..65535";
       }
       units "seconds";
       description
@@ -235,22 +235,6 @@ submodule ietf-bgp-common {
          sent to the peer unchanged";
     }
 
-    leaf route-flap-damping {
-      type boolean;
-      default false;
-      description
-        "Enable route flap damping.";
-    }
-
-    leaf send-community {
-      type bt:community-type;
-      default "NONE";
-      description
-        "Specify which types of community should be sent to the
-         neighbor or group. The default is to not send the community
-         attribute";
-    }
-
     leaf description {
       type string;
       description
@@ -301,22 +285,6 @@ submodule ietf-bgp-common {
     }
   }
 
-  grouping neighbor-group-error-handling-config {
-    description
-      "Configuration parameters relating to enhanced error handling
-       behaviors for BGP";
-
-    leaf treat-as-withdraw {
-      type boolean;
-      default "false";
-      description
-        "Specify whether erroneous UPDATE messages for which the NLRI
-         can be extracted are treated as though the NLRI is withdrawn
-         - avoiding session reset";
-      reference "draft-ietf-idr-error-handling-16";
-    }
-  }
-
   grouping graceful-restart-config {
     description
       "Configuration parameters relating to BGP graceful restart.";
@@ -340,9 +308,7 @@ submodule ietf-bgp-common {
     }
 
     leaf stale-routes-time {
-      type decimal64 {
-        fraction-digits 2;
-      }
+      type uint32;
       description
         "An upper-bound on the time that stale routes will be
          retained by a router after a session is restarted. If an
@@ -355,6 +321,7 @@ submodule ietf-bgp-common {
 
     leaf helper-only {
       type boolean;
+      default true;
       description
         "Enable graceful-restart in helper mode only. When this leaf
          is set, the local system does not retain forwarding its own
@@ -451,57 +418,12 @@ submodule ietf-bgp-common {
       description
         "Parameters relating to options for route selection";
 
-      leaf always-compare-med {
-        type boolean;
-        default "false";
-        description
-          "Compare multi-exit discriminator (MED) value from
-           different ASes when selecting the best route.  The default
-           behavior is to only compare MEDs for paths received from
-           the same AS.";
-      }
-
-      leaf ignore-as-path-length {
-        type boolean;
-        default "false";
-        description
-          "Ignore the AS path length when selecting the best path.
-           The default is to use the AS path length and prefer paths
-           with shorter length.";
-      }
-
-      leaf external-compare-router-id {
-        type boolean;
-        default "true";
-        description
-          "When comparing similar routes received from external BGP
-           peers, use the router-id as a criterion to select the
-           active path.";
-      }
-
-      leaf advertise-inactive-routes {
-        type boolean;
-        default "false";
-        description
-          "Advertise inactive routes to external peers.  The default
-           is to only advertise active routes.";
-      }
-
       leaf enable-aigp {
         type boolean;
         default false;
         description
           "Flag to enable sending / receiving accumulated IGP
            attribute in routing updates";
-      }
-      
-      leaf ignore-next-hop-igp-metric {
-        type boolean;
-        default "false";
-        description
-          "Ignore the IGP metric to the next-hop when calculating BGP
-           best-path. The default is to select the route for which
-           the metric to the next-hop is lowest";
       }
     }
   }

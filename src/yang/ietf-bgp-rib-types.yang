@@ -13,7 +13,7 @@ submodule ietf-bgp-rib-types {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com";
+              Susan Hares (shares at ndzh.com)";
 
   description
     "Defines identity and type definitions associated with
@@ -53,13 +53,6 @@ submodule ietf-bgp-rib-types {
        local router as originator";
   }
 
-  identity invalid-confed {
-    base invalid-route-reason;
-    description
-      "Route was invalid due to a loop in the AS_CONFED_SEQUENCE or
-       AS_CONFED_SET attributes";
-  }
-
   identity bgp-not-selected-bestpath {
     description
       "Base identity for indicating reason a route was was not
@@ -88,7 +81,7 @@ submodule ietf-bgp-rib-types {
     base bgp-not-selected-bestpath;
     description
       "Route has a higher origin type, i.e., IGP origin is preferred
-      over EGP or incomplete";
+       over EGP or incomplete";
     reference
       "RFC 4271 - Section 9.1.2.2 (b)";
   }
@@ -145,36 +138,5 @@ submodule ietf-bgp-rib-types {
     base bgp-not-selected-policy;
     description
       "Route was rejected after apply import policies";
-  }
-
-  identity tunnel-encapsulation-type {
-    description
-      "Types of tunnel encapsulation, as described by the Tunnel
-       Encapsulation attribute";
-    reference
-      "RFC5512";
-  }
-
-  identity tunnel-encapsulation-subtlv-type {
-    description
-      "SubTLVs of the Tunnel Encapsulation attribute";
-    reference
-      "RFC5512";
-  }
-
-  identity tunnel-remote-endpoint {
-    base tunnel-encapsulation-subtlv-type;
-    description
-      "Remote endpoint of the tunnel.";
-    reference
-      "RFC5512";
-  }
-
-  identity tunnel-color {
-    base tunnel-encapsulation-subtlv-type;
-    description
-      "Colour of the tunnel";
-    reference
-      "RFC5512";
   }
 }
