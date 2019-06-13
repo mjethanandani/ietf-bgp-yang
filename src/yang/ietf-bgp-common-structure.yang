@@ -19,7 +19,7 @@ submodule ietf-bgp-common-structure {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com";
+              Susan Hares (shares at ndzh.com)";
 
   description
     "This sub-module contains groupings that are common across
@@ -34,25 +34,6 @@ submodule ietf-bgp-common-structure {
       "RFC XXX, BGP Model for Service Provider Network.";
   }
 
-  grouping structure-neighbor-group-logging-options {
-    description
-      "Structural grouping used to include error handling
-       configuration and state for both BGP neighbors and groups";
-
-    container logging-options {
-      description
-        "Logging options for events related to the BGP neighbor or
-        group";
-
-      leaf log-neighbor-state-changes {
-        type boolean;
-        default "true";
-        description
-          "Configure logging of peer state changes.  Default is to
-           enable logging of peer state changes.";
-      }
-    }
-  }
   grouping structure-neighbor-group-ebgp-multihop {
     description
       "Structural grouping used to include eBGP multi-hop
@@ -91,6 +72,8 @@ submodule ietf-bgp-common-structure {
     container route-reflector {
       description
         "Route reflector parameters for the BGPgroup";
+      reference
+	"RFC 4456: BGP Route Reflection.";
 
       leaf route-reflector-cluster-id {
         type bt:rr-cluster-id-type;

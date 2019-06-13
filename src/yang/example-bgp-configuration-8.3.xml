@@ -22,9 +22,14 @@
 	  </global>
 	  <neighbors>
 	    <neighbor>
-	      <remote-address>192.0.2.1</remote-address>
+	      <remote-address>2001:db8::</remote-address>
+	      <enabled>true</enabled>
 	      <peer-as>64497</peer-as>
 	      <description>"Peer Router B"</description>
+	      <timers>
+		<hold-time-configured>120</hold-time-configured>
+		<keep-alive-configured>70</keep-alive-configured>
+	      </timers>
 	      <afi-safis>
 		<afi-safi>
 		  <afi-safi-name
