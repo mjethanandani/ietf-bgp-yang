@@ -267,9 +267,7 @@ submodule ietf-bgp-common-multiprotocol {
       }
         
       leaf restart-timer {
-        type decimal64 {
-          fraction-digits 2;
-        }
+	type uint32;
         units "seconds";
         description
           "Time interval in seconds after which the BGP session is

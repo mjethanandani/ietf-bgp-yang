@@ -1,0 +1,72 @@
+module example-newafi-bgp {
+  yang-version 1.1;
+  namespace "http://example.com/ns/example-newafi-bgp";
+  prefix example-newafi-bgp;
+
+  import ietf-routing {
+    prefix rt;
+    reference
+      "RFC 8349, A YANG Data Model for Routing Management
+       (NMDA Version)";
+  }
+
+  import ietf-bgp {
+    prefix "bgp";
+    reference
+      "RFC XXXX: BGP YANG module for Service Provider Network.";
+  }
+
+  import ietf-bgp-types {
+    prefix "bt";
+  }
+
+  organization
+    "Newafi model group.";
+
+  contact
+    "abc@newafi.com";
+  description
+    "This YANG module defines and uses new AFI.";
+
+  revision YYYY-MM-DD {
+    description
+      "Creating new AFI and using in this model";
+
+    reference
+      "RFC XXXX: BGP YANG Model for Service Provider Network.";
+  }
+
+  identity foo {
+    base bt:afi-safi-type;
+    description
+      "New AFI type foo.";
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:global/" +
+          "bgp:afi-safis/bgp:afi-safi" {
+    when "derived-from-or-self(bgp:afi-safi-name, 'foo')" {
+      description
+        "This augmentation is valid for a AFI/SAFI instance
+         of 'foo'";
+    }
+    container foo {
+      description
+	"Container to add 'foo' specific AFI/SAFI information.";
+    }
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/" +
+          "bgp:rib/bgp:afi-safis/bgp:afi-safi" {
+    when "derived-from-or-self(bgp:afi-safi-name, 'foo')" {
+      description
+        "This augmentation is valid for a AFI/SAFI instance
+         of 'foo'";
+    }
+    container foo {
+      description
+	"Container to add 'foo' rib specific information.";
+    }
+  }
+}

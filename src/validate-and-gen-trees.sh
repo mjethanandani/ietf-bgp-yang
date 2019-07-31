@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for i in ../bin/*\@$(date +%Y-%m-%d).yang
+for i in ../bin/ietf-*\@$(date +%Y-%m-%d).yang
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.yang"

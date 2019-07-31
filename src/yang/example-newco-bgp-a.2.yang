@@ -1,0 +1,35 @@
+module example-newco-bgp {
+  yang-version 1.1;
+  namespace "http://example.com/ns/example-newco-bgp";
+  prefix example-newco-bgp;
+
+  import ietf-bgp {
+    prefix "bgp";
+  }
+
+  organization
+    "Newco model group.";
+
+  contact
+    "abc@newco.com";
+  description
+    "This YANG module deviates IETF BGP YANG module.";
+
+  revision YYYY-MM-DD {
+    description
+      "Creating NewCo deviations to ietf-bgp model";
+
+    reference
+      "RFC XXXX: BGP YANG module for Service Provider Network.";
+  }
+
+  deviation "/bgp:bgp/bgp:global/bgp:graceful-restart/" +
+            "bgp:restart-time" {
+    deviate not-supported;
+  }
+
+  deviation "/bgp:bgp/bgp:global/bgp:graceful-restart/" +
+            "bgp:stale-route-time" {
+    deviate not-supported;
+  }
+}

@@ -27,8 +27,8 @@
 	      <peer-as>64497</peer-as>
 	      <description>"Peer Router B"</description>
 	      <timers>
-		<hold-time-configured>120</hold-time-configured>
-		<keep-alive-configured>70</keep-alive-configured>
+		<hold-time>120</hold-time>
+		<keepalive>70</keepalive>
 	      </timers>
 	      <afi-safis>
 		<afi-safi>

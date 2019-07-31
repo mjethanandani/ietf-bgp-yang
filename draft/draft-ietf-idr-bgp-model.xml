@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc category="std" docName="draft-ietf-idr-bgp-model-06" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-idr-bgp-model-07" ipr="trust200902">
   <?rfc toc="yes"?>
 
   <front>
@@ -72,7 +72,33 @@
       </address>
     </author>
 
-    <date day="13" month="June" year="2019"/>
+    <author fullname="Jeffrey Haas" initials="J.H" surname="Haas">
+      <organization>Juniper Networks</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city/>
+
+          <region/>
+
+          <code/>
+
+          <country/>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>jhaas@pfrc.org</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <date day="13" month="August" year="2019"/>
 
     <area>Routing</area>
 
@@ -803,5 +829,34 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.2.xml,68)
 
       <?rfc include='reference.I-D.ietf-bfd-yang'?>
     </references>
+
+    <section title="How to add a new AFI and Augment a Module">
+      <t>This section explains how a new AFI can be defined in a new module
+      and how that module can then be augmented. Assume that the new AFI being
+      defined is called 'foo' which extends the base identity of
+      'afi-safi-type', and the augmentation is to add a new container for
+      'foo' under two different XPaths. The example shows how the base
+      identity can be extended to add this new AFI, and then use the augmented
+      containers be used to add 'foo' specific information.</t>
+
+      <figure>
+        <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/example-newafi-bgp@YYYY-MM-DD.yang)
+
+]]></artwork>
+      </figure>
+    </section>
+
+    <section title="How to deviate a module">
+      <t>This example shows how the BGP can be deviated to indicate two nodes
+      that the particular implementation is choosing not to support.</t>
+
+      <figure>
+        <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/example-newco-bgp-a.2@YYYY-MM-DD.yang)
+
+]]></artwork>
+      </figure>
+    </section>
   </back>
 </rfc>

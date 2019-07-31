@@ -23,30 +23,18 @@ submodule ietf-bgp-peer-group {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com)";
+              Susan Hares (shares at ndzh.com),
+              Jeffrey Haas (jhaas at pfrc.org).";
 
   description
     "This sub-module contains groupings that are specific to the
-     peer-group context of the OpenConfig BGP module.";
+     peer-group context of the BGP module.";
 
   revision "YYYY-MM-DD" {
     description
       "Initial Version";
     reference 
       "RFC XXX, BGP Model for Service Provider Network.";
-  }
-
-  grouping bgp-peer-group-config {
-    description
-      "Configuration parameters relating to a base BGP peer group
-       that are not also applicable to any other context (e.g.,
-       neighbor)";
-
-    leaf peer-group-name {
-      type string;
-      description
-        "Name of the BGP peer-group";
-    }
   }
 
   grouping bgp-peer-group-afi-safi-list {
@@ -79,9 +67,13 @@ submodule ietf-bgp-peer-group {
     description
       "Parameters related to a BGP group.";
 
-    uses bgp-peer-group-config;
+    leaf peer-group-name {
+      type string;
+      description
+        "Name of the BGP peer-group";
+    }
+
     uses neighbor-group-config;
-    uses state;
 
     container timers {
       description

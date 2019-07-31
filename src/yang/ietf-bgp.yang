@@ -111,11 +111,6 @@ module ietf-bgp {
   /*
    * Feature(s)
    */
-  feature clear-routes {
-    description
-      "Clearing of BGP routes is supported.";
-  }
-
   feature clear-neighbors {
     description
       "Clearing of BGP neighbors is supported.";
@@ -144,6 +139,7 @@ module ietf-bgp {
     container bgp {
       description
         "Top-level configuration for the BGP router";
+
       container global {
         presence "Enables global configuration of BGP";
         description
@@ -169,13 +165,13 @@ module ietf-bgp {
             "RFC 6286: AS-Wide Unique BGP ID for BGP-4. Section 2.1";
         }
 
-        container default-route-distance {
+        container distance {
           description
             "Administrative distance (or preference) assigned to
              routes received from different sources
              (external, internal, and local).";
 
-          leaf external-route-distance {
+          leaf external {
             type uint8 {
               range "1..255";
             }
@@ -183,7 +179,7 @@ module ietf-bgp {
               "Administrative distance for routes learned from
                external BGP (eBGP).";
           }
-          leaf internal-route-distance {
+          leaf internal {
             type uint8 {
               range "1..255";
             }
@@ -232,7 +228,7 @@ module ietf-bgp {
 
         container afi-safis {
           description
-	    "List of address-families associated with the BGP
+            "List of address-families associated with the BGP
              instance";
           list afi-safi {
             key "afi-safi-name";
@@ -266,27 +262,27 @@ module ietf-bgp {
 
         list neighbor {
           key "remote-address";
-	  
+
           description
             "List of BGP neighbors configured on the local system,
              uniquely identified by remote IPv[46] address";
 
-	  leaf local-address {
-	    type inet:ip-address;
-	    config false;
-	    description 
-	      "The local IP address of this entry's BGP connection.";
-	  }
+          leaf local-address {
+            type inet:ip-address;
+            config false;
+            description
+              "The local IP address of this entry's BGP connection.";
+          }
 
-	  leaf local-port {
-	    type inet:port-number {
-	      range "0..65535";
-	    }
-	    config false;
-	    description 
-	      "The local port for the TCP connection between
+          leaf local-port {
+            type inet:port-number {
+              range "0..65535";
+            }
+            config false;
+            description
+              "The local port for the TCP connection between
                the BGP peers.";
-	  }
+          }
 
           leaf peer-group {
             type leafref {
@@ -311,32 +307,22 @@ module ietf-bgp {
           leaf remote-address {
             type inet:ip-address;
             description
-	      "The remote IP address of this entry's BGP peer.";
+              "The remote IP address of this entry's BGP peer.";
           }
 
-	  leaf remote-port {
-	    type inet:port-number {
-	      range "0..65535";
-	    }
-	    config false;
-	    description 
-	      "The remote port for the TCP connection
+          leaf remote-port {
+            type inet:port-number {
+              range "0..65535";
+            }
+            config false;
+            description
+              "The remote port for the TCP connection
                between the BGP peers.  Note that the
                objects local-addr, local-port, remote-addr, and
                reemote-port provide the appropriate
                reference to the standard MIB TCP
                connection table.";
-	  }
-
-	  leaf remote-as {
-	    type inet:as-number;
-	    config false;
-	    description 
-	      "The remote autonomous system number received in
-               the BGP OPEN message.";
-	    reference   
-	      "RFC 4271, Section 4.2.";
-	  }
+          }
 
           leaf enabled {
             type boolean;
@@ -362,7 +348,20 @@ module ietf-bgp {
               "RFC 4271, Section 8.1.2.";
           }
 
+          leaf ttl-security {
+	    if-feature "bt:ttl-security";
+	    type uint8;
+	    default "255";
+	    description
+	      "BGP Time To Live (TTL) security check.";
+	    reference
+	      "RFC 5082: The Genaralized TTL Security Mechanism
+               (GTSM),
+               RFC 7454: BGP Operations and Security.";
+	  }
+
           uses neighbor-group-config;
+          uses route-selection-options;
 
           leaf session-state {
             type enumeration {
@@ -397,8 +396,8 @@ module ietf-bgp {
                    established";
               }
             }
-	    //  notification does not like a non-config statement.
-	    //  config false;
+            //  notification does not like a non-config statement.
+            //  config false;
             description
               "The BGP peer connection state.";
             reference
@@ -442,8 +441,8 @@ module ietf-bgp {
             type binary {
               length "2";
             }
-	    // notification does not like non-config statement.
-	    // config false;
+            // notification does not like non-config statement.
+            // config false;
             description 
               "The last error code and subcode seen by this
                peer on this connection.  If no error has
@@ -486,7 +485,19 @@ module ietf-bgp {
             uses neighbor-group-transport-config;
           }
 
-	  leaf erroneous-update-messages {
+          leaf treat-as-withdraw {
+            type boolean;
+            default "false";
+            description
+              "Specify whether erroneous UPDATE messages for which
+               the NLRI can be extracted are treated as though the
+               NLRI is withdrawn - avoiding session reset";
+            reference
+              "RFC 7606: Revised Error Handling for BGP UPDATE
+               Messages.";
+          }
+
+          leaf erroneous-update-messages {
             type uint32;
             config false;
             description
@@ -561,6 +572,7 @@ module ietf-bgp {
             }
           }
 
+          uses structure-neighbor-group-logging-options;
           uses structure-neighbor-group-ebgp-multihop;
           uses structure-neighbor-group-route-reflector;
           uses structure-neighbor-group-as-path-options;
@@ -575,7 +587,7 @@ module ietf-bgp {
             uses bgp-neighbor-afi-safi-list;
           }
 
-	  container statistics {
+          container statistics {
 
             leaf established-transitions {
               type yang:counter64;
@@ -676,36 +688,36 @@ module ietf-bgp {
               }
             }
 
-	    container clear-statistics {
-	      if-feature "clear-statistics";
+            container clear-statistics {
+              if-feature "clear-statistics";
 
-	      action clear {
-		input {
-		  leaf clear-at {
-		    type yang:date-and-time;
-		    description
-		      "Time when the clear action needs to be
+              action clear {
+                input {
+                  leaf clear-at {
+                    type yang:date-and-time;
+                    description
+                      "Time when the clear action needs to be
                        executed.";
-		  }
-		}
+                  }
+                }
 
-		output {
-		  leaf clear-finished-at {
-		    type yang:date-and-time;
-		    description
-		      "Time when the clear action command completed.";
-		  }
-		}
-	      }
-	      description
-		"Clear statistics action command.";
-	    }
-	    description
-	      "Statistics per neighbor.";
-	  }
+                output {
+                  leaf clear-finished-at {
+                    type yang:date-and-time;
+                    description
+                      "Time when the clear action command completed.";
+                  }
+                }
+              }
+              description
+                "Clear statistics action command.";
+            }
+            description
+              "Statistics per neighbor.";
+          }
         }
 
-	notification established {
+        notification established {
           description
             "The established event is generated
              when the BGP FSM enters the established state.";
@@ -721,7 +733,7 @@ module ietf-bgp {
 
           leaf last-error {
             type leafref {
-	      path "../../neighbor/last-error";
+              path "../../neighbor/last-error";
             }
             description
               "The last error code and subcode seen by this
@@ -735,8 +747,8 @@ module ietf-bgp {
           }
 
           leaf session-state {
-	    type leafref {
-	      path "../../neighbor/session-state";
+            type leafref {
+              path "../../neighbor/session-state";
             }
             description
               "The BGP peer connection state.";
@@ -751,39 +763,39 @@ module ietf-bgp {
              generated when the BGP FSM moves from a higher
              numbered state to a lower numbered state.";
 
-	  leaf remote-addr {
-	    type leafref {
+          leaf remote-addr {
+            type leafref {
               path "../../neighbor/remote-address";
-	    }
-	    description
+            }
+            description
               "IP address of the neighbor that went away from
                established state.";
           }
 
-	  leaf last-error {
+          leaf last-error {
             type leafref {
-	      path "../../neighbor/last-error";
+              path "../../neighbor/last-error";
             }
-	    description
-	      "The last error code and subcode seen by this
+            description
+              "The last error code and subcode seen by this
                peer on this connection.  If no error has
                occurred, this field is zero.  Otherwise, the
                first byte of this two byte OCTET STRING
                contains the error code, and the second byte
                contains the subcode.";
-	    reference
-	      "RFC 4271, Section 4.5.";
-	  }
+            reference
+              "RFC 4271, Section 4.5.";
+          }
 
-	  leaf session-state {
-	    type leafref {
-	      path "../../neighbor/session-state";
+          leaf session-state {
+            type leafref {
+              path "../../neighbor/session-state";
             }
             description
               "The BGP peer connection state.";
             reference
               "RFC 4271, Section 8.2.2.";
-	  }
+          }
         }
 
         container clear-neighbors {
@@ -793,8 +805,8 @@ module ietf-bgp {
             input {
               leaf clear-at {
                 type yang:date-and-time;
-		description
-		  "Time when the clear action command needs to be
+                description
+                  "Time when the clear action command needs to be
                    executed.";
               }
             }
@@ -802,13 +814,13 @@ module ietf-bgp {
             output {
               leaf clear-finished-at {
                 type yang:date-and-time;
-		description
-		  "Time when the clear action command completed.";
+                description
+                  "Time when the clear action command completed.";
               }
             }
           }
-	  description
-	    "Clear neighbors action.";
+          description
+            "Clear neighbors action.";
         }
       }
 

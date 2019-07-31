@@ -21,8 +21,14 @@ echo "Starting ConfD"
 confd
 confd --wait-started
 
-echo "Loading Data"
+echo "Loading Data for example 8.1"
 confd_load -l -m example-bgp-configuration-8.1.xml
+
+echo "Loading Data for example 8.2"
+confd_load -l -m example-bgp-configuration-8.2.xml
+
+echo "Loading Data for example 8.3"
+confd_load -l -m example-bgp-configuration-8.3.xml
 
 # Don't do this in the actual test, just waste of cycles
 # echo "Stopping ConfD"

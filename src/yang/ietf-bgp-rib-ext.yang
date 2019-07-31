@@ -15,10 +15,11 @@ submodule ietf-bgp-rib-ext {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com)";
+              Susan Hares (shares at ndzh.com),
+              Jeffrey Haas (jhaas at pfrc.org).";
   
   description
-    "Defines additional data nodes for the OpenConfig BGP RIB model.
+    "Defines additional data nodes for the BGP RIB model.
      These items reflect extensions that are desirable features but
      are not currently supported in a majority of BGP
      implementations.";
