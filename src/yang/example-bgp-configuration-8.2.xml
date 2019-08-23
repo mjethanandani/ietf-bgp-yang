@@ -1,3 +1,7 @@
+<!--
+  This example shows a neighbor configuration with damping.
+-->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
   <routing
@@ -24,6 +28,15 @@
 	    <neighbor>
 	      <remote-address>192.0.2.1</remote-address>
 	      <peer-as>64497</peer-as>
+	      <route-flap-damping>
+		<enable>true</enable>
+		<suppress-above>4.0</suppress-above>
+		<reuse-above>3.0</reuse-above>
+		<max-flap>15.0</max-flap>
+		<reach-decay>100</reach-decay>
+		<unreach-decay>500</unreach-decay>
+		<keep-history>1000</keep-history>
+	      </route-flap-damping>
 	      <description>"Peer Router B"</description>
 	      <afi-safis>
 		<afi-safi>
