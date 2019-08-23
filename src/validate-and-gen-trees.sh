@@ -96,7 +96,7 @@ for i in yang/example-bgp-configuration-*.xml
 do
     name=$(echo $i | cut -f 1-2 -d '.')
     echo "Validating $name.xml"
-    response=`yanglint -s -i -t auto -p ../../iana/yang-parameters -p ../bin -p ../bin/submodules ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang $name.xml`
+    response=`yanglint -s -i -t auto -p ../../iana/yang-parameters -p ../bin -p ../bin/submodules ../../iana/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang $name.xml`
     if [ $? -ne 0 ]; then
        printf "failed (error code: $?)\n"
        printf "$response\n\n"

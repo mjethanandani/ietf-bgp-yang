@@ -51,6 +51,7 @@ submodule ietf-bgp-peer-group {
       uses mp-afi-safi-config;
 
       container graceful-restart {
+	if-feature graceful-restart;
         description
           "Parameters relating to BGP graceful-restart";
 
@@ -90,6 +91,7 @@ submodule ietf-bgp-peer-group {
     }
 
     container graceful-restart {
+      if-feature graceful-restart;
       description
         "Parameters relating the graceful restart mechanism for BGP.";
 

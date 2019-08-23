@@ -164,6 +164,7 @@ submodule ietf-bgp-neighbor {
       }
 
       container graceful-restart {
+	if-feature bgp:graceful-restart;
         description
           "Parameters relating to BGP graceful-restart";
 

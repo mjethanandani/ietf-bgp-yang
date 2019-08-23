@@ -190,12 +190,15 @@ submodule ietf-bgp-common-structure {
 
       choice send {
 	default "all";
+	description
+	  "Choice of sending the max. number of paths or to send all.";
+
         case max {
           leaf max {
             type uint8;
             description
-              "The maximum number of paths to advertise to neighbors for
-               a single NLRI";
+              "The maximum number of paths to advertise to neighbors
+               for a single NLRI";
           }
         }
 
@@ -203,8 +206,8 @@ submodule ietf-bgp-common-structure {
           leaf all {
             type empty;
             description
-              "Send all the path advertisements to neighbors for a single
-               NLRI.";
+              "Send all the path advertisements to neighbors for a
+               single NLRI.";
           }
         }
       }

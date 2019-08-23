@@ -59,8 +59,8 @@ submodule ietf-bgp-common {
       type uint16 {
         range "0 | 3..65535";
       }
-      default "90";
       units "seconds";
+      default "90";
       description
         "Time interval (in seconds) for the HoldTimer established
          with the peer.  When read as operational data (ro), the
@@ -88,8 +88,8 @@ submodule ietf-bgp-common {
       type uint16 {
         range "0..21845";
       }
-      default "30";
       units "seconds";
+      default "30";
       description
         "When used as a configuration (rw) value, this Time interval
          (in seconds) for the KeepAlive timer configured for this BGP
@@ -118,8 +118,8 @@ submodule ietf-bgp-common {
       type uint16 {
         range "0..max";
       }
-      default "15";
       units "seconds";
+      default "15";
       description
         "Time interval (in seconds) for the MinASOriginationInterval
          timer. The suggested value for this timer is 15 seconds.";
@@ -293,6 +293,8 @@ submodule ietf-bgp-common {
          restart BGP capability.  This is a 12-bit value, referred to
          as Restart Time in RFC4724.  Per RFC4724, the suggested
          default value is <= the hold-time value.";
+      reference
+	"RFC 4724: Graceful Restart Mechanism for BGP.";
     }
 
     leaf stale-routes-time {
@@ -317,6 +319,8 @@ submodule ietf-bgp-common {
          is set, the local system does not retain forwarding its own
          state during a restart, but supports procedures for the
          receiving speaker, as defined in RFC4724.";
+      reference
+	"RFC 4724: Graceful Restart Mechanism for BGP.";
     }
   }
 
