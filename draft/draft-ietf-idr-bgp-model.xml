@@ -253,6 +253,10 @@
           <c>SAFI</c>
 
           <c>Subsequent Address Family Identifier</c>
+
+          <c>VRF</c>
+
+          <c>Virtual Routing and Forwarding</c>
         </texttable>
       </section>
     </section>
@@ -464,8 +468,11 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
     <section title="Relation to other YANG data models">
       <t>The BGP model augments the Routing Management model <xref
       target="RFC8349">A YANG Data Model for Routing Management </xref> which
-      defines the notion of routing, routing protocols, routing instances, or
-      VRFs, and RIBs.</t>
+      defines the notion of routing, routing protocols, and RIBs. The notion
+      of Virtual Routing and Forwarding (VRF) is derived by using the <xref
+      target="RFC8528">YANG Schema Mount</xref> to mount the Routing
+      Management module under the <xref target="RFC8529">YANG Data Model for
+      Network Instances</xref>.</t>
     </section>
 
     <section title="Security Considerations">
@@ -748,6 +755,32 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.2.xml,68)
 ]]></artwork>
           </figure></t>
       </section>
+
+      <section title="IPv6 Neighbor Configuration">
+        <t>This example shows how to configure a BGP peer, where the remote
+        peer has a IPv6 address, and uses non-default timers for hold-time and
+        keepalive. </t>
+
+        <t><figure>
+            <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.3.xml,68)
+
+]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="VRF Configuration">
+        <t>This example shows how BGP can be configured for two VRFs, red and
+        blue. In this case, the two network instances share a common AS, and
+        distinguish between the instances using the router id. </t>
+
+        <figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.4.xml,68)
+
+]]></artwork>
+        </figure>
+      </section>
     </section>
 
     <section title="Contributors">
@@ -814,6 +847,10 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.2.xml,68)
       <?rfc include='reference.RFC.8349'?>
 
       <?rfc include='reference.RFC.8446'?>
+
+      <?rfc include='reference.RFC.8528'?>
+
+      <?rfc include='reference.RFC.8529'?>
     </references>
 
     <references title="Informative references">
