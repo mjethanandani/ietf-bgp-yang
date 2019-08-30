@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="13" month="August" year="2019"/>
+    <date day="13" month="September" year="2019"/>
 
     <area>Routing</area>
 
@@ -506,6 +506,17 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       sensitive or vulnerable in some network environments. It is thus
       important to control access to these operations. These are the
       operations and their sensitivity/vulnerability:</t>
+
+      <t><xref target="RFC7454">BGP OPSEC</xref> describes several policies
+      that can be used to secure a BGP. In particular, it recommends securing
+      the underlying TCP session and to use <xref target="RFC5082">Generalized
+      TTL Security Mechanism (GTSM)</xref> capability to make it harder to
+      spoof a BGP session. This module allows implementations that want to
+      support the capability to configure a TTL value, under a feature flag.
+      It also defines a container 'secure-session' that can be augmented with
+      <xref target="RFC5925">TCP-Authentication Option (TCP-AO)</xref>, or
+      other methods to secure a BGP session, and will be developed in a future
+      version of this draft.</t>
     </section>
 
     <section title="IANA Considerations">
@@ -759,7 +770,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.2.xml,68)
       <section title="IPv6 Neighbor Configuration">
         <t>This example shows how to configure a BGP peer, where the remote
         peer has a IPv6 address, and uses non-default timers for hold-time and
-        keepalive. </t>
+        keepalive.</t>
 
         <t><figure>
             <artwork><![CDATA[
@@ -772,7 +783,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.3.xml,68)
       <section title="VRF Configuration">
         <t>This example shows how BGP can be configured for two VRFs, red and
         blue. In this case, the two network instances share a common AS, and
-        distinguish between the instances using the router id. </t>
+        distinguish between the instances using the router id.</t>
 
         <figure>
           <artwork><![CDATA[
@@ -854,7 +865,13 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-8.4.xml,68)
     </references>
 
     <references title="Informative references">
+      <?rfc include='reference.RFC.5082'?>
+
       <?rfc include='reference.RFC.5880'?>
+
+      <?rfc include='reference.RFC.5925'?>
+
+      <?rfc include='reference.RFC.7454'?>
 
       <?rfc include='reference.RFC.7854'?>
 
