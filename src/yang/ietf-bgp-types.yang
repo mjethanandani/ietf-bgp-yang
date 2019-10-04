@@ -18,7 +18,8 @@ module ietf-bgp-types {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com)";
+              Susan Hares (shares at ndzh.com),
+              Jeffrey Haas (jhaas at pfrc.org).";
 
   description
     "This module contains general data definitions for use in BGP
@@ -408,13 +409,13 @@ module ietf-bgp-types {
 
   typedef bgp-origin-attr-type {
     type enumeration {
-      enum IGP {
+      enum igp {
         description "Origin of the NLRI is internal";
       }
-      enum EGP {
+      enum egp {
         description "Origin of the NLRI is EGP";
       }
-      enum INCOMPLETE {
+      enum incomplete {
         description "Origin of the NLRI is neither IGP or EGP";
       }
     }
