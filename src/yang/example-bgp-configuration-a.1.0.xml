@@ -15,7 +15,9 @@
 	    <afi-safis>
 	      <afi-safi>
 		<afi-safi-name
-		    xmlns:bt="urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:ipv4-unicast
+		    xmlns:bt=
+		    "urn:ietf:params:xml:ns:yang:ietf-bgp-types">
+		  bt:ipv4-unicast
 		</afi-safi-name>
 	      </afi-safi>
 	    </afi-safis>

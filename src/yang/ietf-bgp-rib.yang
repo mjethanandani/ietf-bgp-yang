@@ -1,37 +1,33 @@
 submodule ietf-bgp-rib {
-  yang-version "1.1";
+  yang-version 1.1;
   belongs-to ietf-bgp {
-    prefix "br";
+    prefix br;
   }
 
   /*
    * Import and Include
    */
+
   import ietf-bgp-types {
-    prefix "bt";
+    prefix bt;
     reference
       "RFC XXXX: BGP YANG Model for Service Provider Networks.";
   }
-
   import ietf-inet-types {
     prefix inet;
     reference
       "RFC 6991: Common YANG Types.";
   }
-
   import ietf-yang-types {
     prefix yang;
     reference
       "RFC 6991: Common YANG Types.";
   }
-
   import ietf-routing-types {
-    prefix "rt";
+    prefix rt;
     reference
       "RFC 8294: Routing Area YANG Types.";
   }
-  
-
   include ietf-bgp-rib-types;
   include ietf-bgp-rib-tables;
 
@@ -39,14 +35,15 @@ submodule ietf-bgp-rib {
   //  - shared across multiple routes
   //  - common to LOC-RIB and Adj-RIB, but not shared across routes
   //  - specific to LOC-RIB or Adj-RIB
+
   include ietf-bgp-rib-attributes;
 
   // groupings of annotations for each route or table
+
   include ietf-bgp-rib-table-attributes;
 
   organization
     "IETF IDR Working Group";
-
   contact
     "WG Web:   <http://tools.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
@@ -54,7 +51,6 @@ submodule ietf-bgp-rib {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com)";
-
   description
     "Defines a submodule for representing BGP routing table (RIB)
      contents.  The submodule supports 5 logical RIBs per address
@@ -86,33 +82,48 @@ submodule ietf-bgp-rib {
 
      adj-rib-out-post: This is a per-neighbor table containing routes
      eligible for sending (advertising) to the neighbor after output
-     policy rules have been applied.";
+     policy rules have been applied.
 
-  revision "YYYY-MM-DD" {
+     Copyright (c) 2019 IETF Trust and the persons identified as
+     authors of the code. All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Simplified BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX
+     (https://www.rfc-editor.org/info/rfcXXXX); see the RFC itself
+     for full legal notices.
+
+     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
+     NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
+     'MAY', and 'OPTIONAL' in this document are to be interpreted as
+     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
+     they appear in all capitals, as shown here.";
+
+  revision YYYY-MM-DD {
     description
       "Initial Version";
-    reference 
+    reference
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
   }
 
   grouping rib {
     description
       "Grouping for rib.";
-
     container rib {
       config false;
-
       container attr-sets {
         description
           "Enclosing container for the list of path attribute sets";
-
         list attr-set {
           key "index";
-
           description
             "List of path attributes that may be in use by multiple
              routes in the table";
-
           leaf index {
             type uint64;
             description
@@ -121,14 +132,12 @@ submodule ietf-bgp-rib {
                specific path.  Multiple paths may reference the same
                attribute set.";
           }
-
           leaf origin {
             type bt:bgp-origin-attr-type;
             description
               "BGP attribute defining the origin of the path
                information.";
           }
-
           leaf atomic-aggregate {
             type boolean;
             description
@@ -137,9 +146,8 @@ submodule ietf-bgp-rib {
                route without selecting a more specific route that is
                included in it.";
             reference
-	      "RFC 4271: Section 5.1.6.";
+              "RFC 4271: Section 5.1.6.";
           }
-
           leaf next-hop {
             type inet:ip-address;
             description
@@ -147,18 +155,16 @@ submodule ietf-bgp-rib {
                router that should be used as the next hop to the
                destination";
             reference
-	      "RFC 4271: Section 5.1.3.";
+              "RFC 4271: Section 5.1.3.";
           }
-
           leaf med {
             type uint32;
             description
               "BGP multi-exit discriminator attribute used in BGP route
                selection process";
             reference
-	      "RFC 4271: Section 5.1.4.";
+              "RFC 4271: Section 5.1.4.";
           }
-
           leaf local-pref {
             type uint32;
             description
@@ -167,9 +173,8 @@ submodule ietf-bgp-rib {
                routes.  The route with the highest local preference
                value is preferred.";
             reference
-	      "RFC 4271: Section 5.1.5.";
+              "RFC 4271: Section 5.1.5.";
           }
-
           leaf originator-id {
             type yang:dotted-quad;
             description
@@ -179,7 +184,6 @@ submodule ietf-bgp-rib {
               "RFC 4456 - BGP Route Reflection: An Alternative to Full
                Mesh Internal BGP (IBGP)";
           }
-
           leaf-list cluster-list {
             type yang:dotted-quad;
             description
@@ -189,7 +193,6 @@ submodule ietf-bgp-rib {
               "RFC 4456 - BGP Route Reflection: An Alternative to Full
                Mesh Internal BGP (IBGP)";
           }
-
           leaf aigp-metric {
             type uint64;
             description
@@ -204,15 +207,13 @@ submodule ietf-bgp-rib {
               "BGP attribute indicating the prefix has been
                aggregated by the specified AS and router.";
             reference
-	      "RFC 4271: Section 5.1.7.";
-
+              "RFC 4271: Section 5.1.7.";
             leaf as {
               type inet:as-number;
               description
                 "AS number of the autonomous system that performed the
                  aggregation.";
             }
-
             leaf as4 {
               type inet:as-number;
               description
@@ -224,7 +225,6 @@ submodule ietf-bgp-rib {
               reference
                 "RFC 6793 - BGP Support for Four-octet AS Number Space";
             }
-
             leaf address {
               type inet:ipv4-address;
               description
@@ -249,10 +249,8 @@ submodule ietf-bgp-rib {
               "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)
                RFC 6793 - BGP Support for Four-octet AS Number Space
                RFC 5065 - Autonomous System Confederations for BGP";
-
             list segment {
               key "type";
-
               config false;
               uses bgp-as-path-attr;
               description
@@ -270,10 +268,8 @@ submodule ietf-bgp-rib {
                as-path leaf regardless of being 4-octet or 2-octet.";
             reference
               "RFC 6793 - BGP Support for Four-octet AS Number Space";
-
             list segment {
               key "type";
-
               config false;
               uses bgp-as-path-attr;
               description
@@ -282,46 +278,16 @@ submodule ietf-bgp-rib {
           }
         }
       }
-
       container communities {
         description
           "Enclosing container for the list of community attribute
-        sets";
-
+           sets";
         list community {
           key "index";
-
-          config false;
-          description
-            "List of path attributes that may be in use by multiple
-          routes in the table";
-
-          leaf index {
-            type uint64;
-            description
-              "System generated index for each attribute set.  The
-              index is used to reference an attribute set from a
-              specific path.  Multiple paths may reference the same
-              attribute set.";
-          }
-
-          uses bgp-community-attr-state;
-        }
-      }
-
-      container ext-communities {
-        description
-          "Enclosing container for the list of extended community
-           attribute sets";
-
-        list ext-community {
-          key "index";
-
           config false;
           description
             "List of path attributes that may be in use by multiple
              routes in the table";
-
           leaf index {
             type uint64;
             description
@@ -330,7 +296,27 @@ submodule ietf-bgp-rib {
                specific path.  Multiple paths may reference the same
                attribute set.";
           }
-
+          uses bgp-community-attr-state;
+        }
+      }
+      container ext-communities {
+        description
+          "Enclosing container for the list of extended community
+           attribute sets";
+        list ext-community {
+          key "index";
+          config false;
+          description
+            "List of path attributes that may be in use by multiple
+             routes in the table";
+          leaf index {
+            type uint64;
+            description
+              "System generated index for each attribute set.  The
+               index is used to reference an attribute set from a
+               specific path.  Multiple paths may reference the same
+               attribute set.";
+          }
           leaf-list ext-community {
             type rt:route-target;
             description
@@ -343,53 +329,47 @@ submodule ietf-bgp-rib {
           }
         }
       }
-
       container afi-safis {
-	config false;
-	description
-	  "Enclosing container for address family list";
-
-	list afi-safi {
-	  key "afi-safi-name";
-	  description
-	    "List of afi-safi types.";
-
-	  leaf afi-safi-name {
-	    type identityref {
-	      base bt:afi-safi-type;
-	    }
-	    description "AFI,SAFI name.";
-	  }
-
-	  container ipv4-unicast {
-	    when "../afi-safi-name = 'bt:ipv4-unicast'" {
-	      description
-		"Include this container for IPv4 unicast RIB";
-	    }
-	    description
-	      "Routing tables for IPv4 unicast -- active when the
-              afi-safi name is ipv4-unicast";
-
-	    uses ipv4-loc-rib;
-	    uses ipv4-adj-rib;
-	  }
-
-	  container ipv6-unicast {
-	    when "../afi-safi-name = 'bt:ipv6-unicast'" {
-	      description
-		"Include this container for IPv6 unicast RIB";
-	    }
-	    description
-	      "Routing tables for IPv6 unicast -- active when the
-               afi-safi name is ipv6-unicast";
-
-	    uses ipv6-loc-rib;
-	    uses ipv6-adj-rib;
-	  }
-	}
+        config false;
+        description
+          "Enclosing container for address family list";
+        list afi-safi {
+          key "afi-safi-name";
+          description
+            "List of afi-safi types.";
+          leaf afi-safi-name {
+            type identityref {
+              base bt:afi-safi-type;
+            }
+            description
+              "AFI,SAFI name.";
+          }
+          container ipv4-unicast {
+            when "../afi-safi-name = 'bt:ipv4-unicast'" {
+              description
+                "Include this container for IPv4 unicast RIB";
+            }
+            description
+              "Routing tables for IPv4 unicast -- active when the
+                     afi-safi name is ipv4-unicast";
+            uses ipv4-loc-rib;
+            uses ipv4-adj-rib;
+          }
+          container ipv6-unicast {
+            when "../afi-safi-name = 'bt:ipv6-unicast'" {
+              description
+                "Include this container for IPv6 unicast RIB";
+            }
+            description
+              "Routing tables for IPv6 unicast -- active when the
+                      afi-safi name is ipv6-unicast";
+            uses ipv6-loc-rib;
+            uses ipv6-adj-rib;
+          }
+        }
       }
       description
-	"Top level container for BGP RIB";
+        "Top level container for BGP RIB";
     }
   }
 }
