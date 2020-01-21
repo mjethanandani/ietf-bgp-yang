@@ -760,23 +760,21 @@ module ietf-bgp {
                    peer";
               }
             }
-            container clear-statistics {
+            action clear {
               if-feature "bt:clear-statistics";
-              action clear {
-                input {
-                  leaf clear-at {
-                    type yang:date-and-time;
-                    description
-                      "Time when the clear action needs to be
-                       executed.";
-                  }
+              input {
+                leaf clear-at {
+                  type yang:date-and-time;
+                  description
+                    "Time when the clear action needs to be
+                     executed.";
                 }
-                output {
-                  leaf clear-finished-at {
-                    type yang:date-and-time;
-                    description
-                      "Time when the clear action command completed.";
-                  }
+              }
+              output {
+                leaf clear-finished-at {
+                  type yang:date-and-time;
+                  description
+                    "Time when the clear action command completed.";
                 }
               }
               description
@@ -859,23 +857,21 @@ module ietf-bgp {
               "RFC 4271, Section 8.2.2.";
           }
         }
-        container clear-neighbors {
+        action clear {
           if-feature "bt:clear-neighbors";
-          action clear {
-            input {
-              leaf clear-at {
-                type yang:date-and-time;
-                description
-                  "Time when the clear action command needs to be
-                   executed.";
-              }
+          input {
+            leaf clear-at {
+              type yang:date-and-time;
+              description
+                "Time when the clear action command needs to be
+                 executed.";
             }
-            output {
-              leaf clear-finished-at {
-                type yang:date-and-time;
-                description
-                  "Time when the clear action command completed.";
-              }
+          }
+          output {
+            leaf clear-finished-at {
+              type yang:date-and-time;
+              description
+                "Time when the clear action command completed.";
             }
           }
           description
