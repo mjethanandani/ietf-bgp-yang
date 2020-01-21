@@ -48,11 +48,6 @@ module ietf-bgp {
     reference
       "RFC 8177: YANG Key Chain.";
   }
-  import ietf-tcp {
-    prefix tcp;
-    reference
-      "I-D.scharf-tcpm-yang-tcp: TCP Configuration.";
-  }
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
   }
@@ -398,7 +393,6 @@ module ietf-bgp {
 
             choice option {
               case ao {
-                uses tcp:ao;
                 leaf ao-keychain {
                   type kc:key-chain-ref;
                   description
@@ -413,12 +407,10 @@ module ietf-bgp {
                    those are defined as a grouping in the TCP YANG
                    model.";
                 reference
-                  "I-D.scharf-tcpm-yang-tcp: YANG model for TCP
-                                             Configuration.";
+                  "RFC 5925 - The TCP Authentication Option.";
               }
 
               case md5 {
-                uses tcp:md5;
                 leaf md5-keychain {
                   type kc:key-chain-ref;
                   description
@@ -433,8 +425,7 @@ module ietf-bgp {
                    those are defined as a grouping in the TCP YANG
                    model.";
                 reference
-                  "I-D.scharf-tcpm-yang-tcp: YANG model for TCP
-                                             Configuration.";
+                  "RFC 2385 - Protection of BGP Sessions via TCP MD5.";
               }
 
               case ipsec {
@@ -672,6 +663,9 @@ module ietf-bgp {
             uses bgp-neighbor-afi-safi-list;
           }
           container statistics {
+            description
+              "Statistics per neighbor.";
+
             leaf established-transitions {
               type yang:counter64;
               config false;
@@ -762,6 +756,9 @@ module ietf-bgp {
             }
             action clear {
               if-feature "bt:clear-statistics";
+              description
+                "Clear statistics action command.";
+
               input {
                 leaf clear-at {
                   type yang:date-and-time;
@@ -777,17 +774,10 @@ module ietf-bgp {
                     "Time when the clear action command completed.";
                 }
               }
-              description
-                "Clear statistics action command.";
             }
-            description
-              "Statistics per neighbor.";
           }
         }
         notification established {
-          description
-            "The established event is generated
-             when the BGP FSM enters the established state.";
           leaf remote-address {
             type leafref {
               path "../../neighbor/remote-address";
@@ -819,12 +809,12 @@ module ietf-bgp {
             reference
               "RFC 4271, Section 8.2.2.";
           }
-        }
-        notification backward-transition {
           description
-            "The backward-transition event is
-             generated when the BGP FSM moves from a higher
-             numbered state to a lower numbered state.";
+            "The established event is generated
+             when the BGP FSM enters the established state.";
+        }
+
+        notification backward-transition {
           leaf remote-addr {
             type leafref {
               path "../../neighbor/remote-address";
@@ -856,9 +846,16 @@ module ietf-bgp {
             reference
               "RFC 4271, Section 8.2.2.";
           }
+          description
+            "The backward-transition event is
+             generated when the BGP FSM moves from a higher
+             numbered state to a lower numbered state.";
         }
         action clear {
           if-feature "bt:clear-neighbors";
+          description
+            "Clear neighbors action.";
+
           input {
             leaf clear-at {
               type yang:date-and-time;
@@ -874,8 +871,6 @@ module ietf-bgp {
                 "Time when the clear action command completed.";
             }
           }
-          description
-            "Clear neighbors action.";
         }
       }
       container peer-groups {

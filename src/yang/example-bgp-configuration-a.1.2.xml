@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <key-chains
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-key-chain">
+    <key-chain>
+      <name>bgp-key-chain</name>
+    </key-chain>
+  </key-chains>
   <routing
       xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
     <control-plane-protocols>
@@ -26,6 +32,10 @@
 	    <neighbor>
 	      <remote-address>2001:db8::</remote-address>
 	      <enabled>true</enabled>
+	      <secure-session-enable>true</secure-session-enable>
+	      <secure-session>
+		<ao-keychain>bgp-key-chain</ao-keychain>
+	      </secure-session>
 	      <peer-as>64497</peer-as>
 	      <description>"Peer Router B"</description>
 	      <timers>
