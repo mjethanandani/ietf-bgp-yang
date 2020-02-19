@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="21" month="January" year="2019"/>
+    <date day="21" month="January" year="2020"/>
 
     <area>Routing</area>
 
@@ -605,8 +605,7 @@ reference: RFC XXXX
     <section title="Structure of the YANG modules">
       <t>The YANG model can be subdivided between the main module for base
       items, types, policy data, and the RIB module. It references <xref
-      target="RFC1997">BGP Communities Attribute </xref>, <xref
-      target="RFC2385">Protection of BGP Sessions via TCP MD5</xref>, <xref
+      target="RFC1997">BGP Communities Attribute </xref>, , <xref
       target="RFC2918">Route Refresh Capability for BGP-4</xref>, , <xref
       target="RFC3765">NOPEER Community for BGP</xref>, <xref
       target="RFC4364">BGP/MPLS IP Virtual Private Networks (VPNs)</xref>,
@@ -789,8 +788,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-table-attributes@YYYY-MM-DD
       <?rfc include='reference.RFC.1997'?>
 
       <?rfc include='reference.RFC.2119'?>
-
-      <?rfc include='reference.RFC.2385'?>
 
       <?rfc include='reference.RFC.2439'?>
 

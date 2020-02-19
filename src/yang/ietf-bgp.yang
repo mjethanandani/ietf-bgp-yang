@@ -425,7 +425,7 @@ module ietf-bgp {
                    those are defined as a grouping in the TCP YANG
                    model.";
                 reference
-                  "RFC 2385 - Protection of BGP Sessions via TCP MD5.";
+                  "RFC 5925 - The TCP Authentication Option.";
               }
 
               case ipsec {
