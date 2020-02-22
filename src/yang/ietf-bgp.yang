@@ -48,6 +48,12 @@ module ietf-bgp {
     reference
       "RFC 8177: YANG Key Chain.";
   }
+  import ietf-tcp {
+    prefix tcp;
+    reference
+      "I-D.scharf-tcpm-yang-tcp: Transmission Control Protocol (TCP)
+       YANG Model.";
+  }
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
   }
@@ -393,6 +399,7 @@ module ietf-bgp {
 
             choice option {
               case ao {
+                uses tcp:ao;
                 leaf ao-keychain {
                   type kc:key-chain-ref;
                   description
@@ -411,6 +418,7 @@ module ietf-bgp {
               }
 
               case md5 {
+                uses tcp:md5;
                 leaf md5-keychain {
                   type kc:key-chain-ref;
                   description
