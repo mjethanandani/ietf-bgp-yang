@@ -1,14 +1,20 @@
 #!/bin/sh
 
+#
+# Does the user have all the IETF published models.
+#
+if [ ! -d ../../iana/yang-parameters ] then
+   rsync -avz --delete rsync.ietf.org::iana/yang-parameters ../../
+fi
+
 for i in ../bin/ietf-*\@$(date +%Y-%m-%d).yang
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.yang"
     if test "${name#^example}" = "$name"; then
-#        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
-        response=`yanger --strict -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree $name.yang > $name-tree.txt.tmp`
+        response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin/dependent -p ../bin -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
     else            
-        response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
+        response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin/dependent -p ../bin -f tree --max-line-length=72 --tree-line-length=69 $name.yang > $name-tree.txt.tmp`
     fi
     if [ $? -ne 0 ]; then
         printf "$name.yang failed pyang validation\n"

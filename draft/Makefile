@@ -48,7 +48,6 @@ endif
 	-rm -f ../bin/*\@$(shell date +%Y)-*-*-tree.txt*
 	-rm -f ../bin/*\@$(shell date +%Y)-*-*.yang
 	-rm -f ../bin/submodules/*\@$(shell date +%Y)-*-*.yang
-	-rm -f ../packages/bgp/src/yang/*\@$(shell date +%Y)-*-*.yang
 
 $(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/yang/ietf-bgp-common-structure.yang ../src/yang/ietf-bgp-common.yang ../src/yang/ietf-bgp-neighbor.yang ../src/yang/ietf-bgp-peer-group.yang ../src/yang/ietf-bgp-policy.yang ../src/yang/ietf-bgp-types.yang ../src/yang/ietf-bgp.yang rib
 	sed -e"s/$(basename $<)-latest/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
@@ -62,10 +61,6 @@ $(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp.yang > ../bin/ietf-bgp\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/example-newafi-bgp.yang > ../bin/example-newafi-bgp\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/example-newco-bgp-a.2.yang > ../bin/example-newco-bgp-a.2\@$(shell date +%Y-%m-%d).yang
-
-	cp ../bin/*\@$(shell date +%Y-%m-%d).yang ../packages/bgp/src/yang/
-	cp ../bin/submodules/*\@$(shell date +%Y-%m-%d).yang ../packages/bgp/src/yang/
-	cp ../bin/yang-parameters/*.yang ../packages/bgp/src/yang/
 
 	cd ../src; ./validate-and-gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
