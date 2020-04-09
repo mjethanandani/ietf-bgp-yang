@@ -1,3 +1,0 @@
-augment /bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route {
-  uses attr-sets;
-}
