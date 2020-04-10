@@ -3,7 +3,7 @@
 #
 # Does the user have all the IETF published models.
 #
-if [ ! -d ../../iana/yang-parameters ] then
+if [ ! -d ../../iana/yang-parameters ]; then
    rsync -avz --delete rsync.ietf.org::iana/yang-parameters ../../
 fi
 

@@ -112,7 +112,13 @@ submodule ietf-bgp-rib {
   }
 
   grouping attr-set-attributes {
+    description
+      "A grouping for all attribute set parameters.";
+
     container attr-set-attributes {
+      description
+	"A container for attribute set parameters.";
+
       leaf origin {
         type bt:bgp-origin-attr-type;
         description
@@ -261,6 +267,9 @@ submodule ietf-bgp-rib {
   }
 
   grouping attr-set {
+    description
+      "A grouping for all path attributes.";
+
     list attr-set {
       key "index";
       description
@@ -279,6 +288,9 @@ submodule ietf-bgp-rib {
   }
 
   grouping attr-sets {
+    description
+      "A grouping for all sets of path attributes.";
+
     container attr-sets {
       description
         "Enclosing container for the list of path attribute sets";
@@ -287,6 +299,9 @@ submodule ietf-bgp-rib {
   }
 
   grouping ext-community-attributes {
+    description
+      "A grouping for all external community parameters.";
+
     leaf-list ext-community {
       type rt:route-target;
       description
