@@ -44,5 +44,5 @@ for list in list_of_ieee_models:
     module, path = list
     print(module)
     fetch(module, path)
-    
+
 os.system('rm *.yang')

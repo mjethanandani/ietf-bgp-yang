@@ -48,7 +48,6 @@ endif
 	-rm -f ../bin/*\@$(shell date +%Y)-*-*-tree.txt*
 	-rm -f ../bin/*\@$(shell date +%Y)-*-*.yang
 	-rm -f ../bin/submodules/*\@$(shell date +%Y)-*-*.yang
-	-rm -f ../packages/bgp/src/yang/*\@$(shell date +%Y)-*-*.yang
 
 $(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/yang/ietf-bgp-common-structure.yang ../src/yang/ietf-bgp-common.yang ../src/yang/ietf-bgp-neighbor.yang ../src/yang/ietf-bgp-peer-group.yang ../src/yang/ietf-bgp-policy.yang ../src/yang/ietf-bgp-types.yang ../src/yang/ietf-bgp.yang rib
 	sed -e"s/$(basename $<)-latest/$(basename $@)/" -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" $< > $@
