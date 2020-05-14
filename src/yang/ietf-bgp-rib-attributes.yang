@@ -59,6 +59,11 @@ submodule ietf-bgp-rib-attributes {
   grouping bgp-as-path-attr {
     description
       "Data for representing BGP AS-PATH attribute";
+    leaf index {
+      type uint16;
+      description
+	"An index into the AS segments.";
+    }
     leaf type {
       type identityref {
         base bgpt:as-path-segment-type;
