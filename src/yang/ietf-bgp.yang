@@ -433,7 +433,7 @@ module ietf-bgp {
                    those are defined as a grouping in the TCP YANG
                    model.";
                 reference
-                  "RFC 5925 - The TCP Authentication Option.";
+                  "RFC 5925: The TCP Authentication Option.";
               }
 
               case ipsec {
@@ -765,7 +765,10 @@ module ietf-bgp {
             action clear {
               if-feature "bt:clear-statistics";
               description
-                "Clear statistics action command.";
+                "Clear statistics action command.
+
+                 Execution of this command should result in all the
+                 counters to be cleared and set to 0.";
 
               input {
                 leaf clear-at {

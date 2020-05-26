@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc category="std" docName="draft-ietf-idr-bgp-model-08" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-idr-bgp-model-09" ipr="trust200902">
   <?rfc toc="yes"?>
 
   <front>
@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="21" month="January" year="2020"/>
+    <date day="21" month="May" year="2020"/>
 
     <area>Routing</area>
 
@@ -150,11 +150,13 @@
         policies, and also defining BGP-specific policy features. The BGP
         policy features are intended to be used with the general routing
         policy model defined in <xref target="I-D.ietf-rtgwg-policy-model">A
-        YANG Data Model for Routing Policy Management </xref>. The model
-        conforms to the <xref target="RFC8342">NMDA</xref> architecture and
-        has support for configuring <xref target="RFC5880">Bidirectional
-        Forward Detection (BFD) </xref> for fast next hop liveliness
-        check.</t>
+        YANG Data Model for Routing Policy Management </xref>. </t>
+
+        <t>The model conforms to the <xref target="RFC8342">NMDA</xref>
+        architecture. It has support for securing BGP sessions using <xref
+        target="RFC5925">TCP-AO</xref> or TCP-MD5, and for configuring <xref
+        target="RFC5880">Bidirectional Forward Detection (BFD) </xref> for
+        fast next hop liveliness check.</t>
 
         <t>For the base BGP features, the focus of the model described in this
         document is on providing configuration and operational state
@@ -208,9 +210,6 @@
         <t>RFC ZZZZ, where ZZZZ is the number assigned to <xref
         target="I-D.ietf-rtgwg-policy-model">A YANG Data Model for Routing
         Policy Management</xref>.</t>
-
-        <t>RFC AAAA, where AAAA is the number assigned to <xref
-        target="RFC7854">BGP Monitoring Protocol </xref>.</t>
 
         <t>RFC BBBB, where BBBB is the number assigned to <xref
         target="I-D.ietf-bfd-yang">YANG Data Model for Bidirectional Forward
@@ -605,7 +604,7 @@ reference: RFC XXXX
     <section title="Structure of the YANG modules">
       <t>The YANG model can be subdivided between the main module for base
       items, types, policy data, and the RIB module. It references <xref
-      target="RFC1997">BGP Communities Attribute </xref>, , <xref
+      target="RFC1997">BGP Communities Attribute </xref>, <xref
       target="RFC2918">Route Refresh Capability for BGP-4</xref>, , <xref
       target="RFC3765">NOPEER Community for BGP</xref>, <xref
       target="RFC4364">BGP/MPLS IP Virtual Private Networks (VPNs)</xref>,
@@ -862,8 +861,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-table-attributes@YYYY-MM-DD
       <?rfc include='reference.RFC.5925'?>
 
       <?rfc include='reference.RFC.7454'?>
-
-      <?rfc include='reference.RFC.7854'?>
 
       <?rfc include='reference.RFC.8342'?>
 
