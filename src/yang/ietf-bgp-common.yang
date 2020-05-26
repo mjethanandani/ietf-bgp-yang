@@ -331,9 +331,7 @@ submodule ietf-bgp-common {
          expressed as either an IP address or reference to the name
          of an interface.";
     }
-    // TODO: Better form of authentication of the BGP session should
-    // be added here. It can be in the form of TCP-AO [RFC 5925],
-    // IPsec, or any other protocol deemed desirable.
+
     leaf auth-password {
       type string;
       description

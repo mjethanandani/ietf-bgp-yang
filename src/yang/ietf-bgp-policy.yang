@@ -271,13 +271,11 @@ module ietf-bgp-policy {
       }
       leaf local-pref-eq {
         type uint32;
-        // TODO: add support for other comparisons if needed
         description
           "Condition to check if the local pref attribute is equal to
            the specified value";
       }
       leaf route-type {
-        // TODO: verify extent of vendor support for this comparison
         type enumeration {
           enum internal {
             description

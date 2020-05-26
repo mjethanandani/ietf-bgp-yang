@@ -139,9 +139,6 @@ submodule ietf-bgp-common-structure {
            by the Route Reflector. It is set 'true' when the client is
            fully meshed to prevent sending of redundant route
            advertisements.";
-        reference
-          "TODO: Add reference when IETF writes a draft describing
-                  this.";
       }
       leaf route-reflector-client {
         type boolean;
