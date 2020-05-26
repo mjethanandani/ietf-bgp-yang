@@ -486,7 +486,4 @@ module ietf-bgp-policy {
       }
     }
   }
-
-  // rpc statements
-  // notification statements
 }
