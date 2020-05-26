@@ -360,16 +360,9 @@ module ietf-bgp-types {
   }
 
   typedef bgp-std-community-type {
-    // TODO: further refine restrictions and allowed patterns
-    // 4-octet value:
-    //  <as number> 2 octets
-    //  <community value> 2 octets
     type union {
       type uint32 {
-        // per RFC 1997, 0x00000000 - 0x0000FFFF and 0xFFFF0000 -
-        // 0xFFFFFFFF are reserved
         range "65536..4294901759";
-        // 0x00010000..0xFFFEFFFF
       }
       type string {
         pattern '([0-9]+:[0-9]+)';
@@ -382,11 +375,6 @@ module ietf-bgp-types {
   }
 
   typedef bgp-ext-community-type {
-    // TODO: needs more work to make this more precise given the
-    // variability of extended community attribute specifications
-    // 8-octet value:
-    //  <type> 2 octects
-    //  <value> 6 octets
     type union {
       type string {
         // Type 1: 2-octet global and 4-octet local
@@ -447,8 +435,6 @@ module ietf-bgp-types {
   }
 
   typedef bgp-community-regexp-type {
-    // TODO: needs more work to decide what format these regexps can
-    // take.
     type string;
     description
       "Type definition for communities specified as regular

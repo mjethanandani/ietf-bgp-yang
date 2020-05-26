@@ -236,9 +236,9 @@ module ietf-bgp-policy {
     }
   }
 
-  augment "/rpol:routing-policy/rpol:policy-definitions/"
-        + "rpol:policy-definition/rpol:statements/rpol:statement/"
-        + "rpol:conditions" {
+  augment "/rpol:routing-policy/rpol:policy-definitions/" +
+          "rpol:policy-definition/rpol:policy-statements/" +
+          "rpol:statement/rpol:conditions" {
     description
       "BGP policy conditions added to routing policy module";
     container bgp-conditions {
@@ -271,13 +271,11 @@ module ietf-bgp-policy {
       }
       leaf local-pref-eq {
         type uint32;
-        // TODO: add support for other comparisons if needed
         description
           "Condition to check if the local pref attribute is equal to
            the specified value";
       }
       leaf route-type {
-        // TODO: verify extent of vendor support for this comparison
         type enumeration {
           enum internal {
             description
@@ -355,9 +353,9 @@ module ietf-bgp-policy {
     }
   }
 
-  augment "/rpol:routing-policy/rpol:policy-definitions/"
-        + "rpol:policy-definition/rpol:statements/rpol:statement/"
-        + "rpol:actions" {
+  augment "/rpol:routing-policy/rpol:policy-definitions/" +
+          "rpol:policy-definition/rpol:policy-statements/" +
+          "rpol:statement/rpol:actions" {
     description
       "BGP policy actions added to routing policy module.";
     container bgp-actions {
