@@ -1,0 +1,147 @@
+module ietf-bgp-commands {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-commands";
+  prefix bgc;
+
+  /*
+   * Import and Include
+   */
+
+  import ietf-routing {
+    prefix rt;
+    reference
+      "RFC 8349, A YANG Data Model for Routing Management
+       (NMDA Version)";
+  }
+  import ietf-bgp {
+    prefix bgp;
+    reference
+      "RFC XXXX: BGP YANG Model for Service Provider Networks.";
+  }
+
+  revision YYYY-MM-DD {
+    description
+      "Initial Version";
+    reference
+      "RFC XXXX, BGP Model for Service Provider Network ";
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv4-unicast/bgp:loc-rib/bgp:routes/" +
+          "bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv4-unicast/bgp:neighbors/bgp:neighbor/" +
+          "bgp:adj-rib-in-pre/bgp:routes/bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv4-unicast/bgp:neighbors/bgp:neighbor/" +
+          "bgp:adj-rib-in-post/bgp:routes/bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv4-unicast/bgp:neighbors/bgp:neighbor/" +
+          "bgp:adj-rib-out-pre/bgp:routes/bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv4-unicast/bgp:neighbors/bgp:neighbor/" +
+          "bgp:adj-rib-out-post/bgp:routes/bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv6-unicast/bgp:loc-rib/bgp:routes/" +
+          "bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv6-unicast/bgp:neighbors/bgp:neighbor/" +
+          "bgp:adj-rib-in-pre/bgp:routes/bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv6-unicast/bgp:neighbors/bgp:neighbor/" +
+          "bgp:adj-rib-in-post/bgp:routes/bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv6-unicast/bgp:neighbors/bgp:neighbor/" +
+          "bgp:adj-rib-out-pre/bgp:routes/bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:rib/bgp:afi-safis/" +
+          "bgp:afi-safi/bgp:ipv6-unicast/bgp:neighbors/bgp:neighbor/" +
+          "bgp:adj-rib-out-post/bgp:routes/bgp:route" {
+    uses bgp:attr-set-attributes;
+    uses bgp:bgp-community-attr-state;
+    uses bgp:ext-community-attributes;
+    uses bgp:bgp-common-route-annotations-state;
+    uses bgp:bgp-unknown-attr-top;
+    uses bgp:rib-ext-route-annotations;
+  }
+}
