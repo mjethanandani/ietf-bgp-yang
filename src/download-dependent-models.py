@@ -34,7 +34,9 @@ def fetch(module, path):
     model = module + ".yang"
     print("Moving module " + model + " to ../bin/dependent")
     os.system("mv '%s'.txt ../bin/dependent/'%s'" %(model, model))
-        
+
+    os.system("mkdir -p ../bin/dependent")
+
 for list in list_of_ietf_models:
     module, draft, version = list
     print(module)
