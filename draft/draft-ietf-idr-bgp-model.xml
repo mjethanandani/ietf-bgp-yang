@@ -9,7 +9,7 @@
 
     <author fullname="Mahesh Jethanandani" initials="M.J."
             surname="Jethanandani">
-      <organization>VMware</organization>
+      <organization>Kloud Services</organization>
 
       <address>
         <postal>
@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="21" month="May" year="2020"/>
+    <date day="28" month="June" year="2020"/>
 
     <area>Routing</area>
 
@@ -150,7 +150,7 @@
         policies, and also defining BGP-specific policy features. The BGP
         policy features are intended to be used with the general routing
         policy model defined in <xref target="I-D.ietf-rtgwg-policy-model">A
-        YANG Data Model for Routing Policy Management </xref>. </t>
+        YANG Data Model for Routing Policy Management </xref>.</t>
 
         <t>The model conforms to the <xref target="RFC8342">NMDA</xref>
         architecture. It has support for securing BGP sessions using <xref
