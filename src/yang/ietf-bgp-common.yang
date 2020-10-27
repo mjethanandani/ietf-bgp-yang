@@ -283,7 +283,7 @@ submodule ietf-bgp-common {
       if-feature "bt:send-communities";
       type bt:community-type;
       description
-        "When supported, this tells the router to propogate any
+        "When supported, this tells the router to propagate any
          prefixes that are attached to this community. The value
          of 0 implies 'none'.";
     }
@@ -306,10 +306,12 @@ submodule ietf-bgp-common {
     }
     leaf mtu-discovery {
       type boolean;
-      default "false";
+      default "true";
       description
         "Turns path mtu discovery for BGP TCP sessions on (true) or
          off (false)";
+      reference
+	"RFC 1191: Path MTU discovery.";
     }
     leaf passive-mode {
       type boolean;
@@ -337,6 +339,9 @@ submodule ietf-bgp-common {
       description
         "Configures an MD5 authentication password for use with
          neighboring devices.";
+      reference
+	"RFC 2385: Protection of BGP Sessions via the TCP MD5
+                   Signature Option.";
     }
   }
 

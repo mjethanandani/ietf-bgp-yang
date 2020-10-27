@@ -11,12 +11,12 @@ module ietf-bgp {
     prefix rt;
     reference
       "RFC 8349, A YANG Data Model for Routing Management
-       (NMDA Version)";
+       (NMDA Version).";
   }
   import ietf-routing-policy {
     prefix rpol;
     reference
-      "RFC ZZZZ, A YANG Data Model for Routing Policy Management";
+      "RFC ZZZZ, A YANG Data Model for Routing Policy Management.";
   }
   import ietf-interfaces {
     prefix if;
@@ -180,7 +180,7 @@ module ietf-bgp {
       container global {
         presence "Enables global configuration of BGP";
         description
-          "Global configuration for the BGP router";
+          "Global configuration for the BGP router.";
         leaf as {
           type inet:as-number;
           mandatory true;
@@ -203,7 +203,7 @@ module ietf-bgp {
           description
             "Administrative distance (or preference) assigned to
              routes received from different sources
-             (external, internal, and local).";
+             (external, and internal).";
           leaf external {
             type uint8 {
               range "1..255";
@@ -230,7 +230,7 @@ module ietf-bgp {
             type boolean;
             description
               "When this leaf is set to true it indicates that
-               the local-AS is part of a BGP confederation";
+               the local-AS is part of a BGP confederation.";
           }
           leaf identifier {
             type inet:as-number;
@@ -248,7 +248,7 @@ module ietf-bgp {
           if-feature "bt:graceful-restart";
           description
             "Parameters relating the graceful restart mechanism for
-             BGP";
+             BGP.";
           uses graceful-restart-config;
         }
         uses global-group-use-multiple-paths;
@@ -256,12 +256,12 @@ module ietf-bgp {
         container afi-safis {
           description
             "List of address-families associated with the BGP
-             instance";
+             instance.";
           list afi-safi {
             key "afi-safi-name";
             description
               "AFI,SAFI configuration available for the
-               neighbour or group";
+               neighbour or group.";
             uses mp-afi-safi-config;
             uses state;
             container graceful-restart {
@@ -281,14 +281,14 @@ module ietf-bgp {
 
       container neighbors {
         description
-          "Configuration for BGP neighbors";
+          "Configuration for BGP neighbors.";
 
         list neighbor {
           key "remote-address";
 
           description
             "List of BGP neighbors configured on the local system,
-             uniquely identified by remote IPv[46] address";
+             uniquely identified by remote IPv[46] address.";
 
           leaf local-address {
             type inet:ip-address;
@@ -460,7 +460,7 @@ module ietf-bgp {
             description
               "BGP Time To Live (TTL) security check.";
             reference
-              "RFC 5082: The Genaralized TTL Security Mechanism
+              "RFC 5082: The Generalized TTL Security Mechanism
                (GTSM),
                RFC 7454: BGP Operations and Security.";
           }
@@ -520,13 +520,13 @@ module ietf-bgp {
                in UTC (assuming the session is in the ESTABLISHED
                state, per the session-state leaf).";
           }
-          leaf-list supported-capabilities {
+          leaf-list negotiated-capabilities {
             type identityref {
               base bt:bgp-capability;
             }
             config false;
             description
-              "BGP capabilities negotiated as supported with the peer";
+              "Negotiated BGP capabilities.";
           }
           leaf negotiated-hold-time {
             type decimal64 {
@@ -674,7 +674,7 @@ module ietf-bgp {
             description
               "Statistics per neighbor.";
 
-            leaf established-transitions {
+            leaf peer-fsm-established-transitions {
               type yang:counter64;
               config false;
               description

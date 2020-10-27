@@ -20,9 +20,8 @@ module ietf-bgp-types {
               Susan Hares (shares at ndzh.com),
               Jeffrey Haas (jhaas at pfrc.org).";
   description
-    "This module contains general data definitions for use in BGP
-     policy. It can be imported by modules that make use of BGP
-     attributes";
+    "This module contains general data definitions for use in BGP.
+     It can be imported by modules that make use of BGP attributes";
 
   revision YYYY-MM-DD {
     description
@@ -52,7 +51,7 @@ module ietf-bgp-types {
 
   feature send-communities {
     description
-      "Enable the propogation of communities.";
+      "Enable the propagation of communities.";
   }
 
   feature ttl-security {
@@ -105,7 +104,7 @@ module ietf-bgp-types {
     description
       "Multi-protocol extensions to BGP";
     reference
-      "RFC 4760: Multiprotocol Extenstions for BGP-4.";
+      "RFC 4760: Multiprotocol Extensions for BGP-4.";
   }
 
   identity route-refresh {
@@ -280,7 +279,7 @@ module ietf-bgp-types {
        is advised not to re-advertise the NLRI to external bi-lateral
        peer autonomous systems. An AS may also filter received NLRI
        from bilateral peer sessions when they are tagged with this
-       community value";
+       community value. This community has a value of 0xFFFFFF04.";
     reference
       "RFC 3765: NOPEER Community for BGP.";
   }
@@ -335,11 +334,11 @@ module ietf-bgp-types {
 
   typedef bgp-session-direction {
     type enumeration {
-      enum INBOUND {
+      enum inbound {
         description
           "Refers to all NLRI received from the BGP peer";
       }
-      enum OUTBOUND {
+      enum oubound {
         description
           "Refers to all NLRI advertised to the BGP peer";
       }
@@ -466,11 +465,11 @@ module ietf-bgp-types {
     type enumeration {
       enum internal {
         description
-          "Internal (iBGP) peer";
+          "Internal (IBGP) peer";
       }
       enum external {
         description
-          "External (eBGP) peer";
+          "External (EBGP) peer";
       }
       enum confederation {
         description
@@ -482,14 +481,14 @@ module ietf-bgp-types {
        external or confederation.";
   }
 
-  identity REMOVE_PRIVATE_AS_OPTION {
+  identity remove-private-as-option {
     description
       "Base identity for options for removing private autonomous
        system numbers from the AS_PATH attribute";
   }
 
-  identity PRIVATE_AS_REMOVE_ALL {
-    base REMOVE_PRIVATE_AS_OPTION;
+  identity private-as-remove-all {
+    base remove-private-as-option;
     description
       "Strip all private autonomous system numbers from the AS_PATH.
        This action is performed regardless of the other content of the
@@ -497,8 +496,8 @@ module ietf-bgp-types {
        within that attribute.";
   }
 
-  identity PRIVATE_AS_REPLACE_ALL {
-    base REMOVE_PRIVATE_AS_OPTION;
+  identity private-as-replace-all {
+    base remove-private-as-option;
     description
       "Replace all instances of private autonomous system numbers in
        the AS_PATH with the local BGP speaker's autonomous system
@@ -509,19 +508,11 @@ module ietf-bgp-types {
 
   typedef remove-private-as-option {
     type identityref {
-      base REMOVE_PRIVATE_AS_OPTION;
+      base remove-private-as-option;
     }
     description
       "Set of options for configuring how private AS path numbers
        are removed from advertisements";
-  }
-
-  typedef percentage {
-    type uint8 {
-      range "0..100";
-    }
-    description
-      "Integer indicating a percentage value";
   }
 
   typedef rr-cluster-id-type {

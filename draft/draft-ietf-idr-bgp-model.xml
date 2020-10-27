@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc category="std" docName="draft-ietf-idr-bgp-model-09" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-idr-bgp-model-10" ipr="trust200902">
   <?rfc toc="yes"?>
 
   <front>
@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="28" month="June" year="2020"/>
+    <date day="28" month="October" year="2020"/>
 
     <area>Routing</area>
 
@@ -345,8 +345,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
         common configuration and state options are included - further work is
         expected to add additional parameters to this area of the model.</t>
 
-        <t>The following address-families are currently supported by the
-        model:</t>
+        <t>The model supports ipv4-unicast and ipv6-unicast address-families
+        and defers the remaining AFI/SAFI to other or future drafts:</t>
 
         <figure>
           <artwork><![CDATA[
@@ -493,19 +493,60 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       These data nodes may be considered sensitive or vulnerable in some
       network environments. Write operations (e.g., edit-config) to these data
       nodes without proper protection can have a negative effect on network
-      operations. These are the subtrees and data nodes and their
-      sensitivity/vulnerability:</t>
+      operations. Some of the subtrees and data nodes and their
+      sensitivity/vulnerability are described here.</t>
+
+      <t>- The attribute 'as'. If a user is allowed to change this attribute,
+      it will have the net effect of bringing down the entire routing
+      instance, causing it to delete all the current routing entries, and
+      learning new ones.</t>
+
+      <t>- The attribute 'identifier'. If a user is allowed to change this
+      attribute, it will have the net effect of this routing instance
+      re-advertising all its routes.</t>
+
+      <t>- The attribute 'distance'. If a user is allowed to change this
+      attribute, it will cause the preference for routes, e.g. external vs
+      internal to change.</t>
+
+      <t>- The attribute 'enabled' in the 'confederation' container. This
+      attribute defines whether a local-AS is part of a BGP federation.</t>
+
+      <t>- Finally, there are a whole set of route selection options such as
+      'always-compare-med', 'ignore-as-path-length' that affect the way the
+      system picks up a particular route. Being able to change will adversely
+      affect how the route selection happens.</t>
 
       <t>Some of the readable data nodes in this YANG module may be considered
       sensitive or vulnerable in some network environments. It is thus
       important to control read access (e.g., via get, get-config, or
-      notification) to these data nodes. These are the subtrees and data nodes
-      and their sensitivity/vulnerability:</t>
+      notification) to these data nodes. Some of the subtrees and data nodes
+      and their sensitivity/vulnerability are:</t>
+
+      <t>- The list of neighbors, and their attributes. Allowing a user to
+      read these attributes, in particular the address/port information may
+      allow a malicious user to launch an attack at the particular
+      address/port.</t>
+
+      <t>- The 'rib' container. This container contains sensitive information
+      such as attribute sets, communities and external communities. Being able
+      to read the contents of this container will allow a malicious user to
+      understand how the system decide how to route a packet, and thus try to
+      affect a change.</t>
 
       <t>Some of the RPC operations in this YANG module may be considered
       sensitive or vulnerable in some network environments. It is thus
       important to control access to these operations. These are the
       operations and their sensitivity/vulnerability:</t>
+
+      <t>- The model allows for routes to be cleared using the 'clear' RPC
+      operations, causing the entire RIB table to be cleared.</t>
+
+      <t>- The model allows for statistics to be cleared by the 'clear' RPC
+      operation, causing all the individual statistics to be cleared.</t>
+
+      <t>- The model also allows for neighbors that have been learnt by the
+      system to be cleared by using the 'clear' RPC operation.</t>
 
       <t><xref target="RFC7454">BGP OPSEC</xref> describes several policies
       that can be used to secure a BGP. In particular, it recommends securing
@@ -611,7 +652,7 @@ reference: RFC XXXX
       <xref target="RFC4659">BGP-MPLS IP Virtual Private Network (VPN)
       Extension for IPv6 VPN</xref>, <xref target="RFC4724">Graceful Restart
       Mechanism for BGP</xref>, <xref target="RFC4760">Multiprotocol
-      Extenstions for BGP-4</xref>, <xref target="RFC4761">Virtual Private LAN
+      Extentions for BGP-4</xref>, <xref target="RFC4761">Virtual Private LAN
       Service (VPLS) Using BGP for Auto-Discovery and Signaling</xref>, <xref
       target="RFC5065">Autonomous System Configuration for BGP</xref>, <xref
       target="RFC5082">The Generalized TTL Security Mechanism (GTSM)</xref>,
@@ -954,6 +995,17 @@ INSERT_TEXT_FROM_FILE(../bin/example-newco-bgp-a.2@YYYY-MM-DD.yang)
 
 ]]></artwork>
       </figure>
+    </section>
+
+    <section title="Complete tree diagram">
+      <t>Here is a complete tree diagram for the model.</t>
+
+      <t><figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-tree.txt)
+
+]]></artwork>
+        </figure></t>
     </section>
   </back>
 </rfc>
