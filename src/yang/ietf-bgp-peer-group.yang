@@ -69,7 +69,7 @@ submodule ietf-bgp-peer-group {
       key "afi-safi-name";
       description
         "AFI, SAFI configuration available for the
-         neighbour or group";
+         neighbor or group";
       uses mp-afi-safi-config;
       container graceful-restart {
         if-feature "bt:graceful-restart";
@@ -85,7 +85,7 @@ submodule ietf-bgp-peer-group {
 
   grouping bgp-peer-group-base {
     description
-      "Parameters related to a BGP group.";
+      "Parameters related to a BGP peer-group.";
     leaf peer-group-name {
       type string;
       description
@@ -117,7 +117,7 @@ submodule ietf-bgp-peer-group {
     container afi-safis {
       description
         "Per-address-family configuration parameters associated with
-         the group.";
+         the peer-group.";
       uses bgp-peer-group-afi-safi-list;
     }
   }

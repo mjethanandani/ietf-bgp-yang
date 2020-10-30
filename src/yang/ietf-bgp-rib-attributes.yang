@@ -195,12 +195,6 @@ submodule ietf-bgp-rib-attributes {
     }
   }
 
-  grouping bgp-loc-rib-attr-state {
-    description
-      "Path attributes that are not expected to be shared across
-       route entries, specific to LOC-RIB";
-  }
-
   grouping bgp-adj-rib-attr-state {
     description
       "Path attributes that are not expected to be shared across

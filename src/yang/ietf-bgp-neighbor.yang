@@ -152,7 +152,7 @@ submodule ietf-bgp-neighbor {
       container prefixes {
         config false;
         description
-          "Prefix counters for the BGP session";
+          "Prefix counters for the AFI/SAFI in this BGP session";
         leaf received {
           type uint32;
           description

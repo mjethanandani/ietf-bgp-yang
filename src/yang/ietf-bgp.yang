@@ -75,9 +75,6 @@ module ietf-bgp {
   include ietf-bgp-rib {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-rib-ext {
-    revision-date YYYY-MM-DD;
-  }
   include ietf-bgp-rib-attributes {
     revision-date YYYY-MM-DD;
   }
@@ -123,7 +120,7 @@ module ietf-bgp {
           +-> [ optional pointer to peer-group ]
           +-> AFI / SAFI [ per-AFI overrides ]
 
-     Copyright (c) 2019 IETF Trust and the persons identified as
+     Copyright (c) 2020 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -176,7 +173,7 @@ module ietf-bgp {
        control-plane-protocol.";
     container bgp {
       description
-        "Top-level configuration for the BGP router";
+        "Top-level configuration for the BGP router.";
       container global {
         presence "Enables global configuration of BGP";
         description
@@ -201,15 +198,15 @@ module ietf-bgp {
         }
         container distance {
           description
-            "Administrative distance (or preference) assigned to
-             routes received from different sources
-             (external, and internal).";
+            "Administrative distances (or preferences) assigned to
+             routes received from different sources (external, and
+             internal).";
           leaf external {
             type uint8 {
               range "1..255";
             }
             description
-              "Administrative distance for routes learned from
+              "Administrative distances for routes learned from
                external BGP (eBGP).";
           }
           leaf internal {
@@ -217,7 +214,7 @@ module ietf-bgp {
               range "1..255";
             }
             description
-              "Administrative distance for routes learned from
+              "Administrative distances for routes learned from
                internal BGP (iBGP).";
           }
         }
@@ -261,7 +258,7 @@ module ietf-bgp {
             key "afi-safi-name";
             description
               "AFI,SAFI configuration available for the
-               neighbour or group.";
+               neighbor or group.";
             uses mp-afi-safi-config;
             uses state;
             container graceful-restart {
@@ -334,7 +331,7 @@ module ietf-bgp {
             description
               "The BGP Identifier of this entry's BGP peer.
                This entry MUST be 0.0.0.0 unless the
-               sessionstate is in the openconfirm or the
+               session state is in the openconfirm or the
                established state.";
             reference
               "RFC 4271, Section 4.2, 'BGP Identifier'.";
@@ -609,7 +606,7 @@ module ietf-bgp {
               config false;
               description
                 "The period of time (advertised by the peer) that the
-                 peer expects a restart of a BGP session to take";
+                 peer expects a restart of a BGP session to take.";
             }
             leaf peer-restarting {
               type boolean;
@@ -617,16 +614,16 @@ module ietf-bgp {
               description
                 "This flag indicates whether the remote neighbor is
                  currently in the process of restarting, and hence
-                 received routes are currently stale";
+                 received routes are currently stale.";
             }
             leaf local-restarting {
               type boolean;
               config false;
               description
                 "This flag indicates whether the local neighbor is
-                 currently restarting. The flag is unset after all NLRI
+                 currently restarting. The flag is cleared after all NLRI
                  have been advertised to the peer, and the End-of-RIB
-                 (EOR) marker has been unset";
+                 (EOR) marker has been cleared.";
             }
             leaf mode {
               type enumeration {
@@ -805,8 +802,8 @@ module ietf-bgp {
               "The last error code and subcode seen by this
                peer on this connection.  If no error has
                occurred, this field is zero.  Otherwise, the
-               first byte of this two byte OCTET STRING
-               contains the error code, and the second byte
+               first octet of this two byte OCTET STRING
+               contains the error code, and the second octet
                contains the subcode.";
             reference
               "RFC 4271, Section 4.5.";
@@ -831,7 +828,7 @@ module ietf-bgp {
               path "../../neighbor/remote-address";
             }
             description
-              "IP address of the neighbor that went away from
+              "IP address of the neighbor that changed its state from
                established state.";
           }
           leaf last-error {

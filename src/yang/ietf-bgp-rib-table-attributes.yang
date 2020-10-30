@@ -82,13 +82,6 @@ submodule ietf-bgp-rib-table-attributes {
     }
   }
 
-  grouping bgp-loc-rib-route-annotations-state {
-    description
-      "Data definitions for information attached to routes in the
-       LOC-RIB";
-    // placeholder for route metadata specific to the LOC-RIB
-  }
-
   grouping bgp-adj-rib-in-post-route-annotations-state {
     description
       "Data definitions for information attached to routes in the
@@ -98,20 +91,5 @@ submodule ietf-bgp-rib-table-attributes {
       description
         "Current path was selected as the best path.";
     }
-  }
-
-  grouping bgp-common-table-attrs-state {
-    description
-      "Common attributes attached to all routing tables";
-    // placeholder for metadata associated with all tables
-  }
-
-  grouping bgp-common-table-attrs-top {
-    // no enclosing container as this data will fit under an
-    // existing LOC-RIB container
-    uses bgp-common-table-attrs-state;
-    description
-      "Operational state data for data related to the entire
-       LOC-RIB";
   }
 }
