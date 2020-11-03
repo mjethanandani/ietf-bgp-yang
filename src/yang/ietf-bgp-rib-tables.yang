@@ -26,7 +26,6 @@ submodule ietf-bgp-rib-tables {
     reference
       "RFC XXXX: BGP YANG Model for Service Provider Network.";
   }
-  include ietf-bgp-rib-ext;
   include ietf-bgp-rib-attributes;
   include ietf-bgp-rib-table-attributes;
 
@@ -69,6 +68,24 @@ submodule ietf-bgp-rib-tables {
       "Initial Version";
     reference
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
+  }
+
+  grouping rib-ext-route-annotations {
+    description
+      "Extended annotations for routes in the routing tables";
+    leaf reject-reason {
+      type union {
+        type identityref {
+          base bgp-not-selected-bestpath;
+        }
+        type identityref {
+          base bgp-not-selected-policy;
+        }
+      }
+      description
+        "Indicates the reason the route is not used, either due to
+         policy filtering or bestpath selection";
+    }
   }
 
   grouping bgp-adj-rib-common-attr-refs {
@@ -203,7 +220,6 @@ submodule ietf-bgp-rib-tables {
       config false;
       description
         "Container for the IPv4 BGP LOC-RIB data.";
-      uses bgp-common-table-attrs-top;
       container routes {
         description
           "Enclosing container for list of routes in the routing
@@ -225,9 +241,7 @@ submodule ietf-bgp-rib-tables {
           }
           uses bgp-loc-rib-common-keys;
           uses bgp-loc-rib-common-attr-refs;
-          uses bgp-loc-rib-attr-state;
           uses bgp-common-route-annotations-state;
-          uses bgp-loc-rib-route-annotations-state;
           uses bgp-unknown-attr-top;
           uses rib-ext-route-annotations;
         }
@@ -243,7 +257,6 @@ submodule ietf-bgp-rib-tables {
       config false;
       description
         "Container for the IPv6 BGP LOC-RIB data.";
-      uses bgp-common-table-attrs-top;
       container routes {
         description
           "Enclosing container for list of routes in the routing
@@ -265,9 +278,7 @@ submodule ietf-bgp-rib-tables {
           }
           uses bgp-loc-rib-common-keys;
           uses bgp-loc-rib-common-attr-refs;
-          uses bgp-loc-rib-attr-state;
           uses bgp-common-route-annotations-state;
-          uses bgp-loc-rib-route-annotations-state;
           uses bgp-unknown-attr-top;
           uses rib-ext-route-annotations;
         }
@@ -279,7 +290,6 @@ submodule ietf-bgp-rib-tables {
   grouping ipv4-adj-rib-common {
     description
       "Common structural grouping for each IPv4 adj-RIB table.";
-    uses bgp-common-table-attrs-top;
     container routes {
       config false;
       description
@@ -311,7 +321,6 @@ submodule ietf-bgp-rib-tables {
     description
       "Common structural grouping for the IPv4 adj-rib-in
        post-policy table.";
-    uses bgp-common-table-attrs-top;
     container routes {
       config false;
       description
@@ -391,7 +400,6 @@ submodule ietf-bgp-rib-tables {
   grouping ipv6-adj-rib-common {
     description
       "Common structural grouping for each IPv6 adj-RIB table.";
-    uses bgp-common-table-attrs-state;
     container routes {
       config false;
       description
@@ -420,7 +428,6 @@ submodule ietf-bgp-rib-tables {
     description
       "Common structural grouping for the IPv6 adj-rib-in
        post-policy table.";
-    uses bgp-common-table-attrs-state;
     container routes {
       config false;
       description

@@ -258,34 +258,34 @@ module ietf-bgp-policy {
           "rpol:policy-definition/rpol:policy-statements/" +
           "rpol:statement/rpol:conditions" {
     description
-      "BGP policy conditions added to routing policy module";
+      "BGP policy conditions added to routing policy module.";
     container bgp-conditions {
       description
-        "Top-level container for BGP specific policy conditions ";
+        "Top-level container for BGP specific policy conditions.";
       leaf med-eq {
         type uint32;
         description
           "Condition to check if the received MED value is equal to
-           the specified value";
+           the specified value.";
       }
       leaf origin-eq {
         type bt:bgp-origin-attr-type;
         description
           "Condition to check if the route origin is equal to the
-           specified value";
+           specified value.";
       }
       leaf-list next-hop-in {
         type inet:ip-address-no-zone;
         description
           "List of next hop addresses to check for in the route
-           update";
+           update.";
       }
       leaf-list afi-safi-in {
         type identityref {
           base bt:afi-safi-type;
         }
         description
-          "List of address families which the NLRI may be within";
+          "List of address families which the NLRI may be within.";
       }
       leaf local-pref-eq {
         type uint32;
