@@ -296,7 +296,7 @@ module ietf-bgp-policy {
 	    "Value for the number of communities in the route update.";
 	}
 
-	choice opertion {
+	choice operation {
 	  case eq {
 	    leaf eq {
 	      type empty;
@@ -341,7 +341,7 @@ module ietf-bgp-policy {
 	    "Value of the AS path length in the route update.";
 	}
 
-	choice opertion {
+	choice operation {
 	  case eq {
 	    leaf eq {
 	      type empty;
