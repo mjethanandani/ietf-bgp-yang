@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc category="std" docName="draft-ietf-idr-bgp-model-08" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-idr-bgp-model-10" ipr="trust200902">
   <?rfc toc="yes"?>
 
   <front>
@@ -9,7 +9,7 @@
 
     <author fullname="Mahesh Jethanandani" initials="M.J."
             surname="Jethanandani">
-      <organization>VMware</organization>
+      <organization>Kloud Services</organization>
 
       <address>
         <postal>
@@ -98,7 +98,7 @@
       </address>
     </author>
 
-    <date day="21" month="January" year="2020"/>
+    <date day="16" month="November" year="2020"/>
 
     <area>Routing</area>
 
@@ -111,7 +111,7 @@
     <abstract>
       <t>This document defines a YANG data model for configuring and managing
       BGP, including protocol, policy, and operational aspects, such as RIB,
-      based on data center, carrier and content provider operational
+      based on data center, carrier, and content provider operational
       requirements.</t>
     </abstract>
   </front>
@@ -121,7 +121,7 @@
       <t>This document describes a <xref target="RFC7950">YANG</xref> data
       model for the <xref target="RFC4271">BGP-4</xref> protocol, including
       various protocol extensions, policy configuration, as well as defining
-      key operational state data, including Routing Information Base (RIB).
+      key operational state data, including a Routing Information Base (RIB).
       The model is intended to be vendor-neutral, in order to allow operators
       to manage BGP configuration in heterogeneous environments with routers
       supplied by multiple vendors. The model is also intended to be readily
@@ -150,11 +150,13 @@
         policies, and also defining BGP-specific policy features. The BGP
         policy features are intended to be used with the general routing
         policy model defined in <xref target="I-D.ietf-rtgwg-policy-model">A
-        YANG Data Model for Routing Policy Management </xref>. The model
-        conforms to the <xref target="RFC8342">NMDA</xref> architecture and
-        has support for configuring <xref target="RFC5880">Bidirectional
-        Forward Detection (BFD) </xref> for fast next hop liveliness
-        check.</t>
+        YANG Data Model for Routing Policy Management </xref>.</t>
+
+        <t>The model conforms to the <xref target="RFC8342">NMDA</xref>
+        architecture. It has support for securing BGP sessions using <xref
+        target="RFC5925">TCP-AO</xref> or TCP-MD5, and for configuring <xref
+        target="RFC5880">Bidirectional Forward Detection (BFD) </xref> for
+        fast next hop liveliness checking.</t>
 
         <t>For the base BGP features, the focus of the model described in this
         document is on providing configuration and operational state
@@ -170,7 +172,7 @@
             features that relate to a neighbor - controlling the import and
             export of NLRIs.</t>
 
-            <t>RIB contents.</t>
+            <t>BGP RIB contents.</t>
           </list></t>
 
         <t>As mentioned earlier, any configuration items that are deemed to be
@@ -208,9 +210,6 @@
         <t>RFC ZZZZ, where ZZZZ is the number assigned to <xref
         target="I-D.ietf-rtgwg-policy-model">A YANG Data Model for Routing
         Policy Management</xref>.</t>
-
-        <t>RFC AAAA, where AAAA is the number assigned to <xref
-        target="RFC7854">BGP Monitoring Protocol </xref>.</t>
 
         <t>RFC BBBB, where BBBB is the number assigned to <xref
         target="I-D.ietf-bfd-yang">YANG Data Model for Bidirectional Forward
@@ -311,11 +310,11 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
         <t>Users may specify configuration at a higher level and have it apply
         to all lower-level items, or provide overriding configuration at a
         lower level of the hierarchy. Overriding configuration items are
-        optional, with neighbor specific configuration being the most specific
+        optional, with neighbor-specific configuration being the most specific
         or lowest level, followed by peer-group, and finally global. Global
-        configuration options reflect a subset of the peer-group or neighbor
-        specific configuration options which are relevant to the entire BGP
-        instance.</t>
+        configuration options reflect a subset of the peer-group or
+        neighbor-specific configuration options which are relevant to the
+        entire BGP instance.</t>
 
         <t>The model makes the simplifying assumption that most of the
         configuration items are available at all levels of the hierarchy. That
@@ -334,7 +333,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
         <t>Address-family configuration is made available in multiple points
         within the model - primarily within the global container, where
         instance-wide configuration can be set (for example, global protocol
-        parameters, the BGP best path route selection options, or global
+        parameters, the BGP best-path route selection options, or global
         policies relating to the address-family); and on a per-neighbor or
         per-peer-group basis, where address-families can be enabled or
         disabled, and policy associated with the parent entity applied. Within
@@ -346,8 +345,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
         common configuration and state options are included - further work is
         expected to add additional parameters to this area of the model.</t>
 
-        <t>The following address-families are currently supported by the
-        model:</t>
+        <t>The model supports ipv4-unicast and ipv6-unicast address-families
+        and defers the remaining AFI/SAFI to other or future drafts:</t>
 
         <figure>
           <artwork><![CDATA[
@@ -418,7 +417,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
         <t>The RIB data model represents the BGP RIB contents. The model
         supports five logical RIBs per address family.</t>
 
-        <t>A abridged version of the tree shows the RIB portion of the tree
+        <t>An abridged version of the tree shows the RIB portion of the tree
         diagram.</t>
 
         <t><figure>
@@ -432,10 +431,10 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           <t>The loc-rib is the main BGP routing table for the local routing
           instance, containing best-path selections for each prefix. The
           loc-rib table may contain multiple routes for a given prefix, with
-          an attribute to indicate which was selected as the best path. Note
+          an attribute to indicate which was selected as the best-path. Note
           that multiple paths may be used or advertised even if only one path
           is marked as best, e.g., when using BGP add-paths. An implementation
-          may choose to mark multiple paths in the RIB as best path by setting
+          may choose to mark multiple paths in the RIB as best-path by setting
           the flag to true for multiple entries.</t>
         </section>
 
@@ -461,7 +460,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
         <section title="Post route advertisements per-neighbor">
           <t>The adj-rib-out-post table is a per-neighbor table containing
           routes eligible for sending (advertising) to the neighbor after
-          output policy rules have been applied</t>
+          output policy rules have been applied.</t>
         </section>
       </section>
     </section>
@@ -494,19 +493,60 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       These data nodes may be considered sensitive or vulnerable in some
       network environments. Write operations (e.g., edit-config) to these data
       nodes without proper protection can have a negative effect on network
-      operations. These are the subtrees and data nodes and their
-      sensitivity/vulnerability:</t>
+      operations. Some of the subtrees and data nodes and their
+      sensitivity/vulnerability are described here.</t>
+
+      <t>- The attribute 'as'. If a user is allowed to change this attribute,
+      it will have the net effect of bringing down the entire routing
+      instance, causing it to delete all the current routing entries, and
+      learning new ones.</t>
+
+      <t>- The attribute 'identifier'. If a user is allowed to change this
+      attribute, it will have the net effect of this routing instance
+      re-advertising all its routes.</t>
+
+      <t>- The attribute 'distance'. If a user is allowed to change this
+      attribute, it will cause the preference for routes, e.g. external vs
+      internal to change.</t>
+
+      <t>- The attribute 'enabled' in the 'confederation' container. This
+      attribute defines whether a local-AS is part of a BGP federation.</t>
+
+      <t>- Finally, there are a whole set of route selection options such as
+      'always-compare-med', 'ignore-as-path-length' that affect the way the
+      system picks up a particular route. Being able to change will adversely
+      affect how the route selection happens.</t>
 
       <t>Some of the readable data nodes in this YANG module may be considered
       sensitive or vulnerable in some network environments. It is thus
       important to control read access (e.g., via get, get-config, or
-      notification) to these data nodes. These are the subtrees and data nodes
-      and their sensitivity/vulnerability:</t>
+      notification) to these data nodes. Some of the subtrees and data nodes
+      and their sensitivity/vulnerability are:</t>
+
+      <t>- The list of neighbors, and their attributes. Allowing a user to
+      read these attributes, in particular the address/port information may
+      allow a malicious user to launch an attack at the particular
+      address/port.</t>
+
+      <t>- The 'rib' container. This container contains sensitive information
+      such as attribute sets, communities and external communities. Being able
+      to read the contents of this container will allow a malicious user to
+      understand how the system decide how to route a packet, and thus try to
+      affect a change.</t>
 
       <t>Some of the RPC operations in this YANG module may be considered
       sensitive or vulnerable in some network environments. It is thus
       important to control access to these operations. These are the
       operations and their sensitivity/vulnerability:</t>
+
+      <t>- The model allows for routes to be cleared using the 'clear' RPC
+      operations, causing the entire RIB table to be cleared.</t>
+
+      <t>- The model allows for statistics to be cleared by the 'clear' RPC
+      operation, causing all the individual statistics to be cleared.</t>
+
+      <t>- The model also allows for neighbors that have been learnt by the
+      system to be cleared by using the 'clear' RPC operation.</t>
 
       <t><xref target="RFC7454">BGP OPSEC</xref> describes several policies
       that can be used to secure a BGP. In particular, it recommends securing
@@ -524,9 +564,9 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <t>This document registers three URIs and three YANG modules.</t>
 
       <section title="URI Registration">
-        <t>in the <xref target="RFC3688">IETF XML registry</xref> [RFC3688].
-        Following the format in RFC 3688, the following registration is
-        requested to be made: <figure>
+        <t>Following the format in the <xref target="RFC3688">IETF XML
+        registry</xref> [RFC3688], the following registration is requested to
+        be made: <figure>
             <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bgp
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-types
@@ -538,7 +578,7 @@ URI: urn:ietf:params:xml:ns:yang:ietf-bgp-types
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers three YANG module in the YANG Module Names
+        <t>This document registers three YANG modules in the YANG Module Names
         registry <xref target="RFC6020">YANG</xref>.</t>
 
         <t><figure>
@@ -605,14 +645,14 @@ reference: RFC XXXX
     <section title="Structure of the YANG modules">
       <t>The YANG model can be subdivided between the main module for base
       items, types, policy data, and the RIB module. It references <xref
-      target="RFC1997">BGP Communities Attribute </xref>, , <xref
-      target="RFC2918">Route Refresh Capability for BGP-4</xref>, , <xref
+      target="RFC1997">BGP Communities Attribute </xref>, <xref
+      target="RFC2918">Route Refresh Capability for BGP-4</xref>, <xref
       target="RFC3765">NOPEER Community for BGP</xref>, <xref
       target="RFC4364">BGP/MPLS IP Virtual Private Networks (VPNs)</xref>,
       <xref target="RFC4659">BGP-MPLS IP Virtual Private Network (VPN)
       Extension for IPv6 VPN</xref>, <xref target="RFC4724">Graceful Restart
       Mechanism for BGP</xref>, <xref target="RFC4760">Multiprotocol
-      Extenstions for BGP-4</xref>, <xref target="RFC4761">Virtual Private LAN
+      Extentions for BGP-4</xref>, <xref target="RFC4761">Virtual Private LAN
       Service (VPLS) Using BGP for Auto-Discovery and Signaling</xref>, <xref
       target="RFC5065">Autonomous System Configuration for BGP</xref>, <xref
       target="RFC5082">The Generalized TTL Security Mechanism (GTSM)</xref>,
@@ -701,13 +741,6 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
-<CODE ENDS>
-
-]]></artwork>
-          </figure><figure>
-            <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp-rib-ext@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-ext@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
@@ -863,8 +896,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-table-attributes@YYYY-MM-DD
 
       <?rfc include='reference.RFC.7454'?>
 
-      <?rfc include='reference.RFC.7854'?>
-
       <?rfc include='reference.RFC.8342'?>
 
       <?rfc include='reference.RFC.8349?>
@@ -957,6 +988,17 @@ INSERT_TEXT_FROM_FILE(../bin/example-newco-bgp-a.2@YYYY-MM-DD.yang)
 
 ]]></artwork>
       </figure>
+    </section>
+
+    <section title="Complete tree diagram">
+      <t>Here is a complete tree diagram for the model.</t>
+
+      <t><figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-tree.txt)
+
+]]></artwork>
+        </figure></t>
     </section>
   </back>
 </rfc>

@@ -73,8 +73,7 @@ submodule ietf-bgp-neighbor {
         default "false";
         description
           "Whether the use of multiple paths for the same NLRI is
-           enabled for the neighbor. This value is overridden by any
-           more specific configuration value.";
+           enabled for the neighbor.";
       }
       container ebgp {
         description
@@ -153,7 +152,7 @@ submodule ietf-bgp-neighbor {
       container prefixes {
         config false;
         description
-          "Prefix counters for the BGP session";
+          "Prefix counters for the AFI/SAFI in this BGP session";
         leaf received {
           type uint32;
           description

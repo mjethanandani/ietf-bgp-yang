@@ -24,7 +24,8 @@ submodule ietf-bgp-rib-attributes {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com)";
+              Susan Hares (shares at ndzh.com),
+              Jeffrey Haas (jhaas at pfrc.org).";
   description
     "This submodule contains common data definitions for BGP
      attributes for use in BGP RIB tables.
@@ -59,6 +60,11 @@ submodule ietf-bgp-rib-attributes {
   grouping bgp-as-path-attr {
     description
       "Data for representing BGP AS-PATH attribute";
+    leaf index {
+      type uint16;
+      description
+	"An index into the AS segments.";
+    }
     leaf type {
       type identityref {
         base bgpt:as-path-segment-type;
@@ -187,12 +193,6 @@ submodule ietf-bgp-rib-attributes {
         uses bgp-unknown-attr-state;
       }
     }
-  }
-
-  grouping bgp-loc-rib-attr-state {
-    description
-      "Path attributes that are not expected to be shared across
-       route entries, specific to LOC-RIB";
   }
 
   grouping bgp-adj-rib-attr-state {

@@ -48,7 +48,7 @@ submodule ietf-bgp-rib-types {
   identity invalid-route-reason {
     description
       "Base identity for reason code for routes that are rejected as
-       invalid.  Some derived entities are based on BMP v3";
+       invalid. Some derived entities are based on BMP v3.";
     reference
       "RFC 7854: BGP Monitoring Protocol.";
   }
