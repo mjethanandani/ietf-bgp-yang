@@ -27,7 +27,6 @@ submodule ietf-bgp-rib-tables {
       "RFC XXXX: BGP YANG Model for Service Provider Network.";
   }
   include ietf-bgp-rib-attributes;
-  include ietf-bgp-rib-table-attributes;
 
   organization
     "IETF IDR Working Group";
@@ -68,6 +67,45 @@ submodule ietf-bgp-rib-tables {
       "Initial Version";
     reference
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
+  }
+
+  grouping bgp-common-route-annotations-state {
+    description
+      "Data definitions for flags and other information attached
+       to routes in both LOC-RIB and Adj-RIB";
+    leaf last-modified {
+      type yang:timeticks;
+      description
+        "Timestamp when this path was last modified.
+
+         The value is the timestamp in seconds relative to
+         the Unix Epoch (Jan 1, 1970 00:00:00 UTC).";
+    }
+    leaf valid-route {
+      type boolean;
+      description
+        "Indicates that the route is considered valid by the
+         local router";
+    }
+    leaf invalid-reason {
+      type identityref {
+        base invalid-route-reason;
+      }
+      description
+        "If the route is rejected as invalid, this indicates the
+         reason.";
+    }
+  }
+
+  grouping bgp-adj-rib-in-post-route-annotations-state {
+    description
+      "Data definitions for information attached to routes in the
+       Adj-RIB-in post-policy table";
+    leaf best-path {
+      type boolean;
+      description
+        "Current path was selected as the best path.";
+    }
   }
 
   grouping rib-ext-route-annotations {

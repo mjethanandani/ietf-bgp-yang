@@ -225,8 +225,8 @@ module ietf-bgp-policy {
   }
 
   augment "/rpol:routing-policy/rpol:policy-definitions/" +
-          "rpol:policy-definition/rpol:policy-statements/" +
-          "rpol:statement/rpol:conditions" {
+          "rpol:policy-definition/rpol:statements/rpol:statement/" +
+          "rpol:conditions" {
     description
       "BGP policy conditions added to routing policy module.";
 
@@ -421,8 +421,8 @@ module ietf-bgp-policy {
   }
 
   augment "/rpol:routing-policy/rpol:policy-definitions/" +
-          "rpol:policy-definition/rpol:policy-statements/" +
-          "rpol:statement/rpol:actions" {
+          "rpol:policy-definition/rpol:statements/rpol:statement/" +
+          "rpol:actions" {
     description
       "BGP policy actions added to routing policy module.";
     container bgp-actions {
