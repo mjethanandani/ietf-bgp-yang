@@ -29,7 +29,7 @@ submodule ietf-bgp-common {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com,
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
   description
     "This sub-module contains common groupings that are common across
      multiple contexts within the BGP module. That is to say that

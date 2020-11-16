@@ -28,7 +28,7 @@ submodule ietf-bgp-neighbor {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
   description
     "This sub-module contains groupings that are specific to the
      neighbor context of the BGP module.

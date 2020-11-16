@@ -13,7 +13,7 @@ submodule ietf-bgp-rib-types {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
   description
     "Defines identity and type definitions associated with
      the BGP RIB modules.

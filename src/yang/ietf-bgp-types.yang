@@ -18,7 +18,7 @@ module ietf-bgp-types {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
   description
     "This module contains general data definitions for use in BGP.
      It can be imported by modules that make use of BGP attributes.

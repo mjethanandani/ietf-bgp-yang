@@ -28,7 +28,7 @@ submodule ietf-bgp-common-structure {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
   description
     "This sub-module contains groupings that are common across
      multiple BGP contexts and provide structure around other

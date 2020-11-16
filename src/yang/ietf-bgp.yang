@@ -91,7 +91,7 @@ module ietf-bgp {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
   description
     "This module describes a YANG model for BGP protocol
      configuration. It is a limited subset of all of the configuration

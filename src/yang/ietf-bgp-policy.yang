@@ -27,7 +27,7 @@ module ietf-bgp-policy {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
   description
     "This module contains data definitions for BGP routing policy.
      It augments the base routing-policy module with BGP-specific

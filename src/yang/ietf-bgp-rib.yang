@@ -47,7 +47,7 @@ submodule ietf-bgp-rib {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
 
   description
     "Defines a submodule for representing BGP routing table (RIB)

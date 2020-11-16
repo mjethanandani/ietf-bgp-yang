@@ -25,7 +25,7 @@ submodule ietf-bgp-rib-attributes {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper dot net).";
   description
     "This submodule contains common data definitions for BGP
      attributes for use in BGP RIB tables.
