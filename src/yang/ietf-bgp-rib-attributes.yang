@@ -63,7 +63,7 @@ submodule ietf-bgp-rib-attributes {
     leaf index {
       type uint16;
       description
-	"An index into the AS segments.";
+        "An index into the AS segments.";
     }
     leaf type {
       type identityref {

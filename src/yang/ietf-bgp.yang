@@ -301,18 +301,18 @@ module ietf-bgp {
                the BGP peers.";
           }
 
-	  leaf peer-type {
-	    type bt:peer-type;
-	    config false;
-	    description
-	      "The type of peering session associated with this
+          leaf peer-type {
+            type bt:peer-type;
+            config false;
+            description
+              "The type of peering session associated with this
                neighbor.";
-	    reference
-	      "RFC 4271: A Border Gateway Protocol 4 (BGP-4)
+            reference
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4)
                          Section 1.1 for iBGP and eBGP.
                RFC 5065: Autonomous System Configuration
                          for Confederation internal and external.";
-	  }
+          }
 
           leaf peer-group {
             type leafref {
