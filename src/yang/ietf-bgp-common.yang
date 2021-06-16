@@ -284,8 +284,8 @@ submodule ietf-bgp-common {
       type bt:community-type;
       description
         "When supported, this tells the router to propagate any
-         prefixes that are attached to this community. The value
-         of 0 implies 'none'.";
+	 prefixes that are attached to these community-types.
+	 The value of 0 implies 'none'.";
     }
     leaf description {
       type string;

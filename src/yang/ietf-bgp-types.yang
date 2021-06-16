@@ -551,19 +551,19 @@ module ietf-bgp-types {
       bit standard {
         position 0;
         description
-          "Send only standard communities.";
+          "Send standard communities.";
         reference
           "RFC 1997: BGP Communities Attribute.";
       }
       bit extended {
         description
-          "Send only extended communities.";
+          "Send extended communities.";
         reference
           "RFC 4360: BGP Extended Communities Attribute.";
       }
       bit large {
         description
-          "Send only large communities.";
+          "Send large communities.";
         reference
           "RFC 8092: BGP Large Communities Attribute.";
       }
