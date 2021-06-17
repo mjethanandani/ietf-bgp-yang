@@ -129,7 +129,7 @@ submodule ietf-bgp-common-structure {
            for each neighbor.";
         reference
           "RFC 4456: BGP Route Reflection: An Alternative to
-                  Full Mesh.";
+                     Full Mesh.";
       }
       leaf no-client-reflect {
         type boolean;
@@ -167,7 +167,7 @@ submodule ietf-bgp-common-structure {
         description
           "Specify the number of occurrences of the local BGP
            speaker's AS that can occur within the AS_PATH before it
-           is rejected.";
+           is rejected as looped.";
       }
       leaf replace-peer-as {
         type boolean;
