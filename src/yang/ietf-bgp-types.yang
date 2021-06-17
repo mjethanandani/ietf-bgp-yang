@@ -18,12 +18,13 @@ module ietf-bgp-types {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper dot net).";
+              Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This module contains general data definitions for use in BGP.
      It can be imported by modules that make use of BGP attributes.
 
-     Copyright (c) 2020 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -560,19 +561,19 @@ module ietf-bgp-types {
       bit standard {
         position 0;
         description
-          "Send only standard communities.";
+          "Send standard communities.";
         reference
           "RFC 1997: BGP Communities Attribute.";
       }
       bit extended {
         description
-          "Send only extended communities.";
+          "Send extended communities.";
         reference
           "RFC 4360: BGP Extended Communities Attribute.";
       }
       bit large {
         description
-          "Send only large communities.";
+          "Send large communities.";
         reference
           "RFC 8092: BGP Large Communities Attribute.";
       }
