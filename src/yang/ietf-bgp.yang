@@ -295,9 +295,7 @@ module ietf-bgp {
           }
 
           leaf local-port {
-            type inet:port-number {
-              range "0..65535";
-            }
+            type inet:port-number
             config false;
             description
               "The local port for the TCP connection between
@@ -344,9 +342,7 @@ module ietf-bgp {
           }
 
           leaf remote-port {
-            type inet:port-number {
-              range "0..65535";
-            }
+            type inet:port-number
             config false;
             description
               "The remote port for the TCP connection
