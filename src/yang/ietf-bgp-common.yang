@@ -121,7 +121,7 @@ submodule ietf-bgp-common {
          determine the KEEPALIVE messages' frequency relative to
          the value specified in configured value for hold-time.
 
-         If the value of this object is zero (0), no periodical
+         If the value of this object is zero (0), no periodic
          KEEPALIVE messages are sent to the peer after the BGP
          connection has been established.  The suggested value for
          this timer is 30 seconds.;
