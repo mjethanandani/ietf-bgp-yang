@@ -162,6 +162,6 @@ submodule ietf-bgp-rib-types {
   identity rejected-import-policy {
     base bgp-not-selected-policy;
     description
-      "Route was rejected after applying import policies";
+      "Route was rejected after applying import policies.";
   }
 }

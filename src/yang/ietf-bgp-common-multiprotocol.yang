@@ -68,7 +68,7 @@ submodule ietf-bgp-common-multiprotocol {
       default "false";
       description
         "This leaf indicates whether graceful-restart is enabled for
-         this AFI-SAFI";
+         this AFI-SAFI.";
     }
   }
 
