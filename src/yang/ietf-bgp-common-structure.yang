@@ -198,7 +198,6 @@ submodule ietf-bgp-common-structure {
            an NLRI from the neighbor or group";
       }
       choice send {
-        default "all";
         description
           "Choice of sending the max. number of paths or to send all.";
         case max {
