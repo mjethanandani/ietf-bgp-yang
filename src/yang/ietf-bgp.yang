@@ -302,6 +302,24 @@ module ietf-bgp {
                the BGP peers.";
           }
 
+          leaf remote-address {
+            type inet:ip-address;
+            description
+              "The remote IP address of this entry's BGP peer.";
+          }
+
+          leaf remote-port {
+            type inet:port-number;
+            config false;
+            description
+              "The remote port for the TCP connection
+               between the BGP peers.  Note that the
+               objects local-addr, local-port, remote-addr, and
+               reemote-port provide the appropriate
+               reference to the standard MIB TCP
+               connection table.";
+          }
+
 	  leaf peer-type {
 	    type bt:peer-type;
 	    config false;
@@ -333,24 +351,6 @@ module ietf-bgp {
                established state.";
             reference
               "RFC 4271, Section 4.2, 'BGP Identifier'.";
-          }
-
-          leaf remote-address {
-            type inet:ip-address;
-            description
-              "The remote IP address of this entry's BGP peer.";
-          }
-
-          leaf remote-port {
-            type inet:port-number;
-            config false;
-            description
-              "The remote port for the TCP connection
-               between the BGP peers.  Note that the
-               objects local-addr, local-port, remote-addr, and
-               reemote-port provide the appropriate
-               reference to the standard MIB TCP
-               connection table.";
           }
 
           leaf enabled {
