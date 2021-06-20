@@ -68,7 +68,7 @@ submodule ietf-bgp-common-multiprotocol {
       default "false";
       description
         "This leaf indicates whether graceful-restart is enabled for
-         this AFI-SAFI";
+         this AFI-SAFI.";
     }
   }
 
@@ -86,8 +86,8 @@ submodule ietf-bgp-common-multiprotocol {
       type boolean;
       default "false";
       description
-        "This leaf indicates whether the IPv4 Unicast AFI,SAFI is
-         enabled for the neighbor or group";
+	"This leaf indicates whether this AFI,SAFI is enabled for
+	 the neighbor or group";
     }
   }
 

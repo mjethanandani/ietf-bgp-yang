@@ -493,7 +493,7 @@ module ietf-bgp-types {
       }
       enum confederation {
         description
-          "Confederation as peer";
+          "Confederation AS peer.";
       }
     }
     description
