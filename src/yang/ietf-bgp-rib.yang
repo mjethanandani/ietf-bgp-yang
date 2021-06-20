@@ -194,13 +194,33 @@ submodule ietf-bgp-rib {
           "BGP attribute indicating the prefix has been
            aggregated by the specified AS and router.";
         reference
-          "RFC 4271: Section 5.1.7.";
+          "RFC 4271: Section 5.1.7.
+           RFC 6793 - BGP Support for Four-octet AS Number Space.";
         leaf as {
           type inet:as-number;
           description
             "AS number of the autonomous system that performed the
              aggregation.";
         }
+        leaf address {
+          type inet:ipv4-address;
+          description
+            "IP address of the router that performed the
+             aggregation.";
+        }
+      }
+      container aggregator4 {
+        config false;
+        description
+          "BGP attribute indicating the prefix has been
+           aggregated by the specified AS and router.
+           This value is populated with the received or sent
+           attribute in Adj-RIB-In or Adj-RIB-Out, respectively.
+           It should not be populated in Loc-RIB since the Loc-RIB
+           is expected to store the effective AGGREGATOR in the
+           aggregator/as leaf regardless of being 4-octet or 2-octet.";
+        reference
+          "RFC 4271: Section 5.1.7.";
         leaf as4 {
           type inet:as-number;
           description
