@@ -237,7 +237,6 @@ submodule ietf-bgp-rib {
            RFC 6793 - BGP Support for Four-octet AS Number Space
            RFC 5065 - Autonomous System Confederations for BGP";
         list segment {
-          key "index";
           config false;
           uses bgp-as-path-attr;
           description
@@ -256,7 +255,6 @@ submodule ietf-bgp-rib {
         reference
           "RFC 6793 - BGP Support for Four-octet AS Number Space";
         list segment {
-          key "index";
           config false;
           uses bgp-as-path-attr;
           description
