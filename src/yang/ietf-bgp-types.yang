@@ -491,14 +491,18 @@ module ietf-bgp-types {
         description
           "External (EBGP) peer";
       }
-      enum confederation {
+      enum confederation-internal {
         description
-          "Confederation AS peer.";
+          "Confederation Internal (IBGP) peer.";
+      }
+      enum confederation-external {
+        description
+          "Confederation External (EBGP) peer.";
       }
     }
     description
       "Labels a peer or peer group as explicitly internal,
-       external, or confederation.";
+       external, or the related confederation type.";
   }
 
   identity remove-private-as-option {
