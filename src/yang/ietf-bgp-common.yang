@@ -113,7 +113,6 @@ submodule ietf-bgp-common {
         range "0..21845";
       }
       units "seconds";
-      default "30";
       description
         "When used as a configuration (rw) value, this Time interval
          (in seconds) for the KeepAlive timer configured for this BGP
@@ -124,7 +123,7 @@ submodule ietf-bgp-common {
          If the value of this object is zero (0), no periodic
          KEEPALIVE messages are sent to the peer after the BGP
          connection has been established.  The suggested value for
-         this timer is 30 seconds.;
+         this timer is 30 seconds.
 
          The actual time interval for the KEEPALIVE messages is
          indicated by operational value of keepalive. The value
