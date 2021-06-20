@@ -503,6 +503,9 @@ module ietf-bgp-types {
     description
       "Labels a peer or peer group as explicitly internal,
        external, or the related confederation type.";
+    reference
+      "RFC 4271 - A Border Gateway Protocol 4 (BGP-4), Sec 1.1.
+       RFC 5065, Autonomous System Configuration for BGP.";
   }
 
   identity remove-private-as-option {
