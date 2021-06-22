@@ -120,7 +120,6 @@ submodule ietf-bgp-common-structure {
       reference
         "RFC 4456: BGP Route Reflection.";
       leaf route-reflector-cluster-id {
-        when "../route-reflector-client = 'false'";
         type bt:rr-cluster-id-type;
         description
           "Route Reflector cluster id to use when local router is
@@ -137,8 +136,8 @@ submodule ietf-bgp-common-structure {
         description
           "When set to 'true', this disables route redistribution
            by the Route Reflector. It is set 'true' when the client is
-           fully meshed to prevent sending of redundant route
-           advertisements.";
+	   fully meshed in its peer-group to prevent sending of
+	   redundant route advertisements.";
       }
       leaf route-reflector-client {
         type boolean;
