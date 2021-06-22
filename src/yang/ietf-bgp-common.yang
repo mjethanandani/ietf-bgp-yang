@@ -142,7 +142,6 @@ submodule ietf-bgp-common {
         range "0..max";
       }
       units "seconds";
-      default "15";
       description
         "Time interval (in seconds) for the MinASOriginationInterval
          timer. The suggested value for this timer is 15 seconds.";
