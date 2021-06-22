@@ -330,7 +330,7 @@ submodule ietf-bgp-common {
          of an interface.";
     }
 
-    leaf auth-password {
+    leaf md5-auth-password {
       type string;
       description
         "Configures an MD5 authentication password for use with
