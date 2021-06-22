@@ -193,14 +193,10 @@ submodule ietf-bgp-common {
     }
 
     leaf remove-private-as {
-      // could also make this a container with a flag to enable
-      // remove-private and separate option.  here, option implies
-      // remove-private is enabled.
       type bt:remove-private-as-option;
       description
-        "Remove private AS numbers from updates sent to peers - when
-         this leaf is not specified, the AS_PATH attribute should be
-         sent to the peer unchanged";
+        "When this leaf is specified, remove private AS numbers from
+         updates sent to peers.";
     }
     container route-flap-damping {
       if-feature "bt:damping";
