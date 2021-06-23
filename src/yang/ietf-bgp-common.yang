@@ -513,13 +513,14 @@ submodule ietf-bgp-common {
       type uint32;
       config false;
       description
-        "Total number of BGP paths within the context";
+        "Total number of BGP paths (BGP routes) within the context";
     }
     leaf total-prefixes {
       type uint32;
       config false;
       description
-        "Total number of BGP prefixes received within the context";
+	"Total number of BGP prefixes (destinations) received within
+	 the context";
     }
   }
 }
