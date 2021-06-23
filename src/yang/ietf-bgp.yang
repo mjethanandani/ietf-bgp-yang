@@ -500,7 +500,7 @@ module ietf-bgp {
               "RFC 4271, Section 8.1.2.";
           }
           leaf last-established {
-            type uint64;
+            type yang:date-and-time;
             config false;
             description
               "This timestamp indicates the time that the BGP session
