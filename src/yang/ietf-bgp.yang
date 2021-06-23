@@ -458,7 +458,6 @@ module ietf-bgp {
                RFC 7454: BGP Operations and Security.";
           }
           uses neighbor-group-config;
-          uses route-selection-options;
           leaf session-state {
             type enumeration {
               enum idle {
