@@ -617,9 +617,9 @@ module ietf-bgp {
               config false;
               description
                 "This flag indicates whether the local neighbor is
-                 currently restarting. The flag is cleared after all NLRI
-                 have been advertised to the peer, and the End-of-RIB
-                 (EOR) marker has been cleared.";
+                 currently restarting. The flag is cleared after all
+                 NLRI have been advertised to the peer, and the
+                 End-of-RIB (EOR) marker has been cleared.";
             }
             leaf mode {
               type enumeration {
