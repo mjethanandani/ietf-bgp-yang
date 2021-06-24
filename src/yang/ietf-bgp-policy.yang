@@ -290,39 +290,39 @@ module ietf-bgp-policy {
           "Value and comparison operations for conditions based on the
            number of communities in the route update.";
 
-	leaf community-count {
-	  type uint32;
-	  description
-	    "Value for the number of communities in the route update.";
-	}
+        leaf community-count {
+          type uint32;
+          description
+            "Value for the number of communities in the route update.";
+        }
 
-	choice operation {
-	  case eq {
-	    leaf eq {
-	      type empty;
-	      description
-		"Check to see if the value is equal.";
-	    }
-	  }
+        choice operation {
+          case eq {
+            leaf eq {
+              type empty;
+              description
+                "Check to see if the value is equal.";
+            }
+          }
 
-	  case lt-or-eq {
-	    leaf lt-or-eq {
-	      type empty;
-	      description
-		"Check to see if the value is less than or equal.";
-	    }
-	  }
+          case lt-or-eq {
+            leaf lt-or-eq {
+              type empty;
+              description
+                "Check to see if the value is less than or equal.";
+            }
+          }
 
-	  case gt-or-eq {
-	    leaf gt-or-eq {
-	      type empty;
-	      description
-		"Check to see if the value is greater than or equal.";
-	    }
-	  }
-	  description
-	    "Choice of operations on the value of community-count.";
-	}
+          case gt-or-eq {
+            leaf gt-or-eq {
+              type empty;
+              description
+                "Check to see if the value is greater than or equal.";
+            }
+          }
+          description
+            "Choice of operations on the value of community-count.";
+        }
       }
 
       container as-path-length {
@@ -335,39 +335,39 @@ module ietf-bgp-policy {
         reference
           "RFC 4271: BGP-4.";
 
-	leaf as-path-length {
-	  type uint32;
-	  description
-	    "Value of the AS path length in the route update.";
-	}
+        leaf as-path-length {
+          type uint32;
+          description
+            "Value of the AS path length in the route update.";
+        }
 
-	choice operation {
-	  case eq {
-	    leaf eq {
-	      type empty;
-	      description
-		"Check to see if the value is equal.";
-	    }
-	  }
+        choice operation {
+          case eq {
+            leaf eq {
+              type empty;
+              description
+                "Check to see if the value is equal.";
+            }
+          }
 
-	  case lt-or-eq {
-	    leaf lt-or-eq {
-	      type empty;
-	      description
-		"Check to see if the value is less than or equal.";
-	    }
-	  }
+          case lt-or-eq {
+            leaf lt-or-eq {
+              type empty;
+              description
+                "Check to see if the value is less than or equal.";
+            }
+          }
 
-	  case gt-or-eq {
-	    leaf gt-or-eq {
-	      type empty;
-	      description
-		"Check to see if the value is greater than or equal.";
-	    }
-	  }
-	  description
-	    "Choice of operations on the value of as-path-len.";
-	}
+          case gt-or-eq {
+            leaf gt-or-eq {
+              type empty;
+              description
+                "Check to see if the value is greater than or equal.";
+            }
+          }
+          description
+            "Choice of operations on the value of as-path-len.";
+        }
       }
 
       container match-community-set {

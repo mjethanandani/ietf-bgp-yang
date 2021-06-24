@@ -136,8 +136,8 @@ submodule ietf-bgp-common-structure {
         description
           "When set to 'true', this disables route redistribution
            by the Route Reflector. It is set 'true' when the client is
-	   fully meshed in its peer-group to prevent sending of
-	   redundant route advertisements.";
+           fully meshed in its peer-group to prevent sending of
+           redundant route advertisements.";
       }
       leaf route-reflector-client {
         type boolean;

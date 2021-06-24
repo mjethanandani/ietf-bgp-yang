@@ -117,7 +117,7 @@ submodule ietf-bgp-rib {
 
     container attr-set-attributes {
       description
-	"A container for attribute set parameters.";
+        "A container for attribute set parameters.";
 
       leaf origin {
         type bt:bgp-origin-attr-type;
@@ -357,7 +357,7 @@ submodule ietf-bgp-rib {
                specific path.  Multiple paths may reference the same
                attribute set.";
           }
-	  uses ext-community-attributes;
+          uses ext-community-attributes;
         }
       }
 

@@ -306,7 +306,7 @@ submodule ietf-bgp-common {
         "Turns path mtu discovery for BGP TCP sessions on (true) or
          off (false).";
       reference
-	"RFC 1191: Path MTU discovery.";
+        "RFC 1191: Path MTU discovery.";
     }
     leaf passive-mode {
       type boolean;
@@ -335,7 +335,7 @@ submodule ietf-bgp-common {
         "Configures an MD5 authentication password for use with
          neighboring devices.";
       reference
-	"RFC 2385: Protection of BGP Sessions via the TCP MD5
+        "RFC 2385: Protection of BGP Sessions via the TCP MD5
                    Signature Option.";
     }
   }
@@ -519,8 +519,8 @@ submodule ietf-bgp-common {
       type uint32;
       config false;
       description
-	"Total number of BGP prefixes (destinations) received within
-	 the context";
+        "Total number of BGP prefixes (destinations) received within
+         the context";
     }
   }
 }
