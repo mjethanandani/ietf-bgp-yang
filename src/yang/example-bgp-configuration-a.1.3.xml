@@ -5,67 +5,67 @@
     <network-instance>
       <name>vrf-red</name>
       <vrf-root>
-	<routing
-	    xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
-	  <router-id>192.0.2.1</router-id>
-	  <control-plane-protocols>
-	    <control-plane-protocol>
-	      <type
-		  xmlns:bgpm=
-		  "urn:ietf:params:xml:ns:yang:ietf-bgp">bgpm:bgp
-	      </type>
-	      <name>BGP</name>
-	      <bgp
-		  xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
-		<global>
-		  <as>64496</as>
-		  <afi-safis>
-		    <afi-safi>
-		      <afi-safi-name
-			  xmlns:bt=
-			  "urn:ietf:params:xml:ns:yang:ietf-bgp-types">
-			bt:ipv4-unicast
-		      </afi-safi-name>
-		    </afi-safi>
-		  </afi-safis>
-		</global>
-	      </bgp>
-	    </control-plane-protocol>
-	  </control-plane-protocols>
-	</routing>
+        <routing
+            xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+          <router-id>192.0.2.1</router-id>
+          <control-plane-protocols>
+            <control-plane-protocol>
+              <type
+                  xmlns:bgpm=
+                  "urn:ietf:params:xml:ns:yang:ietf-bgp">bgpm:bgp
+              </type>
+              <name>BGP</name>
+              <bgp
+                  xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
+                <global>
+                  <as>64496</as>
+                  <afi-safis>
+                    <afi-safi>
+                      <afi-safi-name
+                          xmlns:bt=
+                          "urn:ietf:params:xml:ns:yang:ietf-bgp-types">
+                        bt:ipv4-unicast
+                      </afi-safi-name>
+                    </afi-safi>
+                  </afi-safis>
+                </global>
+              </bgp>
+            </control-plane-protocol>
+          </control-plane-protocols>
+        </routing>
       </vrf-root>
     </network-instance>
     <network-instance>
       <name>vrf-blue</name>
       <vrf-root>
-	<routing
-	    xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
-	  <router-id>192.0.2.2</router-id>
-	  <control-plane-protocols>
-	    <control-plane-protocol>
-	      <type
-		  xmlns:bgpm=
-		  "urn:ietf:params:xml:ns:yang:ietf-bgp">bgpm:bgp
-	      </type>
-	      <name>BGP</name>
-	      <bgp
-		  xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
-		<global>
-		  <as>64496</as>
-		  <afi-safis>
-		    <afi-safi>
-		      <afi-safi-name
-			  xmlns:bt=
-			  "urn:ietf:params:xml:ns:yang:ietf-bgp-types">
-			bt:ipv4-unicast
-		      </afi-safi-name>
-		    </afi-safi>
-		  </afi-safis>
-		</global>
-	      </bgp>
-	    </control-plane-protocol>
-	  </control-plane-protocols>
-	</routing>
+        <routing
+            xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+          <router-id>192.0.2.2</router-id>
+          <control-plane-protocols>
+            <control-plane-protocol>
+              <type
+                  xmlns:bgpm=
+                  "urn:ietf:params:xml:ns:yang:ietf-bgp">bgpm:bgp
+              </type>
+              <name>BGP</name>
+              <bgp
+                  xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
+                <global>
+                  <as>64496</as>
+                  <afi-safis>
+                    <afi-safi>
+                      <afi-safi-name
+                          xmlns:bt=
+                          "urn:ietf:params:xml:ns:yang:ietf-bgp-types">
+                        bt:ipv4-unicast
+                      </afi-safi-name>
+                    </afi-safi>
+                  </afi-safis>
+                </global>
+              </bgp>
+            </control-plane-protocol>
+          </control-plane-protocols>
+        </routing>
       </vrf-root>
     </network-instance>
   </network-instances>
