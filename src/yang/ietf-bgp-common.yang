@@ -14,11 +14,6 @@ submodule ietf-bgp-common {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
-  import ietf-yang-types {
-    prefix yang;
-    reference
-      "RFC 6991: Common YANG Data Types.";
-  }
 
   organization
     "IETF IDR Working Group";
@@ -239,7 +234,7 @@ submodule ietf-bgp-common {
            suppress-above.";
       }
       leaf reach-decay {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "300";
         description
@@ -251,7 +246,7 @@ submodule ietf-bgp-common {
            than a larger value.";
       }
       leaf unreach-decay {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "900";
         description
@@ -261,7 +256,7 @@ submodule ietf-bgp-common {
            value greater than or equal to reach-decay.";
       }
       leaf keep-history {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "1800";
         description
