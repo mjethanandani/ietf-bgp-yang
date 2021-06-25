@@ -164,14 +164,6 @@ submodule ietf-bgp-common {
   grouping neighbor-group-config {
     description
       "Neighbor level configuration items.";
-    leaf remote-as {
-      type inet:as-number;
-      description
-        "The remote autonomous system number received in
-         the BGP OPEN message.";
-      reference
-        "RFC 4271, Section 4.2.";
-    }
     leaf peer-as {
       type inet:as-number;
       description
