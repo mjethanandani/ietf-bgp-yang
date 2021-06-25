@@ -14,11 +14,6 @@ submodule ietf-bgp-common {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
-  import ietf-yang-types {
-    prefix yang;
-    reference
-      "RFC 6991: Common YANG Data Types.";
-  }
 
   organization
     "IETF IDR Working Group";
@@ -122,7 +117,7 @@ submodule ietf-bgp-common {
          determine the KEEPALIVE messages' frequency relative to
          the value specified in configured value for hold-time.
 
-         If the value of this object is zero (0), no periodical
+         If the value of this object is zero (0), no periodic
          KEEPALIVE messages are sent to the peer after the BGP
          connection has been established.  The suggested value for
          this timer is 30 seconds.;
@@ -143,7 +138,6 @@ submodule ietf-bgp-common {
         range "0..max";
       }
       units "seconds";
-      default "15";
       description
         "Time interval (in seconds) for the MinASOriginationInterval
          timer. The suggested value for this timer is 15 seconds.";
@@ -194,14 +188,10 @@ submodule ietf-bgp-common {
     }
 
     leaf remove-private-as {
-      // could also make this a container with a flag to enable
-      // remove-private and separate option.  here, option implies
-      // remove-private is enabled.
       type bt:remove-private-as-option;
       description
-        "Remove private AS numbers from updates sent to peers - when
-         this leaf is not specified, the AS_PATH attribute should be
-         sent to the peer unchanged";
+        "When this leaf is specified, remove private AS numbers from
+         updates sent to peers.";
     }
     container route-flap-damping {
       if-feature "bt:damping";
@@ -245,7 +235,7 @@ submodule ietf-bgp-common {
            suppress-above.";
       }
       leaf reach-decay {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "300";
         description
@@ -257,7 +247,7 @@ submodule ietf-bgp-common {
            than a larger value.";
       }
       leaf unreach-decay {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "900";
         description
@@ -267,7 +257,7 @@ submodule ietf-bgp-common {
            value greater than or equal to reach-decay.";
       }
       leaf keep-history {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "1800";
         description
@@ -335,7 +325,7 @@ submodule ietf-bgp-common {
          of an interface.";
     }
 
-    leaf auth-password {
+    leaf md5-auth-password {
       type string;
       description
         "Configures an MD5 authentication password for use with
@@ -519,13 +509,14 @@ submodule ietf-bgp-common {
       type uint32;
       config false;
       description
-        "Total number of BGP paths within the context";
+        "Total number of BGP paths (BGP routes) within the context";
     }
     leaf total-prefixes {
       type uint32;
       config false;
       description
-        "Total number of BGP prefixes received within the context";
+        "Total number of BGP prefixes (destinations) received within
+         the context";
     }
   }
 }

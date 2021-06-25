@@ -1,7 +1,8 @@
 import os
 
 list_of_ietf_models =\
-[ ["ietf-bfd-types", "draft-ietf-bfd-yang", "17"],
+[ ["ietf-routing-policy", "draft-ietf-rtgwg-policy-model", "29"],
+  ["ietf-bfd-types", "draft-ietf-bfd-yang", "17"],
   ["ietf-tcp", "draft-scharf-tcpm-yang-tcp", "04"],
   ["ietf-if-extensions", "draft-ietf-netmod-intf-ext-yang", "10"],
   ["ietf-if-vlan-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "07"],

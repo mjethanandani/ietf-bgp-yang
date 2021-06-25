@@ -78,8 +78,8 @@ submodule ietf-bgp-common-structure {
            enable logging of peer state changes.
 
            Note: Documenting demotion from ESTABLISHED state is
-                 desirable, but documenting all backward transitions is
-                 problematic, and should be avoided.";
+                 desirable, but documenting all backward transitions
+                 is problematic, and should be avoided.";
       }
     }
   }
@@ -121,7 +121,6 @@ submodule ietf-bgp-common-structure {
       reference
         "RFC 4456: BGP Route Reflection.";
       leaf route-reflector-cluster-id {
-        when "../route-reflector-client = 'false'";
         type bt:rr-cluster-id-type;
         description
           "Route Reflector cluster id to use when local router is
@@ -130,7 +129,7 @@ submodule ietf-bgp-common-structure {
            for each neighbor.";
         reference
           "RFC 4456: BGP Route Reflection: An Alternative to
-                  Full Mesh.";
+                     Full Mesh.";
       }
       leaf no-client-reflect {
         type boolean;
@@ -138,8 +137,8 @@ submodule ietf-bgp-common-structure {
         description
           "When set to 'true', this disables route redistribution
            by the Route Reflector. It is set 'true' when the client is
-           fully meshed to prevent sending of redundant route
-           advertisements.";
+           fully meshed in its peer-group to prevent sending of
+           redundant route advertisements.";
       }
       leaf route-reflector-client {
         type boolean;
@@ -168,7 +167,7 @@ submodule ietf-bgp-common-structure {
         description
           "Specify the number of occurrences of the local BGP
            speaker's AS that can occur within the AS_PATH before it
-           is rejected.";
+           is rejected as looped.";
       }
       leaf replace-peer-as {
         type boolean;
