@@ -78,9 +78,6 @@ module ietf-bgp {
   include ietf-bgp-rib-attributes {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-rib-table-attributes {
-    revision-date YYYY-MM-DD;
-  }
   include ietf-bgp-rib-tables {
     revision-date YYYY-MM-DD;
   }
@@ -94,7 +91,8 @@ module ietf-bgp {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This module describes a YANG model for BGP protocol
      configuration. It is a limited subset of all of the configuration
@@ -120,7 +118,7 @@ module ietf-bgp {
           +-> [ optional pointer to peer-group ]
           +-> AFI / SAFI [ per-AFI overrides ]
 
-     Copyright (c) 2020 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or

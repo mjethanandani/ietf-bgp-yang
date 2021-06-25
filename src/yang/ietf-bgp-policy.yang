@@ -27,13 +27,14 @@ module ietf-bgp-policy {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at pfrc.org).";
+              Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This module contains data definitions for BGP routing policy.
      It augments the base routing-policy module with BGP-specific
      options for conditions and actions.
 
-     Copyright (c) 2020 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -217,7 +218,7 @@ module ietf-bgp-policy {
           leaf-list member {
             type string;
             description
-              "AS path expression -- list of ASes in the set";
+              "AS path regular expression -- list of ASes in the set";
           }
         }
       }
@@ -248,7 +249,7 @@ module ietf-bgp-policy {
            specified value.";
       }
 
-      leaf-list next-hop-in {
+      leaf-list next-hop-in-eq {
         type inet:ip-address-no-zone;
         description
           "List of next hop addresses to check for in the route
@@ -421,8 +422,8 @@ module ietf-bgp-policy {
   }
 
   augment "/rpol:routing-policy/rpol:policy-definitions/" +
-          "rpol:policy-definition/rpol:statements/" +
-          "rpol:statement/rpol:actions" {
+          "rpol:policy-definition/rpol:statements/rpol:statement/" +
+          "rpol:actions" {
     description
       "BGP policy actions added to routing policy module.";
     container bgp-actions {

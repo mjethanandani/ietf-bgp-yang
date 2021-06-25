@@ -35,12 +35,8 @@ submodule ietf-bgp-rib {
   //  - shared across multiple routes
   //  - common to LOC-RIB and Adj-RIB, but not shared across routes
   //  - specific to LOC-RIB or Adj-RIB
-
-  include ietf-bgp-rib-attributes;
-
   // groupings of annotations for each route or table
-
-  include ietf-bgp-rib-table-attributes;
+  include ietf-bgp-rib-attributes;
 
   organization
     "IETF IDR Working Group";
@@ -50,7 +46,9 @@ submodule ietf-bgp-rib {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com)";
+              Susan Hares (shares at ndzh.com),
+              Jeffrey Haas (jhaas at juniper dot net).";
+
   description
     "Defines a submodule for representing BGP routing table (RIB)
      contents.  The submodule supports 5 logical RIBs per address
@@ -84,7 +82,7 @@ submodule ietf-bgp-rib {
      eligible for sending (advertising) to the neighbor after output
      policy rules have been applied.
 
-     Copyright (c) 2019 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
