@@ -109,26 +109,22 @@ submodule ietf-bgp-common {
         range "0..21845";
       }
       units "seconds";
-      default "30";
       description
         "When used as a configuration (rw) value, this Time interval
          (in seconds) for the KeepAlive timer configured for this BGP
-         speaker with this peer. The value of this object will only
-         determine the KEEPALIVE messages' frequency relative to
-         the value specified in configured value for hold-time.
+	 speaker with this peer.  A reasonable maximum value for this
+	 timer would be one-third of the configured hold-time.
+
+	 In the absence of explicit configuration of the keepalive
+	 value, operationally it SHOULD have a value of one-third of
+	 the negotiated hold-time.
 
          If the value of this object is zero (0), no periodic
          KEEPALIVE messages are sent to the peer after the BGP
-         connection has been established.  The suggested value for
-         this timer is 30 seconds.;
+         connection has been established.
 
          The actual time interval for the KEEPALIVE messages is
-         indicated by operational value of keepalive. The value
-         of this object is calculated by this BGP speaker such that,
-         when compared with hold-time, it has the same proportion
-         that keepalive has, compared with hold-time. A
-         reasonable maximum value for this timer would be one third
-         of that of hold-time.";
+         indicated by operational value of keepalive.";
       reference
         "RFC 4271, Section 4.4.
          RFC 4271, Section 10.";
