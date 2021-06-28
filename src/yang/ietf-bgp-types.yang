@@ -111,6 +111,13 @@ module ietf-bgp-types {
       "RFC 7911: Advertisement of Multiple Paths in BGP.";
   }
 
+  feature route-refresh {
+    description
+      "Support for the BGP Route Refresh capability.";
+    refrence
+      "RFC 2918: Route Refresh Capability for BGP-4.";
+  }
+
   /*
    * Identities.
    */
