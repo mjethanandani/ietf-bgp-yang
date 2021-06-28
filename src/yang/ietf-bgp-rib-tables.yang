@@ -86,9 +86,9 @@ submodule ietf-bgp-rib-tables {
       type boolean;
       description
         "Indicates that the route is eligible for selection for the
-         best route in the Loc-Rib in BGP's Decision Process."
+         best route in the Loc-Rib in BGP's Decision Process.";
       reference
-        "RFC 4271, Section 9.1."
+        "RFC 4271, Section 9.1.";
     }
     leaf ineligible-reason {
       type identityref {
@@ -99,7 +99,7 @@ submodule ietf-bgp-rib-tables {
          in the Loc-Rib in BGP's Decision process, this indicates the
          reason.";
       reference
-        "RFC 4271, Section 9.1."
+        "RFC 4271, Section 9.1.";
     }
   }
 
