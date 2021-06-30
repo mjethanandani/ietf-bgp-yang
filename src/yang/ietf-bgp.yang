@@ -519,9 +519,7 @@ module ietf-bgp {
               "Negotiated BGP capabilities.";
           }
           leaf negotiated-hold-time {
-            type decimal64 {
-              fraction-digits 2;
-            }
+            type uint16;
             config false;
             description
               "The negotiated hold-time for the BGP session";
