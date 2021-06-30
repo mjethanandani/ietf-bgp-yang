@@ -896,8 +896,6 @@ module ietf-bgp {
               }
               case operation-soft-inbound {
                 leaf soft-inbound {
-                  // XXX JMH - if we wanted to permit future expansion
-                  // to be per-AFI/SAFI, is this a correct definition?
                   if-feature "bt:route-refresh";
                   type empty;
                   description
