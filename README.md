@@ -6,7 +6,7 @@ Native Build
 To build the draft on the machine where the repository exits, one has to
 have all the tools neccesary. These include building other tools (from
 source) used by this model, i.e. yanglint and yanger. Details on how
-to buld them can be found in the link to the tools.
+to build them can be found in the link to the tools.
 
 Other than those tools one will need
 
