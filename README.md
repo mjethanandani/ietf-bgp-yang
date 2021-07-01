@@ -26,7 +26,8 @@ In addition pip should be used to install
 Once all the tools are installed the following commands will build the draft
 
 % cd draft
-% make clean; make
+% make clean
+% make
 
 Build using Docker
 
@@ -36,8 +37,8 @@ root of the repository type
 
 % make container
 
-If the draft is build, it can be copied out of the container using the
-command:
+If the draft is build, it can be copied out of the container into the host
+system using the command:
 
 docker cp :/file/path/within/container /host/path/target
 
