@@ -45,7 +45,7 @@ module example-newafi-bgp {
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bgp:bgp/bgp:global/" +
           "bgp:afi-safis/bgp:afi-safi" {
-    when "derived-from-or-self(bgp:afi-safi-name, 'foo')" {
+    when "derived-from-or-self(bgp:name, 'foo')" {
       description
         "This augmentation is valid for a AFI/SAFI instance
          of 'foo'";
@@ -59,7 +59,7 @@ module example-newafi-bgp {
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bgp:bgp/" +
           "bgp:rib/bgp:afi-safis/bgp:afi-safi" {
-    when "derived-from-or-self(bgp:afi-safi-name, 'foo')" {
+    when "derived-from-or-self(bgp:name, 'foo')" {
       description
         "This augmentation is valid for a AFI/SAFI instance
          of 'foo'";
@@ -67,6 +67,7 @@ module example-newafi-bgp {
     container foo {
       description
         "Container to add 'foo' rib specific information.";
-    }
+      uses bgp:ipv4-loc-rib;
+      uses bgp:ipv4-adj-rib;
   }
 }

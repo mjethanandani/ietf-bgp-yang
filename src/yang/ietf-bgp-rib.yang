@@ -113,7 +113,7 @@ submodule ietf-bgp-rib {
     description
       "A grouping for all attribute set parameters.";
 
-    container attr-set-attributes {
+    container attributes {
       description
         "A container for attribute set parameters.";
 
@@ -384,10 +384,10 @@ submodule ietf-bgp-rib {
         description
           "Enclosing container for address family list.";
         list afi-safi {
-          key "afi-safi-name";
+          key "name";
           description
             "List of afi-safi types.";
-          leaf afi-safi-name {
+          leaf name {
             type identityref {
               base bt:afi-safi-type;
             }
@@ -395,7 +395,7 @@ submodule ietf-bgp-rib {
               "AFI,SAFI name.";
           }
           container ipv4-unicast {
-            when "../afi-safi-name = 'bt:ipv4-unicast'" {
+            when "../name = 'bt:ipv4-unicast'" {
               description
                 "Include this container for IPv4 unicast RIB.";
             }
@@ -406,7 +406,7 @@ submodule ietf-bgp-rib {
             uses ipv4-adj-rib;
           }
           container ipv6-unicast {
-            when "../afi-safi-name = 'bt:ipv6-unicast'" {
+            when "../name = 'bt:ipv6-unicast'" {
               description
                 "Include this container for IPv6 unicast RIB.";
             }

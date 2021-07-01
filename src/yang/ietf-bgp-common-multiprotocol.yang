@@ -76,7 +76,7 @@ submodule ietf-bgp-common-multiprotocol {
   grouping mp-afi-safi-config {
     description
       "Configuration parameters used for all BGP AFI-SAFIs";
-    leaf afi-safi-name {
+    leaf name {
       type identityref {
         base bt:afi-safi-type;
       }
@@ -99,7 +99,7 @@ submodule ietf-bgp-common-multiprotocol {
     // import and export policy included for the afi/safi
     uses rpol:apply-policy-group;
     container ipv4-unicast {
-      when "../afi-safi-name = 'bt:ipv4-unicast'" {
+      when "../name = 'bt:ipv4-unicast'" {
         description
           "Include this container for IPv4 Unicast specific
            configuration";
@@ -111,7 +111,7 @@ submodule ietf-bgp-common-multiprotocol {
       // placeholder for IPv4 unicast  specific configuration
     }
     container ipv6-unicast {
-      when "../afi-safi-name = 'bt:ipv6-unicast'" {
+      when "../name = 'bt:ipv6-unicast'" {
         description
           "Include this container for IPv6 Unicast specific
            configuration";
@@ -124,7 +124,7 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container ipv4-labeled-unicast {
-      when "../afi-safi-name = 'bt:ipv4-labeled-unicast'" {
+      when "../name = 'bt:ipv4-labeled-unicast'" {
         description
           "Include this container for IPv4 Labeled Unicast specific
            configuration";
@@ -136,7 +136,7 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container ipv6-labeled-unicast {
-      when "../afi-safi-name = 'bt:ipv6-labeled-unicast'" {
+      when "../name = 'bt:ipv6-labeled-unicast'" {
         description
           "Include this container for IPv6 Labeled Unicast specific
            configuration";
@@ -148,7 +148,7 @@ submodule ietf-bgp-common-multiprotocol {
       // options.
     }
     container l3vpn-ipv4-unicast {
-      when "../afi-safi-name = 'bt:l3vpn-ipv4-unicast'" {
+      when "../name = 'bt:l3vpn-ipv4-unicast'" {
         description
           "Include this container for IPv4 Unicast L3VPN specific
            configuration";
@@ -160,7 +160,7 @@ submodule ietf-bgp-common-multiprotocol {
       // placeholder for IPv4 Unicast L3VPN specific config options.
     }
     container l3vpn-ipv6-unicast {
-      when "../afi-safi-name = 'bt:l3vpn-ipv6-unicast'" {
+      when "../name = 'bt:l3vpn-ipv6-unicast'" {
         description
           "Include this container for unicast IPv6 L3VPN specific
            configuration";
@@ -173,7 +173,7 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container l3vpn-ipv4-multicast {
-      when "../afi-safi-name = 'bt:l3vpn-ipv4-multicast'" {
+      when "../name = 'bt:l3vpn-ipv4-multicast'" {
         description
           "Include this container for multicast IPv6 L3VPN specific
            configuration";
@@ -186,7 +186,7 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container l3vpn-ipv6-multicast {
-      when "../afi-safi-name = 'bt:l3vpn-ipv6-multicast'" {
+      when "../name = 'bt:l3vpn-ipv6-multicast'" {
         description
           "Include this container for multicast IPv6 L3VPN specific
            configuration";
@@ -199,7 +199,7 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container l2vpn-vpls {
-      when "../afi-safi-name = 'bt:l2vpn-vpls'" {
+      when "../name = 'bt:l2vpn-vpls'" {
         description
           "Include this container for BGP-signalled VPLS specific
            configuration";
@@ -212,7 +212,7 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container l2vpn-evpn {
-      when "../afi-safi-name = 'bt:l2vpn-evpn'" {
+      when "../name = 'bt:l2vpn-evpn'" {
         description
           "Include this container for BGP EVPN specific
            configuration";

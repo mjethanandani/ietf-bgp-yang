@@ -135,7 +135,7 @@ submodule ietf-bgp-neighbor {
     description
       "List of address-families associated with the BGP neighbor";
     list afi-safi {
-      key "afi-safi-name";
+      key "name";
       description
         "AFI, SAFI configuration available for the neighbor or
          group";
