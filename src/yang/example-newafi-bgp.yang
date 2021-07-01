@@ -69,5 +69,6 @@ module example-newafi-bgp {
         "Container to add 'foo' rib specific information.";
       uses bgp:ipv4-loc-rib;
       uses bgp:ipv4-adj-rib;
+    }
   }
 }
