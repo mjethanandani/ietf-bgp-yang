@@ -107,7 +107,7 @@ submodule ietf-bgp-common-multiprotocol {
       description
         "IPv4 unicast configuration options";
       // include common IPv[46] unicast options
-      uses mp-ipv4-ipv6-unicast-common;
+      uses mp-ipv4-ipv4-unicast-common;
       // placeholder for IPv4 unicast  specific configuration
     }
     container ipv6-unicast {

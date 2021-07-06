@@ -112,12 +112,12 @@ submodule ietf-bgp-common {
       description
         "When used as a configuration (rw) value, this Time interval
          (in seconds) for the KeepAlive timer configured for this BGP
-	 speaker with this peer.  A reasonable maximum value for this
-	 timer would be one-third of the configured hold-time.
+         speaker with this peer.  A reasonable maximum value for this
+         timer would be one-third of the configured hold-time.
 
-	 In the absence of explicit configuration of the keepalive
-	 value, operationally it SHOULD have a value of one-third of
-	 the negotiated hold-time.
+         In the absence of explicit configuration of the keepalive
+         value, operationally it SHOULD have a value of one-third of
+         the negotiated hold-time.
 
          If the value of this object is zero (0), no periodic
          KEEPALIVE messages are sent to the peer after the BGP
@@ -263,8 +263,8 @@ submodule ietf-bgp-common {
       type bt:community-type;
       description
         "When supported, this tells the router to propagate any
-	 prefixes that are attached to these community-types.
-	 The value of 0 implies 'none'.";
+         prefixes that are attached to these community-types.
+         The value of 0 implies 'none'.";
     }
     leaf description {
       type string;
