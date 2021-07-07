@@ -114,7 +114,7 @@ module ietf-bgp-types {
   feature route-refresh {
     description
       "Support for the BGP Route Refresh capability.";
-    reference
+    refrence
       "RFC 2918: Route Refresh Capability for BGP-4.";
   }
 
