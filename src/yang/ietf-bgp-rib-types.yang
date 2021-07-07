@@ -76,8 +76,8 @@ submodule ietf-bgp-rib-types {
   identity ineligible-confed {
     base ineligible-route-reason;
     description
-      "Route was ineligible due to a loop in the AS_CONFED_SEQUENCE or
-       AS_CONFED_SET attributes";
+      "Route was ineligible due to a loop in the AS_CONFED_SEQUENCE
+       or AS_CONFED_SET attributes";
   }
 
   identity bgp-not-selected-bestpath {

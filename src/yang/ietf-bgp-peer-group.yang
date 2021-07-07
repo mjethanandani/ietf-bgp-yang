@@ -67,7 +67,7 @@ submodule ietf-bgp-peer-group {
     description
       "List of address-families associated with the BGP peer-group";
     list afi-safi {
-      key "afi-safi-name";
+      key "name";
       description
         "AFI, SAFI configuration available for the
          neighbor or group";
@@ -87,7 +87,7 @@ submodule ietf-bgp-peer-group {
   grouping bgp-peer-group-base {
     description
       "Parameters related to a BGP peer-group.";
-    leaf peer-group-name {
+    leaf name {
       type string;
       description
         "Name of the BGP peer-group";
@@ -127,7 +127,7 @@ submodule ietf-bgp-peer-group {
     description
       "The list of BGP peer groups";
     list peer-group {
-      key "peer-group-name";
+      key "name";
       description
         "List of BGP peer-groups configured on the local system -
          uniquely identified by peer-group name";

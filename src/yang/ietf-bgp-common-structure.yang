@@ -120,7 +120,7 @@ submodule ietf-bgp-common-structure {
         "Route reflector parameters for the BGP peer-group";
       reference
         "RFC 4456: BGP Route Reflection.";
-      leaf route-reflector-cluster-id {
+      leaf cluster-id {
         type bt:rr-cluster-id-type;
         description
           "Route Reflector cluster id to use when local router is
@@ -140,7 +140,7 @@ submodule ietf-bgp-common-structure {
            fully meshed in its peer-group to prevent sending of
            redundant route advertisements.";
       }
-      leaf route-reflector-client {
+      leaf client {
         type boolean;
         default "false";
         description

@@ -102,8 +102,9 @@ submodule ietf-bgp-rib-attributes {
       list unknown-attribute {
         key "attr-type";
         description
-          "This list contains received attributes that are unrecognized
-           or unsupported by the local router.  The list may be empty.";
+          "This list contains received attributes that are
+           unrecognized or unsupported by the local router. The list
+           may be empty.";
 
         leaf optional {
           type boolean;
@@ -120,10 +121,10 @@ submodule ietf-bgp-rib-attributes {
           type boolean;
           description
             "Defines whether an optional attribute is transitive
-             (if set to true) or non-transitive (if set to false). For
-             well-known attributes, the transitive flag must be set to
-             true. Set in the second high-order bit of the BGP attribute
-             flags octet.";
+             (if set to true) or non-transitive (if set to false).
+             For well-known attributes, the transitive flag must be
+             set to true. Set in the second high-order bit of the BGP
+             attribute flags octet.";
           reference
             "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
         }
@@ -131,12 +132,12 @@ submodule ietf-bgp-rib-attributes {
         leaf partial {
           type boolean;
           description
-            "Defines whether the information contained in the optional
-             transitive attribute is partial (if set to true) or
-             complete (if set to false).  For well-known attributes and
-             for optional non-transitive attributes, the partial flag
-             must be set to false.  Set in the third high-order bit of
-             the BGP attribute flags octet.";
+            "Defines whether the information contained in the
+             optional transitive attribute is partial (if set to
+             true) or complete (if set to false). For well-known
+             attributes and for optional non-transitive attributes,
+             the partial flag must be set to false. Set in the third
+             high-order bit of the BGP attribute flags octet.";
           reference
             "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
         }
@@ -145,7 +146,7 @@ submodule ietf-bgp-rib-attributes {
           type boolean;
           description
             "Defines whether the attribute length is one octet
-             (if set to false) or two octets (if set to true).  Set in
+             (if set to false) or two octets (if set to true). Set in
              the fourth high-order bit of the BGP attribute flags
              octet.";
           reference
@@ -165,8 +166,8 @@ submodule ietf-bgp-rib-attributes {
           description
             "One or two octet attribute length field indicating the
              length of the attribute data in octets.  If the Extended
-             Length attribute flag is set, the length field is 2 octets,
-             otherwise it is 1 octet";
+             Length attribute flag is set, the length field is 2
+             octets, otherwise it is 1 octet";
           reference
             "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
         }
