@@ -5,7 +5,7 @@ submodule ietf-bgp-peer-group {
   }
 
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
   }
   import ietf-bgp-types {
     prefix bt;
@@ -114,7 +114,7 @@ submodule ietf-bgp-peer-group {
     uses structure-neighbor-group-as-path-options;
     uses structure-neighbor-group-add-paths;
     uses global-group-use-multiple-paths;
-    uses rpol:apply-policy-group;
+    uses rt-pol:apply-policy-group;
     container afi-safis {
       description
         "Per-address-family configuration parameters associated with

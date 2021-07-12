@@ -5,7 +5,7 @@ submodule ietf-bgp-common-structure {
   }
 
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
     reference
       "RFC ZZZZ, A YANG Data Model for Routing Policy Management";
   }
@@ -219,8 +219,8 @@ submodule ietf-bgp-common-structure {
       }
       leaf eligible-prefix-policy {
         type leafref {
-          path "/rpol:routing-policy/rpol:policy-definitions/"
-             + "rpol:policy-definition/rpol:name";
+          path "/rt-pol:routing-policy/rt-pol:policy-definitions/"
+             + "rt-pol:policy-definition/rt-pol:name";
         }
         description
           "A reference to a routing policy which can be used to

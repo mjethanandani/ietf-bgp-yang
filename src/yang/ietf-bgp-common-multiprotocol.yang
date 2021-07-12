@@ -8,7 +8,7 @@ submodule ietf-bgp-common-multiprotocol {
     prefix bt;
   }
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
   }
   import ietf-routing-types {
     prefix rt-types;
@@ -97,7 +97,7 @@ submodule ietf-bgp-common-multiprotocol {
       "A common grouping used for contents of the list that is used
        for AFI-SAFI entries";
     // import and export policy included for the afi/safi
-    uses rpol:apply-policy-group;
+    uses rt-pol:apply-policy-group;
     container ipv4-unicast {
       when "../name = 'bt:ipv4-unicast'" {
         description

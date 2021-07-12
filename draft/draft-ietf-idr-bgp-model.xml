@@ -620,9 +620,6 @@ reference: RFC XXXX
           multiple contexts, but are used only to create structural elements,
           i.e., containers (leaf nodes are defined in separate groupings)</t>
 
-          <t>ietf-bgp-global - groupings with data specific to the global
-          context</t>
-
           <t>ietf-bgp-peer-group - groupings with data specific to the peer
           group context</t>
 
