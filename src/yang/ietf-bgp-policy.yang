@@ -9,7 +9,7 @@ module ietf-bgp-policy {
     prefix inet;
   }
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
   }
   import ietf-bgp-types {
     prefix bt;
@@ -147,7 +147,7 @@ module ietf-bgp-policy {
 
   // augment statements
 
-  augment "/rpol:routing-policy/rpol:defined-sets" {
+  augment "/rt-pol:routing-policy/rt-pol:defined-sets" {
     description
       "Adds BGP defined sets container to routing policy model.";
     container bgp-defined-sets {
@@ -225,9 +225,9 @@ module ietf-bgp-policy {
     }
   }
 
-  augment "/rpol:routing-policy/rpol:policy-definitions/" +
-          "rpol:policy-definition/rpol:statements/" +
-          "rpol:statement/rpol:conditions" {
+  augment "/rt-pol:routing-policy/rt-pol:policy-definitions/" +
+          "rt-pol:policy-definition/rt-pol:statements/" +
+          "rt-pol:statement/rt-pol:conditions" {
     description
       "BGP policy conditions added to routing policy module.";
 
@@ -378,14 +378,14 @@ module ietf-bgp-policy {
            defined in the match-set-options leaf.";
         leaf community-set {
           type leafref {
-            path "/rpol:routing-policy/rpol:defined-sets/"
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                + "bp:bgp-defined-sets/bp:community-sets/"
                + "bp:community-set/bp:name";
           }
           description
             "References a defined community set.";
         }
-        uses rpol:match-set-options-group;
+        uses rt-pol:match-set-options-group;
       }
 
       container match-ext-community-set {
@@ -394,14 +394,14 @@ module ietf-bgp-policy {
            logic defined in the match-set-options leaf.";
         leaf ext-community-set {
           type leafref {
-            path "/rpol:routing-policy/rpol:defined-sets/"
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                + "bp:bgp-defined-sets/bp:ext-community-sets/"
                + "bp:ext-community-set/bp:name";
           }
           description
             "References a defined extended community set.";
         }
-        uses rpol:match-set-options-group;
+        uses rt-pol:match-set-options-group;
       }
       container match-as-path-set {
         description
@@ -409,21 +409,21 @@ module ietf-bgp-policy {
            defined in the match-set-options leaf.";
         leaf as-path-set {
           type leafref {
-            path "/rpol:routing-policy/rpol:defined-sets/"
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                + "bp:bgp-defined-sets/bp:as-path-sets/"
                + "bp:as-path-set/bp:name";
           }
           description
             "References a defined AS path set";
         }
-        uses rpol:match-set-options-group;
+        uses rt-pol:match-set-options-group;
       }
     }
   }
 
-  augment "/rpol:routing-policy/rpol:policy-definitions/" +
-          "rpol:policy-definition/rpol:statements/rpol:statement/" +
-          "rpol:actions" {
+  augment "/rt-pol:routing-policy/rt-pol:policy-definitions/" +
+          "rt-pol:policy-definition/rt-pol:statements/" +
+          "rt-pol:statement/rt-pol:actions" {
     description
       "BGP policy actions added to routing policy module.";
     container bgp-actions {
@@ -498,7 +498,7 @@ module ietf-bgp-policy {
           case reference {
             leaf community-set-ref {
               type leafref {
-                path "/rpol:routing-policy/rpol:defined-sets/"
+                path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                    + "bp:bgp-defined-sets/"
                    + "bp:community-sets/bp:community-set/bp:name";
               }
@@ -543,7 +543,7 @@ module ietf-bgp-policy {
           case reference {
             leaf ext-community-set-ref {
               type leafref {
-                path "/rpol:routing-policy/rpol:defined-sets/"
+                path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                    + "bp:bgp-defined-sets/bp:ext-community-sets/"
                    + "bp:ext-community-set/bp:name";
               }

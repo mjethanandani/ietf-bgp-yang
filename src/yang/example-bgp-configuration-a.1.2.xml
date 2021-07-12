@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-  <key-chains
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-key-chain">
-    <key-chain>
-      <name>bgp-key-chain</name>
-    </key-chain>
-  </key-chains>
-  <routing
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
-    <control-plane-protocols>
-      <control-plane-protocol>
-        <type
-            xmlns:bgp="urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp
-        </type>
-        <name>name:BGP</name>
-        <bgp
-            xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
-          <global>
-            <as>64496</as>
+<key-chains
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-key-chain">
+  <key-chain>
+    <name>bgp-key-chain</name>
+  </key-chain>
+</key-chains>
+<routing
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+  <control-plane-protocols>
+    <control-plane-protocol>
+      <type
+          xmlns:bgp="urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp</type>
+      <name>name:BGP</name>
+      <bgp
+          xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
+        <global>
+          <as>64496</as>
+          <afi-safis>
+            <afi-safi>
+              <name
+                  xmlns:bt=
+                  "urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:ipv6-unicast</name>
+            </afi-safi>
+          </afi-safis>
+        </global>
+        <neighbors>
+          <neighbor>
+            <remote-address>2001:db8::</remote-address>
+            <enabled>true</enabled>
+            <secure-session-enable>true</secure-session-enable>
+            <secure-session>
+              <ao-keychain>bgp-key-chain</ao-keychain>
+            </secure-session>
+            <peer-as>64497</peer-as>
+            <description>"Peer Router B"</description>
+            <timers>
+              <hold-time>120</hold-time>
+              <keepalive>70</keepalive>
+            </timers>
             <afi-safis>
               <afi-safi>
-                <afi-safi-name
+                <name
                     xmlns:bt=
-                    "urn:ietf:params:xml:ns:yang:ietf-bgp-types">
-                  bt:ipv6-unicast
-                </afi-safi-name>
+                    "urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:ipv6-unicast</name>
               </afi-safi>
             </afi-safis>
-          </global>
-          <neighbors>
-            <neighbor>
-              <remote-address>2001:db8::</remote-address>
-              <enabled>true</enabled>
-              <secure-session-enable>true</secure-session-enable>
-              <secure-session>
-                <ao-keychain>bgp-key-chain</ao-keychain>
-              </secure-session>
-              <peer-as>64497</peer-as>
-              <description>"Peer Router B"</description>
-              <timers>
-                <hold-time>120</hold-time>
-                <keepalive>70</keepalive>
-              </timers>
-              <afi-safis>
-                <afi-safi>
-                  <afi-safi-name
-                      xmlns:bt=
-                      "urn:ietf:params:xml:ns:yang:ietf-bgp-types">
-                    bt:ipv6-unicast
-                  </afi-safi-name>
-                </afi-safi>
-              </afi-safis>
-            </neighbor>
-          </neighbors>
-        </bgp>
-      </control-plane-protocol>
-    </control-plane-protocols>
-  </routing>
-</config>
+          </neighbor>
+        </neighbors>
+      </bgp>
+    </control-plane-protocol>
+  </control-plane-protocols>
+</routing>

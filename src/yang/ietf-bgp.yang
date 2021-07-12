@@ -14,7 +14,7 @@ module ietf-bgp {
        (NMDA Version).";
   }
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
     reference
       "RFC ZZZZ, A YANG Data Model for Routing Policy Management.";
   }
@@ -29,7 +29,7 @@ module ietf-bgp {
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
   }
   import ietf-bfd-types {
-    prefix bfd;
+    prefix bfd-types;
     reference
       "RFC BBBB, YANG Data Model for Bidirectional Forward Detection.";
   }
@@ -44,7 +44,7 @@ module ietf-bgp {
       "RFC 6991: Common YANG Data Types.";
   }
   import ietf-key-chain {
-    prefix kc;
+    prefix key-chain;
     reference
       "RFC 8177: YANG Key Chain.";
   }
@@ -270,7 +270,7 @@ module ietf-bgp {
             uses mp-all-afi-safi-list-contents;
           }
         }
-        uses rpol:apply-policy-group;
+        uses rt-pol:apply-policy-group;
         uses state;
       }
 
@@ -392,7 +392,7 @@ module ietf-bgp {
               case ao {
                 uses tcp:ao;
                 leaf ao-keychain {
-                  type kc:key-chain-ref;
+                  type key-chain:key-chain-ref;
                   description
                     "Reference to the key chain that will be used by
                      this model. Applicable for TCP-AO and TCP-MD5
@@ -411,7 +411,7 @@ module ietf-bgp {
               case md5 {
                 uses tcp:md5;
                 leaf md5-keychain {
-                  type kc:key-chain-ref;
+                  type key-chain:key-chain-ref;
                   description
                     "Reference to the key chain that will be used by
                      this model. Applicable for TCP-AO and TCP-MD5
@@ -651,7 +651,7 @@ module ietf-bgp {
           uses structure-neighbor-group-as-path-options;
           uses structure-neighbor-group-add-paths;
           uses bgp-neighbor-use-multiple-paths;
-          uses rpol:apply-policy-group;
+          uses rt-pol:apply-policy-group;
           container afi-safis {
             description
               "Per-address-family configuration parameters associated
@@ -935,7 +935,7 @@ module ietf-bgp {
           }
           container bfd {
             if-feature "bt:bfd";
-            uses bfd:client-cfg-parms;
+            uses bfd-types:client-cfg-parms;
             description
               "BFD client configuration.";
             reference
