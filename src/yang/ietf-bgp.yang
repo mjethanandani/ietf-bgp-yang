@@ -51,7 +51,7 @@ module ietf-bgp {
   import ietf-tcp {
     prefix tcp;
     reference
-      "I-D.scharf-tcpm-yang-tcp: Transmission Control Protocol (TCP)
+      "I-D.ietf-tcpm-yang-tcp: Transmission Control Protocol (TCP)
        YANG Model.";
   }
   include ietf-bgp-common {
