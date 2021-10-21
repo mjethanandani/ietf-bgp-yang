@@ -54,15 +54,15 @@ submodule ietf-bgp-rib {
      contents.  The submodule supports 5 logical RIBs per address
      family:
 
-     loc-rib: This is the main BGP routing table for the local routing
-     instance, containing best-path selections for each prefix. The
-     loc-rib table may contain multiple routes for a given prefix,
-     with an attribute to indicate which was selected as the best
-     path.  Note that multiple paths may be used or advertised even if
-     only one path is marked as best, e.g., when using BGP
-     add-paths.  An implementation may choose to mark multiple
-     paths in the RIB as best path by setting the flag to true for
-     multiple entries.
+     loc-rib: This is the main BGP routing table for the local
+     routing instance, containing best-path selections for each
+     prefix. The loc-rib table may contain multiple routes for a
+     given prefix, with an attribute to indicate which was selected
+     as the best path.  Note that multiple paths may be used or
+     advertised even if only one path is marked as best, e.g., when
+     using BGP add-paths.  An implementation may choose to mark
+     multiple paths in the RIB as best path by setting the flag to
+     true for multiple entries.
 
      adj-rib-in-pre: This is a per-neighbor table containing the NLRI
      updates received from the neighbor before any local input policy
@@ -138,15 +138,15 @@ submodule ietf-bgp-rib {
         description
           "BGP next hop attribute defining the IP address of the
            router that should be used as the next hop to the
-           destination";
+           destination.";
         reference
           "RFC 4271: Section 5.1.3.";
       }
       leaf med {
         type uint32;
         description
-          "BGP multi-exit discriminator attribute used in the BGP route
-           selection process";
+          "BGP multi-exit discriminator attribute used in the BGP
+           route selection process.";
         reference
           "RFC 4271: Section 5.1.4.";
       }
@@ -216,7 +216,8 @@ submodule ietf-bgp-rib {
            attribute in Adj-RIB-In or Adj-RIB-Out, respectively.
            It should not be populated in Loc-RIB since the Loc-RIB
            is expected to store the effective AGGREGATOR in the
-           aggregator/as leaf regardless of being 4-octet or 2-octet.";
+           aggregator/as leaf regardless of being 4-octet or
+           2-octet.";
         reference
           "RFC 4271: Section 5.1.7.";
         leaf as4 {

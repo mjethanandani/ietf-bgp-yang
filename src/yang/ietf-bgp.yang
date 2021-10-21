@@ -31,7 +31,8 @@ module ietf-bgp {
   import ietf-bfd-types {
     prefix bfd-types;
     reference
-      "RFC BBBB, YANG Data Model for Bidirectional Forward Detection.";
+      "RFC BBBB, YANG Data Model for Bidirectional Forward
+       Detection.";
   }
   import ietf-inet-types {
     prefix inet;
@@ -95,13 +96,13 @@ module ietf-bgp {
 
   description
     "This module describes a YANG model for BGP protocol
-     configuration. It is a limited subset of all of the configuration
-     parameters available in the variety of vendor implementations,
-     hence it is expected that it would be augmented with vendor-
-     specific configuration data as needed. Additional modules or
-     submodules to handle other aspects of BGP configuration,
-     including policy, VRFs, VPNs, and additional address families
-     are also expected.
+     configuration. It is a limited subset of all of the
+     configuration parameters available in the variety of vendor
+     implementations, hence it is expected that it would be augmented
+     with vendor-specific configuration data as needed. Additional
+     modules or submodules to handle other aspects of BGP
+     configuration, including policy, VRFs, VPNs, and additional
+     address families are also expected.
 
      This model supports the following BGP configuration level
      hierarchy:
@@ -336,7 +337,8 @@ module ietf-bgp {
               path "../../../peer-groups/peer-group/name";
             }
             description
-              "The peer-group with which this neighbor is associated";
+              "The peer-group with which this neighbor is
+               associated.";
           }
 
           leaf identifier {
@@ -360,8 +362,8 @@ module ietf-bgp {
                not initiate connections to the neighbor, and should
                not respond to TCP connections attempts from the
                neighbor. If the state of the BGP session is
-               ESTABLISHED at the time that this leaf is set to false,
-               the BGP session should be ceased.
+               ESTABLISHED at the time that this leaf is set to
+               false, the BGP session should be ceased.
 
                A transition from 'false' to 'true' will cause
                the BGP Manual Start Event to be generated.
@@ -460,33 +462,35 @@ module ietf-bgp {
             type enumeration {
               enum idle {
                 description
-                  "Neighbor is down, and in the Idle state of the FSM";
+                  "Neighbor is down, and in the Idle state of the
+                   FSM.";
               }
               enum connect {
                 description
-                  "Neighbor is down, and the session is waiting for the
-                   underlying transport session to be established";
+                  "Neighbor is down, and the session is waiting for
+                   the underlying transport session to be
+                   established.";
               }
               enum active {
                 description
-                  "Neighbor is down, and the local system is awaiting a
-                   connection from the remote peer";
+                  "Neighbor is down, and the local system is awaiting
+                   a connection from the remote peer.";
               }
               enum opensent {
                 description
-                  "Neighbor is in the process of being established.  The
-                   local system has sent an OPEN message";
+                  "Neighbor is in the process of being established.
+                   The local system has sent an OPEN message.";
               }
               enum openconfirm {
                 description
                   "Neighbor is in the process of being established.
                    The local system is awaiting a NOTIFICATION or
-                   KEEPALIVE message";
+                   KEEPALIVE message.";
               }
               enum established {
                 description
                   "Neighbor is up - the BGP session with the peer is
-                   established";
+                   established.";
               }
             }
             //  notification does not like a non-config statement.
@@ -671,7 +675,8 @@ module ietf-bgp {
                  bgpPeerFsmEstablishedTransitions object from the
                  standard BGP-4 MIB";
               reference
-                "RFC 4273 - Definitions of Managed Objects for BGP-4";
+                "RFC 4273, Definitions of Managed Objects for
+                 BGP-4.";
             }
             leaf fsm-established-transitions {
               type yang:counter32;
@@ -931,7 +936,8 @@ module ietf-bgp {
           leaf name {
             type if:interface-ref;
             description
-              "Reference to the interface within the routing instance.";
+              "Reference to the interface within the routing
+               instance.";
           }
           container bfd {
             if-feature "bt:bfd";
@@ -939,7 +945,7 @@ module ietf-bgp {
             description
               "BFD client configuration.";
             reference
-              "RFC BBBB - YANG Data Model for Bidirectional Forwarding
+              "RFC 9127, YANG Data Model for Bidirectional Forwarding
                Detection.";
           }
           description
