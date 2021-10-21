@@ -658,6 +658,17 @@ module ietf-bgp {
                with the neighbor";
             uses bgp-neighbor-afi-safi-list;
           }
+
+	  container bfd {
+            if-feature "bt:bfd";
+            uses bfd-types:client-cfg-parms;
+            description
+              "BFD client configuration.";
+            reference
+              "RFC BBBB - YANG Data Model for Bidirectional Forwarding
+               Detection.";
+          }
+
           container statistics {
             description
               "Statistics per neighbor.";

@@ -890,7 +890,11 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <section title="Creating BGP Instance">
         <t>This example shows how to enable BGP with the IPv4 unicast address
-        family, while adding one network to advertise.</t>
+        family, while adding one network to advertise. In addition, BFD
+	is configured at a neighbor level with a local multiplier of 2,
+	and within the choice of setting both transmit and receive
+	intervals, setting the 'desired-min-tx-interval' to 3.3 ms, and the
+	'required-min-rx-interval also to 3.3 ms.</t>
 
         <t><figure>
             <artwork><![CDATA[
