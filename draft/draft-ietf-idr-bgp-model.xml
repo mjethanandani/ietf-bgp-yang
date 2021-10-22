@@ -99,13 +99,9 @@
     </author>
 
     <date/>
-
     <area>Routing</area>
-
     <workgroup>Interdomain Routing</workgroup>
-
     <keyword>bgp</keyword>
-
     <keyword>yang</keyword>
 
     <abstract>
@@ -862,6 +858,10 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.8528.xml'?>
 
       <?rfc include='reference.RFC.8529.xml'?>
+
+      <?rfc include='reference.I-D.ietf-bfd-yang.xml'?>
+
+      <?rfc include='reference.I-D.ietf-tcpm-yang-tcp.xml'?>
     </references>
 
     <references title="Informative references">
