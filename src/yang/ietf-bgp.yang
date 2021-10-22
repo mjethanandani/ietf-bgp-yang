@@ -659,13 +659,13 @@ module ietf-bgp {
             uses bgp-neighbor-afi-safi-list;
           }
 
-	  container bfd {
+          container bfd {
             if-feature "bt:bfd";
             uses bfd-types:client-cfg-parms;
             description
               "BFD client configuration.";
             reference
-              "RFC BBBB - YANG Data Model for Bidirectional Forwarding
+              "RFC 9127, YANG Data Model for Bidirectional Forwarding
                Detection.";
           }
 
@@ -950,7 +950,7 @@ module ietf-bgp {
             description
               "BFD client configuration.";
             reference
-              "RFC BBBB - YANG Data Model for Bidirectional Forwarding
+              "RFC 9127, YANG Data Model for Bidirectional Forwarding
                Detection.";
           }
           description
