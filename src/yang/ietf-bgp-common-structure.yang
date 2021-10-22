@@ -136,8 +136,8 @@ submodule ietf-bgp-common-structure {
         default "false";
         description
           "When set to 'true', this disables route redistribution
-           by the Route Reflector. It is set 'true' when the client is
-           fully meshed in its peer-group to prevent sending of
+           by the Route Reflector. It is set 'true' when the client
+           is fully meshed in its peer-group to prevent sending of
            redundant route advertisements.";
       }
       leaf client {
@@ -199,7 +199,8 @@ submodule ietf-bgp-common-structure {
       }
       choice send {
         description
-          "Choice of sending the max. number of paths or to send all.";
+          "Choice of sending the max. number of paths or to send
+           all.";
         case max {
           leaf max {
             type uint8;

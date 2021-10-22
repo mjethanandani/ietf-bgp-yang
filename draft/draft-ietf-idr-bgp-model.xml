@@ -98,14 +98,10 @@
       </address>
     </author>
 
-    <date day="10" month="July" year="2021"/>
-
+    <date/>
     <area>Routing</area>
-
     <workgroup>Interdomain Routing</workgroup>
-
     <keyword>bgp</keyword>
-
     <keyword>yang</keyword>
 
     <abstract>
@@ -661,8 +657,12 @@ reference: RFC XXXX
       and Procedures for Multicast in MPLS/BGP IP VPNs</xref>, <xref
       target="RFC6793">BGP Support for Four-Octet Autonomous System (AS)
       Number Space</xref>, <xref target="RFC7911">Advertisement of Multiple
-      Paths in BGP</xref>, <xref target="RFC8177">YANG Key Chain</xref>, and
-      <xref target="RFC8277">Carrying Label Information in BGP-4</xref>.</t>
+      Paths in BGP</xref>, <xref target="RFC8177">YANG Key Chain</xref>,
+      <xref target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission
+      Control Protocol (TCP) Configuration</xref>, <xref target=
+      "I-D.ietf-bfd-yang">YANG Data Model for Bidirectional Forward
+      Detection</xref>, and <xref target="RFC8277">Carrying Label
+      Information in BGP-4</xref>.</t>
 
       <section title="Main module and submodules for base items">
         <t><figure>
@@ -864,6 +864,10 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.8528.xml'?>
 
       <?rfc include='reference.RFC.8529.xml'?>
+
+      <?rfc include='reference.I-D.ietf-bfd-yang.xml'?>
+
+      <?rfc include='reference.I-D.ietf-tcpm-yang-tcp.xml'?>
     </references>
 
     <references title="Informative references">
@@ -880,8 +884,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.8349.xml?>
 
       <?rfc include='reference.I-D.ietf-rtgwg-policy-model.xml'?>
-
-      <?rfc include='reference.I-D.ietf-bfd-yang.xml'?>
     </references>
 
     <section title="Examples">

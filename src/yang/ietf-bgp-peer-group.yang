@@ -106,7 +106,8 @@ submodule ietf-bgp-peer-group {
     container graceful-restart {
       if-feature "bt:graceful-restart";
       description
-        "Parameters relating the graceful restart mechanism for BGP.";
+        "Parameters relating the graceful restart mechanism for
+         BGP.";
       uses graceful-restart-config;
     }
     uses structure-neighbor-group-ebgp-multihop;
