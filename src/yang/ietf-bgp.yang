@@ -950,15 +950,6 @@ module ietf-bgp {
               "Reference to the interface within the routing
                instance.";
           }
-          container bfd {
-            if-feature "bt:bfd";
-            uses bfd-types:client-cfg-parms;
-            description
-              "BFD client configuration.";
-            reference
-              "RFC 9127, YANG Data Model for Bidirectional Forwarding
-               Detection.";
-          }
           description
             "List of interfaces within the routing instance.";
         }
