@@ -5,7 +5,7 @@ submodule ietf-bgp-peer-group {
   }
 
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
   }
   import ietf-bgp-types {
     prefix bt;
@@ -31,6 +31,7 @@ submodule ietf-bgp-peer-group {
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
               Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This sub-module contains groupings that are specific to the
      peer-group context of the BGP module.
@@ -66,7 +67,7 @@ submodule ietf-bgp-peer-group {
     description
       "List of address-families associated with the BGP peer-group";
     list afi-safi {
-      key "afi-safi-name";
+      key "name";
       description
         "AFI, SAFI configuration available for the
          neighbor or group";
@@ -86,7 +87,7 @@ submodule ietf-bgp-peer-group {
   grouping bgp-peer-group-base {
     description
       "Parameters related to a BGP peer-group.";
-    leaf peer-group-name {
+    leaf name {
       type string;
       description
         "Name of the BGP peer-group";
@@ -105,7 +106,8 @@ submodule ietf-bgp-peer-group {
     container graceful-restart {
       if-feature "bt:graceful-restart";
       description
-        "Parameters relating the graceful restart mechanism for BGP.";
+        "Parameters relating the graceful restart mechanism for
+         BGP.";
       uses graceful-restart-config;
     }
     uses structure-neighbor-group-ebgp-multihop;
@@ -113,7 +115,7 @@ submodule ietf-bgp-peer-group {
     uses structure-neighbor-group-as-path-options;
     uses structure-neighbor-group-add-paths;
     uses global-group-use-multiple-paths;
-    uses rpol:apply-policy-group;
+    uses rt-pol:apply-policy-group;
     container afi-safis {
       description
         "Per-address-family configuration parameters associated with
@@ -126,7 +128,7 @@ submodule ietf-bgp-peer-group {
     description
       "The list of BGP peer groups";
     list peer-group {
-      key "peer-group-name";
+      key "name";
       description
         "List of BGP peer-groups configured on the local system -
          uniquely identified by peer-group name";

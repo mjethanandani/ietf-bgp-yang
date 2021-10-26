@@ -14,7 +14,7 @@ module ietf-bgp {
        (NMDA Version).";
   }
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
     reference
       "RFC ZZZZ, A YANG Data Model for Routing Policy Management.";
   }
@@ -29,9 +29,10 @@ module ietf-bgp {
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
   }
   import ietf-bfd-types {
-    prefix bfd;
+    prefix bfd-types;
     reference
-      "RFC BBBB, YANG Data Model for Bidirectional Forward Detection.";
+      "RFC BBBB, YANG Data Model for Bidirectional Forward
+       Detection.";
   }
   import ietf-inet-types {
     prefix inet;
@@ -44,14 +45,14 @@ module ietf-bgp {
       "RFC 6991: Common YANG Data Types.";
   }
   import ietf-key-chain {
-    prefix kc;
+    prefix key-chain;
     reference
       "RFC 8177: YANG Key Chain.";
   }
   import ietf-tcp {
     prefix tcp;
     reference
-      "I-D.scharf-tcpm-yang-tcp: Transmission Control Protocol (TCP)
+      "I-D.ietf-tcpm-yang-tcp: Transmission Control Protocol (TCP)
        YANG Model.";
   }
   include ietf-bgp-common {
@@ -78,9 +79,6 @@ module ietf-bgp {
   include ietf-bgp-rib-attributes {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-rib-table-attributes {
-    revision-date YYYY-MM-DD;
-  }
   include ietf-bgp-rib-tables {
     revision-date YYYY-MM-DD;
   }
@@ -95,15 +93,16 @@ module ietf-bgp {
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
               Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This module describes a YANG model for BGP protocol
-     configuration. It is a limited subset of all of the configuration
-     parameters available in the variety of vendor implementations,
-     hence it is expected that it would be augmented with vendor-
-     specific configuration data as needed. Additional modules or
-     submodules to handle other aspects of BGP configuration,
-     including policy, VRFs, VPNs, and additional address families
-     are also expected.
+     configuration. It is a limited subset of all of the
+     configuration parameters available in the variety of vendor
+     implementations, hence it is expected that it would be augmented
+     with vendor-specific configuration data as needed. Additional
+     modules or submodules to handle other aspects of BGP
+     configuration, including policy, VRFs, VPNs, and additional
+     address families are also expected.
 
      This model supports the following BGP configuration level
      hierarchy:
@@ -255,7 +254,7 @@ module ietf-bgp {
             "List of address-families associated with the BGP
              instance.";
           list afi-safi {
-            key "afi-safi-name";
+            key "name";
             description
               "AFI,SAFI configuration available for the
                neighbor or group.";
@@ -272,7 +271,7 @@ module ietf-bgp {
             uses mp-all-afi-safi-list-contents;
           }
         }
-        uses rpol:apply-policy-group;
+        uses rt-pol:apply-policy-group;
         uses state;
       }
 
@@ -295,34 +294,51 @@ module ietf-bgp {
           }
 
           leaf local-port {
-            type inet:port-number {
-              range "0..65535";
-            }
+            type inet:port-number;
             config false;
             description
               "The local port for the TCP connection between
                the BGP peers.";
           }
 
-	  leaf peer-type {
-	    type bt:peer-type;
-	    config false;
-	    description
-	      "The type of peering session associated with this
+          leaf remote-address {
+            type inet:ip-address;
+            description
+              "The remote IP address of this entry's BGP peer.";
+          }
+
+          leaf remote-port {
+            type inet:port-number;
+            config false;
+            description
+              "The remote port for the TCP connection
+               between the BGP peers.  Note that the
+               objects local-addr, local-port, remote-addr, and
+               reemote-port provide the appropriate
+               reference to the standard MIB TCP
+               connection table.";
+          }
+
+          leaf peer-type {
+            type bt:peer-type;
+            config false;
+            description
+              "The type of peering session associated with this
                neighbor.";
-	    reference
-	      "RFC 4271: A Border Gateway Protocol 4 (BGP-4)
+            reference
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4)
                          Section 1.1 for iBGP and eBGP.
                RFC 5065: Autonomous System Configuration
                          for Confederation internal and external.";
-	  }
+          }
 
           leaf peer-group {
             type leafref {
-              path "../../../peer-groups/peer-group/peer-group-name";
+              path "../../../peer-groups/peer-group/name";
             }
             description
-              "The peer-group with which this neighbor is associated";
+              "The peer-group with which this neighbor is
+               associated.";
           }
 
           leaf identifier {
@@ -337,26 +353,6 @@ module ietf-bgp {
               "RFC 4271, Section 4.2, 'BGP Identifier'.";
           }
 
-          leaf remote-address {
-            type inet:ip-address;
-            description
-              "The remote IP address of this entry's BGP peer.";
-          }
-
-          leaf remote-port {
-            type inet:port-number {
-              range "0..65535";
-            }
-            config false;
-            description
-              "The remote port for the TCP connection
-               between the BGP peers.  Note that the
-               objects local-addr, local-port, remote-addr, and
-               reemote-port provide the appropriate
-               reference to the standard MIB TCP
-               connection table.";
-          }
-
           leaf enabled {
             type boolean;
             default "true";
@@ -366,8 +362,8 @@ module ietf-bgp {
                not initiate connections to the neighbor, and should
                not respond to TCP connections attempts from the
                neighbor. If the state of the BGP session is
-               ESTABLISHED at the time that this leaf is set to false,
-               the BGP session should be ceased.
+               ESTABLISHED at the time that this leaf is set to
+               false, the BGP session should be ceased.
 
                A transition from 'false' to 'true' will cause
                the BGP Manual Start Event to be generated.
@@ -398,7 +394,7 @@ module ietf-bgp {
               case ao {
                 uses tcp:ao;
                 leaf ao-keychain {
-                  type kc:key-chain-ref;
+                  type key-chain:key-chain-ref;
                   description
                     "Reference to the key chain that will be used by
                      this model. Applicable for TCP-AO and TCP-MD5
@@ -417,7 +413,7 @@ module ietf-bgp {
               case md5 {
                 uses tcp:md5;
                 leaf md5-keychain {
-                  type kc:key-chain-ref;
+                  type key-chain:key-chain-ref;
                   description
                     "Reference to the key chain that will be used by
                      this model. Applicable for TCP-AO and TCP-MD5
@@ -462,38 +458,39 @@ module ietf-bgp {
                RFC 7454: BGP Operations and Security.";
           }
           uses neighbor-group-config;
-          uses route-selection-options;
           leaf session-state {
             type enumeration {
               enum idle {
                 description
-                  "Neighbor is down, and in the Idle state of the FSM";
+                  "Neighbor is down, and in the Idle state of the
+                   FSM.";
               }
               enum connect {
                 description
-                  "Neighbor is down, and the session is waiting for the
-                   underlying transport session to be established";
+                  "Neighbor is down, and the session is waiting for
+                   the underlying transport session to be
+                   established.";
               }
               enum active {
                 description
-                  "Neighbor is down, and the local system is awaiting a
-                   connection from the remote peer";
+                  "Neighbor is down, and the local system is awaiting
+                   a connection from the remote peer.";
               }
               enum opensent {
                 description
-                  "Neighbor is in the process of being established.  The
-                   local system has sent an OPEN message";
+                  "Neighbor is in the process of being established.
+                   The local system has sent an OPEN message.";
               }
               enum openconfirm {
                 description
                   "Neighbor is in the process of being established.
                    The local system is awaiting a NOTIFICATION or
-                   KEEPALIVE message";
+                   KEEPALIVE message.";
               }
               enum established {
                 description
                   "Neighbor is up - the BGP session with the peer is
-                   established";
+                   established.";
               }
             }
             //  notification does not like a non-config statement.
@@ -504,7 +501,7 @@ module ietf-bgp {
               "RFC 4271, Section 8.1.2.";
           }
           leaf last-established {
-            type uint64;
+            type yang:date-and-time;
             config false;
             description
               "This timestamp indicates the time that the BGP session
@@ -526,9 +523,7 @@ module ietf-bgp {
               "Negotiated BGP capabilities.";
           }
           leaf negotiated-hold-time {
-            type decimal64 {
-              fraction-digits 2;
-            }
+            type uint16;
             config false;
             description
               "The negotiated hold-time for the BGP session";
@@ -621,9 +616,9 @@ module ietf-bgp {
               config false;
               description
                 "This flag indicates whether the local neighbor is
-                 currently restarting. The flag is cleared after all NLRI
-                 have been advertised to the peer, and the End-of-RIB
-                 (EOR) marker has been cleared.";
+                 currently restarting. The flag is cleared after all
+                 NLRI have been advertised to the peer, and the
+                 End-of-RIB (EOR) marker has been cleared.";
             }
             leaf mode {
               type enumeration {
@@ -660,7 +655,7 @@ module ietf-bgp {
           uses structure-neighbor-group-as-path-options;
           uses structure-neighbor-group-add-paths;
           uses bgp-neighbor-use-multiple-paths;
-          uses rpol:apply-policy-group;
+          uses rt-pol:apply-policy-group;
           container afi-safis {
             description
               "Per-address-family configuration parameters associated
@@ -680,7 +675,8 @@ module ietf-bgp {
                  bgpPeerFsmEstablishedTransitions object from the
                  standard BGP-4 MIB";
               reference
-                "RFC 4273 - Definitions of Managed Objects for BGP-4";
+                "RFC 4273, Definitions of Managed Objects for
+                 BGP-4.";
             }
             leaf fsm-established-transitions {
               type yang:counter32;
@@ -865,6 +861,54 @@ module ietf-bgp {
             "Clear neighbors action.";
 
           input {
+            choice operation {
+              default operation-admin;
+              description
+                "The type of operation for the clear action.";
+              case operation-admin {
+                leaf admin {
+                  type empty;
+                  description
+                    "Closes the Established BGP session with a BGP
+                     NOTIFICATION message with the Administrative
+                     Reset error subcode.";
+                  reference
+                    "RFC 4486 - Subcodes for BGP Cease Notification
+                     Message.";
+                }
+              }
+              case operation-hard {
+                leaf hard {
+                  type empty;
+                  description
+                    "Closes the Established BGP session with a BGP
+                     NOTIFICATION message with the Hard Reset error
+                     subcode.";
+                  reference
+                    "RFC 8538, Section 3 - Notification Message
+                     Support for BGP Graceful Restart.";
+                }
+              }
+              case operation-soft {
+                leaf soft {
+                  type empty;
+                  description
+                    "Re-sends the current Adj-Rib-Out to this
+                     neighbor.";
+                }
+              }
+              case operation-soft-inbound {
+                leaf soft-inbound {
+                  if-feature "bt:route-refresh";
+                  type empty;
+                  description
+                    "Requests the Adj-Rib-In for this neighbor to be
+                     re-sent using the BGP Route Refresh feature.";
+                }
+              }
+            }
+
+
             leaf clear-at {
               type yang:date-and-time;
               description
@@ -892,15 +936,16 @@ module ietf-bgp {
           leaf name {
             type if:interface-ref;
             description
-              "Reference to the interface within the routing instance.";
+              "Reference to the interface within the routing
+               instance.";
           }
           container bfd {
             if-feature "bt:bfd";
-            uses bfd:client-cfg-parms;
+            uses bfd-types:client-cfg-parms;
             description
               "BFD client configuration.";
             reference
-              "RFC BBBB - YANG Data Model for Bidirectional Forwarding
+              "RFC 9127, YANG Data Model for Bidirectional Forwarding
                Detection.";
           }
           description
