@@ -474,6 +474,13 @@ submodule ietf-bgp-rib {
                      best-path selection after local input policy
                      rules have been applied.";
                   uses ipv4-adj-rib-in-post;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-in state for the containing
+                       neighbor. Subsequently, implementations might
+                       issue a 'route refresh' if 'route refresh' has
+                       been negotiatited, or reset the session. ";
+                  }
                 }
                 container adj-rib-out-pre {
                   description
@@ -586,6 +593,13 @@ submodule ietf-bgp-rib {
                      best-path selection after local input policy
                      rules have been applied.";
                   uses ipv6-adj-rib-in-post;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-in state for the containing
+                       neighbor. Subsequently, implementations might
+                       issue a 'route refresh' if 'route refresh' has
+                       been negotiatited, or reset the session. ";
+                  }
                 }
                 container adj-rib-out-pre {
                   description

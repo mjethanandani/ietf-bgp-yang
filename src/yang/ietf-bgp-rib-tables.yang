@@ -314,13 +314,6 @@ submodule ietf-bgp-rib-tables {
         uses bgp-unknown-attr-top;
         uses rib-ext-route-annotations;
       }
-      uses clear-routes {
-        description
-          "Clears the adj-rib-in state for the containing neighbor.
-           Subsequently, implementations might issue a
-           'route refresh' if 'route refresh' has been negotiatited,
-           or reset the session. ";
-      }
     }
   }
 
@@ -374,13 +367,6 @@ submodule ietf-bgp-rib-tables {
         uses bgp-adj-rib-in-post-route-annotations-state;
         uses bgp-unknown-attr-top;
         uses rib-ext-route-annotations;
-      }
-      uses clear-routes {
-        description
-          "Clears the adj-rib-in state for the containing neighbor.
-           Subsequently, implementations might issue a
-           'route refresh' if 'route refresh' has been negotiatited,
-           or reset the session. ";
       }
     }
   }
