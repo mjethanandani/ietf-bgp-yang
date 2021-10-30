@@ -93,6 +93,14 @@ module ietf-bgp-types {
                  Multihop Paths.";
   }
 
+  feature bfd-client-cfg {
+    description
+      "Support for configuration of BFD client parameters.";
+    reference
+      "RFC 9127, YANG Data Model for Bidirectional Forwarding
+                 Detection.";
+  }
+
   feature damping {
     description
       "Weighted route dampening is supported.";

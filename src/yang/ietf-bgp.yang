@@ -665,12 +665,23 @@ module ietf-bgp {
 
           container bfd {
             if-feature "bt:bfd";
-            uses bfd-types:client-cfg-parms;
+            leaf enabled {
+              type boolean;
+              default "false";
+              description
+                "Indicates whether BFD is enabled or disabled.";
+            }
+            container bfd-client-cfg {
+              if-feature "bt:bfd-client-cfg";
+              uses bfd-types:base-cfg-parms;
+              description
+                "BFD client configuration.";
+              reference
+                "RFC 9127, YANG Data Model for Bidirectional
+                 Forwarding Detection.";
+            }
             description
-              "BFD client configuration.";
-            reference
-              "RFC 9127, YANG Data Model for Bidirectional Forwarding
-               Detection.";
+              "BFD configuration per-neighbor.";
           }
 
           container statistics {
