@@ -145,10 +145,10 @@ submodule ietf-bgp-neighbor {
         config false;
         description
           "This value indicates whether a particular AFI-SAFI has
-	   been successfully negotiated with the peer. An AFI-SAFI
-	   may be enabled in the current running configuration, but
-	   a session restart may be required in order to negotiate
-	   the new capability.";
+           been successfully negotiated with the peer. An AFI-SAFI
+           may be enabled in the current running configuration, but
+           a session restart may be required in order to negotiate
+           the new capability.";
       }
       container prefixes {
         config false;
