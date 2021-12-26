@@ -534,7 +534,7 @@ module ietf-bgp-policy {
           description
             "Indicates the method used to specify the extended
              communities for the set-ext-community action";
-          case  inline {
+          case inline {
             leaf-list communities {
               type union {
                 type rt-types:route-target;
