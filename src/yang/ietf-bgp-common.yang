@@ -14,11 +14,6 @@ submodule ietf-bgp-common {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
-  import ietf-yang-types {
-    prefix yang;
-    reference
-      "RFC 6991: Common YANG Data Types.";
-  }
 
   organization
     "IETF IDR Working Group";
@@ -29,14 +24,15 @@ submodule ietf-bgp-common {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com,
-              Jeffrey Haas (jhaas at juniper dot net).";
+              Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This sub-module contains common groupings that are common across
      multiple contexts within the BGP module. That is to say that
      they may be application to a subset of global, peer-group, or
      neighbor contexts.
 
-     Copyright (c) 2020 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -113,26 +109,22 @@ submodule ietf-bgp-common {
         range "0..21845";
       }
       units "seconds";
-      default "30";
       description
         "When used as a configuration (rw) value, this Time interval
          (in seconds) for the KeepAlive timer configured for this BGP
-         speaker with this peer. The value of this object will only
-         determine the KEEPALIVE messages' frequency relative to
-         the value specified in configured value for hold-time.
+         speaker with this peer.  A reasonable maximum value for this
+         timer would be one-third of the configured hold-time.
 
-         If the value of this object is zero (0), no periodical
+         In the absence of explicit configuration of the keepalive
+         value, operationally it SHOULD have a value of one-third of
+         the negotiated hold-time.
+
+         If the value of this object is zero (0), no periodic
          KEEPALIVE messages are sent to the peer after the BGP
-         connection has been established.  The suggested value for
-         this timer is 30 seconds.;
+         connection has been established.
 
          The actual time interval for the KEEPALIVE messages is
-         indicated by operational value of keepalive. The value
-         of this object is calculated by this BGP speaker such that,
-         when compared with hold-time, it has the same proportion
-         that keepalive has, compared with hold-time. A
-         reasonable maximum value for this timer would be one third
-         of that of hold-time.";
+         indicated by operational value of keepalive.";
       reference
         "RFC 4271, Section 4.4.
          RFC 4271, Section 10.";
@@ -142,7 +134,6 @@ submodule ietf-bgp-common {
         range "0..max";
       }
       units "seconds";
-      default "15";
       description
         "Time interval (in seconds) for the MinASOriginationInterval
          timer. The suggested value for this timer is 15 seconds.";
@@ -170,14 +161,6 @@ submodule ietf-bgp-common {
   grouping neighbor-group-config {
     description
       "Neighbor level configuration items.";
-    leaf remote-as {
-      type inet:as-number;
-      description
-        "The remote autonomous system number received in
-         the BGP OPEN message.";
-      reference
-        "RFC 4271, Section 4.2.";
-    }
     leaf peer-as {
       type inet:as-number;
       description
@@ -193,14 +176,10 @@ submodule ietf-bgp-common {
     }
 
     leaf remove-private-as {
-      // could also make this a container with a flag to enable
-      // remove-private and separate option.  here, option implies
-      // remove-private is enabled.
       type bt:remove-private-as-option;
       description
-        "Remove private AS numbers from updates sent to peers - when
-         this leaf is not specified, the AS_PATH attribute should be
-         sent to the peer unchanged";
+        "When this leaf is specified, remove private AS numbers from
+         updates sent to peers.";
     }
     container route-flap-damping {
       if-feature "bt:damping";
@@ -244,7 +223,7 @@ submodule ietf-bgp-common {
            suppress-above.";
       }
       leaf reach-decay {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "300";
         description
@@ -256,7 +235,7 @@ submodule ietf-bgp-common {
            than a larger value.";
       }
       leaf unreach-decay {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "900";
         description
@@ -266,7 +245,7 @@ submodule ietf-bgp-common {
            value greater than or equal to reach-decay.";
       }
       leaf keep-history {
-        type yang:gauge32;
+        type uint32;
         units "seconds";
         default "1800";
         description
@@ -284,8 +263,8 @@ submodule ietf-bgp-common {
       type bt:community-type;
       description
         "When supported, this tells the router to propagate any
-         prefixes that are attached to this community. The value
-         of 0 implies 'none'.";
+         prefixes that are attached to these community-types.
+         The value of 0 implies 'none'.";
     }
     leaf description {
       type string;
@@ -334,7 +313,7 @@ submodule ietf-bgp-common {
          of an interface.";
     }
 
-    leaf auth-password {
+    leaf md5-auth-password {
       type string;
       description
         "Configures an MD5 authentication password for use with
@@ -518,13 +497,14 @@ submodule ietf-bgp-common {
       type uint32;
       config false;
       description
-        "Total number of BGP paths within the context";
+        "Total number of BGP paths (BGP routes) within the context";
     }
     leaf total-prefixes {
       type uint32;
       config false;
       description
-        "Total number of BGP prefixes received within the context";
+        "Total number of BGP prefixes (destinations) received within
+         the context";
     }
   }
 }

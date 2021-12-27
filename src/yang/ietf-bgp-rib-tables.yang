@@ -37,12 +37,13 @@ submodule ietf-bgp-rib-tables {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com,
-              Jeffrey Haas (jhaas at juniper dot net).";
+              Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This submodule contains structural data definitions for
      BGP routing tables.
 
-     Copyright (c) 2019 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -81,19 +82,24 @@ submodule ietf-bgp-rib-tables {
          The value is the timestamp in seconds relative to
          the Unix Epoch (Jan 1, 1970 00:00:00 UTC).";
     }
-    leaf valid-route {
+    leaf eligible-route {
       type boolean;
       description
-        "Indicates that the route is considered valid by the
-         local router";
+        "Indicates that the route is eligible for selection for the
+         best route in the Loc-Rib in BGP's Decision Process.";
+      reference
+        "RFC 4271, Section 9.1.";
     }
-    leaf invalid-reason {
+    leaf ineligible-reason {
       type identityref {
-        base invalid-route-reason;
+        base ineligible-route-reason;
       }
       description
-        "If the route is rejected as invalid, this indicates the
+        "If the route is ineligible for selection for the best route
+         in the Loc-Rib in BGP's Decision process, this indicates the
          reason.";
+      reference
+        "RFC 4271, Section 9.1.";
     }
   }
 

@@ -1,12 +1,14 @@
 import os
 
 list_of_ietf_models =\
-[ ["ietf-routing-policy", "draft-ietf-rtgwg-policy-model", "27"],
+[ ["ietf-routing-policy", "draft-ietf-rtgwg-policy-model", "29"],
   ["ietf-bfd-types", "draft-ietf-bfd-yang", "17"],
   ["ietf-tcp", "draft-scharf-tcpm-yang-tcp", "04"],
   ["ietf-if-extensions", "draft-ietf-netmod-intf-ext-yang", "10"],
-  ["ietf-if-l3-vlan", "draft-ietf-netmod-sub-intf-vlan-model", "07"],
+  ["ietf-if-vlan-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "07"],
+  ["ietf-if-flexible-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "07"],
   ["iana-bfd-types", "draft-ietf-bfd-yang", "17"],
+  ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "20"],
   ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "10"],
   ["ietf-tcp-server", "draft-ietf-netconf-tcp-client-server", "10"],
   ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "10"] ]

@@ -5,7 +5,7 @@ submodule ietf-bgp-common-structure {
   }
 
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
     reference
       "RFC ZZZZ, A YANG Data Model for Routing Policy Management";
   }
@@ -28,13 +28,14 @@ submodule ietf-bgp-common-structure {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper dot net).";
+              Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This sub-module contains groupings that are common across
      multiple BGP contexts and provide structure around other
      primitive groupings.
 
-     Copyright (c) 2019 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -77,8 +78,8 @@ submodule ietf-bgp-common-structure {
            enable logging of peer state changes.
 
            Note: Documenting demotion from ESTABLISHED state is
-                 desirable, but documenting all backward transitions is
-                 problematic, and should be avoided.";
+                 desirable, but documenting all backward transitions
+                 is problematic, and should be avoided.";
       }
     }
   }
@@ -119,8 +120,7 @@ submodule ietf-bgp-common-structure {
         "Route reflector parameters for the BGP peer-group";
       reference
         "RFC 4456: BGP Route Reflection.";
-      leaf route-reflector-cluster-id {
-        when "../route-reflector-client = 'false'";
+      leaf cluster-id {
         type bt:rr-cluster-id-type;
         description
           "Route Reflector cluster id to use when local router is
@@ -129,18 +129,18 @@ submodule ietf-bgp-common-structure {
            for each neighbor.";
         reference
           "RFC 4456: BGP Route Reflection: An Alternative to
-                  Full Mesh.";
+                     Full Mesh.";
       }
       leaf no-client-reflect {
         type boolean;
         default "false";
         description
           "When set to 'true', this disables route redistribution
-           by the Route Reflector. It is set 'true' when the client is
-           fully meshed to prevent sending of redundant route
-           advertisements.";
+           by the Route Reflector. It is set 'true' when the client
+           is fully meshed in its peer-group to prevent sending of
+           redundant route advertisements.";
       }
-      leaf route-reflector-client {
+      leaf client {
         type boolean;
         default "false";
         description
@@ -167,7 +167,7 @@ submodule ietf-bgp-common-structure {
         description
           "Specify the number of occurrences of the local BGP
            speaker's AS that can occur within the AS_PATH before it
-           is rejected.";
+           is rejected as looped.";
       }
       leaf replace-peer-as {
         type boolean;
@@ -198,9 +198,9 @@ submodule ietf-bgp-common-structure {
            an NLRI from the neighbor or group";
       }
       choice send {
-        default "all";
         description
-          "Choice of sending the max. number of paths or to send all.";
+          "Choice of sending the max. number of paths or to send
+           all.";
         case max {
           leaf max {
             type uint8;
@@ -220,8 +220,8 @@ submodule ietf-bgp-common-structure {
       }
       leaf eligible-prefix-policy {
         type leafref {
-          path "/rpol:routing-policy/rpol:policy-definitions/"
-             + "rpol:policy-definition/rpol:name";
+          path "/rt-pol:routing-policy/rt-pol:policy-definitions/"
+             + "rt-pol:policy-definition/rt-pol:name";
         }
         description
           "A reference to a routing policy which can be used to

@@ -9,7 +9,7 @@ module ietf-bgp-policy {
     prefix inet;
   }
   import ietf-routing-policy {
-    prefix rpol;
+    prefix rt-pol;
   }
   import ietf-bgp-types {
     prefix bt;
@@ -27,13 +27,14 @@ module ietf-bgp-policy {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper dot net).";
+              Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This module contains data definitions for BGP routing policy.
      It augments the base routing-policy module with BGP-specific
      options for conditions and actions.
 
-     Copyright (c) 2020 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -146,25 +147,26 @@ module ietf-bgp-policy {
 
   // augment statements
 
-  augment "/rpol:routing-policy/rpol:defined-sets" {
+  augment "/rt-pol:routing-policy/rt-pol:defined-sets" {
     description
       "Adds BGP defined sets container to routing policy model.";
     container bgp-defined-sets {
       description
-        "BGP-related set definitions for policy match conditions";
+        "BGP-related set definitions for policy match conditions.";
       container community-sets {
         description
-          "Enclosing container for list of defined BGP community sets";
+          "Enclosing container for list of defined BGP community
+           sets.";
         list community-set {
           key "name";
           description
-            "List of defined BGP community sets";
+            "List of defined BGP community sets.";
           leaf name {
             type string;
             mandatory true;
             description
               "Name / label of the community set -- this is used to
-               reference the set in match conditions";
+               reference the set in match conditions.";
           }
           leaf-list member {
             type union {
@@ -197,36 +199,37 @@ module ietf-bgp-policy {
               type bt:bgp-community-regexp-type;
             }
             description
-              "Members of the extended community set";
+              "Members of the extended community set.";
           }
         }
       }
       container as-path-sets {
         description
-          "Enclosing container for list of define AS path sets";
+          "Enclosing container for list of define AS path sets.";
         list as-path-set {
           key "name";
           description
-            "List of defined AS path sets";
+            "List of defined AS path sets.";
           leaf name {
             type string;
             description
-              "Name of the AS path set -- this is used to reference the
-               set in match conditions";
+              "Name of the AS path set -- this is used to reference
+               the set in match conditions.";
           }
           leaf-list member {
             type string;
             description
-              "AS path regular expression -- list of ASes in the set";
+              "AS path regular expression -- list of ASes in the
+               set.";
           }
         }
       }
     }
   }
 
-  augment "/rpol:routing-policy/rpol:policy-definitions/" +
-          "rpol:policy-definition/rpol:statements/rpol:statement/" +
-          "rpol:conditions" {
+  augment "/rt-pol:routing-policy/rt-pol:policy-definitions/" +
+          "rt-pol:policy-definition/rt-pol:statements/" +
+          "rt-pol:statement/rt-pol:conditions" {
     description
       "BGP policy conditions added to routing policy module.";
 
@@ -274,26 +277,27 @@ module ietf-bgp-policy {
         type enumeration {
           enum internal {
             description
-              "route type is internal";
+              "route type is internal.";
           }
           enum external {
             description
-              "route type is external";
+              "route type is external.";
           }
         }
         description
-          "Condition to check the route type in the route update";
+          "Condition to check the route type in the route update.";
       }
 
       container community-count {
         description
-          "Value and comparison operations for conditions based on the
-           number of communities in the route update.";
+          "Value and comparison operations for conditions based on
+           the number of communities in the route update.";
 
         leaf community-count {
           type uint32;
           description
-            "Value for the number of communities in the route update.";
+            "Value for the number of communities in the route
+             update.";
         }
 
         choice operation {
@@ -317,7 +321,8 @@ module ietf-bgp-policy {
             leaf gt-or-eq {
               type empty;
               description
-                "Check to see if the value is greater than or equal.";
+                "Check to see if the value is greater than or
+                 equal.";
             }
           }
           description
@@ -327,8 +332,8 @@ module ietf-bgp-policy {
 
       container as-path-length {
         description
-          "Value and comparison operations for conditions based on the
-           length of the AS path in the route update.
+          "Value and comparison operations for conditions based on
+           the length of the AS path in the route update.
 
            The as-path-length SHALL be calculated and SHALL follow
            RFC 4271 rules.";
@@ -362,7 +367,8 @@ module ietf-bgp-policy {
             leaf gt-or-eq {
               type empty;
               description
-                "Check to see if the value is greater than or equal.";
+                "Check to see if the value is greater than or
+                 equal.";
             }
           }
           description
@@ -377,14 +383,14 @@ module ietf-bgp-policy {
            defined in the match-set-options leaf.";
         leaf community-set {
           type leafref {
-            path "/rpol:routing-policy/rpol:defined-sets/"
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                + "bp:bgp-defined-sets/bp:community-sets/"
                + "bp:community-set/bp:name";
           }
           description
             "References a defined community set.";
         }
-        uses rpol:match-set-options-group;
+        uses rt-pol:match-set-options-group;
       }
 
       container match-ext-community-set {
@@ -393,14 +399,14 @@ module ietf-bgp-policy {
            logic defined in the match-set-options leaf.";
         leaf ext-community-set {
           type leafref {
-            path "/rpol:routing-policy/rpol:defined-sets/"
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                + "bp:bgp-defined-sets/bp:ext-community-sets/"
                + "bp:ext-community-set/bp:name";
           }
           description
             "References a defined extended community set.";
         }
-        uses rpol:match-set-options-group;
+        uses rt-pol:match-set-options-group;
       }
       container match-as-path-set {
         description
@@ -408,21 +414,21 @@ module ietf-bgp-policy {
            defined in the match-set-options leaf.";
         leaf as-path-set {
           type leafref {
-            path "/rpol:routing-policy/rpol:defined-sets/"
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                + "bp:bgp-defined-sets/bp:as-path-sets/"
                + "bp:as-path-set/bp:name";
           }
           description
             "References a defined AS path set";
         }
-        uses rpol:match-set-options-group;
+        uses rt-pol:match-set-options-group;
       }
     }
   }
 
-  augment "/rpol:routing-policy/rpol:policy-definitions/" +
-          "rpol:policy-definition/rpol:statements/rpol:statement/" +
-          "rpol:actions" {
+  augment "/rt-pol:routing-policy/rt-pol:policy-definitions/" +
+          "rt-pol:policy-definition/rt-pol:statements/" +
+          "rt-pol:statement/rt-pol:actions" {
     description
       "BGP policy actions added to routing policy module.";
     container bgp-actions {
@@ -489,15 +495,15 @@ module ietf-bgp-policy {
                 type bt:bgp-well-known-community-type;
               }
               description
-                "Set the community values for the update inline with a
-                 list.";
+                "Set the community values for the update inline with
+                 a list.";
             }
           }
 
           case reference {
             leaf community-set-ref {
               type leafref {
-                path "/rpol:routing-policy/rpol:defined-sets/"
+                path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                    + "bp:bgp-defined-sets/"
                    + "bp:community-sets/bp:community-set/bp:name";
               }
@@ -528,26 +534,27 @@ module ietf-bgp-policy {
           description
             "Indicates the method used to specify the extended
              communities for the set-ext-community action";
-          case  inline {
+          case inline {
             leaf-list communities {
               type union {
                 type rt-types:route-target;
                 type bt:bgp-well-known-community-type;
               }
               description
-                "Set the extended community values for the update inline
-                 with a list.";
+                "Set the extended community values for the update
+                 inline with a list.";
             }
           }
           case reference {
             leaf ext-community-set-ref {
               type leafref {
-                path "/rpol:routing-policy/rpol:defined-sets/"
+                path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                    + "bp:bgp-defined-sets/bp:ext-community-sets/"
                    + "bp:ext-community-set/bp:name";
               }
               description
-                "References a defined extended community set by name";
+                "References a defined extended community set by
+                 name.";
             }
           }
         }
