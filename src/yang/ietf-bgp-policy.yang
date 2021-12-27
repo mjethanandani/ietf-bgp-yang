@@ -203,6 +203,30 @@ module ietf-bgp-policy {
           }
         }
       }
+      container large-community-sets {
+        description
+          "Enclosing container for list of large BGP community
+           sets";
+        list large-community-set {
+          key "name";
+          description
+            "List of defined large BGP community sets";
+          leaf name {
+            type string;
+            description
+              "Name / label of the large community set -- this is
+               used to reference the set in match conditions";
+          }
+          leaf-list member {
+            type union {
+              type bt:bgp-large-community-type;
+              type bt:bgp-community-regexp-type;
+            }
+            description
+              "Members of the large community set.";
+          }
+        }
+      }
       container as-path-sets {
         description
           "Enclosing container for list of define AS path sets.";
@@ -408,6 +432,22 @@ module ietf-bgp-policy {
         }
         uses rt-pol:match-set-options-group;
       }
+
+      container match-large-community-set {
+        description
+          "Match a referenced large community-set according to the
+           logic defined in the match-set-options leaf.";
+        leaf ext-community-set {
+          type leafref {
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
+               + "bp:bgp-defined-sets/bp:large-community-sets/"
+               + "bp:large-community-set/bp:name";
+          }
+          description
+            "References a defined large community set.";
+        }
+        uses rt-pol:match-set-options-group;
+      }
       container match-as-path-set {
         description
           "Match a referenced as-path set according to the logic
@@ -536,10 +576,7 @@ module ietf-bgp-policy {
              communities for the set-ext-community action";
           case inline {
             leaf-list communities {
-              type union {
-                type rt-types:route-target;
-                type bt:bgp-well-known-community-type;
-              }
+              type rt-types:route-target;
               description
                 "Set the extended community values for the update
                  inline with a list.";
@@ -551,6 +588,49 @@ module ietf-bgp-policy {
                 path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                    + "bp:bgp-defined-sets/bp:ext-community-sets/"
                    + "bp:ext-community-set/bp:name";
+              }
+              description
+                "References a defined extended community set by
+                 name.";
+            }
+          }
+        }
+      }
+
+      container set-large-community {
+        description
+          "Action to set the large community attributes of the
+           route, along with options to modify how the community is
+           modified. Extended communities may be set using an inline
+           list OR a reference to an existing defined set (but not
+           both).";
+
+        leaf options {
+          type bgp-set-community-option-type;
+          description
+            "Options for modifying the community attribute with
+             the specified values.  These options apply to both
+             methods of setting the community attribute.";
+        }
+
+        choice method {
+          description
+            "Indicates the method used to specify the large
+             communities for the set-large-community action";
+          case inline {
+            leaf-list communities {
+              type bt:bgp-large-community-type;
+              description
+                "Set the large community values for the update
+                 inline with a list.";
+            }
+          }
+          case reference {
+            leaf large-community-set-ref {
+              type leafref {
+                path "/rt-pol:routing-policy/rt-pol:defined-sets/"
+                   + "bp:bgp-defined-sets/bp:large-community-sets/"
+                   + "bp:large-community-set/bp:name";
               }
               description
                 "References a defined extended community set by
