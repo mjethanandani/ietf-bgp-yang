@@ -28,12 +28,6 @@ module ietf-bgp {
     reference
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
   }
-  import ietf-bfd-types {
-    prefix bfd-types;
-    reference
-      "RFC BBBB, YANG Data Model for Bidirectional Forward
-       Detection.";
-  }
   import ietf-inet-types {
     prefix inet;
     reference
@@ -938,15 +932,6 @@ module ietf-bgp {
             description
               "Reference to the interface within the routing
                instance.";
-          }
-          container bfd {
-            if-feature "bt:bfd";
-            uses bfd-types:client-cfg-parms;
-            description
-              "BFD client configuration.";
-            reference
-              "RFC 9127, YANG Data Model for Bidirectional Forwarding
-               Detection.";
           }
           description
             "List of interfaces within the routing instance.";

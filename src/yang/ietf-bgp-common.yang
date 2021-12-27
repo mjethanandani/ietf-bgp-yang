@@ -14,6 +14,12 @@ submodule ietf-bgp-common {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
+  import ietf-bfd-types {
+    prefix bfd-types;
+    reference
+      "RFC 9127, YANG Data Model for Bidirectional Forward
+       Detection.";
+  }
 
   organization
     "IETF IDR Working Group";
@@ -312,7 +318,6 @@ submodule ietf-bgp-common {
          expressed as either an IP address or reference to the name
          of an interface.";
     }
-
     leaf md5-auth-password {
       type string;
       description
@@ -321,6 +326,15 @@ submodule ietf-bgp-common {
       reference
         "RFC 2385: Protection of BGP Sessions via the TCP MD5
                    Signature Option.";
+    }
+    container bfd {
+      if-feature "bt:bfd";
+      uses bfd-types:client-cfg-parms;
+      description
+        "BFD client configuration.";
+      reference
+        "RFC 9127, YANG Data Model for Bidirectional Forwarding
+         Detection.";
     }
   }
 
