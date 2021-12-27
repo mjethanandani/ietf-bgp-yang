@@ -852,9 +852,12 @@ module ietf-bgp {
               "RFC 4271, Section 8.2.2.";
           }
           description
-            "The backward-transition event is
+            "The backward-transition event is generally
              generated when the BGP FSM moves from a higher
-             numbered state to a lower numbered state.";
+             numbered state to a lower numbered state. However,
+             that makes for a very noisy environment and most
+             vendors have implemented the notification only
+             when the BGP session goes out of established state.";
         }
         action clear {
           if-feature "bt:clear-neighbors";
