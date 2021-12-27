@@ -4,7 +4,8 @@
 # Does the user have all the IETF published models.
 #
 if [ ! -d ../../yang-parameters ]; then
-   rsync -avz --delete rsync.iana.org::assignments/yang-parameters ../../
+    rsync -avz --delete rsync.iana.org::assignments/yang-parameters ../../
+    rm -rf ../../yang-parameters/*bfd*
 fi
 
 for i in ../bin/ietf-*\@$(date +%Y-%m-%d).yang
