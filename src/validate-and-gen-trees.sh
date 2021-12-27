@@ -5,6 +5,8 @@
 #
 if [ ! -d ../../yang-parameters ]; then
    rsync -avz --delete rsync.iana.org::assignments/yang-parameters ../../
+# Temporary workaround for IANA RFC 9127 issues
+rm ../../yang-parameters/*bfd*
 fi
 
 for i in ../bin/ietf-*\@$(date +%Y-%m-%d).yang
