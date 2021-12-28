@@ -609,7 +609,7 @@ module ietf-bgp-policy {
           type bgp-set-community-option-type;
           description
             "Options for modifying the community attribute with
-             the specified values.  These options apply to both
+             the specified values. These options apply to both
              methods of setting the community attribute.";
         }
 

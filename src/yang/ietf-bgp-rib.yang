@@ -405,7 +405,7 @@ submodule ietf-bgp-rib {
           leaf index {
             type uint64;
             description
-              "System generated index for each attribute set.  The
+              "System generated index for each attribute set. The
                index is used to reference an attribute set from a
                specific path.  Multiple paths may reference the same
                attribute set.";
