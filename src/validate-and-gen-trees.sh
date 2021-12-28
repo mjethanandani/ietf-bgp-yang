@@ -98,7 +98,7 @@ rm ../bin/*-rib-tree.txt.tmp
 
 echo "Validating examples"
 
-for i in yang/example-bgp-configuration-*.xml
+for i in yang/example-bgp-configuration-a.*.xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.xml"

@@ -532,8 +532,7 @@ module ietf-bgp {
             type binary {
               length "2";
             }
-            // notification does not like non-config statement.
-            // config false;
+            config false;
             description
               "The last error code and subcode seen by this
                peer on this connection.  If no error has
