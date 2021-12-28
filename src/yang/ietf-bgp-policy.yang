@@ -601,7 +601,7 @@ module ietf-bgp-policy {
         description
           "Action to set the large community attributes of the
            route, along with options to modify how the community is
-           modified. Extended communities may be set using an inline
+           modified. Large communities may be set using an inline
            list OR a reference to an existing defined set (but not
            both).";
 

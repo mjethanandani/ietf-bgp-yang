@@ -517,7 +517,7 @@ module ietf-bgp-types {
     description
       "Type definition for a large BGP community";
     reference
-          "RFC 8092: BGP Large Communities Attribute.";
+      "RFC 8092: BGP Large Communities Attribute.";
   }
 
   typedef peer-type {
