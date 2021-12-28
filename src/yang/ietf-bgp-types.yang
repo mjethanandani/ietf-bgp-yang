@@ -201,7 +201,7 @@ module ietf-bgp-types {
     description
       "Labeled IPv4 unicast (AFI,SAFI = 1,4)";
     reference
-      "RFC 3107: Carrying Label Information in BGP-4.";
+      "RFC 8277: Using BGP to Bind MPLS Labels to Address Prefixes.";
   }
 
   identity ipv6-labeled-unicast {
@@ -209,7 +209,7 @@ module ietf-bgp-types {
     description
       "Labeled IPv6 unicast (AFI,SAFI = 2,4)";
     reference
-      "RFC 3107: Carrying Label Information in BGP-4.";
+      "RFC 8277: Using BGP to Bind MPLS Labels to Address Prefixes.";
   }
 
   identity l3vpn-ipv4-unicast {
