@@ -114,7 +114,7 @@
 
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This document describes a <xref target="RFC7950">YANG</xref> data
+      <t>This document describes a <xref target="RFC7950">YANG 1.1</xref> data
       model for the <xref target="RFC4271">BGP-4</xref> protocol, including
       various protocol extensions, policy configuration, as well as defining
       key operational state data, including a Routing Information Base (RIB).
@@ -616,9 +616,6 @@ reference: RFC XXXX
           multiple contexts, but are used only to create structural elements,
           i.e., containers (leaf nodes are defined in separate groupings)</t>
 
-          <t>ietf-bgp-peer-group - groupings with data specific to the peer
-          group context</t>
-
           <t>ietf-bgp-neighbor - groupings with data specific to the neighbor
           context</t>
 
@@ -656,13 +653,15 @@ reference: RFC XXXX
       TCP Authentication Option</xref>, <xref target="RFC6514">BGP Encodings
       and Procedures for Multicast in MPLS/BGP IP VPNs</xref>, <xref
       target="RFC6793">BGP Support for Four-Octet Autonomous System (AS)
-      Number Space</xref>, <xref target="RFC7911">Advertisement of Multiple
-      Paths in BGP</xref>, <xref target="RFC8177">YANG Key Chain</xref>,
-      <xref target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission
-      Control Protocol (TCP) Configuration</xref>, <xref target=
-      "RFC9127">YANG Data Model for Bidirectional Forward
-      Detection</xref>, and <xref target="RFC8277">Carrying Label
-      Information in BGP-4</xref>.</t>
+      Number Space</xref>,
+      <xref target="RFC7911">Advertisement of Multiple Paths in BGP
+      </xref>, <xref target="RFC8177">YANG Key Chain</xref>,
+      <xref target="RFC8277">Carrying Label Information in BGP-4
+      </xref>, <xref target="RFC9067">A YANG Data Model for Routing
+      Policy</xref>, <xref target="RFC9127">YANG Data Model for
+      Bidirectional Forward Detection</xref>, and
+      <xref target="I-D.ietf-tcpm-yang-tcp">YANG Model for
+      Transmission Control Protocol (TCP) Configuration</xref>.</t>
 
       <section title="Main module and submodules for base items">
         <t><figure>
