@@ -329,6 +329,7 @@ submodule ietf-bgp-common {
       "Configuration parameters relating to BGP graceful restart.";
     leaf enabled {
       type boolean;
+      default "false";
       description
         "Enable or disable the graceful-restart capability.";
     }

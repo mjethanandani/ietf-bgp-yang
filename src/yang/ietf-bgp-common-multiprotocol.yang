@@ -66,6 +66,7 @@ submodule ietf-bgp-common-multiprotocol {
        basis";
     leaf enabled {
       type boolean;
+      must ". = ../../../../graceful-restart/enabled";
       default "false";
       description
         "This leaf indicates whether graceful-restart is enabled for
