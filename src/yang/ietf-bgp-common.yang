@@ -258,13 +258,14 @@ submodule ietf-bgp-common {
         "Routes learned via BGP are subject to weighted route
          dampening.";
     }
-    leaf send-community {
+    leaf-list send-community {
       if-feature "bt:send-communities";
-      type bt:community-type;
+      type identityref {
+        base "bt:send-community-feature";
+      }
       description
         "When supported, this tells the router to propagate any
-         prefixes that are attached to these community-types.
-         The value of 0 implies 'none'.";
+         prefixes that are attached to these community-types.";
     }
     leaf description {
       type string;

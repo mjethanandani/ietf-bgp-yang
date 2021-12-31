@@ -359,6 +359,35 @@ module ietf-bgp-types {
       "RFC 5065, Autonomous System Configuration for BGP.";
   }
 
+  identity send-community-feature {
+    description
+      "Base identity to identify send-community feature.";
+  }
+
+  identity standard {
+    base send-community-feature;
+    description
+      "Send standard communities.";
+    reference
+      "RFC 1997: BGP Communities Attribute.";
+  }
+
+  identity extended {
+    base send-community-feature;
+    description
+      "Send extended communities.";
+    reference
+      "RFC 4360: BGP Extended Communities Attribute.";
+  }
+
+  identity large {
+    base send-community-feature;
+    description
+      "Send large communities.";
+    reference
+      "RFC 8092: BGP Large Communities Attribute.";
+  }
+
   /*
    * Typedefs.
    */
@@ -574,33 +603,5 @@ module ietf-bgp-types {
       "Union type for route reflector cluster ids:
        option 1: 4-byte number
        option 2: IP address";
-  }
-
-  typedef community-type {
-    type bits {
-      bit standard {
-        position 0;
-        description
-          "Send standard communities.";
-        reference
-          "RFC 1997: BGP Communities Attribute.";
-      }
-      bit extended {
-        description
-          "Send extended communities.";
-        reference
-          "RFC 4360: BGP Extended Communities Attribute.";
-      }
-      bit large {
-        description
-          "Send large communities.";
-        reference
-          "RFC 8092: BGP Large Communities Attribute.";
-      }
-    }
-    description
-      "Type describing variations of community attributes.
-       The community types can be combined and a value of 0
-       implies 'none'";
   }
 }
