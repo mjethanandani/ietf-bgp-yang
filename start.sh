@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cd /git/ietf-bgp-model/draft
+cd /app/draft
 make clean
 make
