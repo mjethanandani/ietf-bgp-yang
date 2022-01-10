@@ -32,7 +32,7 @@ module ietf-bgp {
     prefix bfd-types;
     reference
       "I-D.ietf-bfd-rfc9127-bis: YANG Data Model for
-      Bidirectional Forward Detection (BFD).";
+       Bidirectional Forward Detection (BFD).";
   }
   import ietf-inet-types {
     prefix inet;
