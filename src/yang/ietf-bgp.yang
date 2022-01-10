@@ -959,7 +959,7 @@ module ietf-bgp {
               "BFD client configuration.";
             reference
               "I-D.ietf-bfd-rfc9127-bis: YANG Data Model for
-	      Bidirectional Forward Detection (BFD).";
+               Bidirectional Forward Detection (BFD).";
           }
           description
             "List of interfaces within the routing instance.";
