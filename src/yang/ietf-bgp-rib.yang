@@ -317,7 +317,7 @@ submodule ietf-bgp-rib {
 
   grouping ext-community-attributes {
     description
-      "A grouping for all external community parameters.";
+      "A grouping for all extended community parameters.";
 
     leaf-list ext-community {
       type rt:route-target;
@@ -328,6 +328,19 @@ submodule ietf-bgp-rib {
          formatted according to RFC 4360.";
       reference
         "RFC 4360 - BGP Extended Communities Attribute";
+    }
+  }
+
+  grouping large-community-attributes {
+    description
+      "A grouping for all large community parameters.";
+
+    leaf-list large-community {
+      type bt:bgp-large-community-type;
+      description
+        "List of BGP large community attributes.";
+      reference
+        "RFC 8092: BGP Large Communities Attribute.";
     }
   }
   
@@ -377,6 +390,27 @@ submodule ietf-bgp-rib {
                attribute set.";
           }
           uses ext-community-attributes;
+        }
+      }
+      container large-communities {
+        description
+          "Enclosing container for the list of large community
+           attribute sets.";
+        list large-community {
+          key "index";
+          config false;
+          description
+            "List of path attributes that may be in use by multiple
+             routes in the table.";
+          leaf index {
+            type uint64;
+            description
+              "System generated index for each attribute set. The
+               index is used to reference an attribute set from a
+               specific path.  Multiple paths may reference the same
+               attribute set.";
+          }
+          uses large-community-attributes;
         }
       }
 
