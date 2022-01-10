@@ -1,4 +1,4 @@
-FROM mjethanandani/build-yang:1.1
+FROM mjethanandani/build-yang:latest
 
 ADD start.sh /
 
