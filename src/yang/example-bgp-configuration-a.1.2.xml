@@ -30,6 +30,7 @@
             <enabled>true</enabled>
             <secure-session-enable>true</secure-session-enable>
             <secure-session>
+              <enable-ao>true</enable-ao>
               <ao-keychain>bgp-key-chain</ao-keychain>
             </secure-session>
             <peer-as>64497</peer-as>
