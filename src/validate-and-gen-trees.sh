@@ -39,8 +39,7 @@ do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Generating abridged tree diagram for $name.yang"
     if test "${name#^example}" = "$name"; then
-#       response=`pyang --lint --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=72 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
-        response=`yanger --strict -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -p ../../iana/yang-parameters -f tree --tree-depth=3 $name.yang > $name-sub-tree.txt.tmp`
+       response=`pyang --lint --strict --canonical -p ../../yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=72 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
     else            
         response=`pyang --ietf --strict --canonical -p ../../iana/yang-parameters -p ../bin/submodules -p ../bin -f tree --tree-depth=3 --max-line-length=72 --tree-line-length=69 $name.yang > $name-sub-tree.txt.tmp`
     fi
@@ -98,7 +97,7 @@ rm ../bin/*-rib-tree.txt.tmp
 
 echo "Validating examples"
 
-for i in yang/example-bgp-configuration-*.xml
+for i in yang/example-bgp-configuration-a.*.xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.xml"
