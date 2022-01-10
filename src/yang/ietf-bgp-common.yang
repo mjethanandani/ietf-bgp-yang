@@ -14,6 +14,12 @@ submodule ietf-bgp-common {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
+  import ietf-bfd-types {
+    prefix bfd-types;
+    reference
+      "RFC XXXX, YANG Data Model for Bidirectional Forward
+       Detection.";
+  }
 
   organization
     "IETF IDR Working Group";
@@ -258,13 +264,14 @@ submodule ietf-bgp-common {
         "Routes learned via BGP are subject to weighted route
          dampening.";
     }
-    leaf send-community {
+    leaf-list send-community {
       if-feature "bt:send-communities";
-      type bt:community-type;
+      type identityref {
+        base "bt:send-community-feature";
+      }
       description
         "When supported, this tells the router to propagate any
-         prefixes that are attached to these community-types.
-         The value of 0 implies 'none'.";
+         prefixes that are attached to these community-types.";
     }
     leaf description {
       type string;
@@ -312,7 +319,6 @@ submodule ietf-bgp-common {
          expressed as either an IP address or reference to the name
          of an interface.";
     }
-
     leaf md5-auth-password {
       type string;
       description
@@ -322,6 +328,15 @@ submodule ietf-bgp-common {
         "RFC 2385: Protection of BGP Sessions via the TCP MD5
                    Signature Option.";
     }
+    container bfd {
+      if-feature "bt:bfd";
+      uses bfd-types:client-cfg-parms;
+      description
+        "BFD client configuration.";
+      reference
+        "RFC XXXX, YANG Data Model for Bidirectional Forwarding
+         Detection.";
+    }
   }
 
   grouping graceful-restart-config {
@@ -329,6 +344,7 @@ submodule ietf-bgp-common {
       "Configuration parameters relating to BGP graceful restart.";
     leaf enabled {
       type boolean;
+      default "false";
       description
         "Enable or disable the graceful-restart capability.";
     }
