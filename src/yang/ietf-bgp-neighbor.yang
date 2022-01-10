@@ -190,6 +190,35 @@ submodule ietf-bgp-neighbor {
             "This leaf indicates whether the ability to support
              graceful-restart has been advertised to the peer";
         }
+        leaf local-forwarding-state-preserved {
+          type boolean;
+          config false;
+          description
+            "This leaf indicates whether the local router has
+             or would advertise the Forwarding State bit in its
+             Graceful Restart capability for this AFI-SAFI.";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP.";
+        }
+        leaf forwarding-state-preserved {
+          type boolean;
+          config false;
+          description
+            "This leaf indicates whether the neighbor has advertised
+             the Forwarding State bit in its Graceful Restart
+             capability for this AFI-SAFI.";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP.";
+        }
+        leaf end-of-rib-received {
+          type boolean;
+          config false;
+          description
+            "This leaf indicates whether the neighbor has advertised
+             the End-of-RIB marker for this AFI-SAFI.";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP.";
+        }
       }
       uses mp-all-afi-safi-list-contents;
       uses bgp-neighbor-use-multiple-paths;
