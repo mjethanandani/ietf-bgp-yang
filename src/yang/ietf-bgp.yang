@@ -663,52 +663,6 @@ module ietf-bgp {
                treat-as-withdraw mechanism has been applied based on
                erroneous message contents";
           }
-          container graceful-restart {
-            if-feature "bt:graceful-restart";
-            description
-              "Parameters relating the graceful restart mechanism for
-               BGP";
-            uses graceful-restart-config;
-            leaf peer-restart-time {
-              type uint16 {
-                range "0..4096";
-              }
-              config false;
-              description
-                "The period of time (advertised by the peer) that the
-                 peer expects a restart of a BGP session to take.";
-            }
-            leaf peer-restarting {
-              type boolean;
-              config false;
-              description
-                "This flag indicates whether the remote neighbor is
-                 currently in the process of restarting, and hence
-                 received routes are currently stale.";
-            }
-            leaf local-restarting {
-              type boolean;
-              config false;
-              description
-                "This flag indicates whether this BGP session is
-                 currently restarting. The flag is cleared after all
-                 NLRI have been advertised to the peer, and the
-                 End-of-RIB (EOR) marker has been cleared.";
-            }
-          }
-          uses structure-neighbor-group-logging-options;
-          uses structure-neighbor-group-ebgp-multihop;
-          uses structure-neighbor-group-route-reflector;
-          uses structure-neighbor-group-as-path-options;
-          uses structure-neighbor-group-add-paths;
-          uses bgp-neighbor-use-multiple-paths;
-          uses rt-pol:apply-policy-group;
-          container afi-safis {
-            description
-              "Per-address-family configuration parameters associated
-               with the neighbor";
-            uses bgp-neighbor-afi-safi-list;
-          }
 
           container bfd {
             if-feature "bt:bfd";
