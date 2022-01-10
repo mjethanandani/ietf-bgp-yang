@@ -946,6 +946,18 @@ module ietf-bgp {
               "Reference to the interface within the routing
                instance.";
           }
+          container bfd {
+            if-feature "bt:bfd";
+            leaf enabled {
+              type boolean;
+              default "false";
+              description
+                "Indicates whether BFD is enabled on this
+                 interface.";
+            }
+            description
+              "BFD configuration parameters.";
+          }
           description
             "List of interfaces within the routing instance.";
         }
