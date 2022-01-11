@@ -201,7 +201,7 @@ module ietf-bgp-types {
     description
       "Labeled IPv4 unicast (AFI,SAFI = 1,4)";
     reference
-      "RFC 3107: Carrying Label Information in BGP-4.";
+      "RFC 8277: Using BGP to Bind MPLS Labels to Address Prefixes.";
   }
 
   identity ipv6-labeled-unicast {
@@ -209,7 +209,7 @@ module ietf-bgp-types {
     description
       "Labeled IPv6 unicast (AFI,SAFI = 2,4)";
     reference
-      "RFC 3107: Carrying Label Information in BGP-4.";
+      "RFC 8277: Using BGP to Bind MPLS Labels to Address Prefixes.";
   }
 
   identity l3vpn-ipv4-unicast {
@@ -531,6 +531,22 @@ module ietf-bgp-types {
       "Type definition for standard BGP origin attribute";
     reference
       "RFC 4271 - A Border Gateway Protocol 4 (BGP-4), Sec 4.3";
+  }
+
+  typedef bgp-large-community-type {
+    type string {
+      // 4-octets global:4-octets local part-1:4-octets local part-2.
+      pattern '(4[0-2][0-9][0-4][0-9][0-6][0-7][0-2][0-9][0-6]|'
+            + '[1-3][0-9]{9}|[1-9]([0-9]{1,7})?[0-9]|[1-9]):'
+            + '(4[0-2][0-9][0-4][0-9][0-6][0-7][0-2][0-9][0-6]|'
+            + '[1-3][0-9]{9}|[1-9]([0-9]{1,7})?[0-9]|[1-9]):'
+            + '(4[0-2][0-9][0-4][0-9][0-6][0-7][0-2][0-9][0-6]|'
+            + '[1-3][0-9]{9}|[1-9]([0-9]{1,7})?[0-9]|[1-9])';
+    }
+    description
+      "Type definition for a large BGP community";
+    reference
+      "RFC 8092: BGP Large Communities Attribute.";
   }
 
   typedef peer-type {

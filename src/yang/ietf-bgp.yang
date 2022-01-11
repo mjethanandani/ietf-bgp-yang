@@ -31,8 +31,8 @@ module ietf-bgp {
   import ietf-bfd-types {
     prefix bfd-types;
     reference
-      "RFC BBBB, YANG Data Model for Bidirectional Forward
-       Detection.";
+      "I-D.ietf-bfd-rfc9127-bis: YANG Data Model for
+       Bidirectional Forward Detection (BFD).";
   }
   import ietf-inet-types {
     prefix inet;
@@ -614,38 +614,10 @@ module ietf-bgp {
               type boolean;
               config false;
               description
-                "This flag indicates whether the local neighbor is
+                "This flag indicates whether this BGP session is
                  currently restarting. The flag is cleared after all
                  NLRI have been advertised to the peer, and the
                  End-of-RIB (EOR) marker has been cleared.";
-            }
-            leaf mode {
-              type enumeration {
-                enum helper-only {
-                  description
-                    "The local router is operating in helper-only
-                     mode, and hence will not retain forwarding state
-                     during a local session restart, but will do so
-                     during a restart of the remote peer";
-                }
-                enum bilateral {
-                  description
-                    "The local router is operating in both helper
-                     mode, and hence retains forwarding state during
-                     a remote restart, and also maintains forwarding
-                     state during local session restart";
-                }
-                enum remote-helper {
-                  description
-                    "The local system is able to retain routes during
-                     restart but the remote system is only able to
-                     act as a helper";
-                }
-              }
-              config false;
-              description
-                "This leaf indicates the mode of operation of BGP
-                 graceful restart with the peer";
             }
           }
           uses structure-neighbor-group-logging-options;
@@ -661,6 +633,14 @@ module ietf-bgp {
                with the neighbor";
             uses bgp-neighbor-afi-safi-list;
           }
+
+          container bfd {
+            if-feature "bt:bfd";
+            uses bfd-types:client-cfg-parms;
+            description
+              "BFD configuration per-neighbor.";
+          }
+
           container statistics {
             description
               "Statistics per neighbor.";
@@ -940,12 +920,18 @@ module ietf-bgp {
           }
           container bfd {
             if-feature "bt:bfd";
-            uses bfd-types:client-cfg-parms;
+            leaf enabled {
+              type boolean;
+              default "false";
+              description
+                "Indicates whether BFD is enabled on this
+                 interface.";
+            }
             description
               "BFD client configuration.";
             reference
-              "RFC 9127, YANG Data Model for Bidirectional Forwarding
-               Detection.";
+              "I-D.ietf-bfd-rfc9127-bis: YANG Data Model for
+               Bidirectional Forward Detection (BFD).";
           }
           description
             "List of interfaces within the routing instance.";

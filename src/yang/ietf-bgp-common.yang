@@ -14,6 +14,12 @@ submodule ietf-bgp-common {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
+  import ietf-bfd-types {
+    prefix bfd-types;
+    reference
+      "RFC XXXX, YANG Data Model for Bidirectional Forward
+       Detection.";
+  }
 
   organization
     "IETF IDR Working Group";
@@ -309,11 +315,10 @@ submodule ietf-bgp-common {
       }
       description
         "Set the local IP (either IPv4 or IPv6) address to use for
-         the session when sending BGP update messages.  This may be
+         the session when sending BGP update messages. This may be
          expressed as either an IP address or reference to the name
          of an interface.";
     }
-
     leaf md5-auth-password {
       type string;
       description
@@ -322,6 +327,15 @@ submodule ietf-bgp-common {
       reference
         "RFC 2385: Protection of BGP Sessions via the TCP MD5
                    Signature Option.";
+    }
+    container bfd {
+      if-feature "bt:bfd";
+      uses bfd-types:client-cfg-parms;
+      description
+        "BFD client configuration.";
+      reference
+        "RFC XXXX, YANG Data Model for Bidirectional Forwarding
+         Detection.";
     }
   }
 

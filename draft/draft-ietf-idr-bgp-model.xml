@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc category="std" docName="draft-ietf-idr-bgp-model-latest" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-idr-bgp-model-latest" ipr="trust200902" consensus="true">
   <?rfc toc="yes"?>
 
   <front>
@@ -206,10 +206,6 @@
         <t>RFC ZZZZ, where ZZZZ is the number assigned to <xref
         target="RFC9067">A YANG Data Model for Routing
         Policy Management</xref>.</t>
-
-        <t>RFC BBBB, where BBBB is the number assigned to <xref
-        target="RFC9127">YANG Data Model for Bidirectional Forward
-        Detection</xref>.</t>
       </section>
 
       <section title="Terminology">
@@ -685,14 +681,14 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
 <CODE BEGINS> file "ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang)
 <CODE ENDS>
- 
+
         ]]></artwork>
           </figure><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-structure@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yang)
 <CODE ENDS>
- 
+
         ]]></artwork>
           </figure><figure>
             <artwork><![CDATA[
@@ -706,7 +702,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-peer-group@YYYY-MM-DD.yang)
 <CODE BEGINS> file "ietf-bgp-neighbor@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
 <CODE ENDS>
- 
+
 
 ]]></artwork>
           </figure></t>
@@ -718,7 +714,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
 <CODE BEGINS> file "ietf-bgp-types@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
 <CODE ENDS>
-       
+
         ]]></artwork>
           </figure></t>
       </section>
@@ -892,7 +888,11 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <section title="Creating BGP Instance">
         <t>This example shows how to enable BGP with the IPv4 unicast address
-        family, while adding one network to advertise.</t>
+        family, while adding one network to advertise. In addition, BFD
+	is configured at a neighbor level with a local multiplier of 2,
+	and within the choice of setting both transmit and receive
+	intervals, setting the 'desired-min-tx-interval' to 3.3 ms, and the
+	'required-min-rx-interval also to 3.3 ms.</t>
 
         <t><figure>
             <artwork><![CDATA[

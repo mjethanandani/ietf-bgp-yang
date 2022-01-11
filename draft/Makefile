@@ -63,7 +63,7 @@ $(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/example-newafi-bgp.yang > ../bin/example-newafi-bgp\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/example-newco-bgp-a.2.yang > ../bin/example-newco-bgp-a.2\@$(shell date +%Y-%m-%d).yang
 
-	cd ../src; python ./download-dependent-models.py; ./validate-and-gen-trees.sh; cd ..;
+	cd ../src; ./validate-and-gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
 
 rib: ../src/yang/ietf-bgp-rib.yang ../src/yang/ietf-bgp-rib-attributes.yang ../src/yang/ietf-bgp-rib-tables.yang ../src/yang/ietf-bgp-rib-types.yang
