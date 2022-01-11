@@ -315,7 +315,7 @@ submodule ietf-bgp-common {
       }
       description
         "Set the local IP (either IPv4 or IPv6) address to use for
-         the session when sending BGP update messages.  This may be
+         the session when sending BGP update messages. This may be
          expressed as either an IP address or reference to the name
          of an interface.";
     }

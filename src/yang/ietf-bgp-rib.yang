@@ -437,9 +437,117 @@ submodule ietf-bgp-rib {
             description
               "Routing tables for IPv4 unicast -- active when the
                afi-safi name is ipv4-unicast.";
-            uses ipv4-loc-rib;
-            uses ipv4-adj-rib;
+
+            container loc-rib {
+              config false;
+              description
+                "Container for the IPv4 BGP LOC-RIB data.";
+              container routes {
+                description
+                  "Enclosing container for list of routes in the
+                   routing table.";
+                list route {
+                  key "prefix origin path-id";
+                  description
+                    "List of routes in the table, keyed by the route
+                     prefix, the route origin, and path-id. The route
+                     origin can be either the neighbor address from
+                     which the route was learned, or the source
+                     protocol that injected the route. The path-id
+                     distinguishes routes for the same prefix
+                     received from a neighbor (e.g., if add-paths is
+                     enabled).";
+                  leaf prefix {
+                    type inet:ipv4-prefix;
+                    description
+                      "The IPv4 prefix corresponding to the route.";
+                  }
+                  uses bgp-loc-rib-common-keys;
+                  uses bgp-loc-rib-common-attr-refs;
+                  uses bgp-common-route-annotations-state;
+                  uses bgp-unknown-attr-top;
+                  uses rib-ext-route-annotations;
+                }
+              }
+            }
+
+            container neighbors {
+              config false;
+              description
+                "Enclosing container for neighbor list.";
+              list neighbor {
+                key "neighbor-address";
+                description
+                  "List of neighbors (peers) of the local BGP
+                   speaker.";
+                leaf neighbor-address {
+                  type inet:ip-address;
+                  description
+                    "IP address of the BGP neighbor or peer.";
+                }
+                container adj-rib-in-pre {
+                  description
+                    "Per-neighbor table containing the NLRI updates
+                     received from the neighbor before any local
+                     input policy rules or filters have been applied.
+                     This can be considered the 'raw' updates from
+                     the neighbor.";
+                  uses ipv4-adj-rib-common;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-in state for the containing
+                       neighbor. Subsequently, implementations might
+                       issue a 'route refresh' if 'route refresh' has
+                       been negotiatited, or reset the session. ";
+                  }
+                }
+                container adj-rib-in-post {
+                  description
+                    "Per-neighbor table containing the paths received
+                     from the neighbor that are eligible for
+                     best-path selection after local input policy
+                     rules have been applied.";
+                  uses ipv4-adj-rib-in-post;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-in state for the containing
+                       neighbor. Subsequently, implementations might
+                       issue a 'route refresh' if 'route refresh' has
+                       been negotiatited, or reset the session. ";
+                  }
+                }
+                container adj-rib-out-pre {
+                  description
+                    "Per-neighbor table containing paths eligible for
+                     sending (advertising) to the neighbor before
+                     output policy rules have been applied.";
+                  uses ipv4-adj-rib-common;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-out state for the
+                       containing neighbor. Subsequently, neighbors
+                       will announce BGP updates to resynchronize
+                       these routes.";
+                  }
+                }
+                container adj-rib-out-post {
+                  description
+                    "Per-neighbor table containing paths eligible for
+                     sending (advertising) to the neighbor after
+                     output policy rules have been applied.";
+                  uses ipv4-adj-rib-common;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-out state for the
+                       containing neighbor. Subsequently, neighbors
+                       will announce BGP updates to resynchronize
+                       these routes.";
+                  }
+                }
+              }
+            }
           }
+
           container ipv6-unicast {
             when "../name = 'bt:ipv6-unicast'" {
               description
@@ -448,8 +556,115 @@ submodule ietf-bgp-rib {
             description
               "Routing tables for IPv6 unicast -- active when the
                afi-safi name is ipv6-unicast.";
-            uses ipv6-loc-rib;
-            uses ipv6-adj-rib;
+
+            container loc-rib {
+              config false;
+              description
+                "Container for the IPv6 BGP LOC-RIB data.";
+              container routes {
+                description
+                  "Enclosing container for list of routes in the
+                   routing table.";
+                list route {
+                  key "prefix origin path-id";
+                  description
+                    "List of routes in the table, keyed by the route
+                     prefix, the route origin, and path-id. The route
+                     origin can be either the neighbor address from
+                     which the route was learned, or the source
+                     protocol that injected the route. The path-id
+                     distinguishes routes for the same prefix
+                     received from a neighbor (e.g., if add-paths is
+                     enabled).";
+                  leaf prefix {
+                    type inet:ipv6-prefix;
+                    description
+                      "The IPv6 prefix corresponding to the route.";
+                  }
+                  uses bgp-loc-rib-common-keys;
+                  uses bgp-loc-rib-common-attr-refs;
+                  uses bgp-common-route-annotations-state;
+                  uses bgp-unknown-attr-top;
+                  uses rib-ext-route-annotations;
+                }
+              }
+            }
+
+            container neighbors {
+              config false;
+              description
+                "Enclosing container for neighbor list.";
+              list neighbor {
+                key "neighbor-address";
+                description
+                  "List of neighbors (peers) of the local BGP
+                   speaker.";
+                leaf neighbor-address {
+                  type inet:ip-address;
+                  description
+                    "IP address of the BGP neighbor or peer.";
+                }
+                container adj-rib-in-pre {
+                  description
+                    "Per-neighbor table containing the NLRI updates
+                     received from the neighbor before any local
+                     input policy rules or filters have been applied.
+                     This can be considered the 'raw' updates from
+                     the neighbor.";
+                  uses ipv6-adj-rib-common;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-in state for the containing
+                       neighbor. Subsequently, implementations might
+                       issue a 'route refresh' if 'route refresh' has
+                       been negotiatited, or reset the session. ";
+                  }
+                }
+                container adj-rib-in-post {
+                  description
+                    "Per-neighbor table containing the paths received
+                     from the neighbor that are eligible for
+                     best-path selection after local input policy
+                     rules have been applied.";
+                  uses ipv6-adj-rib-in-post;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-in state for the containing
+                       neighbor. Subsequently, implementations might
+                       issue a 'route refresh' if 'route refresh' has
+                       been negotiatited, or reset the session. ";
+                  }
+                }
+                container adj-rib-out-pre {
+                  description
+                    "Per-neighbor table containing paths eligible for
+                     sending (advertising) to the neighbor before
+                     output policy rules have been applied.";
+                  uses ipv6-adj-rib-common;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-out state for the
+                       containing neighbor. Subsequently, neighbors
+                       will announce BGP updates to resynchronize
+                       these routes.";
+                  }
+                }
+                container adj-rib-out-post {
+                  description
+                    "Per-neighbor table containing paths eligible for
+                     sending (advertising) to the neighbor after
+                     output policy rules have been applied.";
+                  uses ipv6-adj-rib-common;
+                  uses clear-routes {
+                    description
+                      "Clears the adj-rib-out state for the
+                       containing neighbor. Subsequently, neighbors
+                       will announce BGP updates to resynchronize
+                       these routes.";
+                  }
+                }
+              }
+            }
           }
         }
       }
