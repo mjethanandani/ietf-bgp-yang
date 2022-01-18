@@ -21,7 +21,7 @@ module ietf-bgp-policy {
   organization
     "IETF IDR Working Group";
   contact
-    "WG Web:   <http://tools.ietf.org/wg/idr>
+    "WG Web:   <http://datatracker.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
@@ -34,7 +34,7 @@ module ietf-bgp-policy {
      It augments the base routing-policy module with BGP-specific
      options for conditions and actions.
 
-     Copyright (c) 2021 IETF Trust and the persons identified as
+     Copyright (c) 2022 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -61,19 +61,21 @@ module ietf-bgp-policy {
       "RFC XXX, BGP Model for Service Provider Network.";
   }
 
-  // typedef statements
+  /*
+   * typedef statements
+   */
 
   typedef bgp-set-community-option-type {
     type enumeration {
       enum add {
         description
           "Add the specified communities to the existing
-           community attribute";
+           community attribute.";
       }
       enum remove {
         description
           "Remove the specified communities from the
-           existing community attribute";
+           existing community attribute.";
       }
       enum replace {
         description
@@ -81,11 +83,11 @@ module ietf-bgp-policy {
            the specified communities. If an empty set is
            specified, this removes the community attribute
            from the route.";
-      }
+       }
     }
     description
       "Type definition for options when setting the community
-       attribute in a policy action";
+       attribute in a policy action.";
   }
 
   typedef bgp-next-hop-type {
@@ -95,12 +97,12 @@ module ietf-bgp-policy {
         enum self {
           description
             "Special designation for local router's own
-             address, i.e., next-hop-self";
+             address, i.e., next-hop-self.";
         }
       }
     }
     description
-      "Type definition for specifying next-hop in policy actions";
+      "Type definition for specifying next-hop in policy actions.";
   }
 
   typedef bgp-set-med-type {
@@ -116,7 +118,7 @@ module ietf-bgp-policy {
         enum igp {
           description
             "Set the MED value to the IGP cost toward the
-             next hop for the route";
+             next hop for the route.";
         }
         enum med-plus-igp {
           description
@@ -179,6 +181,7 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container ext-community-sets {
         description
           "Enclosing container for list of extended BGP community
@@ -203,6 +206,7 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container large-community-sets {
         description
           "Enclosing container for list of large BGP community
@@ -227,6 +231,7 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container as-path-sets {
         description
           "Enclosing container for list of define AS path sets.";
@@ -245,6 +250,92 @@ module ietf-bgp-policy {
             description
               "AS path regular expression -- list of ASes in the
                set.";
+          }
+        }
+      }
+
+      container prefix-sets {
+        description
+          "Definitions for a list of IPv4 or IPv6 prefixes which
+           are matched as part of a policy.";
+
+        list prefix-set {
+          key "name";
+          description
+            "List of the defined prefix sets";
+
+          leaf name {
+            type string;
+            description
+              "Name of the prefix set used to reference the set in
+               match conditions.";
+          }
+
+          leaf mode {
+            type enumeration {
+              enum ipv4 {
+                description
+                  "Prefix set contains IPv4 prefixes only.";
+              }
+              enum ipv6 {
+                description
+                  "Prefix set contains IPv6 prefixes only.";
+              }
+              enum mixed {
+                description
+                  "Prefix set contains mixed IPv4 and IPv6 prefixes";
+              }
+            }
+            description
+              "Indicates the mode of the prefix set, in terms of
+               which address families (IPv4, IPv6, or both) are
+               present. The mode provides a hint, but the device
+               must validate that all prefixes are of the indicated
+               type, and is expected to reject the configuration if
+               there is a discrepancy.  The 'mexed' mode may not be
+               supported on devices that require prefix sets to be
+               of only one address family.";
+          }
+        }
+
+        container prefixes {
+          description
+            "Enclosing container for the list of prefixes in a policy
+             prefix list.";
+
+          list prefix {
+            key "ip-prefix masklength-range";
+            description
+              "List of prefixes in the prefix set.";
+
+            leaf ip-prefix {
+              type inet:ip-prefix;
+              mandatory true;
+              description
+                "The prefix member in CIDR notation. While the
+                 prefix may be either IPv4 or IPv6, most
+                 implementations require all members of the prefix
+                 set to be the same address family. Mixing address
+                 types in the same prefix set is likely to cause an
+                 error.";
+            }
+
+            leaf masklength-range {
+              type string {
+                pattern '^(([0-9]+\.\.[0-9]+)|exact)$';
+              }
+              description
+                "Defines a range for the masklength, or 'exact' if
+                 the prefix has an exact length.
+
+                 Example: 10.3.192.0/21 through 10.3.192.0/24 would
+                 be expressed as prefix: 10.3.192.0/21,
+                 masklength-range: 21..24.
+
+                 Example: 10.3.192.0/21 would be expressed as
+                 prefix: 10.3.192.0/21,
+                 masklength-range: exact";
+            }
           }
         }
       }
@@ -448,6 +539,7 @@ module ietf-bgp-policy {
         }
         uses rt-pol:match-set-options-group;
       }
+
       container match-as-path-set {
         description
           "Match a referenced as-path set according to the logic
@@ -462,6 +554,21 @@ module ietf-bgp-policy {
             "References a defined AS path set";
         }
         uses rt-pol:match-set-options-group;
+      }
+
+      container match-prefix-set {
+        description
+          "Match a referenced prefix-set according to the logic
+           defined in the match-set-options leaf.";
+
+        leaf prefix-set {
+            type leafref {
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/" +
+                 "bp:bgp-defined-sets/bp:prefix-sets/prefix-set/" +
+                 "name";
+            }
+            description "References a defined prefix set.";
+        }
       }
     }
   }
@@ -498,6 +605,7 @@ module ietf-bgp-policy {
         description
           "Action to prepend local AS number to the AS-path a
            specified number of times";
+
         leaf repeat-n {
           type uint8 {
             range "1..max";
