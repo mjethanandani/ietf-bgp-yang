@@ -266,7 +266,7 @@ module ietf-bgp-policy {
             description
               "Name of the next-hop set.";
           }
-          leaf-list address {
+          leaf-list next-hop {
             type bgp-next-hop-type;
             max-elements 32;
             description
