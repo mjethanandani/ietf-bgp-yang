@@ -83,7 +83,7 @@ module ietf-bgp-policy {
            the specified communities. If an empty set is
            specified, this removes the community attribute
            from the route.";
-       }
+      }
     }
     description
       "Type definition for options when setting the community
@@ -292,7 +292,7 @@ module ietf-bgp-policy {
                present. The mode provides a hint, but the device
                must validate that all prefixes are of the indicated
                type, and is expected to reject the configuration if
-               there is a discrepancy.  The 'mexed' mode may not be
+               there is a discrepancy.  The 'mixed' mode may not be
                supported on devices that require prefix sets to be
                of only one address family.";
           }
