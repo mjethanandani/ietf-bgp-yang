@@ -322,11 +322,13 @@ module ietf-bgp-policy {
 
             leaf masklength-range {
               type string {
-                pattern '^(([0-9]+\.\.[0-9]+)|exact)$';
+                pattern '(([0-9]+\.\.[0-9]+)|exact)';
               }
               description
                 "Defines a range for the masklength, or 'exact' if
-                 the prefix has an exact length.
+                 the prefix has an exact length. Note, the first
+                 number in the range has to be less than the second
+                 number.
 
                  Example: 10.3.192.0/21 through 10.3.192.0/24 would
                  be expressed as prefix: 10.3.192.0/21,
