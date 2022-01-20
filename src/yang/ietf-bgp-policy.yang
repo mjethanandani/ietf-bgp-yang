@@ -259,16 +259,13 @@ module ietf-bgp-policy {
             "List of defined next-hop sets for use in policies.";
 
           leaf name {
-            type string {
-              length "1..79";
-            }
+            type string;
             mandatory true;
             description
               "Name of the next-hop set.";
           }
           leaf-list next-hop {
             type bgp-next-hop-type;
-            max-elements 32;
             description
               "List of IP addresses in the next-hop set.";
           }
