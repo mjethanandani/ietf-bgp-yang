@@ -248,6 +248,29 @@ module ietf-bgp-policy {
           }
         }
       }
+      container next-hop-sets {
+        description
+          "Definition of a list of IPv4 or IPv6 next-hops which can
+           be matched in a routing policy.";
+
+        list next-hop-set {
+          key "name";
+          description
+            "List of defined next-hop sets for use in policies.";
+
+          leaf name {
+            type string;
+            mandatory true;
+            description
+              "Name of the next-hop set.";
+          }
+          leaf-list next-hop {
+            type bgp-next-hop-type;
+            description
+              "List of IP addresses in the next-hop set.";
+          }
+        }
+      }
     }
   }
 
@@ -467,6 +490,22 @@ module ietf-bgp-policy {
           }
           description
             "References a defined AS path set";
+        }
+        uses rt-pol:match-set-options-group;
+      }
+
+      container match-next-hop-set {
+        description
+          "Match a referenced next-hop set according to the logic
+           defined in the match-set-options leaf.";
+        leaf next-hop-set {
+          type leafref {
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
+               + "bp:bgp-defined-sets/bp:next-hop-sets/"
+               + "bp:next-hop-set/bp:name";
+          }
+          description
+            "Reference a defined next-hop set.";
         }
         uses rt-pol:match-set-options-group;
       }
