@@ -297,6 +297,13 @@ module ietf-bgp-policy {
            the specified value.";
       }
 
+      leaf-list neighbor-eq {
+        type inet:ip-address;
+        description
+          "List of neighbor addresses to check for in the ingress
+           direction.";
+      }
+
       leaf route-type {
         type enumeration {
           enum internal {
