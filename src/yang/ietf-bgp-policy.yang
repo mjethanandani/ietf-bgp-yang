@@ -147,6 +147,30 @@ module ietf-bgp-policy {
        and setting it to the IGP cost (predefined value).";
   }
 
+  // Identities
+  identity prefix-mode {
+    description
+      "Base identity for address prefix mode.";
+  }
+
+  identity ipv4-mode {
+    base prefix-mode;
+    description
+      "Prefix set contains IPv4 prefixes only.";
+  }
+
+  identity ipv6-mode {
+    base prefix-mode;
+    description
+      "Prefix set contains IPv6 prefixes only.";
+  }
+
+  identity mixed-mode {
+    base prefix-mode;
+    description
+      "Prefix set contains a combination of IPv4 and IPv6 prefixes.";
+  }
+  
   // augment statements
 
   augment "/rt-pol:routing-policy/rt-pol:defined-sets" {
@@ -272,19 +296,8 @@ module ietf-bgp-policy {
           }
 
           leaf mode {
-            type enumeration {
-              enum ipv4 {
-                description
-                  "Prefix set contains IPv4 prefixes only.";
-              }
-              enum ipv6 {
-                description
-                  "Prefix set contains IPv6 prefixes only.";
-              }
-              enum mixed {
-                description
-                  "Prefix set contains mixed IPv4 and IPv6 prefixes";
-              }
+            type identityref {
+              base prefix-mode;
             }
             description
               "Indicates the mode of the prefix set, in terms of
@@ -322,13 +335,15 @@ module ietf-bgp-policy {
 
             leaf masklength-range {
               type string {
-                pattern '(([0-9]+\.\.[0-9]+)|exact)';
+                pattern
+                  '(([0-9]+\.\.[0-9]+)|exact|longer|or-longer)';
               }
               description
                 "Defines a range for the masklength, or 'exact' if
                  the prefix has an exact length. Note, the first
-                 number in the range has to be less than the second
-                 number.
+                 number in the range has to be less than or equal to
+                 the second number and the first number must be
+                 greater than or equal to the prefix length.
 
                  Example: 10.3.192.0/21 through 10.3.192.0/24 would
                  be expressed as prefix: 10.3.192.0/21,
