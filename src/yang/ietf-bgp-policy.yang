@@ -332,7 +332,7 @@ module ietf-bgp-policy {
                there is a discrepancy.  The 'mixed' mode may not be
                supported on devices that require prefix sets to be
                of only one address family.";
-	  }
+          }
         }
 
         container prefixes {
@@ -376,7 +376,7 @@ module ietf-bgp-policy {
                  Example: 10.3.192.0/21 would be expressed as
                  prefix: 10.3.192.0/21,
                  masklength-range: exact";
-	    }
+            }
           }
         }
       }
