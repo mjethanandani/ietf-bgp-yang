@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routing-policy
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-routing-policy">
+  <defined-sets>
+    <bgp-defined-sets>
+      <prefix-sets>
+	<prefix-set>
+	  <name>L0 and L1</name>
+	  <mode>ipv4-mode</mode>
+	  <prefixes>
+	    <prefix>
+	      <ip-prefix>1.1.1.1/32</ip-prefix>
+	      <masklength-range>exact</masklength-range>
+	    </prefix>
+	  </prefixes>
+	</prefix-set>
+      </prefix-sets>
+      <community-sets>
+	<community-set>
+	  <name>TO_R2</name>
+	  <member>What should this be?</member>
+	</community-set>
+      </community-sets>
+    </bgp-defined-sets>
+  </defined-sets>
+  <policy-definitions>
+    <policy-definition>
+      <name>TO_R2</name>
+      <statements>
+	<statement>
+	  <name>TO_R2</name>
+	  <actions>
+	    <set-community>
+	      <option>add</option>
+	      <community-set-ref>TO_R2</community-set-ref>
+	    </set-community>
+	  </actions>
+	</statement>
+      </statements>
+    </policy-definition>
+  </policy-definitions>
+</routing-policy>
