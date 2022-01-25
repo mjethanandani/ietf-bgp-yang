@@ -630,9 +630,10 @@ module ietf-bgp-policy {
             path "/rt-pol:routing-policy/rt-pol:defined-sets/" +
                  "bp:bgp-defined-sets/bp:prefix-sets/prefix-set/" +
                  "name";
-           }
-           description "References a defined prefix set.";
+          }
+          description "References a defined prefix set.";
         }
+        uses rt-pol:match-set-options-restricted-group;
       }
     }
   }
