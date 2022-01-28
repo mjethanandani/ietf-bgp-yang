@@ -360,11 +360,12 @@ module ietf-bgp-policy {
             leaf masklength-range {
               type string {
                 pattern
-                  '(([0-9]+\.\.[0-9]+)|exact|longer|or-longer)';
+                  '(([0-9]+\.\.[0-9]+)|exact|le|ge)';
               }
               description
-                "Defines a range for the masklength, or 'exact' if
-                 the prefix has an exact length. Note, the first
+                "Defines a range for the masklength, 'exact' if
+                 the prefix has an exact length, 'le' if the
+                 masklength is <=, and 'ge' if >=. Note, the first
                  number in the range has to be less than or equal to
                  the second number and the first number must be
                  greater than or equal to the prefix length.
@@ -375,7 +376,15 @@ module ietf-bgp-policy {
 
                  Example: 10.3.192.0/21 would be expressed as
                  prefix: 10.3.192.0/21,
-                 masklength-range: exact";
+                 masklength-range: exact
+
+                 Example: 10.3.192.0/0 le 32 would be expressed as
+                 prefix: 10.3.192.0/32,
+                 masklength-range: le
+
+                 Example: 10.3.192.0/0 ge 24 would be expressed as
+                 prefix: 10.3.192.0/24
+                 masklength-range: ge";
             }
           }
         }
