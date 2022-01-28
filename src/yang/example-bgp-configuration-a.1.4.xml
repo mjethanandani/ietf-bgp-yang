@@ -2,25 +2,24 @@
 <routing-policy
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing-policy">
   <defined-sets>
-    <bgp-defined-sets>
+    <bgp-defined-sets
+	xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
       <prefix-sets>
 	<prefix-set>
-	  <name>L0 and L1</name>
+	  <name>L0andL1</name>
 	  <mode>ipv4-mode</mode>
 	  <prefixes>
 	    <prefix>
 	      <ip-prefix>1.1.1.1/32</ip-prefix>
 	      <masklength-range>exact</masklength-range>
 	    </prefix>
+	    <prefix>
+	      <ip-prefix>2.2.2.2/32</ip-prefix>
+	      <masklength-range>exact</masklength-range>
+	    </prefix>
 	  </prefixes>
 	</prefix-set>
       </prefix-sets>
-      <community-sets>
-	<community-set>
-	  <name>TO_R2</name>
-	  <member>What should this be?</member>
-	</community-set>
-      </community-sets>
     </bgp-defined-sets>
   </defined-sets>
   <policy-definitions>
@@ -28,15 +27,64 @@
       <name>TO_R2</name>
       <statements>
 	<statement>
-	  <name>TO_R2</name>
+	  <name>10</name>
+	  <conditions>
+	    <match-prefix-set
+		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+	      <prefix-set>L0andL1</prefix-set>
+	    </match-prefix-set>
+	  </conditions>
 	  <actions>
-	    <set-community>
-	      <option>add</option>
-	      <community-set-ref>TO_R2</community-set-ref>
-	    </set-community>
+	    <bgp-actions
+		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+	      <set-community>
+		<method>inline</method>
+		<inline>
+		  <communities>11:11</communities>
+		</inline>
+	      </set-community>
+	    </bgp-actions>
 	  </actions>
 	</statement>
       </statements>
     </policy-definition>
   </policy-definitions>
 </routing-policy>
+
+<routing
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-routing"
+    xmlns:bt="urn:ietf:params:xml:ns:yang:ietf-bgp-types">
+  <control-plane-protocols>
+    <control-plane-protocol>
+      <type
+          xmlns:bgp="urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp</type>
+      <name>BGP</name>
+      <bgp
+          xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
+        <global>
+          <as>1</as>
+          <afi-safis>
+            <afi-safi>
+              <name>bt:ipv4-unicast</name>
+            </afi-safi>
+          </afi-safis>
+        </global>
+	<neighbor>
+          <remote-address>10.1.1.2</remote-address>
+	  <peer-as>2</peer-as>
+          <afi-safis>
+            <afi-safi>
+              <name>bt:ipv4-unicast</name>
+	      <send-community>standard</send-community>
+	      <apply-policy>
+		<export-policy>TO_R2</export-policy>
+		<default-export-policy>accept-route</default-export-policy>
+	      </apply-policy>
+            </afi-safi>
+          </afi-safis>
+	  </neighbor>
+      </bgp>
+    </control-plane-protocol>
+  </control-plane-protocols>
+</routing>
+
