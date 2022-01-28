@@ -400,7 +400,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
 
         <figure>
           <artwork><![CDATA[
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-sub-tree.txt)
             ]]></artwork>
         </figure>
       </section>
@@ -964,12 +964,25 @@ INSERT_TEXT_FROM_FILE(../bin/example-newco-bgp-a.2@YYYY-MM-DD.yang)
       </figure>
     </section>
 
-    <section title="Complete tree diagram">
-      <t>Here is a complete tree diagram for the model.</t>
+    <section title="Complete configuraiton tree diagram">
+      <t>Here is a complete tree diagram for the configuration and
+      operational part of the model.</t>
 
       <t><figure>
           <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-tree.txt)
+
+]]></artwork>
+        </figure></t>
+    </section>
+
+    <section title="Complete policy tree diagram">
+      <t>Here is a complete tree diagram for the policy portion of
+      the model.</t>
+
+      <t><figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
 
 ]]></artwork>
         </figure></t>
