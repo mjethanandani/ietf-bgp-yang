@@ -945,14 +945,11 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.3.xml,68)
         R1, R2, and R3, configured with AS value of 1, 2 and 3 
         respectively. R1 advertises 5 prefixes to R2 and R3, as
         shown below.</t>
-          <dl newline="true" spacing="normal" indent="3">
-	    <dt>1.1.1.1/32 and 2.2.2.2/32</dt>
-	    <dd>community 11:11</dd>
-	    <dt>3.3.3.3/32 and 4.4.4.4/32</dt>
-	    <dd>community 11:11 22:22</dd>
-	    <dt>5.5.5.5/32</dt>
-	    <dd>community 33.33</dd>
-	</dl>
+        <ul spacing="normal" indent="3">
+	  <li>1.1.1.1/32 and 2.2.2.2/32 with community 11:11</li>
+	  <li>3.3.3.3/32 and 4.4.4.4/32 with community 11:11 22:22</li>
+	  <li>5.5.5.5/32 with community 33.33</li>
+	</ul>
 	<t>Route Policy TO_R2 defines the policy that R1 uses
         in route updates towards R2. It consists of three statements,
         statement 10 that has a exact match rule for the prefix
