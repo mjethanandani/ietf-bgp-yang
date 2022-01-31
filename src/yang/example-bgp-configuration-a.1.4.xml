@@ -19,6 +19,30 @@
 	    </prefix>
 	  </prefixes>
 	</prefix-set>
+	<prefix-set>
+	  <name>L2andL3</name>
+	  <mode>ipv4-mode</mode>
+	  <prefixes>
+	    <prefix>
+	      <ip-prefix>3.3.3.3/32</ip-prefix>
+	      <masklength-range>exact</masklength-range>
+	    </prefix>
+	    <prefix>
+	      <ip-prefix>4.4.4.4/32</ip-prefix>
+	      <masklength-range>exact</masklength-range>
+	    </prefix>
+	  </prefixes>
+	</prefix-set>
+	<prefix-set>
+	  <name>L5</name>
+	  <mode>ipv4-mode</mode>
+	  <prefixes>
+	    <prefix>
+	      <ip-prefix>5.5.5.5/32</ip-prefix>
+	      <masklength-range>exact</masklength-range>
+	    </prefix>
+	  </prefixes>
+	</prefix-set>
       </prefix-sets>
     </bgp-defined-sets>
   </defined-sets>
@@ -41,6 +65,46 @@
 		<method>inline</method>
 		<inline>
 		  <communities>11:11</communities>
+		</inline>
+	      </set-community>
+	    </bgp-actions>
+	  </actions>
+	</statement>
+	<statement>
+	  <name>20</name>
+	  <conditions>
+	    <match-prefix-set
+		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+	      <prefix-set>L2andL3</prefix-set>
+	    </match-prefix-set>
+	  </conditions>
+	  <actions>
+	    <bgp-actions
+		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+	      <set-community>
+		<method>inline</method>
+		<inline>
+		  <communities>11:11 22:22</communities>
+		</inline>
+	      </set-community>
+	    </bgp-actions>
+	  </actions>
+	</statement>
+	<statement>
+	  <name>30</name>
+	  <conditions>
+	    <match-prefix-set
+		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+	      <prefix-set>L4</prefix-set>
+	    </match-prefix-set>
+	  </conditions>
+	  <actions>
+	    <bgp-actions
+		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+	      <set-community>
+		<method>inline</method>
+		<inline>
+		  <communities>33:33</communities>
 		</inline>
 	      </set-community>
 	    </bgp-actions>
