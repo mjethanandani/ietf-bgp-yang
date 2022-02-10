@@ -189,7 +189,6 @@ module ietf-bgp-policy {
             "List of defined BGP community sets.";
           leaf name {
             type string;
-            mandatory true;
             description
               "Name / label of the community set -- this is used to
                reference the set in match conditions.";
@@ -290,7 +289,6 @@ module ietf-bgp-policy {
 
           leaf name {
             type string;
-            mandatory true;
             description
               "Name of the next-hop set.";
           }
