@@ -349,11 +349,11 @@ module ietf-bgp-policy {
             mandatory true;
             description
               "The prefix member in CIDR notation. While the
-                prefix may be either IPv4 or IPv6, most
-                implementations require all members of the prefix
-                set to be the same address family. Mixing address
-                types in the same prefix set is likely to cause an
-                error.";
+               prefix may be either IPv4 or IPv6, most
+               implementations require all members of the prefix
+               set to be the same address family. Mixing address
+               types in the same prefix set is likely to cause an
+               error.";
           }
 
           leaf masklength-range {
