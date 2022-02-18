@@ -333,58 +333,58 @@ module ietf-bgp-policy {
                supported on devices that require prefix sets to be
                of only one address family.";
           }
-        }
 
-        container prefixes {
-          description
-            "Enclosing container for the list of prefixes in a policy
-             prefix list.";
-
-          list prefix {
-            key "ip-prefix masklength-range";
+          container prefixes {
             description
-              "List of prefixes in the prefix set.";
+              "Enclosing container for the list of prefixes in a
+               policy prefix list.";
 
-            leaf ip-prefix {
-              type inet:ip-prefix;
-              mandatory true;
+            list prefix {
+              key "ip-prefix masklength-range";
               description
-                "The prefix member in CIDR notation. While the
-                 prefix may be either IPv4 or IPv6, most
-                 implementations require all members of the prefix
-                 set to be the same address family. Mixing address
-                 types in the same prefix set is likely to cause an
-                 error.";
-            }
+                "List of prefixes in the prefix set.";
 
-            leaf masklength-range {
-              type string {
-                pattern
-                  '(([0-9]+\.\.[0-9]+)|exact|le|ge)';
+              leaf ip-prefix {
+                type inet:ip-prefix;
+                mandatory true;
+                description
+                  "The prefix member in CIDR notation. While the
+                   prefix may be either IPv4 or IPv6, most
+                   implementations require all members of the prefix
+                   set to be the same address family. Mixing address
+                   types in the same prefix set is likely to cause an
+                   error.";
               }
-              description
-                "Defines a range for the masklength, 'exact' if
-                 the prefix has an exact length, 'le' if the
-                 masklength is <=, and 'ge' if >=. Note, the first
-                 number in the range has to be less than or equal to
-                 the second number and the first number must be
-                 greater than or equal to the prefix length.
 
-                 Example: 10.3.192.0/21 through 10.3.192.0/24 would
-                 be expressed as prefix: 10.3.192.0/21,
-                 masklength-range: 21..24.
+              leaf masklength-range {
+                type string {
+                  pattern
+                    '(([0-9]+\.\.[0-9]+)|exact|le|ge)';
+                }
+                description
+                  "Defines a range for the masklength, 'exact' if
+                   the prefix has an exact length, 'le' if the
+                   masklength is <=, and 'ge' if >=. Note, the first
+                   number in the range has to be less than or equal
+                   to the second number and the first number must be
+                   greater than or equal to the prefix length.
 
-                 Example: 10.3.192.0/21 would be expressed as
-                 prefix: 10.3.192.0/21,
-                 masklength-range: exact
+                   Example: 10.3.192.0/21 through 10.3.192.0/24 would
+                   be expressed as prefix: 10.3.192.0/21,
+                   masklength-range: 21..24.
 
-                 Example: 10.3.192.0/0 le 32 would be expressed as
-                 prefix: 10.3.192.0/32,
-                 masklength-range: le
+                   Example: 10.3.192.0/21 would be expressed as
+                   prefix: 10.3.192.0/21,
+                   masklength-range: exact
 
-                 Example: 10.3.192.0/0 ge 24 would be expressed as
-                 prefix: 10.3.192.0/24
-                 masklength-range: ge";
+                   Example: 10.3.192.0/0 le 32 would be expressed as
+                   prefix: 10.3.192.0/32,
+                   masklength-range: le
+
+                   Example: 10.3.192.0/0 ge 24 would be expressed as
+                   prefix: 10.3.192.0/24
+                   masklength-range: ge";
+              }
             }
           }
         }

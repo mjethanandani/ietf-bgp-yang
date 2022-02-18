@@ -7,7 +7,6 @@
       <prefix-sets>
 	<prefix-set>
 	  <name>L0andL1</name>
-	  <mode>ipv4-mode</mode>
 	  <prefixes>
 	    <prefix>
 	      <ip-prefix>1.1.1.1/32</ip-prefix>
@@ -21,7 +20,6 @@
 	</prefix-set>
 	<prefix-set>
 	  <name>L2andL3</name>
-	  <mode>ipv4-mode</mode>
 	  <prefixes>
 	    <prefix>
 	      <ip-prefix>3.3.3.3/32</ip-prefix>
@@ -34,8 +32,7 @@
 	  </prefixes>
 	</prefix-set>
 	<prefix-set>
-	  <name>L5</name>
-	  <mode>ipv4-mode</mode>
+	  <name>L4</name>
 	  <prefixes>
 	    <prefix>
 	      <ip-prefix>5.5.5.5/32</ip-prefix>
@@ -53,19 +50,18 @@
 	<statement>
 	  <name>10</name>
 	  <conditions>
-	    <match-prefix-set
+	    <bgp-conditions
 		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
-	      <prefix-set>L0andL1</prefix-set>
-	    </match-prefix-set>
+	      <match-prefix-set>
+		<prefix-set>L0andL1</prefix-set>
+	      </match-prefix-set>
+	    </bgp-conditions>
 	  </conditions>
 	  <actions>
 	    <bgp-actions
 		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
 	      <set-community>
-		<method>inline</method>
-		<inline>
-		  <communities>11:11</communities>
-		</inline>
+		<communities>11:11</communities>
 	      </set-community>
 	    </bgp-actions>
 	  </actions>
@@ -73,19 +69,19 @@
 	<statement>
 	  <name>20</name>
 	  <conditions>
-	    <match-prefix-set
+	    <bgp-conditions
 		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
-	      <prefix-set>L2andL3</prefix-set>
-	    </match-prefix-set>
+	      <match-prefix-set>
+		<prefix-set>L2andL3</prefix-set>
+	      </match-prefix-set>
+	    </bgp-conditions>
 	  </conditions>
 	  <actions>
 	    <bgp-actions
 		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
 	      <set-community>
-		<method>inline</method>
-		<inline>
-		  <communities>11:11 22:22</communities>
-		</inline>
+		<communities>11:11</communities>
+		<communities>22:22</communities>
 	      </set-community>
 	    </bgp-actions>
 	  </actions>
@@ -93,19 +89,18 @@
 	<statement>
 	  <name>30</name>
 	  <conditions>
-	    <match-prefix-set
+	    <bgp-conditions
 		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
-	      <prefix-set>L4</prefix-set>
-	    </match-prefix-set>
+	      <match-prefix-set>
+		<prefix-set>L4</prefix-set>
+	      </match-prefix-set>
+	    </bgp-conditions>
 	  </conditions>
 	  <actions>
 	    <bgp-actions
 		xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
 	      <set-community>
-		<method>inline</method>
-		<inline>
-		  <communities>33:33</communities>
-		</inline>
+		<communities>33:33</communities>
 	      </set-community>
 	    </bgp-actions>
 	  </actions>
@@ -133,20 +128,22 @@
             </afi-safi>
           </afi-safis>
         </global>
-	<neighbor>
-          <remote-address>10.1.1.2</remote-address>
-	  <peer-as>2</peer-as>
-          <afi-safis>
-            <afi-safi>
-              <name>bt:ipv4-unicast</name>
-	      <send-community>standard</send-community>
-	      <apply-policy>
-		<export-policy>TO_R2</export-policy>
-		<default-export-policy>accept-route</default-export-policy>
-	      </apply-policy>
-            </afi-safi>
-          </afi-safis>
+	<neighbors>
+	  <neighbor>
+            <remote-address>10.1.1.2</remote-address>
+	    <peer-as>2</peer-as>
+            <afi-safis>
+              <afi-safi>
+		<name>bt:ipv4-unicast</name>
+	      </afi-safi>
+            </afi-safis>
+	    <send-community>bt:standard</send-community>
+	    <apply-policy>
+	      <export-policy>TO_R2</export-policy>
+	      <default-export-policy>accept-route</default-export-policy>
+	    </apply-policy>
 	  </neighbor>
+	</neighbors>
       </bgp>
     </control-plane-protocol>
   </control-plane-protocols>
