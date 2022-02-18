@@ -148,29 +148,7 @@ module ietf-bgp-policy {
   }
 
   // Identities
-  identity prefix-mode {
-    description
-      "Base identity for address prefix mode.";
-  }
 
-  identity ipv4-mode {
-    base prefix-mode;
-    description
-      "Prefix set contains IPv4 prefixes only.";
-  }
-
-  identity ipv6-mode {
-    base prefix-mode;
-    description
-      "Prefix set contains IPv6 prefixes only.";
-  }
-
-  identity mixed-mode {
-    base prefix-mode;
-    description
-      "Prefix set contains a combination of IPv4 and IPv6 prefixes.";
-  }
-  
   // augment statements
 
   augment "/rt-pol:routing-policy/rt-pol:defined-sets" {
@@ -317,21 +295,6 @@ module ietf-bgp-policy {
             "Name of the prefix set used to reference the set in
              match conditions.";
         }
-
-        leaf mode {
-          type identityref {
-            base prefix-mode;
-          }
-          description
-            "Indicates the mode of the prefix set, in terms of
-             which address families (IPv4, IPv6, or both) are
-             present. The mode provides a hint, but the device
-             must validate that all prefixes are of the indicated
-             type, and is expected to reject the configuration if
-             there is a discrepancy.  The 'mixed' mode may not be
-             supported on devices that require prefix sets to be
-             of only one address family.";
-        }
       }
 
       container prefixes {
@@ -367,7 +330,10 @@ module ietf-bgp-policy {
                masklength is <=, and 'ge' if >=. Note, the first
                number in the range has to be less than or equal to
                the second number and the first number must be
-               greater than or equal to the prefix length.
+               greater than or equal to the prefix length. Also,
+               if this is a IPv4 prefix, the masklength should not
+               be greater than 32, and if this is a IPv6 prefix,
+               the masklength should not be greater than 127.
 
                Example: 10.3.192.0/21 through 10.3.192.0/24 would
                be expressed as 
