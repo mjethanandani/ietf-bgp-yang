@@ -142,6 +142,16 @@ submodule ietf-bgp-rib {
         reference
           "RFC 4271: Section 5.1.3.";
       }
+      leaf link-local-next-hop {
+        type inet:ipv6-address;
+        description
+          "When both a global and a link-local next-hop are sent
+           when following RFC 2545 procedures, this leaf contains
+           the link-local next-hop.";
+        reference
+          "RFC 2545: Use of BGP-4 Multiprotocol Extensions for IPv6
+           Inter-Domain Routing";
+      }
       leaf med {
         type uint32;
         description
