@@ -148,29 +148,7 @@ module ietf-bgp-policy {
   }
 
   // Identities
-  identity prefix-mode {
-    description
-      "Base identity for address prefix mode.";
-  }
 
-  identity ipv4-mode {
-    base prefix-mode;
-    description
-      "Prefix set contains IPv4 prefixes only.";
-  }
-
-  identity ipv6-mode {
-    base prefix-mode;
-    description
-      "Prefix set contains IPv6 prefixes only.";
-  }
-
-  identity mixed-mode {
-    base prefix-mode;
-    description
-      "Prefix set contains a combination of IPv4 and IPv6 prefixes.";
-  }
-  
   // augment statements
 
   augment "/rt-pol:routing-policy/rt-pol:defined-sets" {
@@ -189,7 +167,6 @@ module ietf-bgp-policy {
             "List of defined BGP community sets.";
           leaf name {
             type string;
-            mandatory true;
             description
               "Name / label of the community set -- this is used to
                reference the set in match conditions.";
@@ -290,7 +267,6 @@ module ietf-bgp-policy {
 
           leaf name {
             type string;
-            mandatory true;
             description
               "Name of the next-hop set.";
           }
@@ -301,91 +277,80 @@ module ietf-bgp-policy {
           }
         }
       }
+    }
 
-      container prefix-sets {
+    container prefix-sets {
+      description
+        "Definitions for a list of IPv4 or IPv6 prefixes which
+         are matched as part of a policy.";
+
+      list prefix-set {
+        key "name";
         description
-          "Definitions for a list of IPv4 or IPv6 prefixes which
-           are matched as part of a policy.";
+          "List of the defined prefix sets";
 
-        list prefix-set {
-          key "name";
+        leaf name {
+          type string;
           description
-            "List of the defined prefix sets";
+            "Name of the prefix set used to reference the set in
+             match conditions.";
+        }
+      }
 
-          leaf name {
-            type string;
+      container prefixes {
+        description
+          "Enclosing container for the list of prefixes in a policy
+           prefix list.";
+
+        list prefix {
+          key "ip-prefix masklength-range";
+          description
+            "List of prefixes in the prefix set.";
+
+          leaf ip-prefix {
+            type inet:ip-prefix;
+            mandatory true;
             description
-              "Name of the prefix set used to reference the set in
-               match conditions.";
+              "The prefix member in CIDR notation. While the
+               prefix may be either IPv4 or IPv6, most
+               implementations require all members of the prefix
+               set to be the same address family. Mixing address
+               types in the same prefix set is likely to cause an
+               error.";
           }
 
-          leaf mode {
-            type identityref {
-              base prefix-mode;
+          leaf masklength-range {
+            type string {
+              pattern
+                '(([0-9]+\.\.[0-9]+)|exact|le|ge)';
             }
             description
-              "Indicates the mode of the prefix set, in terms of
-               which address families (IPv4, IPv6, or both) are
-               present. The mode provides a hint, but the device
-               must validate that all prefixes are of the indicated
-               type, and is expected to reject the configuration if
-               there is a discrepancy.  The 'mixed' mode may not be
-               supported on devices that require prefix sets to be
-               of only one address family.";
-          }
+              "Defines a range for the masklength, 'exact' if
+               the prefix has an exact length, 'le' if the
+               masklength is <=, and 'ge' if >=. Note, the first
+               number in the range has to be less than or equal to
+               the second number and the first number must be
+               greater than or equal to the prefix length. Also,
+               if this is a IPv4 prefix, the masklength should not
+               be greater than 32, and if this is a IPv6 prefix,
+               the masklength should not be greater than 127.
 
-          container prefixes {
-            description
-              "Enclosing container for the list of prefixes in a
-               policy prefix list.";
+               Example: 10.3.192.0/21 through 10.3.192.0/24 would
+               be expressed as 
+               prefix: 10.3.192.0/21,
+               masklength-range: 21..24.
 
-            list prefix {
-              key "ip-prefix masklength-range";
-              description
-                "List of prefixes in the prefix set.";
+               Example: 10.3.192.0/21 would be expressed as
+               prefix: 10.3.192.0/21,
+               masklength-range: exact
 
-              leaf ip-prefix {
-                type inet:ip-prefix;
-                mandatory true;
-                description
-                  "The prefix member in CIDR notation. While the
-                   prefix may be either IPv4 or IPv6, most
-                   implementations require all members of the prefix
-                   set to be the same address family. Mixing address
-                   types in the same prefix set is likely to cause an
-                   error.";
-              }
+               Example: 10.3.192.0/0 le 32 would be expressed as
+               prefix: 10.3.192.0/32,
+               masklength-range: le
 
-              leaf masklength-range {
-                type string {
-                  pattern
-                    '(([0-9]+\.\.[0-9]+)|exact|le|ge)';
-                }
-                description
-                  "Defines a range for the masklength, 'exact' if
-                   the prefix has an exact length, 'le' if the
-                   masklength is <=, and 'ge' if >=. Note, the first
-                   number in the range has to be less than or equal
-                   to the second number and the first number must be
-                   greater than or equal to the prefix length.
-
-                   Example: 10.3.192.0/21 through 10.3.192.0/24 would
-                   be expressed as prefix: 10.3.192.0/21,
-                   masklength-range: 21..24.
-
-                   Example: 10.3.192.0/21 would be expressed as
-                   prefix: 10.3.192.0/21,
-                   masklength-range: exact
-
-                   Example: 10.3.192.0/0 le 32 would be expressed as
-                   prefix: 10.3.192.0/32,
-                   masklength-range: le
-
-                   Example: 10.3.192.0/0 ge 24 would be expressed as
-                   prefix: 10.3.192.0/24
-                   masklength-range: ge";
-              }
-            }
+               Example: 10.3.192.0/0 ge 24 would be expressed as
+               prefix: 10.3.192.0/24
+               masklength-range: ge";
           }
         }
       }
@@ -556,8 +521,8 @@ module ietf-bgp-policy {
         leaf community-set {
           type leafref {
             path "/rt-pol:routing-policy/rt-pol:defined-sets/"
-               + "bp:bgp-defined-sets/bp:community-sets/"
-               + "bp:community-set/bp:name";
+               + "bgp-defined-sets/community-sets/"
+               + "community-set/name";
           }
           description
             "References a defined community set.";
@@ -572,8 +537,8 @@ module ietf-bgp-policy {
         leaf ext-community-set {
           type leafref {
             path "/rt-pol:routing-policy/rt-pol:defined-sets/"
-               + "bp:bgp-defined-sets/bp:ext-community-sets/"
-               + "bp:ext-community-set/bp:name";
+               + "bgp-defined-sets/ext-community-sets/"
+               + "ext-community-set/name";
           }
           description
             "References a defined extended community set.";
@@ -588,8 +553,8 @@ module ietf-bgp-policy {
         leaf ext-community-set {
           type leafref {
             path "/rt-pol:routing-policy/rt-pol:defined-sets/"
-               + "bp:bgp-defined-sets/bp:large-community-sets/"
-               + "bp:large-community-set/bp:name";
+               + "bgp-defined-sets/large-community-sets/"
+               + "large-community-set/name";
           }
           description
             "References a defined large community set.";
@@ -604,8 +569,8 @@ module ietf-bgp-policy {
         leaf as-path-set {
           type leafref {
             path "/rt-pol:routing-policy/rt-pol:defined-sets/"
-               + "bp:bgp-defined-sets/bp:as-path-sets/"
-               + "bp:as-path-set/bp:name";
+               + "bgp-defined-sets/as-path-sets/"
+               + "as-path-set/name";
           }
           description
             "References a defined AS path set";
@@ -620,30 +585,28 @@ module ietf-bgp-policy {
         leaf next-hop-set {
           type leafref {
             path "/rt-pol:routing-policy/rt-pol:defined-sets/"
-               + "bp:bgp-defined-sets/bp:next-hop-sets/"
-               + "bp:next-hop-set/bp:name";
+               + "bgp-defined-sets/next-hop-sets/"
+               + "next-hop-set/name";
           }
           description
             "Reference a defined next-hop set.";
         }
         uses rt-pol:match-set-options-group;
       }
+    }
+    container match-prefix-set {
+      description
+        "Match a referenced prefix-set according to the logic
+         defined in the match-set-options leaf.";
 
-      container match-prefix-set {
-        description
-          "Match a referenced prefix-set according to the logic
-           defined in the match-set-options leaf.";
-
-        leaf prefix-set {
-          type leafref {
-            path "/rt-pol:routing-policy/rt-pol:defined-sets/" +
-                 "bp:bgp-defined-sets/bp:prefix-sets/prefix-set/" +
-                 "name";
-          }
-          description "References a defined prefix set.";
+      leaf prefix-set {
+        type leafref {
+          path "/rt-pol:routing-policy/rt-pol:defined-sets/" +
+               "prefix-sets/prefix-set/name";
         }
-        uses rt-pol:match-set-options-restricted-group;
+        description "References a defined prefix set.";
       }
+      uses rt-pol:match-set-options-restricted-group;
     }
   }
 
@@ -726,8 +689,8 @@ module ietf-bgp-policy {
             leaf community-set-ref {
               type leafref {
                 path "/rt-pol:routing-policy/rt-pol:defined-sets/"
-                   + "bp:bgp-defined-sets/"
-                   + "bp:community-sets/bp:community-set/bp:name";
+                   + "bgp-defined-sets/"
+                   + "community-sets/community-set/name";
               }
               description
                 "References a defined community set by name";
@@ -768,8 +731,8 @@ module ietf-bgp-policy {
             leaf ext-community-set-ref {
               type leafref {
                 path "/rt-pol:routing-policy/rt-pol:defined-sets/"
-                   + "bp:bgp-defined-sets/bp:ext-community-sets/"
-                   + "bp:ext-community-set/bp:name";
+                   + "bgp-defined-sets/ext-community-sets/"
+                   + "ext-community-set/name";
               }
               description
                 "References a defined extended community set by
@@ -811,8 +774,8 @@ module ietf-bgp-policy {
             leaf large-community-set-ref {
               type leafref {
                 path "/rt-pol:routing-policy/rt-pol:defined-sets/"
-                   + "bp:bgp-defined-sets/bp:large-community-sets/"
-                   + "bp:large-community-set/bp:name";
+                   + "bgp-defined-sets/large-community-sets/"
+                   + "large-community-set/name";
               }
               description
                 "References a defined extended community set by
