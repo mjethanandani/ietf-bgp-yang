@@ -502,6 +502,38 @@ submodule ietf-bgp-common {
           "Flag to enable sending/receiving of MED metric attribute
            in routing updates.";
       }
+      container med-plus-igp {
+        leaf enabled {
+          type boolean;
+          default "false";
+          description
+            "When enabled allows BGP to use MED and IGP values
+             defined below to determine the optimal route.";
+          reference
+            "RFC 4451: BGP MED Considerations.";
+        }
+        leaf igp-multiplier {
+          type uint16;
+          default 1;
+          description
+            "Specifies an IGP cost multiplier.";
+          reference
+            "RFC 4451: BGP MED Considerations.";
+        }
+        leaf med-multiplier {
+          type uint16;
+          default 1;
+          description
+            "Specifies a MED multiplier.";
+          reference
+            "RFC 4451: BGP MED Considerations.";
+        }
+        description
+          "The med-plus-igp option enables BGP to use the sum of
+           MED multiplied by a MED multiplier and IGP cost multiplied
+           by IGP cost multiplier to select routes when MED is
+           required to determine the optimal route.";
+      }
     }
   }
 
