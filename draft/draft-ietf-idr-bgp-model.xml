@@ -884,12 +884,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       used.</t>
 
       <section title="Creating BGP Instance">
-        <t>This example shows how to enable BGP with the IPv4 unicast address
-        family, while adding one network to advertise. In addition, BFD
-	is configured at a neighbor level with a local multiplier of 2,
-	and within the choice of setting both transmit and receive
-	intervals, setting the 'desired-min-tx-interval' to 3.3 ms, and the
-	'required-min-rx-interval also to 3.3 ms.</t>
+        <t>This example shows how to enable BGP for a IPv4 unicast
+        address family.</t>
 
         <t><figure>
             <artwork><![CDATA[
@@ -900,9 +896,14 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.0.xml,68)
       </section>
 
       <section title="Neighbor Address Family Configuration">
-        <t>This example shows how to configure a BGP peer, where the remote
-        address is 192.0.2.1, the remote AS number is 64497, and the address
-        family of the peer is IPv4 unicast.</t>
+        <t>This example shows how to configure a BGP neighbor, where
+        the remote address is 192.0.2.1, the remote AS number is
+        64497, and the address family of the neighbor is IPv4
+        unicast. The neighbor is configured for route flap prevention
+        and it set up for standard and large communities. In addition,
+        BFD is configured at a neighbor level with a local multiplier
+        of 2, a desired minimum transmit interval, and a required
+        minimum receive interval of 3.3 ms.</t>
 
         <t><figure>
             <artwork><![CDATA[
