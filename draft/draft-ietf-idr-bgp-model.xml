@@ -633,35 +633,38 @@ reference: RFC XXXX
     </section>
 
     <section title="Structure of the YANG modules">
-      <t>The YANG model can be subdivided between the main module for base
-      items, types, policy data, and the RIB module. It references <xref
-      target="RFC1997">BGP Communities Attribute </xref>, <xref
-      target="RFC2918">Route Refresh Capability for BGP-4</xref>, <xref
-      target="RFC3765">NOPEER Community for BGP</xref>, <xref
-      target="RFC4364">BGP/MPLS IP Virtual Private Networks (VPNs)</xref>,
-      <xref target="RFC4659">BGP-MPLS IP Virtual Private Network (VPN)
-      Extension for IPv6 VPN</xref>, <xref target="RFC4724">Graceful Restart
-      Mechanism for BGP</xref>, <xref target="RFC4760">Multiprotocol
-      Extentions for BGP-4</xref>, <xref target="RFC4761">Virtual Private LAN
-      Service (VPLS) Using BGP for Auto-Discovery and Signaling</xref>, <xref
-      target="RFC5065">Autonomous System Configuration for BGP</xref>, <xref
-      target="RFC5082">The Generalized TTL Security Mechanism (GTSM)</xref>,
-      <xref target="RFC5880">Bidirectional Forward Detection (BFD)</xref>,
-      <xref target="RFC5881">Bidirectional Forward Detection for IPv4 and IPv6
-      (Single Hop)</xref>, <xref target="RFC5883">Bidirectional Forwarding
-      Detection (BFD) for Multihop Paths</xref>, <xref target="RFC5925">The
-      TCP Authentication Option</xref>, <xref target="RFC6514">BGP Encodings
-      and Procedures for Multicast in MPLS/BGP IP VPNs</xref>, <xref
-      target="RFC6793">BGP Support for Four-Octet Autonomous System (AS)
-      Number Space</xref>,
-      <xref target="RFC7911">Advertisement of Multiple Paths in BGP
-      </xref>, <xref target="RFC8177">YANG Key Chain</xref>,
-      <xref target="RFC8277">Carrying Label Information in BGP-4
-      </xref>, <xref target="RFC9067">A YANG Data Model for Routing
+      <t>The YANG model can be subdivided between the main module for
+      base items, types, policy data, and the RIB module. It
+      references <xref target="RFC1997">BGP Communities Attribute
+      </xref>, <xref target="RFC2918">Route Refresh Capability for
+      BGP-4</xref>, <xref target="RFC3765">NOPEER Community for
+      BGP</xref>, <xref target="RFC4364">BGP/MPLS IP Virtual Private
+      Networks (VPNs)</xref>, <xref target="RFC4451">BGP MED
+      Considerations</xref>, <xref target="RFC4659">BGP-MPLS IP
+      Virtual Private Network (VPN) Extension for IPv6 VPN</xref>,
+      <xref target="RFC4724">Graceful Restart Mechanism for
+      BGP</xref>, <xref target="RFC4760">Multiprotocol Extentions for
+      BGP-4</xref>, <xref target="RFC4761">Virtual Private LAN Service
+      (VPLS) Using BGP for Auto-Discovery and Signaling</xref>, <xref
+      target="RFC5065">Autonomous System Configuration for BGP</xref>,
+      <xref target="RFC5082">The Generalized TTL Security Mechanism
+      (GTSM)</xref>, <xref target="RFC5880">Bidirectional Forward
+      Detection (BFD)</xref>, <xref target="RFC5881">Bidirectional
+      Forward Detection for IPv4 and IPv6 (Single Hop)</xref>, <xref
+      target="RFC5883">Bidirectional Forwarding Detection (BFD) for
+      Multihop Paths</xref>, <xref target="RFC5925">The TCP
+      Authentication Option</xref>, <xref target="RFC6514">BGP
+      Encodings and Procedures for Multicast in MPLS/BGP IP
+      VPNs</xref>, <xref target="RFC6793">BGP Support for Four-Octet
+      Autonomous System (AS) Number Space</xref>, <xref
+      target="RFC7911">Advertisement of Multiple Paths in BGP </xref>,
+      <xref target="RFC8177">YANG Key Chain</xref>, <xref
+      target="RFC8277">Carrying Label Information in BGP-4 </xref>,
+      <xref target="RFC9067">A YANG Data Model for Routing
       Policy</xref>, <xref target="RFC9127">YANG Data Model for
-      Bidirectional Forward Detection</xref>, and
-      <xref target="I-D.ietf-tcpm-yang-tcp">YANG Model for
-      Transmission Control Protocol (TCP) Configuration</xref>.</t>
+      Bidirectional Forward Detection</xref>, and <xref
+      target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission
+      Control Protocol (TCP) Configuration</xref>.</t>
 
       <section title="Main module and submodules for base items">
         <t><figure>
@@ -803,6 +806,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.4271.xml'?>
 
       <?rfc include='reference.RFC.4364.xml'?>
+
+      <?rfc include='reference.RFC.4451.xml'?>
 
       <?rfc include='reference.RFC.4456.xml'?>
 
