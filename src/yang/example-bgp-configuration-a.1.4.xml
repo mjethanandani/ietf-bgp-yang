@@ -2,9 +2,8 @@
 <routing-policy
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing-policy">
   <defined-sets>
-    <bgp-defined-sets
+    <prefix-sets
         xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
-      <prefix-sets>
         <prefix-set>
           <name>L0andL1</name>
           <prefixes>
@@ -41,7 +40,6 @@
           </prefixes>
         </prefix-set>
       </prefix-sets>
-    </bgp-defined-sets>
   </defined-sets>
   <policy-definitions>
     <policy-definition>

@@ -295,17 +295,16 @@ module ietf-bgp-policy {
             "Name of the prefix set used to reference the set in
              match conditions.";
         }
-      }
 
-      container prefixes {
-        description
-          "Enclosing container for the list of prefixes in a policy
-           prefix list.";
-
-        list prefix {
-          key "ip-prefix masklength-range";
+        container prefixes {
           description
-            "List of prefixes in the prefix set.";
+            "Enclosing container for the list of prefixes in a policy
+             prefix list.";
+
+          list prefix {
+            key "ip-prefix masklength-range";
+            description
+              "List of prefixes in the prefix set.";
 
           leaf ip-prefix {
             type inet:ip-prefix;
@@ -351,6 +350,7 @@ module ietf-bgp-policy {
                Example: 10.3.192.0/0 ge 24 would be expressed as
                prefix: 10.3.192.0/24
                masklength-range: ge";
+            }
           }
         }
       }
@@ -593,20 +593,21 @@ module ietf-bgp-policy {
         }
         uses rt-pol:match-set-options-group;
       }
-    }
-    container match-prefix-set {
-      description
-        "Match a referenced prefix-set according to the logic
-         defined in the match-set-options leaf.";
 
-      leaf prefix-set {
-        type leafref {
-          path "/rt-pol:routing-policy/rt-pol:defined-sets/" +
-               "prefix-sets/prefix-set/name";
+      container match-prefix-set {
+        description
+          "Match a referenced prefix-set according to the logic
+           defined in the match-set-options leaf.";
+
+        leaf prefix-set {
+          type leafref {
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/" +
+                 "prefix-sets/prefix-set/name";
+          }
+          description "References a defined prefix set.";
         }
-        description "References a defined prefix set.";
+        uses rt-pol:match-set-options-restricted-group;
       }
-      uses rt-pol:match-set-options-restricted-group;
     }
   }
 
