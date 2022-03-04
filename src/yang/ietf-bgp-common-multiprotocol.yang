@@ -238,7 +238,7 @@ submodule ietf-bgp-common-multiprotocol {
         type uint32;
         description
           "Maximum number of prefixes that will be accepted from the
-           neighbor";
+           neighbor in the inbound direction.";
       }
       leaf shutdown-threshold-pct {
         type rt-types:percentage;
