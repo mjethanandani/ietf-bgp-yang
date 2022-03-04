@@ -2,46 +2,51 @@
 <routing-policy
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing-policy">
   <defined-sets>
-    <bgp-defined-sets
-        xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
-      <prefix-sets>
-        <prefix-set>
-          <name>L0andL1</name>
-          <prefixes>
-            <prefix>
-              <ip-prefix>1.1.1.1/32</ip-prefix>
-              <masklength-range>exact</masklength-range>
-            </prefix>
-            <prefix>
-              <ip-prefix>2.2.2.2/32</ip-prefix>
-              <masklength-range>exact</masklength-range>
-            </prefix>
-          </prefixes>
-        </prefix-set>
-        <prefix-set>
-          <name>L2andL3</name>
-          <prefixes>
-            <prefix>
-              <ip-prefix>3.3.3.3/32</ip-prefix>
-              <masklength-range>exact</masklength-range>
-            </prefix>
-            <prefix>
-              <ip-prefix>4.4.4.4/32</ip-prefix>
-              <masklength-range>exact</masklength-range>
-            </prefix>
-          </prefixes>
-        </prefix-set>
-        <prefix-set>
-          <name>L4</name>
-          <prefixes>
-            <prefix>
-              <ip-prefix>5.5.5.5/32</ip-prefix>
-              <masklength-range>exact</masklength-range>
-            </prefix>
-          </prefixes>
-        </prefix-set>
-      </prefix-sets>
-    </bgp-defined-sets>
+    <prefix-sets>
+      <prefix-set>
+        <name>L0andL1</name>
+	<mode>ipv4</mode>
+        <prefixes>
+          <prefix-list>
+            <ip-prefix>1.1.1.1/32</ip-prefix>
+	    <mask-length-lower>32</mask-length-lower>
+	    <mask-length-upper>32</mask-length-upper>
+          </prefix-list>
+          <prefix-list>
+            <ip-prefix>2.2.2.2/32</ip-prefix>
+	    <mask-length-lower>32</mask-length-lower>
+	    <mask-length-upper>32</mask-length-upper>
+          </prefix-list>
+        </prefixes>
+      </prefix-set>
+      <prefix-set>
+        <name>L2andL3</name>
+	<mode>ipv4</mode>
+        <prefixes>
+          <prefix-list>
+            <ip-prefix>3.3.3.3/32</ip-prefix>
+	    <mask-length-lower>32</mask-length-lower>
+	    <mask-length-upper>32</mask-length-upper>
+          </prefix-list>
+          <prefix-list>
+            <ip-prefix>4.4.4.4/32</ip-prefix>
+	    <mask-length-lower>32</mask-length-lower>
+	    <mask-length-upper>32</mask-length-upper>
+          </prefix-list>
+        </prefixes>
+      </prefix-set>
+      <prefix-set>
+        <name>L4</name>
+	<mode>ipv4</mode>
+        <prefixes>
+          <prefix-list>
+            <ip-prefix>5.5.5.5/32</ip-prefix>
+	    <mask-length-lower>32</mask-length-lower>
+	    <mask-length-upper>32</mask-length-upper>
+          </prefix-list>
+        </prefixes>
+      </prefix-set>
+    </prefix-sets>
   </defined-sets>
   <policy-definitions>
     <policy-definition>
@@ -50,12 +55,9 @@
         <statement>
           <name>10</name>
           <conditions>
-            <bgp-conditions
-                xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
-              <match-prefix-set>
-                <prefix-set>L0andL1</prefix-set>
-              </match-prefix-set>
-            </bgp-conditions>
+            <match-prefix-set>
+              <prefix-set>L0andL1</prefix-set>
+            </match-prefix-set>
           </conditions>
           <actions>
             <bgp-actions
@@ -70,12 +72,9 @@
         <statement>
           <name>20</name>
           <conditions>
-            <bgp-conditions
-                xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
-              <match-prefix-set>
-                <prefix-set>L2andL3</prefix-set>
-              </match-prefix-set>
-            </bgp-conditions>
+            <match-prefix-set>
+              <prefix-set>L2andL3</prefix-set>
+            </match-prefix-set>
           </conditions>
           <actions>
             <bgp-actions
@@ -91,12 +90,9 @@
         <statement>
           <name>30</name>
           <conditions>
-            <bgp-conditions
-                xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
-              <match-prefix-set>
-                <prefix-set>L4</prefix-set>
-              </match-prefix-set>
-            </bgp-conditions>
+            <match-prefix-set>
+              <prefix-set>L4</prefix-set>
+            </match-prefix-set>
           </conditions>
           <actions>
             <bgp-actions

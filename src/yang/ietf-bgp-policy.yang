@@ -277,83 +277,6 @@ module ietf-bgp-policy {
           }
         }
       }
-    
-      container prefix-sets {
-        description
-          "Definitions for a list of IPv4 or IPv6 prefixes which
-           are matched as part of a policy.";
-
-        list prefix-set {
-          key "name";
-          description
-            "List of the defined prefix sets";
-
-          leaf name {
-            type string;
-            description
-              "Name of the prefix set used to reference the set in
-               match conditions.";
-          }
-
-          container prefixes {
-            description
-              "Enclosing container for the list of prefixes in a
-               policy prefix list.";
-
-            list prefix {
-              key "ip-prefix masklength-range";
-              description
-                "List of prefixes in the prefix set.";
-
-              leaf ip-prefix {
-                type inet:ip-prefix;
-                mandatory true;
-                description
-                  "The prefix member in CIDR notation. While the
-                   prefix may be either IPv4 or IPv6, most
-                   implementations require all members of the prefix
-                   set to be the same address family. Mixing address
-                   types in the same prefix set is likely to cause an
-                   error.";
-              }
-
-              leaf masklength-range {
-                type string {
-                  pattern
-                    '(([0-9]+\.\.[0-9]+)|exact|le|ge)';
-                }
-                description
-                  "Defines a range for the masklength, 'exact' if
-                   the prefix has an exact length, 'le' if the
-                   masklength is <=, and 'ge' if >=. Note, the first
-                   number in the range has to be less than or equal to
-                   the second number and the first number must be
-                   greater than or equal to the prefix length. Also,
-                   if this is a IPv4 prefix, the masklength should not
-                   be greater than 32, and if this is a IPv6 prefix,
-                   the masklength should not be greater than 127.
-
-                   Example: 10.3.192.0/21 through 10.3.192.0/24 would
-                   be expressed as 
-                   prefix: 10.3.192.0/21,
-                   masklength-range: 21..24.
-
-                   Example: 10.3.192.0/21 would be expressed as
-                   prefix: 10.3.192.0/21,
-                   masklength-range: exact
-
-                   Example: 10.3.192.0/0 le 32 would be expressed as
-                   prefix: 10.3.192.0/32,
-                   masklength-range: le
-
-                   Example: 10.3.192.0/0 ge 24 would be expressed as
-                   prefix: 10.3.192.0/24
-                   masklength-range: ge";
-              }
-            }
-          }
-        }
-      }
     }
   }
 
@@ -592,21 +515,6 @@ module ietf-bgp-policy {
             "Reference a defined next-hop set.";
         }
         uses rt-pol:match-set-options-group;
-      }
-
-      container match-prefix-set {
-        description
-          "Match a referenced prefix-set according to the logic
-           defined in the match-set-options leaf.";
-
-        leaf prefix-set {
-          type leafref {
-            path "/rt-pol:routing-policy/rt-pol:defined-sets" +
-                 "/bgp-defined-sets/prefix-sets/prefix-set/name";
-          }
-          description "References a defined prefix set.";
-        }
-        uses rt-pol:match-set-options-restricted-group;
       }
     }
   }
