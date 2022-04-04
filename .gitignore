@@ -1,0 +1,17 @@
+draft-ietf-idr-bgp-model-*.*
+bin/*
+draft/Diff_*
+logs/*
+ncs-cdb*
+packages/*
+src/yang/example-bgp-configuration-8*
+src/yang/example-bgp-configuration-nsx-*
+src/yang/example-evpn-configuration-*
+src/yang/example-l2vpn-configuration-*
+src/yang/ietf-bgp.mib*
+src/yang/show-*
+state/*
+README.ncs
+ncs.conf
+setup.mk
+*~
