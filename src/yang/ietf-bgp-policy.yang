@@ -693,6 +693,26 @@ module ietf-bgp-policy {
           }
         }
       }
+
+      container set-med-plus-igp {
+        description
+          "The med-plus-igp option enables BGP to use the sum of MED
+           multiplied by a MED multiplier and IGP cost multiplied
+           by IGP cost multiplier to select routes when MED is
+           required to determine the optimal route.";
+
+        leaf med-multiplier {
+          description
+            "The MED muliplier used to compute med-plus-igp.";
+          type uint32;
+        }
+
+        leaf igp-multiplier {
+          description
+            "The IGP multiplier used to compute med-plus-idg.";
+          type uint32;
+        }
+      }
     }
   }
 }
