@@ -54,25 +54,16 @@ module ietf-bgp-types {
   /*
    * Features.
    */
-
-  feature graceful-restart {
+  feature route-refresh {
     description
-      "Graceful restart as defined in RFC 4724 is supported.";
+      "Support for the BGP Route Refresh capability.";
+    reference
+      "RFC 2918: Route Refresh Capability for BGP-4.";
   }
 
-  feature clear-neighbors {
+  feature damping {
     description
-      "Clearing of BGP neighbors is supported.";
-  }
-
-  feature clear-statistics {
-    description
-      "Clearing of BGP statistics is supported.";
-  }
-
-  feature send-communities {
-    description
-      "Enable the propagation of communities.";
+      "Weighted route dampening is supported.";
   }
 
   feature ttl-security {
@@ -80,6 +71,11 @@ module ietf-bgp-types {
       "BGP Time To Live (TTL) security check support.";
     reference
       "RFC 5082, The Generalized TTL Security Mechanism (GTSM).";
+  }
+
+  feature graceful-restart {
+    description
+      "Graceful restart as defined in RFC 4724 is supported.";
   }
 
   feature bfd {
@@ -93,16 +89,6 @@ module ietf-bgp-types {
                  Multihop Paths.";
   }
 
-  feature damping {
-    description
-      "Weighted route dampening is supported.";
-  }
-
-  feature clear-routes {
-    description
-      "Clearing of BGP routes is supported.";
-  }
-
   feature add-paths {
     description
       "Advertisement of multiple paths for the same address prefix
@@ -112,11 +98,24 @@ module ietf-bgp-types {
       "RFC 7911: Advertisement of Multiple Paths in BGP.";
   }
 
-  feature route-refresh {
+  feature send-communities {
     description
-      "Support for the BGP Route Refresh capability.";
-    reference
-      "RFC 2918: Route Refresh Capability for BGP-4.";
+      "Enable the propagation of communities.";
+  }
+
+  feature clear-neighbors {
+    description
+      "Clearing of BGP neighbors is supported.";
+  }
+
+  feature clear-statistics {
+    description
+      "Clearing of BGP statistics is supported.";
+  }
+
+  feature clear-routes {
+    description
+      "Clearing of BGP routes is supported.";
   }
 
   /*
