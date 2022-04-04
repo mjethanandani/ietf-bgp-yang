@@ -702,15 +702,15 @@ module ietf-bgp-policy {
            required to determine the optimal route.";
 
         leaf med-multiplier {
+          type uint32;
           description
             "The MED muliplier used to compute med-plus-igp.";
-          type uint32;
         }
 
         leaf igp-multiplier {
+          type uint32;
           description
             "The IGP multiplier used to compute med-plus-idg.";
-          type uint32;
         }
       }
     }
