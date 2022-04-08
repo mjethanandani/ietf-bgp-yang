@@ -110,7 +110,8 @@ submodule ietf-bgp-rib-tables {
     leaf best-path {
       type boolean;
       description
-        "Current path was selected as the best path.";
+        "Current path was selected as the best path. Best path
+         should indicate that the route is present in BGP LOC-RIB.";
     }
   }
 
