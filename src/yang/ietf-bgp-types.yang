@@ -54,28 +54,13 @@ module ietf-bgp-types {
   /*
    * Features.
    */
-  feature route-refresh {
+  feature add-paths {
     description
-      "Support for the BGP Route Refresh capability.";
+      "Advertisement of multiple paths for the same address prefix
+       without the new paths implicitly replacing any previous
+       ones.";
     reference
-      "RFC 2918: Route Refresh Capability for BGP-4.";
-  }
-
-  feature damping {
-    description
-      "Weighted route dampening is supported.";
-  }
-
-  feature ttl-security {
-    description
-      "BGP Time To Live (TTL) security check support.";
-    reference
-      "RFC 5082, The Generalized TTL Security Mechanism (GTSM).";
-  }
-
-  feature graceful-restart {
-    description
-      "Graceful restart as defined in RFC 4724 is supported.";
+      "RFC 7911: Advertisement of Multiple Paths in BGP.";
   }
 
   feature bfd {
@@ -87,20 +72,6 @@ module ietf-bgp-types {
                  (Single Hop),
        RFC 5883, Bidirectional Forwarding Detection (BFD) for
                  Multihop Paths.";
-  }
-
-  feature add-paths {
-    description
-      "Advertisement of multiple paths for the same address prefix
-       without the new paths implicitly replacing any previous
-       ones.";
-    reference
-      "RFC 7911: Advertisement of Multiple Paths in BGP.";
-  }
-
-  feature send-communities {
-    description
-      "Enable the propagation of communities.";
   }
 
   feature clear-neighbors {
@@ -116,6 +87,35 @@ module ietf-bgp-types {
   feature clear-routes {
     description
       "Clearing of BGP routes is supported.";
+  }
+
+  feature damping {
+    description
+      "Weighted route dampening is supported.";
+  }
+
+  feature graceful-restart {
+    description
+      "Graceful restart as defined in RFC 4724 is supported.";
+  }
+
+  feature route-refresh {
+    description
+      "Support for the BGP Route Refresh capability.";
+    reference
+      "RFC 2918: Route Refresh Capability for BGP-4.";
+  }
+
+  feature send-communities {
+    description
+      "Enable the propagation of communities.";
+  }
+
+  feature ttl-security {
+    description
+      "BGP Time To Live (TTL) security check support.";
+    reference
+      "RFC 5082, The Generalized TTL Security Mechanism (GTSM).";
   }
 
   /*
