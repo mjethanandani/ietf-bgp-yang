@@ -199,7 +199,7 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              type bt:bgp-ext-community-type;
+              type rt-types:route-target;
               type bt:bgp-community-regexp-type;
             }
             description
