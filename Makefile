@@ -21,16 +21,7 @@ push:
 debug:
 	docker run -it $(image) bash
 
-clean: packages-clean
+clean:
 	make -C draft clean
 	-docker rm $(leftover)
 	-docker rmi $(leftover-image)
-
-start: stop netsim-start
-	if [ ! -d ncs-cdb ]; then mkdir ncs-cdb; fi
-	if [ ! -d init_data ]; then mkdir init_data; fi
-	cp init_data/* ncs-cdb/. > /dev/null 2>&1 || true
-	ncs
-
-stop: netsim-stop
-	ncs --stop || true
