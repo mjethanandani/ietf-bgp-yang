@@ -4,6 +4,12 @@ submodule ietf-bgp-neighbor {
     prefix bgp;
   }
 
+  import ietf-yang-types {
+    prefix yang;
+    reference
+      "RFC 6991: Common YANG Data Types.";
+  }
+
   import ietf-bgp-types {
     prefix bt;
     reference
@@ -95,35 +101,35 @@ submodule ietf-bgp-neighbor {
       "Grouping of BGP message types, included for re-use across
        counters";
     leaf updates-received {
-      type uint64;
+      type yang:zero-based-counter64;
       description
         "Number of BGP UPDATE messages received from this neighbor.";
       reference
         "RFC 4273: bgpPeerInUpdates.";
     }
     leaf updates-sent {
-      type uint64;
+      type yang:zero-based-counter64;
       description
         "Number of BGP UPDATE messages sent to this neighbor";
       reference
         "RFC 4273 - bgpPeerOutUpdates";
     }
     leaf messages-received {
-      type uint64;
+      type yang:zero-based-counter64;
       description
         "Number of BGP messages received from thsi neighbor";
       reference
         "RFC 4273 - bgpPeerInTotalMessages";
     }
     leaf messages-sent {
-      type uint64;
+      type yang:zero-based-counter64;
       description
         "Number of BGP messages received from thsi neighbor";
       reference
         "RFC 4273 - bgpPeerOutTotalMessages";
     }
     leaf notification {
-      type uint64;
+      type yang:zero-based-counter64;
       description
         "Number of BGP NOTIFICATION messages indicating an error
          condition has occurred exchanged.";
