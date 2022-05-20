@@ -473,7 +473,7 @@ module ietf-bgp-policy {
         description
           "Match a referenced large community-set according to the
            logic defined in the match-set-options leaf.";
-        leaf ext-community-set {
+        leaf large-community-set {
           type leafref {
             path "/rt-pol:routing-policy/rt-pol:defined-sets/"
                + "bgp-defined-sets/large-community-sets/"
