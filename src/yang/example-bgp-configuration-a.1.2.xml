@@ -3,8 +3,58 @@
     xmlns="urn:ietf:params:xml:ns:yang:ietf-key-chain">
   <key-chain>
     <name>bgp-key-chain</name>
+    <description>"An example of TCP-AO configuration for BGP"</description>
+    <key>
+      <key-id>55</key-id>
+      <lifetime>
+        <send-lifetime>
+          <start-date-time>2017-01-01T00:00:00Z</start-date-time>
+          <end-date-time>2017-02-01T00:00:00Z</end-date-time>
+        </send-lifetime>
+        <accept-lifetime>
+          <start-date-time>2016-12-31T23:59:55Z</start-date-time>
+          <end-date-time>2017-02-01T00:00:05Z</end-date-time>
+        </accept-lifetime>
+      </lifetime>
+      <crypto-algorithm>hmac-sha-1</crypto-algorithm>
+      <key-string>
+	<keystring>testvector</keystring>
+      </key-string>
+      <authentication
+	  xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
+	<keychain>bgp-key-chain</keychain>
+	<enable-ao>true</enable-ao>
+	<send-id>65</send-id>
+	<recv-id>87</recv-id>
+      </authentication>
+    </key>
+    <key>
+      <key-id>56</key-id>
+      <lifetime>
+        <send-lifetime>
+          <start-date-time>2017-01-01T00:00:00Z</start-date-time>
+          <end-date-time>2017-02-01T00:00:00Z</end-date-time>
+        </send-lifetime>
+        <accept-lifetime>
+          <start-date-time>2016-12-31T23:59:55Z</start-date-time>
+          <end-date-time>2017-02-01T00:00:05Z</end-date-time>
+        </accept-lifetime>
+      </lifetime>
+      <crypto-algorithm>hmac-sha-1</crypto-algorithm>
+      <key-string>
+	<keystring>testvector</keystring>
+      </key-string>
+      <authentication
+	  xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
+	<keychain>bgp-key-chain</keychain>
+	<enable-ao>true</enable-ao>
+	<send-id>65</send-id>
+	<recv-id>87</recv-id>
+      </authentication>
+    </key>
   </key-chain>
 </key-chains>
+
 <routing
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
   <control-plane-protocols>
