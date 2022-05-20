@@ -7,7 +7,7 @@ submodule ietf-bgp-rib-attributes {
   // import some basic types
 
   import ietf-bgp-types {
-    prefix bgpt;
+    prefix bt;
   }
   import ietf-inet-types {
     prefix inet;
@@ -64,7 +64,7 @@ submodule ietf-bgp-rib-attributes {
 
     leaf type {
       type identityref {
-        base bgpt:as-path-segment-type;
+        base bt:as-path-segment-type;
       }
       description
         "The type of AS-PATH segment";
@@ -81,8 +81,8 @@ submodule ietf-bgp-rib-attributes {
       "Common definition of BGP community attributes";
     leaf-list community {
       type union {
-        type bgpt:bgp-well-known-community-type;
-        type bgpt:bgp-std-community-type;
+        type bt:bgp-well-known-community-type;
+        type bt:bgp-std-community-type;
       }
       description
         "List of standard or well-known BGP community
@@ -206,6 +206,35 @@ submodule ietf-bgp-rib-attributes {
          used, i.e., the capability has been negotiated.";
       reference
         "RFC 7911: Advertisement of Multiple Paths in BGP";
+    }
+  }
+
+  grouping ext-community-attributes {
+    description
+      "A grouping for all extended community parameters.";
+
+    leaf-list ext-community {
+      type bt:bgp-ext-community-type;
+      description
+        "List of BGP extended community attributes. The received
+         extended community may be an explicitly modeled
+         type or unknown, represented by an 8-octet value
+         formatted according to RFC 4360.";
+      reference
+        "RFC 4360 - BGP Extended Communities Attribute";
+    }
+  }
+
+  grouping large-community-attributes {
+    description
+      "A grouping for all large community parameters.";
+
+    leaf-list large-community {
+      type bt:bgp-large-community-type;
+      description
+        "List of BGP large community attributes.";
+      reference
+        "RFC 8092: BGP Large Communities Attribute.";
     }
   }
 }

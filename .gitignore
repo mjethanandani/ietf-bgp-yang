@@ -1,4 +1,4 @@
-draft-ietf-idr-bgp-model-*.*
+draft/draft-ietf-idr-bgp-model-*.*
 bin/*
 draft/Diff_*
 logs/*
@@ -15,3 +15,7 @@ README.ncs
 ncs.conf
 setup.mk
 *~
+#*#
+.#*
+
+.DS_Store
