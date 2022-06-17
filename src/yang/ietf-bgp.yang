@@ -23,7 +23,7 @@ module ietf-bgp {
     reference
       "RFC 8343, A YANG Data Model for Interface Management.";
   }
-  import ietf-bgp-types {
+  import iana-bgp-types {
     prefix bt;
     reference
       "RFC XXXX, BGP YANG Model for Service Provider Network.";

@@ -111,7 +111,7 @@
 
 <routing
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing"
-    xmlns:bt="urn:ietf:params:xml:ns:yang:ietf-bgp-types">
+    xmlns:bt="urn:ietf:params:xml:ns:yang:iana-bgp-types">
   <control-plane-protocols>
     <control-plane-protocol>
       <type

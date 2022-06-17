@@ -6,7 +6,7 @@ submodule ietf-bgp-rib-attributes {
 
   // import some basic types
 
-  import ietf-bgp-types {
+  import iana-bgp-types {
     prefix bt;
   }
   import ietf-inet-types {
@@ -222,6 +222,15 @@ submodule ietf-bgp-rib-attributes {
          formatted according to RFC 4360.";
       reference
         "RFC 4360 - BGP Extended Communities Attribute";
+    }
+
+    leaf-list ext-community-raw {
+      type string {
+        // raw with 8 octetes
+        pattern 'raw:([0-9A-F][0-9A-F]:){7}[0-9A-F][0-9A-F]';
+      }
+      description
+        "ext-community type in raw format only.";
     }
   }
 

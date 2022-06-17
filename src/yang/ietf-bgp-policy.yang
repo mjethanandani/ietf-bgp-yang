@@ -11,7 +11,7 @@ module ietf-bgp-policy {
   import ietf-routing-policy {
     prefix rt-pol;
   }
-  import ietf-bgp-types {
+  import iana-bgp-types {
     prefix bt;
   }
   import ietf-routing-types {

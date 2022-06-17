@@ -22,7 +22,7 @@ module example-newafi-bgp {
       "RFC XXXX: BGP YANG module for Service Provider Network.";
   }
 
-  import ietf-bgp-types {
+  import iana-bgp-types {
     prefix "bt";
   }
 

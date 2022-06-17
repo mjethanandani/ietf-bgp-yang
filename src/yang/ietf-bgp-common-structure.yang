@@ -9,7 +9,7 @@ submodule ietf-bgp-common-structure {
     reference
       "RFC ZZZZ, A YANG Data Model for Routing Policy Management";
   }
-  import ietf-bgp-types {
+  import iana-bgp-types {
     prefix bt;
     reference
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
