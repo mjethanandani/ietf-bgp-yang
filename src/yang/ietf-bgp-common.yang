@@ -553,14 +553,14 @@ submodule ietf-bgp-common {
         "Global level statistics.";
 
       leaf total-paths {
-        type uint32;
+        type yang:gauge32;
         description
           "Total number of BGP paths (BGP routes) within the
            context";
       }
 
       leaf total-prefixes {
-        type uint32;
+        type yang:gauge32;
         description
           "Total number of BGP prefixes (destinations) received
            within the context";
