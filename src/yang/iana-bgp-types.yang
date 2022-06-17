@@ -514,7 +514,10 @@ module iana-bgp-types {
       }
     }
     description
-      "Type definition for extended community attributes";
+      "Type definition for extended community attributes.
+       It includes a way to specify a 'raw' string that
+       is followed by 8 bytes of octet string to support
+       new and experimental type definitions.";
     reference
       "RFC 4360 - BGP Extended Communities Attribute";
   }
