@@ -745,13 +745,13 @@ module ietf-bgp {
                 "Counters related to queued messages associated with
                  the BGP neighbor";
               leaf input {
-                type uint32;
+                type yang:counter32;
                 description
                   "The number of messages received from the peer
                    currently queued";
               }
               leaf output {
-                type uint32;
+                type yang:counter32;
                 description
                   "The number of messages queued to be sent to the
                    peer";
