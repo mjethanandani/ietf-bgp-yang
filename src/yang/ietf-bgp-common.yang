@@ -565,31 +565,6 @@ submodule ietf-bgp-common {
           "Total number of BGP prefixes (destinations) received
            within the context";
       }
-
-      action clear {
-        if-feature "bt:clear-statistics";
-        description
-          "Clear statistics action command.
-
-           Execution of this command should result in all the
-           counters to be cleared and set to 0.";
-
-        input {
-          leaf clear-at {
-            type yang:date-and-time;
-            description
-              "Time when the clear action needs to be executed.";
-          }
-        }
-
-        output {
-          leaf clear-finished-at {
-            type yang:date-and-time;
-            description
-              "Time when the clear action command completed.";
-          }
-        }
-      }
     }
   }
 }
