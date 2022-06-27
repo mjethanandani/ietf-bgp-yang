@@ -18,14 +18,14 @@
       </lifetime>
       <crypto-algorithm>hmac-sha-1</crypto-algorithm>
       <key-string>
-	<keystring>testvector</keystring>
+        <keystring>testvector</keystring>
       </key-string>
       <authentication
-	  xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
-	<keychain>bgp-key-chain</keychain>
-	<enable-ao>true</enable-ao>
-	<send-id>65</send-id>
-	<recv-id>87</recv-id>
+          xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
+        <keychain>bgp-key-chain</keychain>
+        <enable-ao>true</enable-ao>
+        <send-id>65</send-id>
+        <recv-id>87</recv-id>
       </authentication>
     </key>
     <key>
@@ -42,14 +42,14 @@
       </lifetime>
       <crypto-algorithm>hmac-sha-1</crypto-algorithm>
       <key-string>
-	<keystring>testvector</keystring>
+        <keystring>testvector</keystring>
       </key-string>
       <authentication
-	  xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
-	<keychain>bgp-key-chain</keychain>
-	<enable-ao>true</enable-ao>
-	<send-id>65</send-id>
-	<recv-id>87</recv-id>
+          xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
+        <keychain>bgp-key-chain</keychain>
+        <enable-ao>true</enable-ao>
+        <send-id>65</send-id>
+        <recv-id>87</recv-id>
       </authentication>
     </key>
   </key-chain>
