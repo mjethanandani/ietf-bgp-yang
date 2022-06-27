@@ -544,16 +544,22 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <t>- The model also allows for neighbors that have been learnt by the
       system to be cleared by using the 'clear' RPC operation.</t>
 
-      <t><xref target="RFC7454">BGP OPSEC</xref> describes several policies
-      that can be used to secure a BGP. In particular, it recommends securing
-      the underlying TCP session and to use <xref target="RFC5082">Generalized
-      TTL Security Mechanism (GTSM)</xref> capability to make it harder to
-      spoof a BGP session. This module allows implementations that want to
-      support the capability to configure a TTL value, under a feature flag.
-      It also defines a container 'secure-session' that can be augmented with
-      <xref target="RFC5925">TCP-Authentication Option (TCP-AO)</xref>, or
-      other methods to secure a BGP session, and will be developed in a future
-      version of this draft.</t>
+      <t><xref target="RFC7454">BGP OPSEC</xref> describes several
+      policies that can be used to secure a BGP. In particular, it
+      recommends securing the underlying TCP session and to use <xref
+      target="RFC5082">Generalized TTL Security Mechanism
+      (GTSM)</xref> capability to make it harder to spoof a BGP
+      session. This module allows implementations that want to support
+      the capability to configure a TTL value, under a feature flag.
+      It also defines a container 'secure-session' that contains a
+      choice of using <xref target="RFC5925">TCP-Authentication Option
+      (TCP-AO)</xref>, or <xref target="RFC2385">Protection of BGP
+      Sessions via the TCP MD5 Signature Option</xref>. The support
+      for MD5 has been made available for legacy reasons. However,
+      because of vulnerabilities in MD5 as described in <xref
+      target="RFC6151">MD5 and HMAC-MD5 Security
+      Considerations</xref>, operators are strongly encouraged to use
+      TCP-AO or other methods to secure their BGP session.</t>
     </section>
 
     <section title="IANA Considerations">
@@ -797,6 +803,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.2119.xml'?>
 
+      <?rfc include='reference.RFC.2385.xml'?>
+
       <?rfc include='reference.RFC.2439.xml'?>
 
       <?rfc include='reference.RFC.2918.xml'?>
@@ -828,6 +836,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.5883.xml'?>
 
       <?rfc include='reference.RFC.6020.xml'?>
+
+      <?rfc include='reference.RFC.6151.xml'?>
 
       <?rfc include='reference.RFC.6241.xml'?>
 
