@@ -466,7 +466,10 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       target="RFC8528">YANG Schema Mount</xref> to mount the Routing
       Management module under the <xref target="RFC8529">YANG Data Model for
       Network Instances</xref>.</t>
-      <t>Similarly, it augments the <xref target="RFC9067">A YANG Data Model for Routing Policy Management</xref> to add in BGP-specific conditions and actions to the generic policy model.</t>
+      <t>Similarly, it augments the <xref target="RFC9067">A YANG Data
+      Model for Routing Policy Management</xref> to add in
+      BGP-specific conditions and actions to the generic policy
+      model.</t>
     </section>
 
     <section title="Security Considerations">
