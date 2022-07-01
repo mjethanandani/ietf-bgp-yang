@@ -206,10 +206,6 @@
 
         <t>YYYY-MM-DD with the actual date of the publication of this
         document.</t>
-
-        <t>RFC ZZZZ, where ZZZZ is the number assigned to <xref
-        target="RFC9067">A YANG Data Model for Routing
-        Policy Management</xref>.</t>
       </section>
 
       <section title="Terminology">
@@ -320,11 +316,12 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
         sub-address family configuration where some items are only applicable
         for a given AFI-SAFI combination.</t>
 
-        <t>In order to allow common configuration to be applied to a set of
-        neighbors, all neighbor configuration options are available within a
-        peer-group. A neighbor is associated to a particular peer-group
-        through the use of a peer-group leaf (which provides a reference to a
-        configured item in the peer-group list).</t>
+        <t>In order to allow common configuration to be applied to a
+        set of neighbors, all neighbor configuration options are
+        available within a peer-group. A neighbor is associated with a
+        particular peer-group through the use of a peer-group leaf
+        (which provides a reference to a configured item in the
+        peer-group list).</t>
 
         <t>Address-family configuration is made available in multiple points
         within the model - primarily within the global container, where
@@ -469,6 +466,10 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       target="RFC8528">YANG Schema Mount</xref> to mount the Routing
       Management module under the <xref target="RFC8529">YANG Data Model for
       Network Instances</xref>.</t>
+      <t>Similarly, it augments the <xref target="RFC9067">A YANG Data
+      Model for Routing Policy Management</xref> to add in
+      BGP-specific conditions and actions to the generic policy
+      model.</t>
     </section>
 
     <section title="Security Considerations">
@@ -626,6 +627,10 @@ reference: RFC XXXX
           context</t>
 
           <t>ietf-bgp-rib - grouping for representing BGP RIB.</t>
+	  <t>ietf-bgp-rib-attributes - common data definitions for BGP
+	  attributes used in BGP RIB tables.</t>
+	  <t>ietf-bgp-rib-tables - structural data definitions for BGP
+	  routing tables.</t>
         </list></t>
 
       <t>Additionally, modules include: <list style="symbols">
@@ -792,8 +797,9 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <t>Credit is also due to authors of the OpenConfig, whose model was
       relied upon to come up with this model.</t>
 
-      <t>Special thanks to Robert Wilton who helped convert the YANG models to
-      a NMDA compatible model.</t>
+      <t>Special thanks to Robert Wilton who helped convert the YANG
+      models to a NMDA compatible model, and to Derek Yeung in helping
+      out with Extended Communities support in the model.</t>
     </section>
   </middle>
 
