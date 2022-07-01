@@ -21,7 +21,7 @@ submodule ietf-bgp-rib-tables {
     reference
       "RFC 8022: A YANG Data Model for Routing Management.";
   }
-  import ietf-bgp-types {
+  import iana-bgp-types {
     prefix bt;
     reference
       "RFC XXXX: BGP YANG Model for Service Provider Network.";

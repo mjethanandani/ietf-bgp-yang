@@ -1,6 +1,6 @@
-module ietf-bgp-types {
+module iana-bgp-types {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-types";
+  namespace "urn:ietf:params:xml:ns:yang:iana-bgp-types";
   prefix bt;
 
   import ietf-inet-types {
@@ -10,10 +10,16 @@ module ietf-bgp-types {
   // meta
 
   organization
-    "IETF IDR Working Group";
+    "IANA";
   contact
-    "WG Web:   <http://tools.ietf.org/wg/idr>
-     WG List:  <idr@ietf.org>
+    "Internet Assigned Numbers Authority
+
+     Postal: ICANN
+             12025 Waterfront Drive, Suite 300
+             Los Angeles, CA 90094-2536
+             United States of America
+     Tel:    +1 310 301 5800
+     <mailto:iana@iana.org>
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
@@ -23,6 +29,10 @@ module ietf-bgp-types {
   description
     "This module contains general data definitions for use in BGP.
      It can be imported by modules that make use of BGP attributes.
+
+     This YANG module is maintained by IANA and reflects the
+     'BGP Identities for Community' and 'BGP definitions for
+     Community type' registries.
 
      Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
@@ -497,9 +507,17 @@ module ietf-bgp-types {
               + '(6[0-5][0-5][0-3][0-5]|[1-5][0-9]{4}|'
               + '[1-9][0-9]{1,4}|[0-9])';
       }
+
+      type string {
+        // raw with 8 octets
+        pattern 'raw:([0-9A-F][0-9A-F]:){7}[0-9A-F][0-9A-F]';
+      }
     }
     description
-      "Type definition for extended community attributes";
+      "Type definition for extended community attributes.
+       It includes a way to specify a 'raw' string that
+       is followed by 8 bytes of octet string to support
+       new and experimental type definitions.";
     reference
       "RFC 4360 - BGP Extended Communities Attribute";
   }

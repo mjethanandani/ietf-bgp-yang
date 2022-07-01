@@ -70,7 +70,7 @@
             <afi-safi>
               <name
                   xmlns:bt=
-                  "urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:ipv6-unicast</name>
+                  "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv6-unicast</name>
             </afi-safi>
           </afi-safis>
         </global>
@@ -93,7 +93,7 @@
               <afi-safi>
                 <name
                     xmlns:bt=
-                    "urn:ietf:params:xml:ns:yang:ietf-bgp-types">bt:ipv6-unicast</name>
+                    "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv6-unicast</name>
               </afi-safi>
             </afi-safis>
           </neighbor>

@@ -572,7 +572,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
         be made: <figure>
             <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bgp
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
-URI: urn:ietf:params:xml:ns:yang:ietf-bgp-types
+URI: urn:ietf:params:xml:ns:yang:iana-bgp-types
 ]]></artwork>
           </figure></t>
 
@@ -595,8 +595,8 @@ namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
 prefix: bp
 reference: RFC XXXX
 
-name: ietf-bgp-types
-namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-types
+name: iana-bgp-types
+namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
 prefix: bt
 reference: RFC XXXX
 ]]></artwork>
@@ -634,7 +634,7 @@ reference: RFC XXXX
         </list></t>
 
       <t>Additionally, modules include: <list style="symbols">
-          <t>ietf-bgp-types - common type and identity definitions for BGP,
+          <t>iana-bgp-types - common type and identity definitions for BGP,
           including BGP policy</t>
 
           <t>ietf-bgp-policy - BGP-specific policy data definitions for use
@@ -722,8 +722,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
       <section title="BGP types">
         <t><figure>
             <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp-types@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
+<CODE BEGINS> file "iana-bgp-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-types@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>

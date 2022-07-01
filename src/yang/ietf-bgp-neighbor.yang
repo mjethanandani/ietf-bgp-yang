@@ -10,7 +10,7 @@ submodule ietf-bgp-neighbor {
       "RFC 6991: Common YANG Data Types.";
   }
 
-  import ietf-bgp-types {
+  import iana-bgp-types {
     prefix bt;
     reference
       "RFC XXXX, BGP Model for Service Provider Network.";

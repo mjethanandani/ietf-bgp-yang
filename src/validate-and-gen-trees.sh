@@ -104,7 +104,7 @@ for i in yang/example-bgp-configuration-a.1.[0-3].xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.xml"
-    response=`yanglint -ii -t config -p ../../iana/yang-parameters -p ../bin -p ../bin/submodules ../../iana/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/ietf-bgp-types\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang $name.xml`
+    response=`yanglint -ii -t config -p ../../iana/yang-parameters -p ../bin -p ../bin/submodules ../../iana/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/iana-bgp-types\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang $name.xml`
     if [ $? -ne 0 ]; then
        printf "failed (error code: $?)\n"
        printf "$response\n\n"
@@ -118,7 +118,7 @@ for i in yang/example-bgp-configuration-a.1.4.xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.xml"
-    response=`yanglint -ii -t config -p ../../iana/yang-parameters -p ../bin -p ../bin/submodules ../../iana/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/ietf-bgp-types\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp-policy\@$(date +%Y-%m-%d).yang $name.xml`
+    response=`yanglint -ii -t config -p ../../iana/yang-parameters -p ../bin -p ../bin/submodules ../../iana/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/iana-bgp-types\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp-policy\@$(date +%Y-%m-%d).yang $name.xml`
     if [ $? -ne 0 ]; then
        printf "failed (error code: $?)\n"
        printf "$response\n\n"
