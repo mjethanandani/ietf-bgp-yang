@@ -226,7 +226,7 @@ submodule ietf-bgp-rib-attributes {
 
     leaf-list ext-community-raw {
       type string {
-        // raw with 8 octetes
+        // raw with 8 octets
         pattern 'raw:([0-9A-F][0-9A-F]:){7}[0-9A-F][0-9A-F]';
       }
       description
