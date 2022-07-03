@@ -132,18 +132,26 @@
       previous versions of BGP.</t>
 
       <section anchor="goals" title="Goals and approach">
-        <t>The model covers the base BGP features that are deployed across
-        major implementations and the common BGP configurations in use across
-        a number of operator network deployments. In particular, this model
-        attempts to cover BGP features defined in <xref
-        target="RFC4271">BGP</xref>, <xref target="RFC1997">BGP Communities
-        Attribute </xref>, <xref target="RFC4456">BGP Route Reflection</xref>,
-        <xref target="RFC4760">Multiprotocol Extensions for BGP-4 </xref>,
-        <xref target="RFC5065">Autonomous System Confederations for BGP
-        </xref>, <xref target="RFC2439">BGP Route Flap Damping </xref>, <xref
-        target="RFC4724">Graceful Restart Mechanism for BGP </xref>, <xref
-        target="RFC6811">BGP Prefix Origin Validation </xref>, and <xref
-        target="RFC7911">Advertisement of Multiple Paths in BGP</xref>.</t>
+        <t>The model covers the base BGP features that are deployed
+        across major implementations and the common BGP configurations
+        in use across a number of operator network deployments. In
+        particular, this model attempts to cover BGP features defined
+        in <xref target="RFC4271">BGP</xref>, <xref
+        target="RFC1997">BGP Communities Attribute </xref>, <xref
+        target="RFC4360">BGP Extended Communities Attributes</xref>,
+        <xref target="RFC8092">BGP Large Communities
+        Attributes</xref>, <xref target="RFC4456">BGP Route
+        Reflection</xref>, <xref target="RFC4760">Multiprotocol
+        Extensions for BGP-4 </xref>, <xref
+        target="RFC5065">Autonomous System Confederations for BGP
+        </xref>, <xref target="RFC2439">BGP Route Flap Damping
+        </xref>, <xref target="RFC4724">Graceful Restart Mechanism for
+        BGP </xref>, <xref target="RFC6811">BGP Prefix Origin
+        Validation </xref>, and <xref target="RFC7911">Advertisement
+        of Multiple Paths in BGP</xref>. It attempts to make the model
+        extensible by using identities for well known standard
+        community types, and the use of "raw" string to support new
+        and experimental type definitions.</t>
 
         <t>Along with configuration of base BGP features, this model also
         addresses policy configuration, by providing "hooks" for applying
@@ -262,14 +270,14 @@
           protocol-related operations, defined at various levels of
           hierarchy.</t>
 
-          <t>multiprotocol configuration -- configuration affecting individual
+          <t>multi-protocol configuration -- configuration affecting individual
           address-families within BGP <xref target="RFC4760">Multiprotocol
           Extensions for BGP-4 </xref>.</t>
 
           <t>neighbor configuration -- configuration affecting an individual
           neighbor within BGP.</t>
 
-          <t>neighbor multiprotocol configuration -- configuration affecting
+          <t>neighbor multi-protocol configuration -- configuration affecting
           individual address-families for a neighbor within BGP.</t>
 
           <t>policy configuration -- hooks for application of the policies
@@ -616,7 +624,7 @@ reference: RFC XXXX
           global)</t>
 
           <t>ietf-bgp-common-multiprotocol - defines the groupings that are
-          common across more than one context, and relate to multiprotocol
+          common across more than one context, and relate to multi-protocol
           BGP</t>
 
           <t>ietf-bgp-common-structure - defines groupings that are shared by
@@ -645,12 +653,13 @@ reference: RFC XXXX
 
     <section title="Structure of the YANG modules">
       <t>The YANG model can be subdivided between the main module for
-      base items, types, policy data, and the RIB module. It
-      references <xref target="RFC1997">BGP Communities Attribute
-      </xref>, <xref target="RFC2918">Route Refresh Capability for
-      BGP-4</xref>, <xref target="RFC3765">NOPEER Community for
-      BGP</xref>, <xref target="RFC4364">BGP/MPLS IP Virtual Private
-      Networks (VPNs)</xref>, <xref target="RFC4451">BGP MED
+      base items, types, and policy module. It references <xref
+      target="RFC1997">BGP Communities Attribute </xref>, <xref
+      target="RFC2918">Route Refresh Capability for BGP-4</xref>,
+      <xref target="RFC3765">NOPEER Community for BGP</xref>, <xref
+      target="RFC4360">BGP Extended Communities Attributes</xref>,
+      <xref target="RFC4364">BGP/MPLS IP Virtual Private Networks
+      (VPNs)</xref>, <xref target="RFC4451">BGP MED
       Considerations</xref>, <xref target="RFC4659">BGP-MPLS IP
       Virtual Private Network (VPN) Extension for IPv6 VPN</xref>,
       <xref target="RFC4724">Graceful Restart Mechanism for
@@ -669,6 +678,7 @@ reference: RFC XXXX
       VPNs</xref>, <xref target="RFC6793">BGP Support for Four-Octet
       Autonomous System (AS) Number Space</xref>, <xref
       target="RFC7911">Advertisement of Multiple Paths in BGP </xref>,
+      <xref target="RFC8092">BGP Large Communities Attributes</xref>,
       <xref target="RFC8177">YANG Key Chain</xref>, <xref
       target="RFC8277">Carrying Label Information in BGP-4 </xref>,
       <xref target="RFC9067">A YANG Data Model for Routing
@@ -677,49 +687,70 @@ reference: RFC XXXX
       target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission
       Control Protocol (TCP) Configuration</xref>.</t>
 
-      <section title="Main module and submodules for base items">
-        <t><figure>
+      <section title="Modules and submodules for base items">
+	<section title="ietf-bgp module">
+        <t>
+	  <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
 <CODE ENDS>
 
-
 ]]></artwork>
-          </figure><figure>
+          </figure>
+	</t>
+	</section>
+	<section title = "ietf-bgp-common submodule">
+	  <t>
+	  <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
 <CODE ENDS>
  
         ]]></artwork>
-          </figure><figure>
+          </figure>
+	  </t>
+	</section>
+	<section title = "ietf-bgp-common-multiprotocol submodule">
+	  <t>
+	  <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure><figure>
-            <artwork><![CDATA[
+          </figure>
+	  </t>
+	</section>
+	<section title = "ietf-bgp-common-structure submodule">
+	  <t>
+	    <figure>
+              <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-structure@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure>
-	  <figure>
-            <artwork><![CDATA[
+            </figure>
+	  </t>
+	</section>
+	<section title = "ietf-bgp-neighbors submodule">
+	  <t>
+	    <figure>
+              <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-neighbor@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
 <CODE ENDS>
 
-
 ]]></artwork>
-          </figure></t>
+            </figure>
+	  </t>
+	</section>
       </section>
 
-      <section title="BGP types">
+      <section title="BGP types module">
         <t><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-types@YYYY-MM-DD.yang"
@@ -730,7 +761,7 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-types@YYYY-MM-DD.yang)
           </figure></t>
       </section>
 
-      <section title="BGP policy data">
+      <section title="BGP policy module">
         <t><figure>
             <artwork><![CDATA[
     <CODE BEGINS> file "ietf-bgp-policy@YYYY-MM-DD.yang"
@@ -740,42 +771,55 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-types@YYYY-MM-DD.yang)
           </figure></t>
       </section>
 
-      <section title="RIB modules">
-        <t><figure>
-            <artwork><![CDATA[
+      <section title="RIB submodules">
+	<section title = "ietf-bgp-rib submodule">
+          <t>
+	    <figure>
+              <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
-          </figure></t>
-
-        <figure>
-          <artwork><![CDATA[
+            </figure>
+	  </t>
+	</section>
+	<section title = "ietf-bgp-rib-types submodule">
+	  <t>
+            <figure>
+              <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-types@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-types@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
-        </figure>
-
-        <figure>
-          <artwork><![CDATA[
+            </figure>
+	  </t>
+	</section>
+	<section title = "ietf-bgp-rib-attributes submodule">
+	  <t>
+            <figure>
+              <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-attributes@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-attributes@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
-        </figure>
-
-        <t><figure>
-            <artwork><![CDATA[
+            </figure>
+	  </t>
+        </section>
+	<section title = "ietf-bgp-rib-tables submodule">
+          <t>
+	    <figure>
+              <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-tables@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
-          </figure></t>
+            </figure>
+	  </t>
+        </section>
       </section>
     </section>
 
@@ -818,6 +862,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.3688.xml'?>
 
       <?rfc include='reference.RFC.4271.xml'?>
+
+      <?rfc include='reference.RFC.4360.xml'?>
 
       <?rfc include='reference.RFC.4364.xml'?>
 
@@ -862,6 +908,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.7950.xml'?>
 
       <?rfc include='reference.RFC.8040.xml'?>
+
+      <?rfc include='reference.RFC.8092.xml'?>
 
       <?rfc include='reference.RFC.8174.xml'?>
 
