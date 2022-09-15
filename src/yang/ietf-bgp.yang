@@ -49,12 +49,6 @@ module ietf-bgp {
     reference
       "RFC 8177: YANG Key Chain.";
   }
-  import ietf-tcp {
-    prefix tcp;
-    reference
-      "I-D.ietf-tcpm-yang-tcp: Transmission Control Protocol (TCP)
-       YANG Model.";
-  }
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
   }
@@ -480,7 +474,6 @@ module ietf-bgp {
 
             choice option {
               case ao {
-                uses tcp:ao;
                 leaf ao-keychain {
                   type key-chain:key-chain-ref;
                   description
@@ -499,7 +492,6 @@ module ietf-bgp {
               }
 
               case md5 {
-                uses tcp:md5;
                 leaf md5-keychain {
                   type key-chain:key-chain-ref;
                   description
@@ -960,7 +952,6 @@ module ietf-bgp {
 
             choice option {
               case ao {
-                uses tcp:ao;
                 leaf ao-keychain {
                   type key-chain:key-chain-ref;
                   description
@@ -978,7 +969,6 @@ module ietf-bgp {
                   "RFC 5925 - The TCP Authentication Option.";
               }
               case md5 {
-                uses tcp:md5;
                 leaf md5-keychain {
                   type key-chain:key-chain-ref;
                   description
@@ -1060,6 +1050,7 @@ module ietf-bgp {
               "Reference to the interface within the routing
                instance.";
           }
+
           container bfd {
             if-feature "bt:bfd";
             leaf enabled {

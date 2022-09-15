@@ -1,13 +1,11 @@
 import os
 
 list_of_ietf_models =\
-[ ["ietf-routing-policy", "draft-ietf-rtgwg-policy-model", "29"],
-  ["ietf-bfd-types", "draft-ietf-bfd-yang", "17"],
-  ["ietf-tcp", "draft-scharf-tcpm-yang-tcp", "04"],
+[ ["ietf-bfd-types", "draft-ietf-bfd-rfc9127-bis", "04"],
+  ["ietf-tcp", "draft-ietf-tcpm-yang-tcp", "09"],
   ["ietf-if-extensions", "draft-ietf-netmod-intf-ext-yang", "10"],
   ["ietf-if-vlan-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "07"],
   ["ietf-if-flexible-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "07"],
-  ["iana-bfd-types", "draft-ietf-bfd-yang", "17"],
   ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "20"],
   ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "10"],
   ["ietf-tcp-server", "draft-ietf-netconf-tcp-client-server", "10"],
@@ -21,7 +19,7 @@ def fetch_and_extract(draft, module, version):
     print("Fetching file " + draft + " with version " + version)
     draft_version = draft + "-" + version
     print(draft_version)
-    os.system('curl -sO https://tools.ietf.org/id/%s.txt' %draft_version)
+    os.system('curl -sO https://www.ietf.org/archive/id/%s.txt' %draft_version)
     print("Extracting Module from " + draft_version)
     os.system('xym %s.txt' %draft_version)
     print("Moving module " + module + " to ../bin/dependent/")

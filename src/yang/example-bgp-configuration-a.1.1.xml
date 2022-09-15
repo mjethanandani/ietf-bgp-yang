@@ -48,6 +48,10 @@
               <desired-min-tx-interval>3300</desired-min-tx-interval>
               <required-min-rx-interval>3300</required-min-rx-interval>
             </bfd>
+	    <transport>
+	      <tcp-mss>1400</tcp-mss>
+	      <mtu-discovery>true</mtu-discovery>
+	    </transport>
           </neighbor>
         </neighbors>
       </bgp>

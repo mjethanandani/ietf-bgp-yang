@@ -23,9 +23,10 @@
       <authentication
           xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
         <keychain>bgp-key-chain</keychain>
-        <enable-ao>true</enable-ao>
-        <send-id>65</send-id>
-        <recv-id>87</recv-id>
+	<ao>
+          <send-id>65</send-id>
+          <recv-id>87</recv-id>
+	</ao>
       </authentication>
     </key>
     <key>
@@ -47,9 +48,10 @@
       <authentication
           xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
         <keychain>bgp-key-chain</keychain>
-        <enable-ao>true</enable-ao>
-        <send-id>65</send-id>
-        <recv-id>87</recv-id>
+	<ao>
+          <send-id>65</send-id>
+          <recv-id>87</recv-id>
+	</ao>
       </authentication>
     </key>
   </key-chain>
@@ -80,7 +82,6 @@
             <enabled>true</enabled>
             <secure-session-enable>true</secure-session-enable>
             <secure-session>
-              <enable-ao>true</enable-ao>
               <ao-keychain>bgp-key-chain</ao-keychain>
             </secure-session>
             <peer-as>64497</peer-as>
