@@ -607,6 +607,7 @@ module ietf-bgp-policy {
                  a list.";
             }
           }
+          
           case reference {
             leaf community-set-ref {
               type leafref {
