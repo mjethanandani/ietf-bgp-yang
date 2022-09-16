@@ -35,6 +35,7 @@ module ietf-bgp-policy {
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
               Jeffrey Haas (jhaas at juniper.net).";
+
   description
     "This module contains data definitions for BGP routing policy.
      It augments the base routing-policy module with BGP-specific
@@ -60,7 +61,7 @@ module ietf-bgp-policy {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.";
 
-  revision 2022-07-03 {
+  revision YYYY-MM-DD {
     description
       "Initial Version";
     reference
@@ -154,6 +155,7 @@ module ietf-bgp-policy {
   }
 
   // Identities
+
   // augment statements
 
   augment "/rt-pol:routing-policy/rt-pol:defined-sets" {
@@ -178,8 +180,6 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              //type bt:bgp-well-known-community-type;
-              //type bt:bgp-std-community-type;
               type bt:bgp-community-regexp-type;
             }
             description
@@ -187,6 +187,7 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container ext-community-sets {
         description
           "Enclosing container for list of extended BGP community
@@ -212,6 +213,7 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container large-community-sets {
         description
           "Enclosing container for list of large BGP community
@@ -236,6 +238,7 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container as-path-sets {
         description
           "Enclosing container for list of define AS path sets.";
@@ -257,14 +260,17 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container next-hop-sets {
         description
           "Definition of a list of IPv4 or IPv6 next-hops which can
            be matched in a routing policy.";
+
         list next-hop-set {
           key "name";
           description
             "List of defined next-hop sets for use in policies.";
+
           leaf name {
             type string;
             description
@@ -285,46 +291,74 @@ module ietf-bgp-policy {
         + "rt-pol:statement/rt-pol:conditions" {
     description
       "BGP policy conditions added to routing policy module.";
+
     container bgp-conditions {
       description
         "Top-level container for BGP specific policy conditions.";
+
       leaf med-eq {         //** lt or gt
         type uint32;
         description
           "Condition to check if the received MED value is equal to
            the specified value.";
       }
+
       leaf origin-eq {
         type bt:bgp-origin-attr-type;
         description
           "Condition to check if the route origin is equal to the
            specified value.";
       }
-      leaf-list next-hop-in-eq {     //***should this be leaf-list or leaf?
-        type inet:ip-address-no-zone;
+
+      container match-next-hop {
         description
-          "List of next hop addresses to check for in the route
-           update.";
-      }
-      leaf-list afi-safi-in {        //** leaf? or?
-        type identityref {
-          base bt:afi-safi-type;
+          "Match a next hop addresses according to the logic defined in
+           the match-set-options leaf.";
+
+        leaf-list next-hop {
+          type inet:ip-address-no-zone;
+          description
+            "List of next hop addresses to check for in the route
+             update.";
         }
-        description
-          "List of address families which the NLRI may be within.";
+        uses rt-pol:match-set-options-restricted-group;
       }
-      leaf local-pref-eq {          //** lt or gt?
+
+      container match-afi-safi {
+        description
+          "Match an address family according to the logic defined in
+           the match-set-options leaf.";
+        leaf-list afi-safi-in {
+          type identityref {
+            base bt:afi-safi-type;
+          }
+          description
+            "List of address families which the NLRI may be within.";
+        }
+        uses rt-pol:match-set-options-restricted-group;
+      }
+
+      leaf local-pref-eq {
         type uint32;
         description
           "Condition to check if the local pref attribute is equal to
            the specified value.";
       }
-      leaf-list neighbor-eq {       //** leaf?
-        type inet:ip-address;
+
+      container match-neighbor {
         description
-          "List of neighbor addresses to check for in the ingress
-           direction.";
+          "Match a neighbor according to the logic defined in the
+           match-set-options leaf.";
+
+        leaf-list neighbor-eq {
+          type inet:ip-address;
+          description
+            "List of neighbor addresses to check for in the ingress
+             direction.";
+        }
+        uses rt-pol:match-set-options-restricted-group;
       }
+
       leaf route-type {
         type enumeration {
           enum internal {
@@ -339,16 +373,19 @@ module ietf-bgp-policy {
         description
           "Condition to check the route type in the route update.";
       }
+
       container community-count {
         description
           "Value and comparison operations for conditions based on
            the number of communities in the route update.";
+
         leaf community-count {
           type uint32;
           description
             "Value for the number of communities in the route
              update.";
         }
+
         choice operation {
           case eq {
             leaf eq {
@@ -376,6 +413,7 @@ module ietf-bgp-policy {
             "Choice of operations on the value of community-count.";
         }
       }
+
       container as-path-length {
         description
           "Value and comparison operations for conditions based on
@@ -385,11 +423,13 @@ module ietf-bgp-policy {
            RFC 4271 rules.";
         reference
           "RFC 4271: BGP-4.";
+
         leaf as-path-length {
           type uint32;
           description
             "Value of the AS path length in the route update.";
         }
+
         choice operation {
           case eq {
             leaf eq {
@@ -417,6 +457,7 @@ module ietf-bgp-policy {
             "Choice of operations on the value of as-path-len.";
         }
       }
+
       container match-community-set {
         description
           "Top-level container for match conditions on communities.
@@ -524,6 +565,7 @@ module ietf-bgp-policy {
         description
           "Set the med metric attribute in the route.";
       }
+
       container set-as-path-prepend {
         description
           "Action to prepend local AS number to the AS-path a
@@ -549,12 +591,14 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container set-community {
         description
           "Action to set the community attributes of the route, along
            with options to modify how the community is modified.
            Communities may be set using an inline list OR
            reference to an existing defined set (not both).";
+
         leaf options {
           type bgp-set-community-option-type;
           description
@@ -562,6 +606,7 @@ module ietf-bgp-policy {
              the specified values.  These options apply to both
              methods of setting the community attribute.";
         }
+
         choice method {
           description
             "Indicates the method used to specify the extended
@@ -590,6 +635,7 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container set-ext-community {
         description
           "Action to set the extended community attributes of the
@@ -597,6 +643,7 @@ module ietf-bgp-policy {
            modified. Extended communities may be set using an inline
            list OR a reference to an existing defined set (but not
            both).";
+
         leaf options {
           type bgp-set-community-option-type;
           description
@@ -604,6 +651,7 @@ module ietf-bgp-policy {
              the specified values.  These options apply to both
              methods of setting the community attribute.";
         }
+
         choice method {
           description
             "Indicates the method used to specify the extended
@@ -630,6 +678,7 @@ module ietf-bgp-policy {
           }
         }
       }
+
       container set-large-community {
         description
           "Action to set the large community attributes of the
@@ -637,6 +686,7 @@ module ietf-bgp-policy {
            modified. Large communities may be set using an inline
            list OR a reference to an existing defined set (but not
            both).";
+
         leaf options {
           type bgp-set-community-option-type;
           description
@@ -644,6 +694,7 @@ module ietf-bgp-policy {
              the specified values. These options apply to both
              methods of setting the community attribute.";
         }
+
         choice method {
           description
             "Indicates the method used to specify the large
