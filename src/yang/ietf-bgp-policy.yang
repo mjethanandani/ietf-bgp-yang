@@ -179,9 +179,7 @@ module ietf-bgp-policy {
                reference the set in match conditions.";
           }
           leaf-list member {
-            type union {
-              type bt:bgp-community-regexp-type;
-            }
+            type bt:bgp-community-regexp-type;
             description
               "Members of the community set";
           }
@@ -203,11 +201,7 @@ module ietf-bgp-policy {
                used to reference the set in match conditions";
           }
           leaf-list member {
-            type union {
-              //type rt-types:route-target;
-              //type uint64;
-              type bt:bgp-community-regexp-type;
-            }
+            type bt:bgp-community-regexp-type;
             description
               "Members of the extended community set.";
           }
@@ -229,10 +223,7 @@ module ietf-bgp-policy {
                used to reference the set in match conditions";
           }
           leaf-list member {
-            type union {
-              //type bt:bgp-large-community-type;
-              type bt:bgp-community-regexp-type;
-            }
+            type bt:bgp-community-regexp-type;
             description
               "Members of the large community set.";
           }
@@ -296,7 +287,7 @@ module ietf-bgp-policy {
       description
         "Top-level container for BGP specific policy conditions.";
 
-      leaf med-eq {         //** lt or gt
+      leaf med-eq {
         type uint32;
         description
           "Condition to check if the received MED value is equal to
@@ -308,20 +299,6 @@ module ietf-bgp-policy {
         description
           "Condition to check if the route origin is equal to the
            specified value.";
-      }
-
-      container match-next-hop {
-        description
-          "Match a next hop addresses according to the logic defined in
-           the match-set-options leaf.";
-
-        leaf-list next-hop {
-          type inet:ip-address-no-zone;
-          description
-            "List of next hop addresses to check for in the route
-             update.";
-        }
-        uses rt-pol:match-set-options-restricted-group;
       }
 
       container match-afi-safi {
@@ -394,6 +371,7 @@ module ietf-bgp-policy {
                 "Check to see if the value is equal.";
             }
           }
+
           case lt-or-eq {
             leaf lt-or-eq {
               type empty;
@@ -401,6 +379,7 @@ module ietf-bgp-policy {
                 "Check to see if the value is less than or equal.";
             }
           }
+
           case gt-or-eq {
             leaf gt-or-eq {
               type empty;
@@ -438,6 +417,7 @@ module ietf-bgp-policy {
                 "Check to see if the value is equal.";
             }
           }
+
           case lt-or-eq {
             leaf lt-or-eq {
               type empty;
@@ -445,6 +425,7 @@ module ietf-bgp-policy {
                 "Check to see if the value is less than or equal.";
             }
           }
+
           case gt-or-eq {
             leaf gt-or-eq {
               type empty;
@@ -474,6 +455,7 @@ module ietf-bgp-policy {
         }
         uses rt-pol:match-set-options-group;
       }
+
       container match-ext-community-set {
         description
           "Match a referenced extended community-set according to the
@@ -489,6 +471,7 @@ module ietf-bgp-policy {
         }
         uses rt-pol:match-set-options-group;
       }
+
       container match-large-community-set {
         description
           "Match a referenced large community-set according to the
@@ -504,6 +487,7 @@ module ietf-bgp-policy {
         }
         uses rt-pol:match-set-options-group;
       }
+
       container match-as-path-set {
         description
           "Match a referenced as-path set according to the logic
@@ -519,6 +503,7 @@ module ietf-bgp-policy {
         }
         uses rt-pol:match-set-options-group;
       }
+
       container match-next-hop-set {
         description
           "Match a referenced next-hop set according to the logic
