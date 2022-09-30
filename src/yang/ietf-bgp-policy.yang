@@ -179,7 +179,11 @@ module ietf-bgp-policy {
                reference the set in match conditions.";
           }
           leaf-list member {
-            type bt:bgp-community-regexp-type;
+            type union {
+              type bt:bgp-well-known-community-type;
+              type bt:bgp-std-community-type;
+              type bt:bgp-community-regexp-type;
+            }
             description
               "Members of the community set";
           }
@@ -201,7 +205,10 @@ module ietf-bgp-policy {
                used to reference the set in match conditions";
           }
           leaf-list member {
-            type bt:bgp-community-regexp-type;
+            type union {
+              type rt-types:route-target;
+              type bt:bgp-community-regexp-type;
+            }
             description
               "Members of the extended community set.";
           }
@@ -223,7 +230,10 @@ module ietf-bgp-policy {
                used to reference the set in match conditions";
           }
           leaf-list member {
-            type bt:bgp-community-regexp-type;
+            type union {
+              type bt:bgp-large-community-type;
+              type bt:bgp-community-regexp-type;
+            }
             description
               "Members of the large community set.";
           }
@@ -243,11 +253,12 @@ module ietf-bgp-policy {
               "Name of the AS path set -- this is used to reference
                the set in match conditions.";
           }
-          leaf member {
+          leaf-list member {
             type string;
             description
               "AS path regular expression -- list of ASes in the
-               set.";
+               set. If any of the regualr expression in the lists
+               is matched, the as-path-set is considered matched.";
           }
         }
       }
@@ -277,9 +288,9 @@ module ietf-bgp-policy {
     }
   }
 
-  augment "/rt-pol:routing-policy/rt-pol:policy-definitions/"
-        + "rt-pol:policy-definition/rt-pol:statements/"
-        + "rt-pol:statement/rt-pol:conditions" {
+  augment "/rt-pol:routing-policy/rt-pol:policy-definitions/" +
+          "rt-pol:policy-definition/rt-pol:statements/" +
+          "rt-pol:statement/rt-pol:conditions" {
     description
       "BGP policy conditions added to routing policy module.";
 
@@ -517,14 +528,14 @@ module ietf-bgp-policy {
           description
             "Reference a defined next-hop set.";
         }
-        uses rt-pol:match-set-options-group;
+        uses rt-pol:match-set-options-restricted-group;
       }
     }
   }
 
-  augment "/rt-pol:routing-policy/rt-pol:policy-definitions/"
-        + "rt-pol:policy-definition/rt-pol:statements/"
-        + "rt-pol:statement/rt-pol:actions" {
+  augment "/rt-pol:routing-policy/rt-pol:policy-definitions/" +
+          "rt-pol:policy-definition/rt-pol:statements/" +
+          "rt-pol:statement/rt-pol:actions" {
     description
       "BGP policy actions added to routing policy module.";
     container bgp-actions {
@@ -555,25 +566,20 @@ module ietf-bgp-policy {
         description
           "Action to prepend local AS number to the AS-path a
            specified number of times";
-        list as-path-prepend {
-          key "asn";
+
+        leaf repeat-n {
+          type uint8 {
+            range "1..max";
+          }
           description
-            "List of AS numbers to prepend.";
-          leaf repeat-n {
-            type uint8 {
-              range "1..max";
-            }
-            description
-              "Number of times to prepend the AS number to the AS
-               path. The value should be between 1 and the maximum
-               supported by the implementation.";
-          }
-          leaf asn {
-            type inet:as-number;
-            description
-              "AS number to prepend to the AS path. If not specified,
-               then the local AS number will be used for prepending.";
-          }
+            "Number of times to prepend the AS number to the AS
+             path. The value should be between 1 and the maximum
+             supported by the implementation.";
+        }
+        leaf-list asn {
+          type inet:as-number;
+          description
+            "AS number to prepend to the AS path.";
         }
       }
 

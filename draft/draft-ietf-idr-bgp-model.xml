@@ -1007,7 +1007,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.3.xml,68)
 ]]></artwork>
         </figure>
       </section>
-      <section title="BGP Policy">
+      <section title="BGP Policy - Match Prefix and Set Community">
         <t>Routing policy using community value involves configuring
 	rules to match community values in the inbound or outbound
 	direction. In this example, which is heavily borrowed from
@@ -1038,6 +1038,18 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.3.xml,68)
         <figure>
           <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.4.xml,68)
+
+]]></artwork>
+        </figure>
+      </section>
+            
+      <section title="BGP Policy - Match Next-hop and Set Community">
+        <t>In this example, a "next-hop-set" is configured using option "invert"
+          from "matct-set-options" to match next-hop not equal to "192.0.2.2" and
+          then set community to 55:55.</t>
+        <figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.5.xml,68)
 
 ]]></artwork>
         </figure>
