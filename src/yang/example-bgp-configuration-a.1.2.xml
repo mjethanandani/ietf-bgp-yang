@@ -16,16 +16,19 @@
           <end-date-time>2017-02-01T00:00:05Z</end-date-time>
         </accept-lifetime>
       </lifetime>
-      <crypto-algorithm>hmac-sha-1</crypto-algorithm>
+      <crypto-algorithm
+        xmlns:tcp=
+	"urn:ietf:params:xml:ns:yang:ietf-tcp">tcp:aes-128</crypto-algorithm>
       <key-string>
         <keystring>testvector</keystring>
       </key-string>
       <authentication
           xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
         <keychain>bgp-key-chain</keychain>
-        <enable-ao>true</enable-ao>
-        <send-id>65</send-id>
-        <recv-id>87</recv-id>
+	<ao>
+          <send-id>65</send-id>
+          <recv-id>87</recv-id>
+	</ao>
       </authentication>
     </key>
     <key>
@@ -40,16 +43,19 @@
           <end-date-time>2017-02-01T00:00:05Z</end-date-time>
         </accept-lifetime>
       </lifetime>
-      <crypto-algorithm>hmac-sha-1</crypto-algorithm>
+      <crypto-algorithm
+        xmlns:tcp=
+	"urn:ietf:params:xml:ns:yang:ietf-tcp">tcp:aes-128</crypto-algorithm>
       <key-string>
         <keystring>testvector</keystring>
       </key-string>
       <authentication
           xmlns="urn:ietf:params:xml:ns:yang:ietf-tcp">
         <keychain>bgp-key-chain</keychain>
-        <enable-ao>true</enable-ao>
-        <send-id>65</send-id>
-        <recv-id>87</recv-id>
+	<ao>
+          <send-id>65</send-id>
+          <recv-id>87</recv-id>
+	</ao>
       </authentication>
     </key>
   </key-chain>
@@ -80,7 +86,6 @@
             <enabled>true</enabled>
             <secure-session-enable>true</secure-session-enable>
             <secure-session>
-              <enable-ao>true</enable-ao>
               <ao-keychain>bgp-key-chain</ao-keychain>
             </secure-session>
             <peer-as>64497</peer-as>

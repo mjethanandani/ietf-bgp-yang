@@ -36,6 +36,7 @@ idnits: $(next).txt
 	$(idnits) $<
 
 clean:
+	-rm -rf ../bin
 	-rm -f $(draft).txt $(draft).html index.html
 	-rm -f $(draft)-[0-9][0-9].*
 ifeq (md,$(draft_type))
@@ -61,7 +62,7 @@ $(next).xml: $(draft).xml ../src/yang/ietf-bgp-common-multiprotocol.yang ../src/
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/example-newafi-bgp.yang > ../bin/example-newafi-bgp\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/example-newco-bgp-a.2.yang > ../bin/example-newco-bgp-a.2\@$(shell date +%Y-%m-%d).yang
 
-	cd ../src; ./validate-and-gen-trees.sh; cd ..;
+	cd ../src; python download-dependent-models.py; ./validate-and-gen-trees.sh; cd ..;
 	../src/insert-figures.sh $@ > tmp; mv tmp $@
 
 rib: ../src/yang/ietf-bgp-rib.yang ../src/yang/ietf-bgp-rib-attributes.yang ../src/yang/ietf-bgp-rib-tables.yang ../src/yang/ietf-bgp-rib-types.yang
