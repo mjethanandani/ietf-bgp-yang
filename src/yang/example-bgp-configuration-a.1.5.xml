@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+  <routing-policy xmlns="urn:ietf:params:xml:ns:yang:ietf-routing-policy">
+    <defined-sets>
+      <bgp-defined-sets xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+        <next-hop-sets>
+          <next-hop-set>
+            <name>nexthop_not2</name>
+            <next-hop>192.0.2.2</next-hop>
+          </next-hop-set>
+        </next-hop-sets>
+      </bgp-defined-sets>
+    </defined-sets>
+    <policy-definitions>
+      <policy-definition>
+        <name>nexthop_not2_community</name>
+        <statements>
+          <statement>
+            <name>100</name>
+            <conditions>
+              <bgp-conditions xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+                <match-next-hop-set>
+                  <next-hop-set>nexthop_not2</next-hop-set>
+                  <match-set-options>invert</match-set-options>
+                </match-next-hop-set>
+              </bgp-conditions>
+            </conditions>
+            <actions>
+              <bgp-actions xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
+                <set-community>
+                  <options>add</options>
+                  <communities>55:55</communities>                  
+                </set-community>
+              </bgp-actions>
+            </actions>
+          </statement>
+        </statements>
+      </policy-definition>
+    </policy-definitions>
+  </routing-policy>
