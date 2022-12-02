@@ -682,7 +682,7 @@ reference: RFC XXXX
       <xref target="RFC8177">YANG Key Chain</xref>, <xref
       target="RFC8277">Carrying Label Information in BGP-4 </xref>,
       <xref target="RFC9067">A YANG Data Model for Routing
-      Policy</xref>, <xref target="RFC9127">YANG Data Model for
+      Policy</xref>, <xref target="RFC9314">YANG Data Model for
       Bidirectional Forward Detection</xref>, <xref
       target="RFC9293">Transmission Control Protocol</xref>, and <xref
       target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission
@@ -930,9 +930,9 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.9067.xml'?>
 
-      <?rfc include='reference.RFC.9127.xml'?>
-
       <?rfc include='reference.RFC.9293.xml'?>
+
+      <?rfc include='reference.RFC.9314.xml'?>
 
       <?rfc include='reference.I-D.ietf-tcpm-yang-tcp.xml'?>
     </references>
