@@ -18,12 +18,6 @@ module ietf-bgp-policy {
   import iana-bgp-types {
     prefix bt;
   }
-  import ietf-routing-types {
-    prefix rt-types;
-    reference
-      "RFC 8294 - Common YANG Data Types for the
-       Routing Area";
-  }
 
   organization
     "IETF IDR Working Group";
@@ -206,7 +200,7 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              type rt-types:route-target;
+	      type bt:bgp-ext-community-type;
               type bt:bgp-community-regexp-type;
             }
             description
@@ -650,7 +644,7 @@ module ietf-bgp-policy {
              communities for the set-ext-community action";
           case inline {
             leaf-list communities {
-              type rt-types:route-target;
+              type bt:bgp-ext-community-type;
               description
                 "Set the extended community values for the update
                  inline with a list.";
