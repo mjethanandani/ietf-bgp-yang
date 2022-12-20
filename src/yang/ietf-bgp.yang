@@ -689,23 +689,37 @@ module ietf-bgp {
             }
             container messages {
               description
-                "Counters for BGP messages sent and received from the
+		"Counters for BGP messages sent and received from the
                  neighbor";
-              leaf in-total-messages {
-                type yang:zero-based-counter32;
+              leaf messages-received {
+                type yang:zero-based-counter64;
                 description
-                  "The total number of messages received
-                   from the remote peer on this connection.";
+		  "Number of BGP messages received from this neighbor";
                 reference
-                  "RFC 4271, Section 4.";
+                  "RFC 4273 - bgpPeerInTotalMessages";
               }
-              leaf out-total-messages {
-                type yang:zero-based-counter32;
+              leaf messages-sent {
+                type yang:zero-based-counter64;
                 description
-                  "The total number of messages transmitted to
-                   the remote peer on this connection.";
+                  "Number of BGP messages received from this neighbor";
                 reference
-                  "RFC 4271, Section 4.";
+                  "RFC 4273 - bgpPeerOutTotalMessages";
+              }
+              leaf updates-received {
+                type yang:zero-based-counter64;
+                description
+                  "Number of BGP UPDATE messages received from this
+                   neighbor.";
+                reference
+                  "RFC 4273: bgpPeerInUpdates.";
+              }
+              leaf updates-sent {
+                type yang:zero-based-counter64;
+                description
+		  "Number of BGP UPDATE messages sent to this
+                   neighbor";
+                reference
+                  "RFC 4273 - bgpPeerOutUpdates";
               }
               leaf in-update-elapsed-time {
                 type yang:gauge32;
@@ -719,17 +733,39 @@ module ietf-bgp {
                   "RFC 4271, Section 4.3.
                    RFC 4271, Section 8.2.2, Established state.";
               }
-              container sent {
+              leaf notifications-received {
+                type yang:zero-based-counter64;
                 description
-                  "Counters relating to BGP messages sent to the
-                   neighbor";
-                uses bgp-neighbor-counters-message-types-state;
+                  "Number of BGP NOTIFICATION messages indicating an
+		   error condition has occurred exchanged received from
+                   this peer.";
+                reference
+                  "RFC 4271, Section 4.5.";
               }
-              container received {
+              leaf notifications-sent {
+                type yang:zero-based-counter64;
                 description
-                  "Counters for BGP messages received from the
-                   neighbor";
-                uses bgp-neighbor-counters-message-types-state;
+                  "Number of BGP NOTIFICATION messages indicating an
+		   error condition has occurred exchanged sent to this
+                   peer.";
+                reference
+                  "RFC 4271, Section 4.5.";
+              }
+              leaf route-refreshes-received {
+                type yang:zero-based-counter64;
+                description
+		  "Number of BGP ROUTE-REFRESH messages received from
+                   this peer.";
+                reference
+                  "RFC 2918 - Route Refresh Capability for BGP-4.";
+              }
+              leaf route-refreshes-sent {
+                type yang:zero-based-counter64;
+                description
+                  "Number of BGP ROUTE-REFRESH messages sent to
+                   this peer.";
+                reference
+                  "RFC 2918 - Route Refresh Capability for BGP-4.";
               }
             }
             container queues {

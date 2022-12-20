@@ -96,45 +96,6 @@ submodule ietf-bgp-neighbor {
     }
   }
 
-  grouping bgp-neighbor-counters-message-types-state {
-    description
-      "Grouping of BGP message types, included for re-use across
-       counters";
-    leaf updates-received {
-      type yang:zero-based-counter64;
-      description
-        "Number of BGP UPDATE messages received from this neighbor.";
-      reference
-        "RFC 4273: bgpPeerInUpdates.";
-    }
-    leaf updates-sent {
-      type yang:zero-based-counter64;
-      description
-        "Number of BGP UPDATE messages sent to this neighbor";
-      reference
-        "RFC 4273 - bgpPeerOutUpdates";
-    }
-    leaf messages-received {
-      type yang:zero-based-counter64;
-      description
-        "Number of BGP messages received from thsi neighbor";
-      reference
-        "RFC 4273 - bgpPeerInTotalMessages";
-    }
-    leaf messages-sent {
-      type yang:zero-based-counter64;
-      description
-        "Number of BGP messages received from thsi neighbor";
-      reference
-        "RFC 4273 - bgpPeerOutTotalMessages";
-    }
-    leaf notification {
-      type yang:zero-based-counter64;
-      description
-        "Number of BGP NOTIFICATION messages indicating an error
-         condition has occurred exchanged.";
-    }
-  }
 
   grouping bgp-neighbor-afi-safi-list {
     description
