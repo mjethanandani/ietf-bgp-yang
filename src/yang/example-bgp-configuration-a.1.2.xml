@@ -18,7 +18,8 @@
       </lifetime>
       <crypto-algorithm
         xmlns:tcp=
-	"urn:ietf:params:xml:ns:yang:ietf-tcp">tcp:aes-128</crypto-algorithm>
+	"urn:ietf:params:xml:ns:yang:ietf-tcp">tcp:aes-128
+      </crypto-algorithm>
       <key-string>
         <keystring>testvector</keystring>
       </key-string>
@@ -45,7 +46,8 @@
       </lifetime>
       <crypto-algorithm
         xmlns:tcp=
-	"urn:ietf:params:xml:ns:yang:ietf-tcp">tcp:aes-128</crypto-algorithm>
+	"urn:ietf:params:xml:ns:yang:ietf-tcp">tcp:aes-128
+      </crypto-algorithm>
       <key-string>
         <keystring>testvector</keystring>
       </key-string>

@@ -704,7 +704,8 @@ module ietf-bgp {
               leaf total-sent {
                 type yang:zero-based-counter64;
                 description
-                  "Total number of BGP messages sent do this neighbor";
+                  "Total number of BGP messages sent do this
+                   neighbor";
                 reference
                   "RFC 4273: Definitions of Managed Objects for
                    BGP-4, bgpPeerOutTotalMessages.";
@@ -745,8 +746,8 @@ module ietf-bgp {
                 type yang:zero-based-counter64;
                 description
                   "Number of BGP NOTIFICATION messages indicating an
-                   error condition has occurred exchanged received from
-                   this peer.";
+                   error condition has occurred exchanged received
+                   from this peer.";
                 reference
                   "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
                    Section 4.5.";
@@ -755,8 +756,8 @@ module ietf-bgp {
                 type yang:zero-based-counter64;
                 description
                   "Number of BGP NOTIFICATION messages indicating an
-                   error condition has occurred exchanged sent to this
-                   peer.";
+                   error condition has occurred exchanged sent to
+                   this peer.";
                 reference
                   "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
                    Section 4.5.";
