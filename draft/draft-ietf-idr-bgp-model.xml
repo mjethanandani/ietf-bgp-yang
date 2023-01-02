@@ -854,8 +854,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.2119.xml'?>
 
-      <?rfc include='reference.RFC.2385.xml'?>
-
       <?rfc include='reference.RFC.2439.xml'?>
 
       <?rfc include='reference.RFC.2918.xml'?>
@@ -867,8 +865,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.4360.xml'?>
 
       <?rfc include='reference.RFC.4364.xml'?>
-
-      <?rfc include='reference.RFC.4451.xml'?>
 
       <?rfc include='reference.RFC.4456.xml'?>
 
@@ -889,8 +885,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.5883.xml'?>
 
       <?rfc include='reference.RFC.6020.xml'?>
-
-      <?rfc include='reference.RFC.6151.xml'?>
 
       <?rfc include='reference.RFC.6241.xml'?>
 
@@ -938,11 +932,17 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
     </references>
 
     <references title="Informative references">
+      <?rfc include='reference.RFC.2385.xml'?>
+
       <?rfc include='reference.RFC.3765.xml'?>
+
+      <?rfc include='reference.RFC.4451.xml'?>
 
       <?rfc include='reference.RFC.5082.xml'?>
 
       <?rfc include='reference.RFC.5925.xml'?>
+
+      <?rfc include='reference.RFC.6151.xml'?>
 
       <?rfc include='reference.RFC.7454.xml'?>
 
