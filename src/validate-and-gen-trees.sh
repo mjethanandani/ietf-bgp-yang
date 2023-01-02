@@ -115,7 +115,7 @@ do
 done
 
 # Validate BGP Policy examples
-for i in yang/example-bgp-configuration-a.1.4.xml
+for i in yang/example-bgp-configuration-a.1.[4-5].xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.xml"

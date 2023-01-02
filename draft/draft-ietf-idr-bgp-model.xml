@@ -831,20 +831,22 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
     </section>
 
     <section title="Acknowledgements">
-      <t>The authors are grateful for valuable contributions to this document
-      and the associated models from: Ebben Aires, Pavan Beeram, Chris Chase,
-      Ed Crabbe, Luyuan Fang, Bill Fenner, Akshay Gattani, Josh George, Vijay
-      Gill, Matt John, Jeff Haas, Dhanendra Jain, Acee Lindem, Ina Minei, Carl
-      Moberg, Ashok Narayanan, Einar Nilsen-Nygaard, Adam Simpson, Puneet
-      Sood, Jason Sterne, Jeff Tantsura, Jim Uttaro, and Gunter
-      Vandevelde.</t>
+      <t>The authors are grateful for valuable contributions to this
+      document and the associated models from: Ebben Aires, Pavan
+      Beeram, Chris Chase, Ed Crabbe, Luyuan Fang, Bill Fenner, Akshay
+      Gattani, Josh George, Vijay Gill, Matt John, Dhanendra Jain,
+      Acee Lindem, Ina Minei, Carl Moberg, Ashok Narayanan, Einar
+      Nilsen-Nygaard, Adam Simpson, Puneet Sood, Jason Sterne, Jeff
+      Tantsura, Jim Uttaro, and Gunter Vandevelde.</t>
 
-      <t>Credit is also due to authors of the OpenConfig, whose model was
-      relied upon to come up with this model.</t>
+      <t>Credit is also due to authors of the OpenConfig, whose model
+      was relied upon to come up with this model.</t>
 
       <t>Special thanks to Robert Wilton who helped convert the YANG
-      models to a NMDA compatible model, and to Derek Yeung in helping
-      out with Extended Communities support in the model.</t>
+      models to a NMDA compatible model, to Yingzhen Qu who
+      contributed to the policy part of the module, and to Derek Yeung
+      in helping out with Extended Communities support in the
+      model.</t>
     </section>
   </middle>
 
