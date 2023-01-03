@@ -326,7 +326,6 @@ submodule ietf-bgp-common {
          rather than initiating sessions from the local router.";
     }
 
-    /* XXX JMH - local address and bfd are repeated due to this in neighbors? */
     leaf local-address {
       type union {
         type inet:ip-address;

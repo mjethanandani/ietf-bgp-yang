@@ -128,8 +128,6 @@ submodule ietf-bgp-rib-attributes {
             "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
         }
 
-        /* XXX JMH - perhaps this should be excluded since it's
-         * normally calculated? */
         leaf extended {
           type boolean;
           description

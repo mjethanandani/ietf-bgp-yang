@@ -45,8 +45,8 @@ submodule ietf-bgp-rib {
               Jeffrey Haas (jhaas at juniper dot net).";
 
   description
-    "Defines a submodule for representing BGP Routing Information Base
-     (RIB) contents.  The submodule supports 5 logical RIBs per
+    "Defines a submodule for representing BGP Routing Information
+     Base (RIB) contents.  The submodule supports 5 logical RIBs per
      address family:
 
      loc-rib: This is the main BGP routing table for the local
@@ -261,8 +261,6 @@ submodule ietf-bgp-rib {
            subsumed by it.";
         reference
           "RFC 4271: Section 5.1.6.";
-      /* XXX JMH - the deprecate-as-set-confed-set draft may provide
-       * additional inputs for references. */
       }
       leaf originator-id {
         type yang:dotted-quad;
@@ -293,8 +291,6 @@ submodule ietf-bgp-rib {
     }
   }
 
-  /* XXX JMH - this is a singleton use right now.  collapse into
-   * attr-sets? */
   grouping attr-set {
     description
       "A grouping for all path attributes.";
