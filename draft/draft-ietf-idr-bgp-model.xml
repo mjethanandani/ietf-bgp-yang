@@ -501,26 +501,28 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       operations. Some of the subtrees and data nodes and their
       sensitivity/vulnerability are described here.</t>
 
-      <t>- The attribute 'as'. If a user is allowed to change this attribute,
+      <ul>
+      <li> The attribute 'as'. If a user is allowed to change this attribute,
       it will have the net effect of bringing down the entire routing
       instance, causing it to delete all the current routing entries, and
-      learning new ones.</t>
+      learning new ones.</li>
 
-      <t>- The attribute 'identifier'. If a user is allowed to change this
+      <li> The attribute 'identifier'. If a user is allowed to change this
       attribute, it will have the net effect of this routing instance
-      re-advertising all its routes.</t>
+      re-advertising all its routes.</li>
 
-      <t>- The attribute 'distance'. If a user is allowed to change this
+      <li> The attribute 'distance'. If a user is allowed to change this
       attribute, it will cause the preference for routes, e.g. external vs
-      internal to change.</t>
+      internal to change.</li>
 
-      <t>- The attribute 'enabled' in the 'confederation' container. This
-      attribute defines whether a local-AS is part of a BGP federation.</t>
+      <li> The attribute 'enabled' in the 'confederation' container. This
+      attribute defines whether a local-AS is part of a BGP confederation.</li>
 
-      <t>- Finally, there are a whole set of route selection options such as
+      <li> Finally, there are a whole set of route selection options such as
       'always-compare-med', 'ignore-as-path-length' that affect the way the
       system picks up a particular route. Being able to change will adversely
-      affect how the route selection happens.</t>
+      affect how the route selection happens.</li>
+      </ul>
 
       <t>Some of the readable data nodes in this YANG module may be considered
       sensitive or vulnerable in some network environments. It is thus
@@ -528,34 +530,38 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       notification) to these data nodes. Some of the subtrees and data nodes
       and their sensitivity/vulnerability are:</t>
 
-      <t>- The list of neighbors, and their attributes. Allowing a user to
+      <ul>
+      <li> The list of neighbors, and their attributes. Allowing a user to
       read these attributes, in particular the address/port information may
       allow a malicious user to launch an attack at the particular
-      address/port.</t>
+      address/port.</li>
 
-      <t>- The 'rib' container. This container contains sensitive information
-      such as attribute sets, communities and external communities. Being able
-      to read the contents of this container will allow a malicious user to
-      understand how the system decide how to route a packet, and thus try to
-      affect a change.</t>
+      <li> The 'rib' container. This container contains sensitive information
+      such as attribute sets, communities, extended communities, and large
+      communities. Being able to read the contents of this container will allow
+      a malicious user to understand how the system decide how to route a
+      packet, and thus try to affect a change.</li>
+      </ul>
 
       <t>Some of the RPC operations in this YANG module may be considered
       sensitive or vulnerable in some network environments. It is thus
       important to control access to these operations. These are the
       operations and their sensitivity/vulnerability:</t>
 
-      <t>- The model allows for routes to be cleared using the 'clear' RPC
-      operations, causing the entire RIB table to be cleared.</t>
+      <ul>
+      <li> The model allows for routes to be cleared using the 'clear' RPC
+      operations, causing the entire RIB table to be cleared.</li>
 
-      <t>- The model allows for statistics to be cleared by the 'clear' RPC
-      operation, causing all the individual statistics to be cleared.</t>
+      <li> The model allows for statistics to be cleared by the 'clear' RPC
+      operation, causing all the individual statistics to be cleared.</li>
 
-      <t>- The model also allows for neighbors that have been learnt by the
-      system to be cleared by using the 'clear' RPC operation.</t>
+      <li> The model also allows for neighbors that have been learnt by the
+      system to be cleared by using the 'clear' RPC operation.</li>
+      </ul>
 
       <t><xref target="RFC7454">BGP OPSEC</xref> describes several
-      policies that can be used to secure a BGP. In particular, it
-      recommends securing the underlying TCP session and to use <xref
+      policies that can be used to secure BGP. In particular, it
+      recommends securing the underlying TCP session and to use the <xref
       target="RFC5082">Generalized TTL Security Mechanism
       (GTSM)</xref> capability to make it harder to spoof a BGP
       session. This module allows implementations that want to support
@@ -618,75 +624,71 @@ reference: RFC XXXX
       below.</t>
 
       <t>The main module, ietf-bgp.yang, includes the following submodules:
-      <list style="symbols">
-          <t>ietf-bgp-common - defines the groupings that are common across
+      <ul>
+          <li>ietf-bgp-common - defines the groupings that are common across
           more than one context (where contexts are neighbor, group,
-          global)</t>
+          global).</li>
 
-          <t>ietf-bgp-common-multiprotocol - defines the groupings that are
+          <li>ietf-bgp-common-multiprotocol - defines the groupings that are
           common across more than one context, and relate to multi-protocol
-          BGP</t>
+          BGP.</li>
 
-          <t>ietf-bgp-common-structure - defines groupings that are shared by
-          multiple contexts, but are used only to create structural elements,
-          i.e., containers (leaf nodes are defined in separate groupings)</t>
+          <li>ietf-bgp-common-structure - defines groupings that are shared by
+          multiple contexts, but are used only to create structural elements;
+          i.e., containers (leaf nodes are defined in separate groupings).</li>
 
-          <t>ietf-bgp-neighbor - groupings with data specific to the neighbor
-          context</t>
+          <li>ietf-bgp-neighbor - groupings with data specific to the neighbor
+          context.</li>
 
-          <t>ietf-bgp-rib - grouping for representing BGP RIB.</t>
-	  <t>ietf-bgp-rib-attributes - common data definitions for BGP
-	  attributes used in BGP RIB tables.</t>
-	  <t>ietf-bgp-rib-tables - structural data definitions for BGP
-	  routing tables.</t>
-        </list></t>
+          <li>ietf-bgp-rib - grouping for representing BGP RIBs.</li>
+	  <li>ietf-bgp-rib-attributes - common data definitions for BGP
+	  attributes used in BGP RIB tables.</li>
+	  <li>ietf-bgp-rib-tables - structural data definitions for BGP
+	  routing tables.</li>
+        </ul></t>
 
-      <t>Additionally, modules include: <list style="symbols">
-          <t>iana-bgp-types - common type and identity definitions for BGP,
-          including BGP policy</t>
+      <t>Additionally, modules include:
+      <ul>
+          <li>iana-bgp-types - common type and identity definitions for BGP,
+          including BGP policy.</li>
 
-          <t>ietf-bgp-policy - BGP-specific policy data definitions for use
+          <li>ietf-bgp-policy - BGP-specific policy data definitions for use
           with <xref target="RFC9067"/> (described in more
-          detail <xref target="overview.policy"/>)</t>
-        </list></t>
+          detail <xref target="overview.policy"/>).</li>
+        </ul></t>
     </section>
 
     <section title="Structure of the YANG modules">
       <t>The YANG model can be subdivided between the main module for
-      base items, types, and policy module. It references <xref
-      target="RFC1997">BGP Communities Attribute </xref>, <xref
-      target="RFC2918">Route Refresh Capability for BGP-4</xref>,
-      <xref target="RFC3765">NOPEER Community for BGP</xref>, <xref
-      target="RFC4360">BGP Extended Communities Attributes</xref>,
-      <xref target="RFC4364">BGP/MPLS IP Virtual Private Networks
-      (VPNs)</xref>, <xref target="RFC4451">BGP MED
-      Considerations</xref>, <xref target="RFC4659">BGP-MPLS IP
-      Virtual Private Network (VPN) Extension for IPv6 VPN</xref>,
-      <xref target="RFC4724">Graceful Restart Mechanism for
-      BGP</xref>, <xref target="RFC4760">Multiprotocol Extentions for
-      BGP-4</xref>, <xref target="RFC4761">Virtual Private LAN Service
-      (VPLS) Using BGP for Auto-Discovery and Signaling</xref>, <xref
-      target="RFC5065">Autonomous System Configuration for BGP</xref>,
-      <xref target="RFC5082">The Generalized TTL Security Mechanism
-      (GTSM)</xref>, <xref target="RFC5880">Bidirectional Forward
-      Detection (BFD)</xref>, <xref target="RFC5881">Bidirectional
-      Forward Detection for IPv4 and IPv6 (Single Hop)</xref>, <xref
-      target="RFC5883">Bidirectional Forwarding Detection (BFD) for
-      Multihop Paths</xref>, <xref target="RFC5925">The TCP
-      Authentication Option</xref>, <xref target="RFC6514">BGP
-      Encodings and Procedures for Multicast in MPLS/BGP IP
-      VPNs</xref>, <xref target="RFC6793">BGP Support for Four-Octet
-      Autonomous System (AS) Number Space</xref>, <xref
-      target="RFC7911">Advertisement of Multiple Paths in BGP </xref>,
-      <xref target="RFC8092">BGP Large Communities Attributes</xref>,
-      <xref target="RFC8177">YANG Key Chain</xref>, <xref
-      target="RFC8277">Carrying Label Information in BGP-4 </xref>,
-      <xref target="RFC9067">A YANG Data Model for Routing
-      Policy</xref>, <xref target="RFC9314">YANG Data Model for
-      Bidirectional Forward Detection</xref>, <xref
-      target="RFC9293">Transmission Control Protocol</xref>, and <xref
-      target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission
-      Control Protocol (TCP) Configuration</xref>.</t>
+      base items, types, and policy module. It references:
+      <ul>
+      <li><xref target="RFC1997">BGP Communities Attribute </xref></li>
+      <li><xref target="RFC2918">Route Refresh Capability for BGP-4</xref></li>
+      <li><xref target="RFC3765">NOPEER Community for BGP</xref></li>
+      <li><xref target="RFC4360">BGP Extended Communities Attributes</xref></li>
+      <li><xref target="RFC4364">BGP/MPLS IP Virtual Private Networks (VPNs)</xref></li>
+      <li><xref target="RFC4451">BGP MED Considerations</xref></li>
+      <li><xref target="RFC4659">BGP-MPLS IP Virtual Private Network (VPN) Extension for IPv6 VPN</xref></li>
+      <li><xref target="RFC4724">Graceful Restart Mechanism for BGP</xref></li>
+      <li><xref target="RFC4760">Multiprotocol Extentions for BGP-4</xref></li>
+      <li><xref target="RFC4761">Virtual Private LAN Service (VPLS) Using BGP for Auto-Discovery and Signaling</xref></li>
+      <li><xref target="RFC5065">Autonomous System Configuration for BGP</xref></li>
+      <li><xref target="RFC5082">The Generalized TTL Security Mechanism (GTSM)</xref></li>
+      <li><xref target="RFC5880">Bidirectional Forward Detection (BFD)</xref></li>
+      <li><xref target="RFC5881">Bidirectional Forward Detection for IPv4 and IPv6 (Single Hop)</xref></li>
+      <li><xref target="RFC5883">Bidirectional Forwarding Detection (BFD) for Multihop Paths</xref></li>
+      <li><xref target="RFC5925">The TCP Authentication Option</xref></li>
+      <li><xref target="RFC6514">BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs</xref></li>
+      <li><xref target="RFC6793">BGP Support for Four-Octet Autonomous System (AS) Number Space</xref></li>
+      <li><xref target="RFC7911">Advertisement of Multiple Paths in BGP </xref></li>
+      <li><xref target="RFC8092">BGP Large Communities Attributes</xref></li>
+      <li><xref target="RFC8177">YANG Key Chain</xref></li>
+      <li><xref target="RFC8277">Carrying Label Information in BGP-4 </xref></li>
+      <li><xref target="RFC9067">A YANG Data Model for Routing Policy</xref></li>
+      <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
+      <li><xref target="RFC9293">Transmission Control Protocol</xref></li>
+      <li><xref target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
+      </ul></t>
 
       <section title="Modules and submodules for base items">
 	<section title="ietf-bgp module">

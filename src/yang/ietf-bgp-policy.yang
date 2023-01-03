@@ -251,8 +251,8 @@ module ietf-bgp-policy {
             type string;
             description
               "AS path regular expression -- list of ASes in the
-               set. If any of the regular expression in the lists
-               is matched, the as-path-set is considered matched.";
+               set. If any of the regular expressions in the lists
+               are matched, the as-path-set is considered matched.";
           }
         }
       }

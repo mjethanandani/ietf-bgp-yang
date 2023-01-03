@@ -16,7 +16,7 @@ module ietf-bgp {
   import ietf-routing-policy {
     prefix rt-pol;
     reference
-      "RFC ZZZZ, A YANG Data Model for Routing Policy Management.";
+      "RFC 9067, A YANG Data Model for Routing Policy.";
   }
   import ietf-interfaces {
     prefix if;
@@ -27,12 +27,13 @@ module ietf-bgp {
     prefix bt;
     reference
       "RFC XXXX, BGP YANG Model for Service Provider Network.";
+      /* XXX JMH Title? */
   }
   import ietf-bfd-types {
     prefix bfd-types;
     reference
-      "RFC 9314: YANG Data Model for Bidirectional Forward Detection
-       (BFD).";
+      "RFC 9314: YANG Data Model for Bidirectional Forwarding
+       Detection (BFD).";
   }
   import ietf-inet-types {
     prefix inet;
@@ -47,7 +48,7 @@ module ietf-bgp {
   import ietf-key-chain {
     prefix key-chain;
     reference
-      "RFC 8177: YANG Key Chain.";
+      "RFC 8177: YANG Data Model for Key Chains";
   }
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
@@ -396,7 +397,7 @@ module ietf-bgp {
               "The remote port for the TCP connection
                between the BGP peers.  Note that the
                objects local-addr, local-port, remote-addr, and
-               reemote-port provide the appropriate
+               remote-port provide the appropriate
                reference to the standard MIB TCP
                connection table.";
           }
@@ -444,7 +445,7 @@ module ietf-bgp {
                not initiate connections to the neighbor, and should
                not respond to TCP connections attempts from the
                neighbor. If the state of the BGP session is
-               ESTABLISHED at the time that this leaf is set to
+               Established at the time that this leaf is set to
                false, the BGP session should be ceased.
 
                A transition from 'false' to 'true' will cause
@@ -467,6 +468,7 @@ module ietf-bgp {
           }
 
           container secure-session {
+            /* XXX JMH - why is this constraint mandatory? alos, why not have the enable in this container? */
             when "../secure-session-enable = 'true'";
             description
               "Container for describing how a particular BGP session
@@ -588,9 +590,10 @@ module ietf-bgp {
 
                The BGP session uptime can be computed by clients as
                the difference between this value and the current time
-               in UTC (assuming the session is in the ESTABLISHED
+               in UTC (assuming the session is in the Established
                state, per the session-state leaf).";
           }
+          /* XXX JMH - we probably want a list of sent and received capabilities. */
           leaf-list negotiated-capabilities {
             type identityref {
               base bt:bgp-capability;
@@ -605,6 +608,7 @@ module ietf-bgp {
             description
               "The negotiated hold-time for the BGP session";
           }
+          /* XXX JMH - need better errors.  See also OC's model. */
           leaf last-error {
             type binary {
               length "2";
@@ -678,6 +682,7 @@ module ietf-bgp {
                 "RFC 4273: Definitions of Managed Objects for
                  BGP-4.";
             }
+            /* XXX JMH - what's the difference between peer-fsm-estabhslished-transitions and fsm-established-transitions? */
             leaf fsm-established-transitions {
               type yang:zero-based-counter32;
               description
@@ -832,6 +837,7 @@ module ietf-bgp {
               "IP address of the neighbor that went into established
                state.";
           }
+          /* XXX JMH - last error probably doesn't make sense here? */
           leaf last-error {
             type leafref {
               path "../../neighbor/last-error";
@@ -846,6 +852,7 @@ module ietf-bgp {
             reference
               "RFC 4271, Section 4.5.";
           }
+          /* XXX JMH - I think this notification type implies established?*/
           leaf session-state {
             type leafref {
               path "../../neighbor/session-state";
@@ -869,6 +876,7 @@ module ietf-bgp {
               "IP address of the neighbor that changed its state from
                established state.";
           }
+          /* XXX JMH - reevaluate based on other discussion. */
           leaf last-error {
             type leafref {
               path "../../neighbor/last-error";
@@ -883,6 +891,7 @@ module ietf-bgp {
             reference
               "RFC 4271, Section 4.5.";
           }
+          /* This lingers from RFC 4273 and might not be helpful? */
           leaf session-state {
             type leafref {
               path "../../neighbor/session-state";
@@ -950,7 +959,6 @@ module ietf-bgp {
               }
             }
 
-
             leaf clear-at {
               type yang:date-and-time;
               description
@@ -984,6 +992,7 @@ module ietf-bgp {
               "Name of the BGP peer-group";
           }
 
+          /* XXX JMH - can the secure session stuff be refactored from above? */
           leaf secure-session-enable {
             type boolean;
             default "false";
@@ -1050,6 +1059,7 @@ module ietf-bgp {
             }
           }
 
+          /* XXX JMH - refactor? */
           leaf ttl-security {
             if-feature "bt:ttl-security";
             type uint8;
@@ -1088,6 +1098,7 @@ module ietf-bgp {
         }
       }
 
+      /* XXX JMH - what implementation needs BFD config per interface for BGP? */
       container interfaces {
         list interface {
           key "name";
