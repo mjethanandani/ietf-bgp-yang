@@ -49,6 +49,9 @@ module ietf-bgp {
     reference
       "RFC 8177: YANG Data Model for Key Chains";
   }
+  include ietf-bgp-capabilities {
+    revision-date YYYY-MM-DD;
+  }
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
   }
@@ -176,6 +179,7 @@ module ietf-bgp {
         type uint16 {
           range "0..4096";
         }
+        units "seconds";
         config false;
         description
           "The period of time (advertised by the peer) that the
@@ -591,14 +595,9 @@ module ietf-bgp {
                in UTC (assuming the session is in the Established
                state, per the session-state leaf).";
           }
-          leaf-list negotiated-capabilities {
-            type identityref {
-              base bt:bgp-capability;
-            }
-            config false;
-            description
-              "Negotiated BGP capabilities.";
-          }
+
+          uses bgp-capabilities;
+
           leaf negotiated-hold-time {
             type uint16;
             config false;
