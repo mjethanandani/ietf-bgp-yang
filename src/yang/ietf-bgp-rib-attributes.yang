@@ -60,7 +60,7 @@ submodule ietf-bgp-rib-attributes {
 
   grouping bgp-as-path-segment {
     description
-      "Data for representing BGP AS-PATH attribute";
+      "Data for representing BGP AS-PATH segment";
 
     leaf type {
       type identityref {
