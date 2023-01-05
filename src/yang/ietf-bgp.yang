@@ -459,18 +459,18 @@ module ietf-bgp {
               "RFC 4271, Section 8.1.2.";
           }
 
-          leaf secure-session-enable {
-            type boolean;
-            default "false";
-            description
-              "Does this session need to be secured?";
-          }
-
           container secure-session {
-            when "../secure-session-enable = 'true'";
             description
               "Container for describing how a particular BGP session
                is to be secured.";
+
+            leaf enabled {
+              type boolean;
+              default "false";
+              description
+                "When set to true, session is secured with the
+                 configured options.";
+            }
 
             choice option {
               case ao {
@@ -511,6 +511,11 @@ module ietf-bgp {
 
               description
                 "Choice of authentication options.";
+            }
+            must "enabled = 'false' or " +
+                 "(enabled = 'true' and option != ''" {
+              error-message "When secure-session is enabled " +
+                "secure-session options MUST be set";
             }
           }
           leaf ttl-security {
