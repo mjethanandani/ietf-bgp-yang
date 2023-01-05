@@ -148,6 +148,38 @@ module ietf-bgp-policy {
        and setting it to the IGP cost (predefined value).";
   }
 
+  grouping equality-operator {
+    description "";
+    choice operation {
+      case eq {
+        leaf eq {
+          type empty;
+          description
+            "Check to see if the value is equal.";
+        }
+      }
+
+      case lt-or-eq {
+        leaf lt-or-eq {
+          type empty;
+          description
+            "Check to see if the value is less than or equal.";
+        }
+      }
+
+      case gt-or-eq {
+        leaf gt-or-eq {
+          type empty;
+          description
+            "Check to see if the value is greater than or
+             equal.";
+        }
+      }
+      description
+        "Choice of operations on the value";
+    }
+  }
+
   // Identities
 
   // augment statements
@@ -306,35 +338,9 @@ module ietf-bgp-policy {
              BGP route.";
         }
 
-        choice operation {
-          case eq {
-            leaf eq {
-              type empty;
-              description
-                "Check to see if the value is equal.";
-            }
-          }
-
-          case lt-or-eq {
-            leaf lt-or-eq {
-              type empty;
-              description
-                "Check to see if the value is less than or equal.";
-            }
-          }
-
-          case gt-or-eq {
-            leaf gt-or-eq {
-              type empty;
-              description
-                "Check to see if the value is greater than or
-                 equal.";
-            }
-          }
-          description
-            "Choice of operations on the value of MED.";
-        }
+        uses equality-operator;
       }
+
 
       container med {
         description
@@ -350,34 +356,7 @@ module ietf-bgp-policy {
              route.";
         }
 
-        choice operation {
-          case eq {
-            leaf eq {
-              type empty;
-              description
-                "Check to see if the value is equal.";
-            }
-          }
-
-          case lt-or-eq {
-            leaf lt-or-eq {
-              type empty;
-              description
-                "Check to see if the value is less than or equal.";
-            }
-          }
-
-          case gt-or-eq {
-            leaf gt-or-eq {
-              type empty;
-              description
-                "Check to see if the value is greater than or
-                 equal.";
-            }
-          }
-          description
-            "Choice of operations on the value of MED.";
-        }
+        uses equality-operator;
       }
 
       leaf origin-eq {
@@ -442,34 +421,7 @@ module ietf-bgp-policy {
              update.";
         }
 
-        choice operation {
-          case eq {
-            leaf eq {
-              type empty;
-              description
-                "Check to see if the value is equal.";
-            }
-          }
-
-          case lt-or-eq {
-            leaf lt-or-eq {
-              type empty;
-              description
-                "Check to see if the value is less than or equal.";
-            }
-          }
-
-          case gt-or-eq {
-            leaf gt-or-eq {
-              type empty;
-              description
-                "Check to see if the value is greater than or
-                 equal.";
-            }
-          }
-          description
-            "Choice of operations on the value of community-count.";
-        }
+        uses equality-operator;
       }
 
       container as-path-length {
@@ -488,34 +440,7 @@ module ietf-bgp-policy {
             "Value of the AS path length in the route update.";
         }
 
-        choice operation {
-          case eq {
-            leaf eq {
-              type empty;
-              description
-                "Check to see if the value is equal.";
-            }
-          }
-
-          case lt-or-eq {
-            leaf lt-or-eq {
-              type empty;
-              description
-                "Check to see if the value is less than or equal.";
-            }
-          }
-
-          case gt-or-eq {
-            leaf gt-or-eq {
-              type empty;
-              description
-                "Check to see if the value is greater than or
-                 equal.";
-            }
-          }
-          description
-            "Choice of operations on the value of as-path-len.";
-        }
+        uses equality-operator;
       }
 
       container match-community-set {
