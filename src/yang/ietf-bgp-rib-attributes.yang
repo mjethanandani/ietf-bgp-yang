@@ -128,17 +128,6 @@ submodule ietf-bgp-rib-attributes {
             "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
         }
 
-        leaf extended {
-          type boolean;
-          description
-            "Defines whether the attribute length is one octet
-             (if set to false) or two octets (if set to true). Set in
-             the fourth high-order bit of the BGP attribute flags
-             octet.";
-          reference
-            "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
-        }
-
         leaf attr-type {
           type uint8;
           description
@@ -153,7 +142,11 @@ submodule ietf-bgp-rib-attributes {
             "One or two octet attribute length field indicating the
              length of the attribute data in octets.  If the Extended
              Length attribute flag is set, the length field is 2
-             octets, otherwise it is 1 octet";
+             octets, otherwise it is 1 octet
+
+             Note that the Extended Length bit is not present in this
+             model since implementations are not required to preserve
+             it.";
           reference
             "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
         }
