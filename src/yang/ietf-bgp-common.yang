@@ -121,6 +121,15 @@ submodule ietf-bgp-common {
         "RFC 4271, Section 4.2.
          RFC 4271, Section 10.";
     }
+    leaf negotiated-hold-time {
+      type uint16;
+      config false;
+      description
+        "The negotiated hold-time for the BGP session";
+      reference
+        "RFC 4271, Section 4.2.
+         RFC 4271, Section 10.";
+    }
     leaf keepalive {
       type uint16 {
         range "0..21845";
