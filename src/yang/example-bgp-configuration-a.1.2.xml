@@ -86,10 +86,14 @@
           <neighbor>
             <remote-address>2001:db8::</remote-address>
             <enabled>true</enabled>
-            <secure-session-enable>true</secure-session-enable>
-            <secure-session>
-              <ao-keychain>bgp-key-chain</ao-keychain>
-            </secure-session>
+            <transport>
+              <secure-session>
+                <enabled>true</enabled>
+                <options>
+                  <ao-keychain>bgp-key-chain</ao-keychain>
+                </options>
+              </secure-session>
+            </transport>
             <peer-as>64497</peer-as>
             <description>"Peer Router B"</description>
             <timers>
