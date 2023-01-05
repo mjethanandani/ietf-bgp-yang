@@ -44,11 +44,6 @@ module ietf-bgp {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
-  import ietf-key-chain {
-    prefix key-chain;
-    reference
-      "RFC 8177: YANG Data Model for Key Chains";
-  }
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
   }
@@ -459,69 +454,6 @@ module ietf-bgp {
               "RFC 4271, Section 8.1.2.";
           }
 
-          container secure-session {
-            must "enabled = 'false' or " +
-                 "(enabled = 'true' and options)" {
-              error-message "When secure-session is enabled " +
-                "secure-session options MUST be set";
-            }
-            description
-              "Container for describing how a particular BGP session
-               is to be secured.";
-
-            leaf enabled {
-              type boolean;
-              default "false";
-              description
-                "When set to true, session is secured with the
-                 configured options.";
-            }
-
-            container options {
-              description
-                "Options for securing the BGP session.";
-              choice option {
-                case ao {
-                  leaf ao-keychain {
-                    type key-chain:key-chain-ref;
-                    description
-                      "Reference to the key chain that will be used
-                       by this model. Applicable for TCP-AO and
-                       TCP-MD5 only";
-                    reference
-                      "RFC 8177: YANG Key Chain.";
-                  }
-                  description
-                    "Uses TCP-AO to secure the session. Parameters
-                     for those are defined as a grouping in the TCP
-                     YANG model.";
-                  reference
-                    "RFC 5925 - The TCP Authentication Option.";
-                }
-
-                case md5 {
-                  leaf md5-keychain {
-                    type key-chain:key-chain-ref;
-                    description
-                      "Reference to the key chain that will be used
-                       by this model. Applicable for TCP-AO and
-                       TCP-MD5 only";
-                    reference
-                      "RFC 8177: YANG Key Chain.";
-                  }
-                  description
-                    "Uses TCP-MD5 to secure the session. Parameters
-                     for those are defined as a grouping in the TCP
-                     YANG model.";
-                  reference
-                    "RFC 5925: The TCP Authentication Option.";
-                }
-
-                description
-                  "Choice of authentication options.";
-              }
-            }
-          }
           leaf ttl-security {
             if-feature "bt:ttl-security";
             type uint8;
@@ -991,72 +923,6 @@ module ietf-bgp {
             type string;
             description
               "Name of the BGP peer-group";
-          }
-
-          leaf secure-session-enable {
-            type boolean;
-            default "false";
-            description
-              "Does this session need to be secured?";
-          }
-
-          container secure-session {
-            when "../secure-session-enable = 'true'";
-            description
-              "Container for describing how a particular BGP session
-               is to be secured.";
-
-            choice option {
-              case ao {
-                leaf ao-keychain {
-                  type key-chain:key-chain-ref;
-                  description
-                    "Reference to the key chain that will be used by
-                     this model. Applicable for TCP-AO and TCP-MD5
-                     only";
-                  reference
-                    "RFC 8177: YANG Key Chain.";
-                }
-                description
-                  "Uses TCP-AO to secure the session. Parameters for
-                   those are defined as a grouping in the TCP YANG
-                   model.";
-                reference
-                  "RFC 5925 - The TCP Authentication Option.";
-              }
-              case md5 {
-                leaf md5-keychain {
-                  type key-chain:key-chain-ref;
-                  description
-                    "Reference to the key chain that will be used by
-                     this model. Applicable for TCP-AO and TCP-MD5
-                     only";
-                  reference
-                    "RFC 8177: YANG Key Chain.";
-                }
-                description
-                  "Uses TCP-MD5 to secure the session. Parameters for
-                   those are defined as a grouping in the TCP YANG
-                   model.";
-                reference
-                  "RFC 5925: The TCP Authentication Option.";
-              }
-              case ipsec {
-                leaf sa {
-                  type string;
-                  description
-                    "Security Association (SA) name.";
-                }
-                description
-                  "Currently, the IPsec/IKE YANG model has no
-                   grouping defined that this model can use. When
-                   such a grouping is defined, this model can import
-                   the grouping to add the key parameters
-                   needed to kick of IKE.";
-              }
-              description
-                "Choice of authentication options.";
-            }
           }
 
           leaf ttl-security {
