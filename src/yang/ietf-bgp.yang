@@ -231,7 +231,6 @@ module ietf-bgp {
       }
     }
     uses structure-neighbor-group-logging-options;
-    uses structure-neighbor-group-ebgp-multihop;
     uses structure-neighbor-group-route-reflector;
     uses structure-neighbor-group-as-path-options;
     uses structure-neighbor-group-add-paths;
