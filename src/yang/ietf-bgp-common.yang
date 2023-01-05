@@ -318,6 +318,26 @@ submodule ietf-bgp-common {
         "RFC 1191: Path MTU discovery.";
     }
 
+    container ebgp-multihop {
+      description
+        "eBGP multi-hop parameters for the BGP peer-group";
+      leaf enabled {
+        type boolean;
+        default "false";
+        description
+          "When enabled, the referenced group or neighbors are
+           permitted to be indirectly connected - including cases
+           where the TTL can be decremented between the BGP peers";
+      }
+      leaf multihop-ttl {
+        type uint8;
+        description
+          "Time-to-live value to use when packets are sent to the
+           referenced group or neighbors and ebgp-multihop is
+           enabled";
+      }
+    }
+
     leaf passive-mode {
       type boolean;
       default "false";
