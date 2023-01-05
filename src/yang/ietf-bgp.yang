@@ -591,7 +591,8 @@ module ietf-bgp {
                in UTC (assuming the session is in the Established
                state, per the session-state leaf).";
             reference
-              "RFC 4271, Section 8.";
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+               8.";
           }
           leaf-list negotiated-capabilities {
             type identityref {
