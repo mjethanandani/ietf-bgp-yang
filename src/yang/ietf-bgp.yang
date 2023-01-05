@@ -646,14 +646,6 @@ module ietf-bgp {
               "RFC 7606: Revised Error Handling for BGP UPDATE
                Messages.";
           }
-          leaf erroneous-update-messages {
-            type uint32;
-            config false;
-            description
-              "The number of BGP UPDATE messages for which the
-               treat-as-withdraw mechanism has been applied based on
-               erroneous message contents";
-          }
 
           container bfd {
             if-feature "bt:bfd";
@@ -727,6 +719,28 @@ module ietf-bgp {
                 reference
                   "RFC 4273: Definitions of Managed Objects for
                    BGP-4, bgpPeerOutUpdates.";
+              }
+              leaf erroneous-updates-withdrawn {
+                type yang:zero-based-counter64;
+                config false;
+                description
+                  "The number of BGP UPDATE messages for which the
+                   treat-as-withdraw mechanism has been applied based
+                   on erroneous message contents.";
+                reference
+                  "RFC 7606: Revised Error Handling for BGP UPDATE
+                   Messages, Section 2.";
+              }
+              leaf erroneous-updates-attribute-discarded {
+                type yang:zero-based-counter64;
+                config false;
+                description
+                  "The number of BGP UPDATE messages for which the
+                   attribute discard mechanism has been applied based
+                   on erroneous message contents.";
+                reference
+                  "RFC 7606: Revised Error Handling for BGP UPDATE
+                   Messages, Section 2.";
               }
               leaf in-update-elapsed-time {
                 type yang:gauge32;
