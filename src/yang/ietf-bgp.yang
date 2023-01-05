@@ -667,7 +667,7 @@ module ietf-bgp {
             description
               "Statistics per neighbor.";
 
-            leaf peer-fsm-established-transitions {
+            leaf established-transitions {
               type yang:zero-based-counter64;
               description
                 "Number of transitions to the Established state for
@@ -676,16 +676,8 @@ module ietf-bgp {
                  standard BGP-4 MIB";
               reference
                 "RFC 4273: Definitions of Managed Objects for
-                 BGP-4.";
-            }
-            leaf fsm-established-transitions {
-              type yang:zero-based-counter32;
-              description
-                "The total number of times the BGP FSM
-                 transitioned into the established state
-                 for this peer.";
-              reference
-                "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+                 BGP-4, bgpPeerFsmEstablishedTransitions,
+                 RFC 4271: A Border Gateway Protocol 4 (BGP-4),
                  Section 8.";
             }
             container messages {
