@@ -58,9 +58,9 @@ submodule ietf-bgp-rib-attributes {
       "RFC XXXX: BGP YANG Model for Service Provider Network";
   }
 
-  grouping bgp-as-path-attr {
+  grouping bgp-as-path-segment {
     description
-      "Data for representing BGP AS-PATH attribute";
+      "Data for representing BGP AS-PATH segment";
 
     leaf type {
       type identityref {
@@ -73,20 +73,6 @@ submodule ietf-bgp-rib-attributes {
       type inet:as-number;
       description
         "List of the AS numbers in the AS-PATH segment";
-    }
-  }
-
-  grouping bgp-community-attr-state {
-    description
-      "Common definition of BGP community attributes";
-    leaf-list community {
-      type union {
-        type bt:bgp-well-known-community-type;
-        type bt:bgp-std-community-type;
-      }
-      description
-        "List of standard or well-known BGP community
-         attributes.";
     }
   }
 
@@ -206,6 +192,20 @@ submodule ietf-bgp-rib-attributes {
          used, i.e., the capability has been negotiated.";
       reference
         "RFC 7911: Advertisement of Multiple Paths in BGP";
+    }
+  }
+
+  grouping bgp-community-attr-state {
+    description
+      "Common definition of BGP community attributes";
+    leaf-list community {
+      type union {
+        type bt:bgp-well-known-community-type;
+        type bt:bgp-std-community-type;
+      }
+      description
+        "List of standard or well-known BGP community
+         attributes.";
     }
   }
 

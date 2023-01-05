@@ -28,8 +28,8 @@ submodule ietf-bgp-rib {
 
   // groupings of attributes in three categories:
   //  - shared across multiple routes
-  //  - common to LOC-RIB and Adj-RIB, but not shared across routes
-  //  - specific to LOC-RIB or Adj-RIB
+  //  - common to Loc-RIB and Adj-RIB, but not shared across routes
+  //  - specific to Loc-RIB or Adj-RIB
   // groupings of annotations for each route or table
   include ietf-bgp-rib-attributes;
 
@@ -45,24 +45,24 @@ submodule ietf-bgp-rib {
               Jeffrey Haas (jhaas at juniper dot net).";
 
   description
-    "Defines a submodule for representing BGP routing table (RIB)
-     contents.  The submodule supports 5 logical RIBs per address
-     family:
+    "Defines a submodule for representing BGP Routing Information
+     Base (RIB) contents.  The submodule supports 5 logical RIBs per
+     address family:
 
      loc-rib: This is the main BGP routing table for the local
      routing instance, containing best-path selections for each
      prefix. The loc-rib table may contain multiple routes for a
      given prefix, with an attribute to indicate which was selected
      as the best path.  Note that multiple paths may be used or
-     advertised even if only one path is marked as best, e.g., when
+     advertised even if only one path is marked as best; e.g., when
      using BGP add-paths.  An implementation may choose to mark
      multiple paths in the RIB as best path by setting the flag to
      true for multiple entries.
 
-     adj-rib-in-pre: This is a per-neighbor table containing the NLRI
-     updates received from the neighbor before any local input policy
-     rules or filters have been applied.  This can be considered the
-     'raw' updates from a given neighbor.
+     adj-rib-in-pre: This is a per-neighbor table containing the BGP
+     routes received from the neighbor before any local input policy
+     rules has been applied.  This can be considered the 'raw' routes
+     from a given neighbor.
 
      adj-rib-in-post: This is a per-neighbor table containing the
      routes received from the neighbor that are eligible for
@@ -106,7 +106,7 @@ submodule ietf-bgp-rib {
 
   grouping attr-set-attributes {
     description
-      "A grouping for all attribute set parameters.";
+      "A grouping for all BGP Path Attribute set parameters.";
 
     container attributes {
       description
@@ -117,23 +117,40 @@ submodule ietf-bgp-rib {
         description
           "BGP attribute defining the origin of the path
            information.";
-      }
-      leaf atomic-aggregate {
-        type boolean;
-        description
-          "BGP attribute indicating that the prefix is an atomic
-           aggregate; i.e., the peer selected is a less specific
-           route without selecting a more specific route that is
-           subsumed by it.";
         reference
-          "RFC 4271: Section 5.1.6.";
+          "RFC 4271: Section 5.1.1.";
+      }
+      container as-path {
+        description
+          "Enclosing container for the list of AS path segments.
+
+           In the Adj-RIB-In or Adj-RIB-Out, this list should show
+           the received or sent AS_PATH, respectively.  For
+           example, if the local router is not 4-byte capable, this
+           value should consist of 2-octet ASNs or the AS_TRANS
+           (AS 23456) values received or sent in BGP updates.
+
+           In the Loc-RIB, this list should reflect the effective
+           AS path for the route, e.g., a 4-octet value if the
+           local router is 4-octet capable.";
+        reference
+          "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)
+           RFC 6793 - BGP Support for Four-octet AS Number Space
+           RFC 5065 - Autonomous System Confederations for BGP";
+        list segment {
+          config false;
+          uses bgp-as-path-segment;
+          description
+            "List of AS PATH segments";
+        }
       }
       leaf next-hop {
         type inet:ip-address;
         description
           "BGP next hop attribute defining the IP address of the
            router that should be used as the next hop to the
-           destination.";
+           destination.  Used when the BGP routes' nexthop for that
+           AFI/SAFI can be represented as an IPv4/IPv6 address.";
         reference
           "RFC 4271: Section 5.1.3.";
       }
@@ -165,31 +182,23 @@ submodule ietf-bgp-rib {
         reference
           "RFC 4271: Section 5.1.5.";
       }
-      leaf originator-id {
-        type yang:dotted-quad;
+      container as4-path {
         description
-          "BGP attribute that provides the id as an IPv4 address
-           of the originator of the announcement.";
+          "This is the path encoded with 4-octet
+           AS numbers in the optional transitive AS4_PATH attribute.
+           This value is populated with the received or sent
+           attribute in Adj-RIB-In or Adj-RIB-Out, respectively.
+           It should not be populated in Loc-RIB since the Loc-RIB
+           is expected to store the effective AS-Path in the
+           as-path leaf regardless of being 4-octet or 2-octet.";
         reference
-          "RFC 4456 - BGP Route Reflection: An Alternative to Full
-           Mesh Internal BGP (IBGP)";
-      }
-      leaf-list cluster-list {
-        type yang:dotted-quad;
-        description
-          "Represents the reflection path that the route has
-           passed.";
-        reference
-          "RFC 4456 - BGP Route Reflection: An Alternative to Full
-           Mesh Internal BGP (IBGP)";
-      }
-      leaf aigp-metric {
-        type uint64;
-        description
-          "BGP path attribute representing the accumulated IGP
-           metric for the path";
-        reference
-          "RFC 7311 - The Accumulated IGP Metric Attribute for BGP";
+          "RFC 6793 - BGP Support for Four-octet AS Number Space";
+        list segment {
+          config false;
+          uses bgp-as-path-segment;
+          description
+            "List of AS PATH segments";
+        }
       }
       container aggregator {
         config false;
@@ -243,47 +252,41 @@ submodule ietf-bgp-rib {
              aggregation.";
         }
       }
-      container as-path {
+      leaf atomic-aggregate {
+        type boolean;
         description
-          "Enclosing container for the list of AS path segments.
-
-           In the Adj-RIB-In or Adj-RIB-Out, this list should show
-           the received or sent AS_PATH, respectively.  For
-           example, if the local router is not 4-byte capable, this
-           value should consist of 2-octet ASNs or the AS_TRANS
-           (AS 23456) values received or sent in route updates.
-
-           In the Loc-RIB, this list should reflect the effective
-           AS path for the route, e.g., a 4-octet value if the
-           local router is 4-octet capable.";
+          "BGP attribute indicating that the prefix is an atomic
+           aggregate; i.e., the peer selected is a less specific
+           route without selecting a more specific route that is
+           subsumed by it.";
         reference
-          "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)
-           RFC 6793 - BGP Support for Four-octet AS Number Space
-           RFC 5065 - Autonomous System Confederations for BGP";
-        list segment {
-          config false;
-          uses bgp-as-path-attr;
-          description
-            "List of AS PATH segments";
-        }
+          "RFC 4271: Section 5.1.6.";
       }
-      container as4-path {
+      leaf originator-id {
+        type yang:dotted-quad;
         description
-          "This is the path encoded with 4-octet
-           AS numbers in the optional transitive AS4_PATH attribute.
-           This value is populated with the received or sent
-           attribute in Adj-RIB-In or Adj-RIB-Out, respectively.
-           It should not be populated in Loc-RIB since the Loc-RIB
-           is expected to store the effective AS-Path in the
-           as-path leaf regardless of being 4-octet or 2-octet.";
+          "BGP attribute that provides the id as an IPv4 address
+           of the originator of the announcement.";
         reference
-          "RFC 6793 - BGP Support for Four-octet AS Number Space";
-        list segment {
-          config false;
-          uses bgp-as-path-attr;
-          description
-            "List of AS PATH segments";
-        }
+          "RFC 4456 - BGP Route Reflection: An Alternative to Full
+           Mesh Internal BGP (IBGP)";
+      }
+      leaf-list cluster-list {
+        type yang:dotted-quad;
+        description
+          "Represents the reflection path that the route has
+           passed.";
+        reference
+          "RFC 4456 - BGP Route Reflection: An Alternative to Full
+           Mesh Internal BGP (IBGP)";
+      }
+      leaf aigp-metric {
+        type uint64;
+        description
+          "BGP path attribute representing the accumulated IGP
+           metric for the path";
+        reference
+          "RFC 7311 - The Accumulated IGP Metric Attribute for BGP";
       }
     }
   }
@@ -323,6 +326,7 @@ submodule ietf-bgp-rib {
   grouping rib {
     description
       "Grouping for rib.";
+
     container rib {
       config false;
       uses attr-sets;
@@ -417,7 +421,7 @@ submodule ietf-bgp-rib {
             container loc-rib {
               config false;
               description
-                "Container for the IPv4 BGP LOC-RIB data.";
+                "Container for the IPv4 Unicast BGP Loc-RIB data.";
               container routes {
                 description
                   "Enclosing container for list of routes in the
@@ -463,10 +467,10 @@ submodule ietf-bgp-rib {
                 }
                 container adj-rib-in-pre {
                   description
-                    "Per-neighbor table containing the NLRI updates
+                    "Per-neighbor table containing the BGP routes
                      received from the neighbor before any local
                      input policy rules or filters have been applied.
-                     This can be considered the 'raw' updates from
+                     This can be considered the 'raw' routes from
                      the neighbor.";
                   uses ipv4-adj-rib-common;
                   uses clear-routes {
@@ -474,7 +478,7 @@ submodule ietf-bgp-rib {
                       "Clears the adj-rib-in state for the containing
                        neighbor. Subsequently, implementations might
                        issue a 'route refresh' if 'route refresh' has
-                       been negotiatited, or reset the session. ";
+                       been negotiated, or reset the session. ";
                   }
                 }
                 container adj-rib-in-post {
@@ -489,7 +493,7 @@ submodule ietf-bgp-rib {
                       "Clears the adj-rib-in state for the containing
                        neighbor. Subsequently, implementations might
                        issue a 'route refresh' if 'route refresh' has
-                       been negotiatited, or reset the session. ";
+                       been negotiated, or reset the session. ";
                   }
                 }
                 container adj-rib-out-pre {
@@ -536,7 +540,7 @@ submodule ietf-bgp-rib {
             container loc-rib {
               config false;
               description
-                "Container for the IPv6 BGP LOC-RIB data.";
+                "Container for the IPv6 BGP Loc-RIB data.";
               container routes {
                 description
                   "Enclosing container for list of routes in the
@@ -582,10 +586,10 @@ submodule ietf-bgp-rib {
                 }
                 container adj-rib-in-pre {
                   description
-                    "Per-neighbor table containing the NLRI updates
+                    "Per-neighbor table containing the BGP routes
                      received from the neighbor before any local
                      input policy rules or filters have been applied.
-                     This can be considered the 'raw' updates from
+                     This can be considered the 'raw' routes from
                      the neighbor.";
                   uses ipv6-adj-rib-common;
                   uses clear-routes {
@@ -593,7 +597,7 @@ submodule ietf-bgp-rib {
                       "Clears the adj-rib-in state for the containing
                        neighbor. Subsequently, implementations might
                        issue a 'route refresh' if 'route refresh' has
-                       been negotiatited, or reset the session. ";
+                       been negotiated, or reset the session. ";
                   }
                 }
                 container adj-rib-in-post {
@@ -608,7 +612,7 @@ submodule ietf-bgp-rib {
                       "Clears the adj-rib-in state for the containing
                        neighbor. Subsequently, implementations might
                        issue a 'route refresh' if 'route refresh' has
-                       been negotiatited, or reset the session. ";
+                       been negotiated, or reset the session. ";
                   }
                 }
                 container adj-rib-out-pre {
