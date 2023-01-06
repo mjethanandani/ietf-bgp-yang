@@ -9,6 +9,9 @@ submodule ietf-bgp-common {
     reference
       "RFC XXXX: BGP Model for Service Provider Network.";
   }
+  import ietf-interfaces {
+    prefix if;
+  }
   import ietf-inet-types {
     prefix inet;
     reference
@@ -310,9 +313,7 @@ submodule ietf-bgp-common {
     leaf local-address {
       type union {
         type inet:ip-address;
-        type leafref {
-          path "../../../../interfaces/interface/name";
-        }
+        type if:interface-ref;
       }
       description
         "Set the local IP (either IPv4 or IPv6) address to use for
