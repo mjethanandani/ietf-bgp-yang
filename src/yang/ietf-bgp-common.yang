@@ -401,6 +401,20 @@ submodule ietf-bgp-common {
               "RFC 5925: The TCP Authentication Option.";
           }
 
+          case ipsec {
+            leaf sa {
+              type string;
+              description
+                "Security Association (SA) name.";
+            }
+            description
+              "Currently, the IPsec/IKE YANG model has no
+               grouping defined that this model can use. When
+               such a grouping is defined, this model can import
+               the grouping to add the key parameters
+               needed to kick of IKE.";
+          }
+
           description
             "Choice of authentication options.";
         }
