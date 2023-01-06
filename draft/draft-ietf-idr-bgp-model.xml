@@ -586,6 +586,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
         be made: <figure>
             <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bgp
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
+URI: urn:ietf:params:xml:ns:yang:iana-bgp-notification
 URI: urn:ietf:params:xml:ns:yang:iana-bgp-types
 ]]></artwork>
           </figure></t>
@@ -607,6 +608,11 @@ reference: RFC XXXX
 name: ietf-bgp-policy
 namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
 prefix: bp
+reference: RFC XXXX
+
+name: iana-bgp-notification
+namespace: urn:ietf:params:xml:ns:yang:iana-bgp-notification
+prefix: bn
 reference: RFC XXXX
 
 name: iana-bgp-types
@@ -649,6 +655,9 @@ reference: RFC XXXX
 
       <t>Additionally, modules include:
       <ul>
+          <li>iana-bgp-notification - identity definitions for BGP NOTIFICATION
+          message Error Codes and Error subcodes.</li>
+
           <li>iana-bgp-types - common type and identity definitions for BGP,
           including BGP policy.</li>
 
@@ -751,6 +760,17 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
             </figure>
 	  </t>
 	</section>
+      </section>
+
+      <section title="BGP notification module">
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-notification@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/iana-bgp-notification@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure></t>
       </section>
 
       <section title="BGP types module">
