@@ -235,7 +235,6 @@ module ietf-bgp {
       }
     }
     uses structure-neighbor-group-logging-options;
-    uses structure-neighbor-group-ebgp-multihop;
     uses structure-neighbor-group-route-reflector;
     uses structure-neighbor-group-as-path-options;
     uses structure-neighbor-group-add-paths;
@@ -594,6 +593,9 @@ module ietf-bgp {
                the difference between this value and the current time
                in UTC (assuming the session is in the Established
                state, per the session-state leaf).";
+            reference
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+               8.";
           }
 
           uses bgp-capabilities;
@@ -619,21 +621,6 @@ module ietf-bgp {
             reference
               "RFC 4271, Section 4.5.";
           }
-          leaf fsm-established-time {
-            type yang:gauge32;
-            units "seconds";
-            config false;
-            description
-              "This timer indicates how long (in
-               seconds) this peer has been in the
-               established state or how long
-               since this peer was last in the
-               established state.  It is set to zero when
-               a new peer is configured or when the router is
-               booted.";
-            reference
-              "RFC 4271, Section 8.";
-          }
           leaf treat-as-withdraw {
             type boolean;
             default "false";
@@ -644,14 +631,6 @@ module ietf-bgp {
             reference
               "RFC 7606: Revised Error Handling for BGP UPDATE
                Messages.";
-          }
-          leaf erroneous-update-messages {
-            type uint32;
-            config false;
-            description
-              "The number of BGP UPDATE messages for which the
-               treat-as-withdraw mechanism has been applied based on
-               erroneous message contents";
           }
 
           container bfd {
@@ -666,7 +645,7 @@ module ietf-bgp {
             description
               "Statistics per neighbor.";
 
-            leaf peer-fsm-established-transitions {
+            leaf established-transitions {
               type yang:zero-based-counter64;
               description
                 "Number of transitions to the Established state for
@@ -675,16 +654,8 @@ module ietf-bgp {
                  standard BGP-4 MIB";
               reference
                 "RFC 4273: Definitions of Managed Objects for
-                 BGP-4.";
-            }
-            leaf fsm-established-transitions {
-              type yang:zero-based-counter32;
-              description
-                "The total number of times the BGP FSM
-                 transitioned into the established state
-                 for this peer.";
-              reference
-                "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+                 BGP-4, bgpPeerFsmEstablishedTransitions,
+                 RFC 4271: A Border Gateway Protocol 4 (BGP-4),
                  Section 8.";
             }
             container messages {
@@ -726,6 +697,28 @@ module ietf-bgp {
                 reference
                   "RFC 4273: Definitions of Managed Objects for
                    BGP-4, bgpPeerOutUpdates.";
+              }
+              leaf erroneous-updates-withdrawn {
+                type yang:zero-based-counter64;
+                config false;
+                description
+                  "The number of BGP UPDATE messages for which the
+                   treat-as-withdraw mechanism has been applied based
+                   on erroneous message contents.";
+                reference
+                  "RFC 7606: Revised Error Handling for BGP UPDATE
+                   Messages, Section 2.";
+              }
+              leaf erroneous-updates-attribute-discarded {
+                type yang:zero-based-counter64;
+                config false;
+                description
+                  "The number of BGP UPDATE messages for which the
+                   attribute discard mechanism has been applied based
+                   on erroneous message contents.";
+                reference
+                  "RFC 7606: Revised Error Handling for BGP UPDATE
+                   Messages, Section 2.";
               }
               leaf in-update-elapsed-time {
                 type yang:gauge32;

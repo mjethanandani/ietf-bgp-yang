@@ -118,8 +118,17 @@ submodule ietf-bgp-common {
          a value of (0), then when read this object MUST have a
          value of (0) also.";
       reference
-        "RFC 4271, Section 4.2.
-         RFC 4271, Section 10.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.2,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
+    }
+    leaf negotiated-hold-time {
+      type uint16;
+      config false;
+      description
+        "The negotiated hold-time for the BGP session";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.2,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
     }
     leaf keepalive {
       type uint16 {
@@ -143,8 +152,8 @@ submodule ietf-bgp-common {
          The actual time interval for the KEEPALIVE messages is
          indicated by operational value of keepalive.";
       reference
-        "RFC 4271, Section 4.4.
-         RFC 4271, Section 10.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.4,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
     }
     leaf min-as-origination-interval {
       type uint16 {
@@ -155,8 +164,9 @@ submodule ietf-bgp-common {
         "Time interval (in seconds) for the MinASOriginationInterval
          timer. The suggested value for this timer is 15 seconds.";
       reference
-        "RFC 4271, Section 9.2.1.2.
-         RFC 4271, Section 10.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         9.2.1.2,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
     }
     leaf min-route-advertisement-interval {
       type uint16 {
@@ -170,8 +180,9 @@ submodule ietf-bgp-common {
          seconds for EBGP connections and 5
          seconds for IBGP connections.";
       reference
-        "RFC 4271, Section 9.2.1.1.
-         RFC 4271, Section 10.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         9.2.1.1,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
     }
   }
 
@@ -316,6 +327,26 @@ submodule ietf-bgp-common {
          off (false).";
       reference
         "RFC 1191: Path MTU discovery.";
+    }
+
+    container ebgp-multihop {
+      description
+        "eBGP multi-hop parameters for the BGP peer-group";
+      leaf enabled {
+        type boolean;
+        default "false";
+        description
+          "When enabled, the referenced group or neighbors are
+           permitted to be indirectly connected - including cases
+           where the TTL can be decremented between the BGP peers";
+      }
+      leaf multihop-ttl {
+        type uint8;
+        description
+          "Time-to-live value to use when packets are sent to the
+           referenced group or neighbors and ebgp-multihop is
+           enabled";
+      }
     }
 
     leaf passive-mode {
