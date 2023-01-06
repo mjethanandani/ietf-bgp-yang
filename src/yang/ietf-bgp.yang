@@ -1070,37 +1070,6 @@ module ietf-bgp {
         }
       }
 
-      container interfaces {
-        list interface {
-          key "name";
-          leaf name {
-            type if:interface-ref;
-            description
-              "Reference to the interface within the routing
-               instance.";
-          }
-
-          container bfd {
-            if-feature "bt:bfd";
-            leaf enabled {
-              type boolean;
-              default "false";
-              description
-                "Indicates whether BFD is enabled on this
-                 interface.";
-            }
-            description
-              "BFD client configuration.";
-            reference
-              "RFC 9314: YANG Data Model for Bidirectional Forward
-               Detection (BFD).";
-          }
-          description
-            "List of interfaces within the routing instance.";
-        }
-        description
-          "Interface specific parameters.";
-      }
       uses rib;
     }
   }
