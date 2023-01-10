@@ -1137,7 +1137,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
 
         <t>This YANG model standardizes no particular rendering format for an
         AS_PATH.  This permits the model to be generally applicable for
-        implementations of BGP and does not conflictg with deployed formatting
+        implementations of BGP and does not conflict with deployed formatting
         choices.</t>
 
         <t>AS_PATH regular expressions are a common tool used in BGP policy.
@@ -1240,7 +1240,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
         representation strings used by that implementation's regular
         expression.  While this would seem to be problematic, and may create
         difficulties in some specific scenarios, the following reasons have
-        mitigation this consideration over the years:</t>
+        mitigated this consideration over the years:</t>
 
         <ul>
         <li>AS_SET or AS_CONFED_SET in the AS_PATH not only introduces
