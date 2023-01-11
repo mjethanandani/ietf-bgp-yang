@@ -6,6 +6,11 @@ module iana-bgp-types {
   import ietf-inet-types {
     prefix inet;
   }
+  import ietf-yang-types {
+    prefix yang;
+    reference
+      "RFC 6991: Common YANG Types.";
+  }
 
   // meta
 
@@ -34,7 +39,7 @@ module iana-bgp-types {
      'BGP Identities for Community' and 'BGP definitions for
      Community type' registries.
 
-     Copyright (c) 2021 IETF Trust and the persons identified as
+     Copyright (c) 2023 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -611,7 +616,7 @@ module iana-bgp-types {
   typedef rr-cluster-id-type {
     type union {
       type uint32;
-      type inet:ipv4-address;
+      type yang:dotted-quad;
     }
     description
       "Union type for route reflector cluster ids:

@@ -43,7 +43,7 @@ submodule ietf-bgp-rib-tables {
     "This submodule contains structural data definitions for
      BGP routing tables.
 
-     Copyright (c) 2021 IETF Trust and the persons identified as
+     Copyright (c) 2023 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -106,12 +106,12 @@ submodule ietf-bgp-rib-tables {
   grouping bgp-adj-rib-in-post-route-annotations-state {
     description
       "Data definitions for information attached to routes in the
-       Adj-RIB-in post-policy table";
+       Adj-RIB-In post-policy table";
     leaf best-path {
       type boolean;
       description
         "Current path was selected as the best path. Best path
-         should indicate that the route is present in BGP LOC-RIB.";
+         should indicate that the route is present in BGP Loc-RIB.";
     }
   }
 
@@ -163,12 +163,21 @@ submodule ietf-bgp-rib-tables {
         "Reference to the extended community attribute for the
          route.";
     }
+    leaf large-community-index {
+      type leafref {
+        path "../../../../../../../../../large-communities/"
+           + "large-community/index";
+      }
+      description
+        "Reference to the large community attribute for the
+         route.";
+    }
   }
 
   grouping bgp-loc-rib-common-attr-refs {
     description
       "Definitions of common references to attribute sets for
-       multiple AFI-SAFIs for LOC-RIB tables.";
+       multiple AFI-SAFIs for Loc-RIB tables.";
     leaf attr-index {
       type leafref {
         path "../../../../../../../attr-sets/attr-set/"
@@ -195,12 +204,21 @@ submodule ietf-bgp-rib-tables {
         "Reference to the extended community attribute for the
          route.";
     }
+    leaf large-community-index {
+      type leafref {
+        path "../../../../../../../large-communities/"
+           + "large-community/index";
+      }
+      description
+        "Reference to the large community attribute for the
+         route.";
+    }
   }
 
   grouping bgp-loc-rib-common-keys {
     description
       "Common references used in keys for IPv4 and IPv6
-       LOC-RIB entries.";
+       Loc-RIB entries.";
     leaf origin {
       type union {
         type inet:ip-address;
@@ -260,7 +278,7 @@ submodule ietf-bgp-rib-tables {
 
   grouping ipv4-adj-rib-common {
     description
-      "Common structural grouping for each IPv4 adj-RIB table.";
+      "Common structural grouping for each IPv4 Adj-RIB table.";
     container routes {
       config false;
       description
@@ -271,7 +289,7 @@ submodule ietf-bgp-rib-tables {
         description
           "List of routes in the table, keyed by a combination of
            the route prefix and path-id to distinguish multiple
-           routes received from a neighbor for the same prefix,
+           routes received from a neighbor for the same prefix;
            e.g., when BGP add-paths is enabled.";
         leaf prefix {
           type inet:ipv4-prefix;
@@ -289,7 +307,7 @@ submodule ietf-bgp-rib-tables {
 
   grouping ipv4-adj-rib-in-post {
     description
-      "Common structural grouping for the IPv4 adj-rib-in
+      "Common structural grouping for the IPv4 Adj-RIB-In
        post-policy table.";
     container routes {
       config false;
@@ -301,7 +319,7 @@ submodule ietf-bgp-rib-tables {
         description
           "List of routes in the table, keyed by a combination of
            the route prefix and path-id to distinguish multiple
-           routes received from a neighbor for the same prefix,
+           routes received from a neighbor for the same prefix;
            e.g., when BGP add-paths is enabled.";
         leaf prefix {
           type inet:ipv4-prefix;
@@ -320,7 +338,7 @@ submodule ietf-bgp-rib-tables {
 
   grouping ipv6-adj-rib-common {
     description
-      "Common structural grouping for each IPv6 adj-RIB table.";
+      "Common structural grouping for each IPv6 Adj-RIB table.";
     container routes {
       config false;
       description
@@ -346,7 +364,7 @@ submodule ietf-bgp-rib-tables {
 
   grouping ipv6-adj-rib-in-post {
     description
-      "Common structural grouping for the IPv6 adj-rib-in
+      "Common structural grouping for the IPv6 Adj-RIB-In
        post-policy table.";
     container routes {
       config false;
