@@ -24,7 +24,7 @@ submodule ietf-bgp-rib-tables {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX: BGP YANG Model for Service Provider Network.";
+      "RFC XXXX: YANG module for Border Gateway Protocol (BGP).";
   }
   include ietf-bgp-rib-attributes;
 
@@ -67,7 +67,7 @@ submodule ietf-bgp-rib-tables {
     description
       "Initial Version";
     reference
-      "RFC XXXX, BGP YANG Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP).";
   }
 
   grouping bgp-common-route-annotations-state {

@@ -20,7 +20,7 @@ module example-newco-bgp {
       "Creating NewCo deviations to ietf-bgp model";
 
     reference
-      "RFC XXXX: BGP YANG module for Service Provider Network.";
+      "RFC XXXX: YANG module for Border Gateway Protocol (BGP).";
   }
 
   deviation "/bgp:bgp/bgp:global/bgp:graceful-restart/" +

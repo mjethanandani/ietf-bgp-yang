@@ -55,7 +55,7 @@ submodule ietf-bgp-rib-attributes {
     description
       "Initial version";
     reference
-      "RFC XXXX: BGP YANG Model for Service Provider Network";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP).";
   }
 
   grouping bgp-as-path-attr {

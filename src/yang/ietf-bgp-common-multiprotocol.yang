@@ -57,7 +57,7 @@ submodule ietf-bgp-common-multiprotocol {
     description
       "Initial Version";
     reference
-      "RFC XXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP).";
   }
 
   grouping mp-afi-safi-graceful-restart-config {
