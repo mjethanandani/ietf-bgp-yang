@@ -7,7 +7,7 @@ submodule ietf-bgp-common {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX: BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import ietf-interfaces {
     prefix if;
@@ -78,7 +78,7 @@ submodule ietf-bgp-common {
     description
       "Initial Version";
     reference
-      "RFC XXXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   grouping neighbor-group-timers-config {
@@ -371,6 +371,17 @@ submodule ietf-bgp-common {
       description
         "Wait for peers to issue requests to open a BGP session,
          rather than initiating sessions from the local router.";
+    }
+
+    leaf ttl-security {
+      if-feature "bt:ttl-security";
+      type uint8;
+      default "255";
+      description
+        "BGP Time To Live (TTL) security check.";
+      reference
+        "RFC 5082: The Generalized TTL Security Mechanism (GTSM),
+         RFC 7454: BGP Operations and Security.";
     }
 
     container bfd {

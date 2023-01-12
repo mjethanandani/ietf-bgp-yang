@@ -19,7 +19,7 @@ module example-newafi-bgp {
   import ietf-bgp {
     prefix "bgp";
     reference
-      "RFC XXXX: BGP YANG module for Service Provider Network.";
+      "RFC XXXX: YANG module for Border Gateway Protocol (BGP).";
   }
 
   import iana-bgp-types {
@@ -39,7 +39,7 @@ module example-newafi-bgp {
       "Creating new AFI and using in this model";
 
     reference
-      "RFC XXXX: BGP YANG Model for Service Provider Network.";
+      "RFC XXXX: YANG module for Border Gateway Protocol (BGP).";
   }
 
   identity foo {

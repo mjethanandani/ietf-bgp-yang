@@ -26,7 +26,7 @@ module ietf-bgp {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX, BGP YANG Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import ietf-inet-types {
     prefix inet;
@@ -128,7 +128,7 @@ module ietf-bgp {
     description
       "Initial Version";
     reference
-      "RFC XXXX, BGP Model for Service Provider Network ";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   /*
@@ -506,17 +506,6 @@ module ietf-bgp {
                 "Choice of authentication options.";
             }
           }
-          leaf ttl-security {
-            if-feature "bt:ttl-security";
-            type uint8;
-            default "255";
-            description
-              "BGP Time To Live (TTL) security check.";
-            reference
-              "RFC 5082: The Generalized TTL Security Mechanism
-               (GTSM),
-               RFC 7454: BGP Operations and Security.";
-          }
 
           uses neighbor-group-config;
           uses neighbor-and-peer-group-common;
@@ -627,7 +616,7 @@ module ietf-bgp {
             description
               "Statistics per neighbor.";
 
-            leaf peer-fsm-established-transitions {
+            leaf established-transitions {
               type yang:zero-based-counter64;
               description
                 "Number of transitions to the Established state for
@@ -636,16 +625,8 @@ module ietf-bgp {
                  standard BGP-4 MIB";
               reference
                 "RFC 4273: Definitions of Managed Objects for
-                 BGP-4.";
-            }
-            leaf fsm-established-transitions {
-              type yang:zero-based-counter32;
-              description
-                "The total number of times the BGP FSM
-                 transitioned into the established state
-                 for this peer.";
-              reference
-                "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+                 BGP-4, bgpPeerFsmEstablishedTransitions,
+                 RFC 4271: A Border Gateway Protocol 4 (BGP-4),
                  Section 8.";
             }
             container messages {
@@ -1030,18 +1011,6 @@ module ietf-bgp {
               description
                 "Choice of authentication options.";
             }
-          }
-
-          leaf ttl-security {
-            if-feature "bt:ttl-security";
-            type uint8;
-            default "255";
-            description
-              "BGP Time To Live (TTL) security check.";
-            reference
-              "RFC 5082: The Generalized TTL Security Mechanism
-               (GTSM),
-               RFC 7454: BGP Operations and Security.";
           }
 
           uses neighbor-group-config;
