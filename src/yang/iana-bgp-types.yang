@@ -63,7 +63,7 @@ module iana-bgp-types {
     description
       "Initial Version";
     reference
-      "RFC XXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
   }
 
   /*

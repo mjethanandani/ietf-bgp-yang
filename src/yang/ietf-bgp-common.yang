@@ -7,7 +7,7 @@ submodule ietf-bgp-common {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX: BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import ietf-inet-types {
     prefix inet;
@@ -73,7 +73,7 @@ submodule ietf-bgp-common {
     description
       "Initial Version";
     reference
-      "RFC XXXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   grouping neighbor-group-timers-config {

@@ -8,8 +8,7 @@
   <?rfc toc="yes"?>
 
   <front>
-    <title abbrev="BGP YANG Model">BGP YANG Model for Service Provider
-    Networks</title>
+    <title abbrev="BGP YANG Model">YANG Model for Border Gateway Protocol (BGP-4)</title>
 
     <author fullname="Mahesh Jethanandani" initials="M."
             surname="Jethanandani">
