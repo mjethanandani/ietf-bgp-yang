@@ -11,6 +11,8 @@ submodule ietf-bgp-common {
   }
   import ietf-interfaces {
     prefix if;
+    reference
+      "RFC 7223: A YANG Data Model for Interface Management.";
   }
   import ietf-inet-types {
     prefix inet;
