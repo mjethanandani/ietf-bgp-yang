@@ -7,7 +7,12 @@ submodule ietf-bgp-common {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX: BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
+  import ietf-interfaces {
+    prefix if;
+    reference
+      "RFC 7223: A YANG Data Model for Interface Management.";
   }
   import ietf-key-chain {
     prefix key-chain;
@@ -78,7 +83,7 @@ submodule ietf-bgp-common {
     description
       "Initial Version";
     reference
-      "RFC XXXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   grouping neighbor-group-timers-config {
@@ -123,8 +128,17 @@ submodule ietf-bgp-common {
          a value of (0), then when read this object MUST have a
          value of (0) also.";
       reference
-        "RFC 4271, Section 4.2.
-         RFC 4271, Section 10.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.2,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
+    }
+    leaf negotiated-hold-time {
+      type uint16;
+      config false;
+      description
+        "The negotiated hold-time for the BGP session";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.2,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
     }
     leaf keepalive {
       type uint16 {
@@ -148,8 +162,8 @@ submodule ietf-bgp-common {
          The actual time interval for the KEEPALIVE messages is
          indicated by operational value of keepalive.";
       reference
-        "RFC 4271, Section 4.4.
-         RFC 4271, Section 10.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.4,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
     }
     leaf min-as-origination-interval {
       type uint16 {
@@ -160,8 +174,9 @@ submodule ietf-bgp-common {
         "Time interval (in seconds) for the MinASOriginationInterval
          timer. The suggested value for this timer is 15 seconds.";
       reference
-        "RFC 4271, Section 9.2.1.2.
-         RFC 4271, Section 10.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         9.2.1.2,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
     }
     leaf min-route-advertisement-interval {
       type uint16 {
@@ -175,8 +190,9 @@ submodule ietf-bgp-common {
          seconds for EBGP connections and 5
          seconds for IBGP connections.";
       reference
-        "RFC 4271, Section 9.2.1.1.
-         RFC 4271, Section 10.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         9.2.1.1,
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
     }
   }
 
@@ -196,7 +212,6 @@ submodule ietf-bgp-common {
          this differs from the global BGP router autonomous system
          number.";
     }
-
     leaf remove-private-as {
       type bt:remove-private-as-option;
       description
@@ -302,6 +317,18 @@ submodule ietf-bgp-common {
       "Configuration parameters relating to the transport protocol
        used by the BGP session to the peer.";
 
+    leaf local-address {
+      type union {
+        type inet:ip-address;
+        type if:interface-ref;
+      }
+      description
+        "Set the local IP (either IPv4 or IPv6) address to use for
+         the session when sending BGP update messages. This may be
+         expressed as either an IP address or reference to the name
+         of an interface.";
+    }
+
     leaf tcp-mss {
       type tcp:mss;
       description
@@ -323,6 +350,26 @@ submodule ietf-bgp-common {
         "RFC 1191: Path MTU discovery.";
     }
 
+    container ebgp-multihop {
+      description
+        "eBGP multi-hop parameters for the BGP peer-group";
+      leaf enabled {
+        type boolean;
+        default "false";
+        description
+          "When enabled, the referenced group or neighbors are
+           permitted to be indirectly connected - including cases
+           where the TTL can be decremented between the BGP peers";
+      }
+      leaf multihop-ttl {
+        type uint8;
+        description
+          "Time-to-live value to use when packets are sent to the
+           referenced group or neighbors and ebgp-multihop is
+           enabled";
+      }
+    }
+
     leaf passive-mode {
       type boolean;
       default "false";
@@ -331,18 +378,15 @@ submodule ietf-bgp-common {
          rather than initiating sessions from the local router.";
     }
 
-    leaf local-address {
-      type union {
-        type inet:ip-address;
-        type leafref {
-          path "../../../../interfaces/interface/name";
-        }
-      }
+    leaf ttl-security {
+      if-feature "bt:ttl-security";
+      type uint8;
+      default "255";
       description
-        "Set the local IP (either IPv4 or IPv6) address to use for
-         the session when sending BGP update messages. This may be
-         expressed as either an IP address or reference to the name
-         of an interface.";
+        "BGP Time To Live (TTL) security check.";
+      reference
+        "RFC 5082: The Generalized TTL Security Mechanism (GTSM),
+         RFC 7454: BGP Operations and Security.";
     }
 
     container secure-session {

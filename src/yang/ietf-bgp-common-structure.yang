@@ -12,7 +12,7 @@ submodule ietf-bgp-common-structure {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX, BGP YANG Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   include ietf-bgp-common-multiprotocol;
   include ietf-bgp-common;
@@ -59,7 +59,7 @@ submodule ietf-bgp-common-structure {
     description
       "Initial Version";
     reference
-      "RFC XXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   grouping structure-neighbor-group-logging-options {
@@ -80,32 +80,6 @@ submodule ietf-bgp-common-structure {
            Note: Documenting demotion from ESTABLISHED state is
                  desirable, but documenting all backward transitions
                  is problematic, and should be avoided.";
-      }
-    }
-  }
-
-  grouping structure-neighbor-group-ebgp-multihop {
-    description
-      "Structural grouping used to include eBGP multi-hop
-       configuration and state for both BGP neighbors and peer
-       groups";
-    container ebgp-multihop {
-      description
-        "eBGP multi-hop parameters for the BGP peer-group";
-      leaf enabled {
-        type boolean;
-        default "false";
-        description
-          "When enabled, the referenced group or neighbors are
-           permitted to be indirectly connected - including cases
-           where the TTL can be decremented between the BGP peers";
-      }
-      leaf multihop-ttl {
-        type uint8;
-        description
-          "Time-to-live value to use when packets are sent to the
-           referenced group or neighbors and ebgp-multihop is
-           enabled";
       }
     }
   }

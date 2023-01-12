@@ -11,7 +11,7 @@ submodule ietf-bgp-rib {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX: BGP YANG Model for Service Provider Networks.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import ietf-inet-types {
     prefix inet;
@@ -101,7 +101,7 @@ submodule ietf-bgp-rib {
     description
       "Initial Version";
     reference
-      "RFC XXXX, BGP YANG Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   grouping attr-set-attributes {
@@ -213,12 +213,18 @@ submodule ietf-bgp-rib {
           description
             "AS number of the autonomous system that performed the
              aggregation.";
+          reference
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+             4.3, Path Attributes (g).";
         }
-        leaf address {
-          type inet:ipv4-address;
+        leaf identifier {
+          type yang:dotted-quad;
           description
-            "IP address of the router that performed the
+            "BGP Identifier of the router that performed the
              aggregation.";
+          reference
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+             4.3, Path Attributes (g).";
         }
       }
       container aggregator4 {
@@ -233,7 +239,7 @@ submodule ietf-bgp-rib {
            aggregator/as leaf regardless of being 4-octet or
            2-octet.";
         reference
-          "RFC 4271: Section 5.1.7.";
+          "RFC 6793: BGP Support for Four-octet AS Number Space.";
         leaf as4 {
           type inet:as-number;
           description
@@ -243,13 +249,21 @@ submodule ietf-bgp-rib {
              Its semantics are similar to the AS4_PATH optional
              transitive attribute";
           reference
-            "RFC 6793 - BGP Support for Four-octet AS Number Space";
+            "RFC 6793: BGP Support for Four-octet AS Number Space,
+             Section 3,
+             RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+             4.3, Path Attributes (g).";
         }
-        leaf address {
-          type inet:ipv4-address;
+        leaf identifier {
+          type yang:dotted-quad;
           description
-            "IP address of the router that performed the
+            "BGP Identifier of the router that performed the
              aggregation.";
+          reference
+            "RFC 6793: BGP Support for Four-octet AS Number Space,
+             Section 3,
+             RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+             4.3, Path Attributes (g).";
         }
       }
       leaf atomic-aggregate {
