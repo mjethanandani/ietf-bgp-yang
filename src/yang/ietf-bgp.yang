@@ -356,6 +356,15 @@ module ietf-bgp {
             "List of BGP neighbors configured on the local system,
              uniquely identified by remote IPv[46] address.";
 
+          leaf peer-group {
+            type leafref {
+              path "../../../peer-groups/peer-group/name";
+            }
+            description
+              "The peer-group with which this neighbor is
+               associated.";
+          }
+
           leaf remote-address {
             type inet:ip-address;
             description
@@ -400,15 +409,6 @@ module ietf-bgp {
                          Section 1.1 for iBGP and eBGP.
                RFC 5065: Autonomous System Configuration
                          for Confederation internal and external.";
-          }
-
-          leaf peer-group {
-            type leafref {
-              path "../../../peer-groups/peer-group/name";
-            }
-            description
-              "The peer-group with which this neighbor is
-               associated.";
           }
 
           leaf identifier {
