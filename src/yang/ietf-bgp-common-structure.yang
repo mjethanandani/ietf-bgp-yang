@@ -62,10 +62,26 @@ submodule ietf-bgp-common-structure {
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
-  grouping structure-neighbor-group-logging-options {
+  grouping structure-neighbor-group-error-options {
     description
       "Structural grouping used to include error handling
        configuration and state for both BGP neighbors and groups";
+    leaf treat-as-withdraw {
+      type boolean;
+      default "false";
+      description
+        "Specify whether erroneous UPDATE messages for which the NLRI
+         can be extracted are treated as though the NLRI is withdrawn
+         - avoiding session reset";
+      reference
+        "RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
+    }
+  }
+
+  grouping structure-neighbor-group-logging-options {
+    description
+      "Structural grouping used to include logging configuration and
+       state for both BGP neighbors and groups";
     container logging-options {
       description
         "Logging options for events related to the BGP neighbor or

@@ -219,6 +219,8 @@ module ietf-bgp {
            graceful restart with the peer";
       }
     }
+
+    uses structure-neighbor-group-error-options;
     uses structure-neighbor-group-logging-options;
     uses structure-neighbor-group-route-reflector;
     uses structure-neighbor-group-as-path-options;
@@ -538,17 +540,6 @@ module ietf-bgp {
                contains the subcode.";
             reference
               "RFC 4271, Section 4.5.";
-          }
-          leaf treat-as-withdraw {
-            type boolean;
-            default "false";
-            description
-              "Specify whether erroneous UPDATE messages for which
-               the NLRI can be extracted are treated as though the
-               NLRI is withdrawn - avoiding session reset";
-            reference
-              "RFC 7606: Revised Error Handling for BGP UPDATE
-               Messages.";
           }
 
           container statistics {
