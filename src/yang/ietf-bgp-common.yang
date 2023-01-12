@@ -381,7 +381,7 @@ submodule ietf-bgp-common {
                those are defined as a grouping in the TCP YANG
                model.";
             reference
-              "RFC 5925:he TCP Authentication Option.";
+              "RFC 5925: The TCP Authentication Option.";
           }
 
           case md5 {
