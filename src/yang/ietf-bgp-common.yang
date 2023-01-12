@@ -12,7 +12,7 @@ submodule ietf-bgp-common {
   import ietf-key-chain {
     prefix key-chain;
     reference
-      "RFC 8177: YANG Data Model for Key Chains";
+      "RFC 8177: YANG Data Model for Key Chains.";
   }
   import ietf-inet-types {
     prefix inet;
@@ -374,14 +374,14 @@ submodule ietf-bgp-common {
                 "Reference to the key chain that will be used by this
                  model. Applicable for TCP-AO and TCP-MD5 only";
               reference
-                "RFC 8177: YANG Key Chain.";
+                "RFC 8177: YANG Data Model for Key Chains.";
             }
             description
               "Uses TCP-AO to secure the session. Parameters for
                those are defined as a grouping in the TCP YANG
                model.";
             reference
-              "RFC 5925 - The TCP Authentication Option.";
+              "RFC 5925:he TCP Authentication Option.";
           }
 
           case md5 {
@@ -391,7 +391,7 @@ submodule ietf-bgp-common {
                 "Reference to the key chain that will be used by this
                  model. Applicable for TCP-AO and TCP-MD5 only";
               reference
-                "RFC 8177: YANG Key Chain.";
+                "RFC 8177: YANG Data Model for Key Chains.";
             }
             description
               "Uses TCP-MD5 to secure the session. Parameters for
