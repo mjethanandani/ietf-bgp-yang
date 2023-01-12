@@ -371,6 +371,17 @@ submodule ietf-bgp-common {
          of an interface.";
     }
 
+    leaf ttl-security {
+      if-feature "bt:ttl-security";
+      type uint8;
+      default "255";
+      description
+        "BGP Time To Live (TTL) security check.";
+      reference
+        "RFC 5082: The Generalized TTL Security Mechanism (GTSM),
+         RFC 7454: BGP Operations and Security.";
+    }
+
     container bfd {
       if-feature "bt:bfd";
       uses bfd-types:client-cfg-parms;
