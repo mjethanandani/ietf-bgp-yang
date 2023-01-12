@@ -338,6 +338,7 @@ module ietf-bgp {
               uses mp-afi-safi-graceful-restart-config;
             }
             uses route-selection-options;
+            uses structure-neighbor-group-add-paths;
             uses global-group-use-multiple-paths;
             uses mp-all-afi-safi-list-contents;
           }
@@ -906,6 +907,7 @@ module ietf-bgp {
                   "Parameters relating to BGP graceful-restart";
                 uses mp-afi-safi-graceful-restart-config;
               }
+              uses structure-neighbor-group-add-paths;
               uses bgp-neighbor-use-multiple-paths;
               uses mp-all-afi-safi-list-contents;
             }
