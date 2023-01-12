@@ -28,12 +28,6 @@ module ietf-bgp {
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
-  import ietf-bfd-types {
-    prefix bfd-types;
-    reference
-      "RFC 9314: YANG Data Model for Bidirectional Forwarding
-       Detection (BFD).";
-  }
   import ietf-inet-types {
     prefix inet;
     reference
@@ -617,13 +611,6 @@ module ietf-bgp {
                Messages.";
           }
 
-          container bfd {
-            if-feature "bt:bfd";
-            uses bfd-types:client-cfg-parms;
-            description
-              "BFD configuration per-neighbor.";
-          }
-
           container statistics {
             config false;
             description
@@ -1052,37 +1039,6 @@ module ietf-bgp {
         }
       }
 
-      container interfaces {
-        list interface {
-          key "name";
-          leaf name {
-            type if:interface-ref;
-            description
-              "Reference to the interface within the routing
-               instance.";
-          }
-
-          container bfd {
-            if-feature "bt:bfd";
-            leaf enabled {
-              type boolean;
-              default "false";
-              description
-                "Indicates whether BFD is enabled on this
-                 interface.";
-            }
-            description
-              "BFD client configuration.";
-            reference
-              "RFC 9314: YANG Data Model for Bidirectional Forward
-               Detection (BFD).";
-          }
-          description
-            "List of interfaces within the routing instance.";
-        }
-        description
-          "Interface specific parameters.";
-      }
       uses rib;
     }
   }

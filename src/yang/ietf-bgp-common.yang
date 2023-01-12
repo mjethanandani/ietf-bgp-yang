@@ -9,6 +9,11 @@ submodule ietf-bgp-common {
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
+  import ietf-interfaces {
+    prefix if;
+    reference
+      "RFC 7223: A YANG Data Model for Interface Management.";
+  }
   import ietf-inet-types {
     prefix inet;
     reference
@@ -202,7 +207,6 @@ submodule ietf-bgp-common {
          this differs from the global BGP router autonomous system
          number.";
     }
-
     leaf remove-private-as {
       type bt:remove-private-as-option;
       description
@@ -308,6 +312,18 @@ submodule ietf-bgp-common {
       "Configuration parameters relating to the transport protocol
        used by the BGP session to the peer.";
 
+    leaf local-address {
+      type union {
+        type inet:ip-address;
+        type if:interface-ref;
+      }
+      description
+        "Set the local IP (either IPv4 or IPv6) address to use for
+         the session when sending BGP update messages. This may be
+         expressed as either an IP address or reference to the name
+         of an interface.";
+    }
+
     leaf tcp-mss {
       type tcp:mss;
       description
@@ -355,20 +371,6 @@ submodule ietf-bgp-common {
       description
         "Wait for peers to issue requests to open a BGP session,
          rather than initiating sessions from the local router.";
-    }
-
-    leaf local-address {
-      type union {
-        type inet:ip-address;
-        type leafref {
-          path "../../../../interfaces/interface/name";
-        }
-      }
-      description
-        "Set the local IP (either IPv4 or IPv6) address to use for
-         the session when sending BGP update messages. This may be
-         expressed as either an IP address or reference to the name
-         of an interface.";
     }
 
     leaf ttl-security {
