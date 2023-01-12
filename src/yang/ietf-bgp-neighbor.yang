@@ -13,7 +13,7 @@ submodule ietf-bgp-neighbor {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP).";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   // Include the common submodule
@@ -63,7 +63,7 @@ submodule ietf-bgp-neighbor {
     description
       "Initial Version";
     reference
-      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP).";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   grouping bgp-neighbor-use-multiple-paths {

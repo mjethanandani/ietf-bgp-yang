@@ -43,7 +43,7 @@ submodule ietf-bgp-rib-types {
     description
       "Initial Version";
     reference
-      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP).";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   identity ineligible-route-reason {
