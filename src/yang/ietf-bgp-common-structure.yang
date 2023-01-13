@@ -153,10 +153,10 @@ submodule ietf-bgp-common-structure {
     }
   }
 
-  grouping structure-neighbor-group-add-paths {
+  grouping structure-add-paths {
     description
       "Structural grouping used to include ADD-PATHs configuration
-       and state for both BGP neighbors and peer groups";
+       and state.";
     container add-paths {
       if-feature "bt:add-paths";
       description
