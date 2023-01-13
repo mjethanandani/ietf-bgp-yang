@@ -18,11 +18,6 @@ module ietf-bgp {
     reference
       "RFC 9067, A YANG Data Model for Routing Policy.";
   }
-  import ietf-interfaces {
-    prefix if;
-    reference
-      "RFC 8343, A YANG Data Model for Interface Management.";
-  }
   import iana-bgp-types {
     prefix bt;
     reference
