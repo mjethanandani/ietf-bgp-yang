@@ -18,11 +18,6 @@ module ietf-bgp {
     reference
       "RFC 9067, A YANG Data Model for Routing Policy.";
   }
-  import ietf-interfaces {
-    prefix if;
-    reference
-      "RFC 8343, A YANG Data Model for Interface Management.";
-  }
   import iana-bgp-types {
     prefix bt;
     reference
@@ -153,6 +148,17 @@ module ietf-bgp {
       description
         "Transport session parameters for the BGP neighbor";
       uses neighbor-group-transport-config;
+    }
+
+    leaf treat-as-withdraw {
+      type boolean;
+      default "false";
+      description
+        "Specify whether erroneous UPDATE messages for which the NLRI
+         can be extracted are treated as though the NLRI is withdrawn
+         - avoiding session reset";
+      reference
+        "RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
     }
 
     uses structure-neighbor-group-logging-options;
@@ -296,6 +302,15 @@ module ietf-bgp {
             "List of BGP neighbors configured on the local system,
              uniquely identified by remote IPv[46] address.";
 
+          leaf peer-group {
+            type leafref {
+              path "../../../peer-groups/peer-group/name";
+            }
+            description
+              "The peer-group with which this neighbor is
+               associated.";
+          }
+
           leaf remote-address {
             type inet:ip-address;
             description
@@ -340,15 +355,6 @@ module ietf-bgp {
                          Section 1.1 for iBGP and eBGP.
                RFC 5065: Autonomous System Configuration
                          for Confederation internal and external.";
-          }
-
-          leaf peer-group {
-            type leafref {
-              path "../../../peer-groups/peer-group/name";
-            }
-            description
-              "The peer-group with which this neighbor is
-               associated.";
           }
 
           leaf identifier {
@@ -544,17 +550,6 @@ module ietf-bgp {
                contains the subcode.";
             reference
               "RFC 4271, Section 4.5.";
-          }
-          leaf treat-as-withdraw {
-            type boolean;
-            default "false";
-            description
-              "Specify whether erroneous UPDATE messages for which
-               the NLRI can be extracted are treated as though the
-               NLRI is withdrawn - avoiding session reset";
-            reference
-              "RFC 7606: Revised Error Handling for BGP UPDATE
-               Messages.";
           }
 
           container statistics {
