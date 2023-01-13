@@ -64,8 +64,8 @@ submodule ietf-bgp-common-structure {
 
   grouping structure-neighbor-group-logging-options {
     description
-      "Structural grouping used to include error handling
-       configuration and state for both BGP neighbors and groups";
+      "Structural grouping used to include logging configuration and
+       state for both BGP neighbors and groups";
     container logging-options {
       description
         "Logging options for events related to the BGP neighbor or
