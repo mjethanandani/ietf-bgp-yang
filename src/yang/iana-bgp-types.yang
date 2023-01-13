@@ -637,4 +637,69 @@ module iana-bgp-types {
     reference
        "RFC 4724: Graceful Restart Mechanism for BGP, Section 3.";
   }
+
+  typedef graceful-restart-flags {
+    type bits {
+      bit restart {
+        position 0;
+        description
+          "The most significant bit is defined as the Restart
+           State (R) bit, which can be used to avoid possible
+           deadlock caused by waiting for the End-of-RIB marker
+           when multiple BGP speakers peering with each other
+           restart.  When set (value 1), this bit indicates
+           that the BGP speaker has restarted, and its peer
+           MUST NOT wait for the End-of-RIB marker from the
+           speaker before advertising routing information to
+           the speaker.";
+        reference
+          "RFC 4724: Graceful Restart Mechanism for BGP,
+           Section 3.";
+      }
+      bit notification {
+        position 1;
+        description
+          "The second most significant bit is defined in [RFC 8538]
+           as the Graceful Notification ('N') bit.  It is used to
+           indicate Graceful Restart support for BGP NOTIFICATION
+           messages.  A BGP speaker indicates support for the
+           procedures in this document by advertising a Graceful
+           Restart Capability with its 'N' bit set (value 1).";
+        reference
+          "RFC 8538: Notification Message Support for BGP Graceful
+           Restart, Section 2.";
+      }
+    }
+    description
+      "Restart Flags bits as defined for BGP Graceful Restart and its
+       extensions.";
+    reference
+      "RFC 4724: Graceful Restart Mechanism for BGP,
+       RFC 8538: Notification Message Support for BGP Graceful
+       Restart.";
+  }
+
+  typedef graceful-restart-flags-for-afi {
+    type bits {
+      bit forwarding-preserved {
+        position 0;
+        description
+          "The most significant bit is defined as the
+           Forwarding State (F) bit, which can be used to
+           indicate whether the forwarding state for routes
+           that were advertised with the given AFI and SAFI
+           has indeed been preserved during the previous BGP
+           restart.  When set (value 1), the bit indicates
+           that the forwarding state has been preserved.";
+         reference
+           "RFC 4724: Graceful Restart Mechanism for BGP,
+            Section 3.";
+      }
+    }
+    description
+      "Flags for Address Family bits as defined for BGP Graceful
+       Restart and its extensions.";
+    reference
+      "RFC 4724: Graceful Restart Mechanism for BGP.";
+  }
 }

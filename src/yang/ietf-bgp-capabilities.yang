@@ -153,30 +153,35 @@ submodule ietf-bgp-capabilities {
           "RFC 4724: Graceful Restart Mechanism for BGP.";
 
         leaf flags {
-          type bits {
-            bit restart {
-              position 0;
-              description
-                "The most significant bit is defined as the Restart
-                 State (R) bit, which can be used to avoid possible
-                 deadlock caused by waiting for the End-of-RIB marker
-                 when multiple BGP speakers peering with each other
-                 restart.  When set (value 1), this bit indicates
-                 that the BGP speaker has restarted, and its peer
-                 MUST NOT wait for the End-of-RIB marker from the
-                 speaker before advertising routing information to
-                 the speaker.";
-              reference
-                "RFC 4724: Graceful Restart Mechanism for BGP,
-                 Section 3.";
-            }
-          }
+          type bt:graceful-restart-flags;
           description
             "Restart Flags advertised by the Graceful Restart
              Capability";
           reference
             "RFC 4724: Graceful Restart Mechanism for BGP, Section
-            3.";
+             3.";
+        }
+
+        leaf unknown-flags {
+          type bits {
+            bit unknown-2 {
+              position 2;
+              description
+                "Bit 2 was received but is currently RESERVED.";
+            }
+            bit unknown-3 {
+              position 3;
+              description
+                "Bit 3 was received but is currently RESERVED.";
+            }
+          }
+          description
+            "When a bit is exchanged in the Graceful Restart Flags
+             field that is unknown to this module, their bit position
+             is rendered using the associated unknown bit.";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP, Section
+             3.";
         }
 
         leaf restart-time {
@@ -212,25 +217,57 @@ submodule ietf-bgp-capabilities {
                3.";
           }
           leaf afi-safi-flags {
-            type bits {
-              bit forwarding-preserved {
-                position 0;
-                description
-                  "The most significant bit is defined as the
-                   Forwarding State (F) bit, which can be used to
-                   indicate whether the forwarding state for routes
-                   that were advertised with the given AFI and SAFI
-                   has indeed been preserved during the previous BGP
-                   restart.  When set (value 1), the bit indicates
-                   that the forwarding state has been preserved.";
-                 reference
-                   "RFC 4724: Graceful Restart Mechanism for BGP,
-                    Section 3.";
-              }
-            }
+            type bt:graceful-restart-flags-for-afi;
             description
               "Flags for Address Family advertised per-AFI/SAFI in
                the BGP Graceful Restart Capability.";
+            reference
+              "RFC 4724: Graceful Restart Mechanism for BGP, Section
+               3.";
+          }
+          leaf afi-safi-unknown-flags {
+            type bits {
+              bit unknown-1 {
+                position 1;
+                description
+                  "Bit 1 was received but is currently RESERVED.";
+              }
+              bit unknown-2 {
+                position 2;
+                description
+                  "Bit 2 was received but is currently RESERVED.";
+              }
+              bit unknown-3 {
+                position 3;
+                description
+                  "Bit 3 was received but is currently RESERVED.";
+              }
+              bit unknown-4 {
+                position 4;
+                description
+                  "Bit 4 was received but is currently RESERVED.";
+              }
+              bit unknown-5 {
+                position 5;
+                description
+                  "Bit 5 was received but is currently RESERVED.";
+              }
+              bit unknown-6 {
+                position 6;
+                description
+                  "Bit 6 was received but is currently RESERVED.";
+              }
+              bit unknown-7 {
+                position 7;
+                description
+                  "Bit 7 was received but is currently RESERVED.";
+              }
+            }
+            description
+              "When a bit is exchanged in the Graceful Restart Flags
+               for Address Family field that is unknown to this
+               module, their bit position is rendered using the
+               associated unknown bit.";
             reference
               "RFC 4724: Graceful Restart Mechanism for BGP, Section
                3.";
