@@ -71,6 +71,8 @@ submodule ietf-bgp-common-multiprotocol {
       description
         "This leaf indicates whether graceful-restart is enabled for
          this AFI-SAFI.";
+      reference
+        "RFC 4724: Graceful Restart Mechanism for BGP.";
     }
   }
 

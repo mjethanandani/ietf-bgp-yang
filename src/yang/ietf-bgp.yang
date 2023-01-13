@@ -252,6 +252,8 @@ module ietf-bgp {
           description
             "Parameters relating the graceful restart mechanism for
              BGP.";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP.";
           uses graceful-restart-config;
         }
         uses global-group-use-multiple-paths;
@@ -271,6 +273,8 @@ module ietf-bgp {
               if-feature "bt:graceful-restart";
               description
                 "Parameters relating to BGP graceful-restart";
+              reference
+                "RFC 4724: Graceful Restart Mechanism for BGP.";
               uses mp-afi-safi-graceful-restart-config;
             }
             uses route-selection-options;
@@ -389,6 +393,8 @@ module ietf-bgp {
             description
               "Parameters relating the graceful restart mechanism for
                BGP";
+            reference
+              "RFC 4724: Graceful Restart Mechanism for BGP.";
             uses graceful-restart-config;
             leaf peer-restart-time {
               type uint16 {
@@ -894,6 +900,8 @@ module ietf-bgp {
             description
               "Parameters relating the graceful restart mechanism for
                BGP";
+            reference
+              "RFC 4724: Graceful Restart Mechanism for BGP.";
             uses graceful-restart-config;
           }
 
@@ -908,6 +916,8 @@ module ietf-bgp {
               description
                 "AFI, SAFI configuration available for the
                  neighbor or group";
+              reference
+                "RFC 4724: Graceful Restart Mechanism for BGP.";
               uses mp-afi-safi-config;
               container graceful-restart {
                 if-feature "bt:graceful-restart";
