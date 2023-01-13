@@ -176,10 +176,7 @@ module ietf-bgp {
          BGP";
       uses graceful-restart-config;
       leaf peer-restart-time {
-        type uint16 {
-          range "0..4096";
-        }
-        units "seconds";
+        type bt:graceful-restart-time-type;
         config false;
         description
           "The period of time (advertised by the peer) that the

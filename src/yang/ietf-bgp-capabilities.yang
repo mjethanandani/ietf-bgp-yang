@@ -180,11 +180,7 @@ submodule ietf-bgp-capabilities {
         }
 
         leaf restart-time {
-          /* XXX JMH - create new ranged type. */
-          type uint16 {
-            range "0..4096";
-          }
-          units "seconds";
+          type bt:graceful-restart-time-type;
           description
             "The period of time (advertised by the peer) that the
              peer expects a restart of a BGP session to take.";
