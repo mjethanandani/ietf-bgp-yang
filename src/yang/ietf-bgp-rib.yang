@@ -305,27 +305,6 @@ submodule ietf-bgp-rib {
     }
   }
 
-  grouping attr-set {
-    description
-      "A grouping for all path attributes.";
-
-    list attr-set {
-      key "index";
-      description
-        "List of path attributes that may be in use by multiple
-         routes in the table";
-      leaf index {
-        type uint64;
-        description
-          "System generated index for each attribute set.  The
-           index is used to reference an attribute set from a
-           specific path.  Multiple paths may reference the same
-           attribute set.";
-      }
-      uses attr-set-attributes;
-    }
-  }
-
   grouping attr-sets {
     description
       "A grouping for all sets of path attributes.";
@@ -333,7 +312,22 @@ submodule ietf-bgp-rib {
     container attr-sets {
       description
         "Enclosing container for the list of path attribute sets";
-      uses attr-set;
+
+      list attr-set {
+        key "index";
+        description
+          "List of path attributes that may be in use by multiple
+           routes in the table";
+        leaf index {
+          type uint64;
+          description
+            "System generated index for each attribute set.  The
+             index is used to reference an attribute set from a
+             specific path.  Multiple paths may reference the same
+             attribute set.";
+        }
+        uses attr-set-attributes;
+      }
     }
   }
 
