@@ -26,7 +26,7 @@ module ietf-bgp {
   import iana-bgp-notification {
     prefix bn;
     reference
-      "RFC XXXX, BGP YANG Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import iana-bgp-types {
     prefix bt;
@@ -254,7 +254,8 @@ module ietf-bgp {
         "The timestamp indicates the time that a BGP
          NOTIFICATION message was last handled.";
       reference
-        "RFC 4271, Section 4.5.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
     }
     leaf last-error {
       type identityref {
@@ -267,7 +268,8 @@ module ietf-bgp {
          last-error-subcode will have the information received
          in the NOTIFICATION PDU.";
       reference
-        "RFC 4271, Section 4.5.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
     }
     leaf last-error-code {
       type uint8;
@@ -275,7 +277,8 @@ module ietf-bgp {
         "The last NOTIFICATION Error code for the peer on
          this connection.";
       reference
-        "RFC 4271, Section 4.5.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
     }
     leaf last-error-subcode {
       type uint8;
@@ -283,7 +286,8 @@ module ietf-bgp {
         "The last NOTIFICATION Error subcode for the peer on
          this connection.";
       reference
-        "RFC 4271, Section 4.5.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
     }
   }
   grouping bgp-errors-common-data {
