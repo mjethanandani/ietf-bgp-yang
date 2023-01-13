@@ -7,10 +7,13 @@ submodule ietf-bgp-capabilities {
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX: BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+
   }
   import iana-routing-types {
     prefix iana-rt-types;
+    reference
+      "RFC 8294: Common YANG Data Types for the Routing Area.";
   }
   import ietf-inet-types {
     prefix inet;
@@ -30,7 +33,7 @@ submodule ietf-bgp-capabilities {
               Jeffrey Haas (jhaas at juniper.net).";
 
   description
-    "This sub-module contains groupings that used for BGP 
+    "This sub-module contains groupings that used for BGP
      Capabilities within the BGP module.
 
      Copyright (c) 2023 IETF Trust and the persons identified as
@@ -57,22 +60,25 @@ submodule ietf-bgp-capabilities {
     description
       "Initial Version";
     reference
-      "RFC XXXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   grouping bgp-capabilities-common {
     description
-      "BGP Capabilities that are used commonly in by the
+      "BGP Capabilities that are used commonly by the
        advertised-capabilities and received-capabilities lists in the
        bgp-capabilities grouping.";
 
     leaf code {
-      type uint8;
+      type uint8 {
+        range 1..255;
+      }
       description
         "BGP Capability Code";
       reference
         "RFC 5492: Capabilities Advertisement with BGP-4, Section
-         4."; }
+         4.";
+    }
     leaf index {
       type uint8;
       description
@@ -84,7 +90,8 @@ submodule ietf-bgp-capabilities {
          Capability.";
       reference
         "RFC 5492: Capabilities Advertisement with BGP-4, Section
-         4."; }
+         4.";
+    }
     leaf name {
       type identityref {
         base bt:bgp-capability;
@@ -147,11 +154,21 @@ submodule ietf-bgp-capabilities {
 
         leaf flags {
           type bits {
-            /* XXX JMH - how do we show unknown bits? */
             bit restart {
               position 0;
               description
-                "";
+                "The most significant bit is defined as the Restart
+                 State (R) bit, which can be used to avoid possible
+                 deadlock caused by waiting for the End-of-RIB marker
+                 when multiple BGP speakers peering with each other
+                 restart.  When set (value 1), this bit indicates
+                 that the BGP speaker has restarted, and its peer
+                 MUST NOT wait for the End-of-RIB marker from the
+                 speaker before advertising routing information to
+                 the speaker.";
+              reference
+                "RFC 4724: Graceful Restart Mechanism for BGP,
+                 Section 3.";
             }
           }
           description
@@ -199,13 +216,20 @@ submodule ietf-bgp-capabilities {
                3.";
           }
           leaf afi-safi-flags {
-            /* XXX JMH - refactor */
             type bits {
-              /* XXX JMH - how do we show unknown bits? */
               bit forwarding-preserved {
                 position 0;
                 description
-                  "";
+                  "The most significant bit is defined as the
+                   Forwarding State (F) bit, which can be used to
+                   indicate whether the forwarding state for routes
+                   that were advertised with the given AFI and SAFI
+                   has indeed been preserved during the previous BGP
+                   restart.  When set (value 1), the bit indicates
+                   that the forwarding state has been preserved.";
+                 reference
+                   "RFC 4724: Graceful Restart Mechanism for BGP,
+                    Section 3.";
               }
             }
             description
@@ -270,15 +294,30 @@ submodule ietf-bgp-capabilities {
             type enumeration {
               enum receive {
                 value 1;
-                description "";
+                description
+                  "The sender of the capability is able to receive
+                   multiple paths from its peer.";
+                reference
+                  "RFC 7911: Advertisement of Multiple Paths in BGP,
+                   Section 4.";
               }
               enum send {
                 value 2;
-                description "";
+                description
+                  "The sender of the capability is able to send
+                   multiple paths to its peer.";
+                reference
+                  "RFC 7911: Advertisement of Multiple Paths in BGP,
+                   Section 4.";
               }
               enum receive-send {
                 value 3;
-                description "";
+                description
+                  "The sender of the capability is able both receive
+                   and send multiple paths for its peer.";
+                reference
+                  "RFC 7911: Advertisement of Multiple Paths in BGP,
+                   Section 4.";
               }
             }
             description
@@ -304,7 +343,7 @@ submodule ietf-bgp-capabilities {
         "BGP Capabilities per-neighbor.";
       reference
         "RFC 5492: Capabilities Advertisement with BGP-4.";
-      
+
       list advertised-capabilities {
         key "code index";
         description
