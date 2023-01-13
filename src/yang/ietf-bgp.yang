@@ -150,71 +150,6 @@ module ietf-bgp {
       uses neighbor-group-transport-config;
     }
 
-    container graceful-restart {
-      if-feature "bt:graceful-restart";
-      description
-        "Parameters relating the graceful restart mechanism for
-         BGP";
-      uses graceful-restart-config;
-      leaf peer-restart-time {
-        type uint16 {
-          range "0..4096";
-        }
-        config false;
-        description
-          "The period of time (advertised by the peer) that the
-           peer expects a restart of a BGP session to take.";
-      }
-
-      leaf peer-restarting {
-        type boolean;
-        config false;
-        description
-          "This flag indicates whether the remote neighbor is
-           currently in the process of restarting, and hence
-           received routes are currently stale.";
-      }
-
-      leaf local-restarting {
-        type boolean;
-        config false;
-        description
-          "This flag indicates whether the local neighbor is
-           currently restarting. The flag is cleared after all
-           NLRI have been advertised to the peer, and the
-           End-of-RIB (EOR) marker has been cleared.";
-      }
-
-      leaf mode {
-        type enumeration {
-          enum helper-only {
-            description
-              "The local router is operating in helper-only
-               mode, and hence will not retain forwarding state
-               during a local session restart, but will do so
-               during a restart of the remote peer";
-          }
-          enum bilateral {
-            description
-              "The local router is operating in both helper
-               mode, and hence retains forwarding state during
-               a remote restart, and also maintains forwarding
-               state during local session restart";
-          }
-          enum remote-helper {
-            description
-              "The local system is able to retain routes during
-               restart but the remote system is only able to
-               act as a helper";
-          }
-        }
-        config false;
-        description
-          "This leaf indicates the mode of operation of BGP
-           graceful restart with the peer";
-      }
-    }
-
     leaf treat-as-withdraw {
       type boolean;
       default "false";
@@ -323,6 +258,8 @@ module ietf-bgp {
           description
             "Parameters relating the graceful restart mechanism for
              BGP.";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP.";
           uses graceful-restart-config;
         }
         uses global-group-use-multiple-paths;
@@ -342,6 +279,8 @@ module ietf-bgp {
               if-feature "bt:graceful-restart";
               description
                 "Parameters relating to BGP graceful-restart";
+              reference
+                "RFC 4724: Graceful Restart Mechanism for BGP.";
               uses mp-afi-safi-graceful-restart-config;
             }
             uses route-selection-options;
@@ -455,6 +394,72 @@ module ietf-bgp {
           }
 
           uses neighbor-group-config;
+          container graceful-restart {
+            if-feature "bt:graceful-restart";
+            description
+              "Parameters relating the graceful restart mechanism for
+               BGP";
+            reference
+              "RFC 4724: Graceful Restart Mechanism for BGP.";
+            uses graceful-restart-config;
+            leaf peer-restart-time {
+              type uint16 {
+                range "0..4096";
+              }
+              config false;
+              description
+                "The period of time (advertised by the peer) that the
+                 peer expects a restart of a BGP session to take.";
+            }
+
+            leaf peer-restarting {
+              type boolean;
+              config false;
+              description
+                "This flag indicates whether the remote neighbor is
+                 currently in the process of restarting, and hence
+                 received routes are currently stale.";
+            }
+
+            leaf local-restarting {
+              type boolean;
+              config false;
+              description
+                "This flag indicates whether the local neighbor is
+                 currently restarting. The flag is cleared after all
+                 NLRI have been advertised to the peer, and the
+                 End-of-RIB (EOR) marker has been cleared.";
+            }
+
+            leaf mode {
+              type enumeration {
+                enum helper-only {
+                  description
+                    "The local router is operating in helper-only
+                     mode, and hence will not retain forwarding state
+                     during a local session restart, but will do so
+                     during a restart of the remote peer";
+                }
+                enum bilateral {
+                  description
+                    "The local router is operating in both helper
+                     mode, and hence retains forwarding state during
+                     a remote restart, and also maintains forwarding
+                     state during local session restart";
+                }
+                enum remote-helper {
+                  description
+                    "The local system is able to retain routes during
+                     restart but the remote system is only able to
+                     act as a helper";
+                }
+              }
+              config false;
+              description
+                "This leaf indicates the mode of operation of BGP
+                 graceful restart with the peer";
+            }
+          }
           uses neighbor-and-peer-group-common;
 
           container afi-safis {
@@ -884,6 +889,17 @@ module ietf-bgp {
           }
 
           uses neighbor-group-config;
+
+          container graceful-restart {
+            if-feature "bt:graceful-restart";
+            description
+              "Parameters relating the graceful restart mechanism for
+               BGP";
+            reference
+              "RFC 4724: Graceful Restart Mechanism for BGP.";
+            uses graceful-restart-config;
+          }
+
           uses neighbor-and-peer-group-common;
 
           container afi-safis {
@@ -895,6 +911,8 @@ module ietf-bgp {
               description
                 "AFI, SAFI configuration available for the
                  neighbor or group";
+              reference
+                "RFC 4724: Graceful Restart Mechanism for BGP.";
               uses mp-afi-safi-config;
               container graceful-restart {
                 if-feature "bt:graceful-restart";

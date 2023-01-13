@@ -141,6 +141,8 @@ submodule ietf-bgp-neighbor {
         if-feature "bt:graceful-restart";
         description
           "Parameters relating to BGP graceful-restart";
+        reference
+          "RFC 4724: Graceful Restart Mechanism for BGP.";
         uses mp-afi-safi-graceful-restart-config;
         leaf received {
           type boolean;
@@ -148,6 +150,9 @@ submodule ietf-bgp-neighbor {
           description
             "This leaf indicates whether the neighbor advertised the
              ability to support graceful-restart for this AFI-SAFI";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP, Section
+             3.";
         }
         leaf advertised {
           type boolean;
@@ -155,6 +160,9 @@ submodule ietf-bgp-neighbor {
           description
             "This leaf indicates whether the ability to support
              graceful-restart has been advertised to the peer";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP, Section
+             3.";
         }
         leaf local-forwarding-state-preserved {
           type boolean;
@@ -164,7 +172,8 @@ submodule ietf-bgp-neighbor {
              or would advertise the Forwarding State bit in its
              Graceful Restart capability for this AFI-SAFI.";
           reference
-            "RFC 4724: Graceful Restart Mechanism for BGP.";
+            "RFC 4724: Graceful Restart Mechanism for BGP, Section
+             3.";
         }
         leaf forwarding-state-preserved {
           type boolean;
@@ -174,7 +183,8 @@ submodule ietf-bgp-neighbor {
              the Forwarding State bit in its Graceful Restart
              capability for this AFI-SAFI.";
           reference
-            "RFC 4724: Graceful Restart Mechanism for BGP.";
+            "RFC 4724: Graceful Restart Mechanism for BGP, Section
+             3.";
         }
         leaf end-of-rib-received {
           type boolean;
@@ -183,7 +193,8 @@ submodule ietf-bgp-neighbor {
             "This leaf indicates whether the neighbor has advertised
              the End-of-RIB marker for this AFI-SAFI.";
           reference
-            "RFC 4724: Graceful Restart Mechanism for BGP.";
+            "RFC 4724: Graceful Restart Mechanism for BGP, Section
+             2.";
         }
       }
       uses mp-all-afi-safi-list-contents;
