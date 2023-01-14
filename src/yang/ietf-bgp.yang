@@ -164,7 +164,7 @@ module ietf-bgp {
     uses structure-neighbor-group-logging-options;
     uses structure-neighbor-group-route-reflector;
     uses structure-neighbor-group-as-path-options;
-    uses structure-neighbor-group-add-paths;
+    uses structure-add-paths;
     uses bgp-neighbor-use-multiple-paths;
     uses rt-pol:apply-policy-group;
   }
@@ -284,6 +284,7 @@ module ietf-bgp {
               uses mp-afi-safi-graceful-restart-config;
             }
             uses route-selection-options;
+            uses structure-add-paths;
             uses global-group-use-multiple-paths;
             uses mp-all-afi-safi-list-contents;
           }
@@ -920,6 +921,7 @@ module ietf-bgp {
                   "Parameters relating to BGP graceful-restart";
                 uses mp-afi-safi-graceful-restart-config;
               }
+              uses structure-add-paths;
               uses bgp-neighbor-use-multiple-paths;
               uses mp-all-afi-safi-list-contents;
             }
