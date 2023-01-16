@@ -59,7 +59,7 @@ module ietf-bgp-policy {
     description
       "Initial Version";
     reference
-      "RFC XXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   /*
@@ -250,9 +250,13 @@ module ietf-bgp-policy {
           leaf-list member {
             type string;
             description
-              "AS path regular expression -- list of ASes in the
-               set. If any of the regular expressions in the lists
-               are matched, the as-path-set is considered matched.";
+              "AS path regular expression using BGP YANG AS_PATH
+               regular expression syntax.  If any of the regular
+               expressions in the lists are matched, the as-path-set
+               is considered matched.";
+            reference
+              "RFC XXXX: BGP YANG Model for Service Provider
+               Networks, Appendix F.3.";
           }
         }
       }
@@ -292,11 +296,92 @@ module ietf-bgp-policy {
       description
         "Top-level container for BGP specific policy conditions.";
 
-      leaf med-eq {
-        type uint32;
+      container local-pref {
         description
-          "Condition to check if the received MED value is equal to
-           the specified value.";
+          "Value and comparison operations for conditions based on
+           the value of the BGP LOCAL_PREF.";
+        reference
+          "RFC 4271: Section 5.1.5.";
+
+        leaf value {
+          type uint32;
+          description
+            "BGP LOCAL_PREF value for comparison to the entry in the
+             BGP route.";
+        }
+
+        choice operation {
+          case eq {
+            leaf eq {
+              type empty;
+              description
+                "Check to see if the value is equal.";
+            }
+          }
+
+          case lt-or-eq {
+            leaf lt-or-eq {
+              type empty;
+              description
+                "Check to see if the value is less than or equal.";
+            }
+          }
+
+          case gt-or-eq {
+            leaf gt-or-eq {
+              type empty;
+              description
+                "Check to see if the value is greater than or
+                 equal.";
+            }
+          }
+          description
+            "Choice of operations on the value of MED.";
+        }
+      }
+
+      container med {
+        description
+          "Value and comparison operations for conditions based on
+           the value of the BGP MULTI_EXIT_DISC (MED)";
+        reference
+          "RFC 4271: Section 5.1.4.";
+
+        leaf value {
+          type uint32;
+          description
+            "BGP MED value for comparison to the entry in the BGP
+             route.";
+        }
+
+        choice operation {
+          case eq {
+            leaf eq {
+              type empty;
+              description
+                "Check to see if the value is equal.";
+            }
+          }
+
+          case lt-or-eq {
+            leaf lt-or-eq {
+              type empty;
+              description
+                "Check to see if the value is less than or equal.";
+            }
+          }
+
+          case gt-or-eq {
+            leaf gt-or-eq {
+              type empty;
+              description
+                "Check to see if the value is greater than or
+                 equal.";
+            }
+          }
+          description
+            "Choice of operations on the value of MED.";
+        }
       }
 
       leaf origin-eq {
@@ -318,13 +403,6 @@ module ietf-bgp-policy {
             "List of address families which the NLRI may be within.";
         }
         uses rt-pol:match-set-options-restricted-group;
-      }
-
-      leaf local-pref-eq {
-        type uint32;
-        description
-          "Condition to check if the local pref attribute is equal to
-           the specified value.";
       }
 
       container match-neighbor {

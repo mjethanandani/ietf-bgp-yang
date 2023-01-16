@@ -18,21 +18,10 @@ module ietf-bgp {
     reference
       "RFC 9067, A YANG Data Model for Routing Policy.";
   }
-  import ietf-interfaces {
-    prefix if;
-    reference
-      "RFC 8343, A YANG Data Model for Interface Management.";
-  }
   import iana-bgp-types {
     prefix bt;
     reference
-      "RFC XXXX, BGP YANG Model for Service Provider Network.";
-  }
-  import ietf-bfd-types {
-    prefix bfd-types;
-    reference
-      "RFC 9314: YANG Data Model for Bidirectional Forwarding
-       Detection (BFD).";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import ietf-inet-types {
     prefix inet;
@@ -43,14 +32,6 @@ module ietf-bgp {
     prefix yang;
     reference
       "RFC 6991: Common YANG Data Types.";
-  }
-  import ietf-key-chain {
-    prefix key-chain;
-    reference
-      "RFC 8177: YANG Data Model for Key Chains";
-  }
-  include ietf-bgp-capabilities {
-    revision-date YYYY-MM-DD;
   }
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
@@ -137,7 +118,7 @@ module ietf-bgp {
     description
       "Initial Version";
     reference
-      "RFC XXXX, BGP Model for Service Provider Network ";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   /*
@@ -169,72 +150,21 @@ module ietf-bgp {
       uses neighbor-group-transport-config;
     }
 
-    container graceful-restart {
-      if-feature "bt:graceful-restart";
+    leaf treat-as-withdraw {
+      type boolean;
+      default "false";
       description
-        "Parameters relating the graceful restart mechanism for
-         BGP";
-      uses graceful-restart-config;
-      leaf peer-restart-time {
-        type bt:graceful-restart-time-type;
-        config false;
-        description
-          "The period of time (advertised by the peer) that the
-           peer expects a restart of a BGP session to take.";
-      }
-
-      leaf peer-restarting {
-        type boolean;
-        config false;
-        description
-          "This flag indicates whether the remote neighbor is
-           currently in the process of restarting, and hence
-           received routes are currently stale.";
-      }
-
-      leaf local-restarting {
-        type boolean;
-        config false;
-        description
-          "This flag indicates whether the local neighbor is
-           currently restarting. The flag is cleared after all
-           NLRI have been advertised to the peer, and the
-           End-of-RIB (EOR) marker has been cleared.";
-      }
-
-      leaf mode {
-        type enumeration {
-          enum helper-only {
-            description
-              "The local router is operating in helper-only
-               mode, and hence will not retain forwarding state
-               during a local session restart, but will do so
-               during a restart of the remote peer";
-          }
-          enum bilateral {
-            description
-              "The local router is operating in both helper
-               mode, and hence retains forwarding state during
-               a remote restart, and also maintains forwarding
-               state during local session restart";
-          }
-          enum remote-helper {
-            description
-              "The local system is able to retain routes during
-               restart but the remote system is only able to
-               act as a helper";
-          }
-        }
-        config false;
-        description
-          "This leaf indicates the mode of operation of BGP
-           graceful restart with the peer";
-      }
+        "Specify whether erroneous UPDATE messages for which the NLRI
+         can be extracted are treated as though the NLRI is withdrawn
+         - avoiding session reset";
+      reference
+        "RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
     }
+
     uses structure-neighbor-group-logging-options;
     uses structure-neighbor-group-route-reflector;
     uses structure-neighbor-group-as-path-options;
-    uses structure-neighbor-group-add-paths;
+    uses structure-add-paths;
     uses bgp-neighbor-use-multiple-paths;
     uses rt-pol:apply-policy-group;
   }
@@ -328,6 +258,8 @@ module ietf-bgp {
           description
             "Parameters relating the graceful restart mechanism for
              BGP.";
+          reference
+            "RFC 4724: Graceful Restart Mechanism for BGP.";
           uses graceful-restart-config;
         }
         uses global-group-use-multiple-paths;
@@ -347,9 +279,12 @@ module ietf-bgp {
               if-feature "bt:graceful-restart";
               description
                 "Parameters relating to BGP graceful-restart";
+              reference
+                "RFC 4724: Graceful Restart Mechanism for BGP.";
               uses mp-afi-safi-graceful-restart-config;
             }
             uses route-selection-options;
+            uses structure-add-paths;
             uses global-group-use-multiple-paths;
             uses mp-all-afi-safi-list-contents;
           }
@@ -367,6 +302,15 @@ module ietf-bgp {
           description
             "List of BGP neighbors configured on the local system,
              uniquely identified by remote IPv[46] address.";
+
+          leaf peer-group {
+            type leafref {
+              path "../../../peer-groups/peer-group/name";
+            }
+            description
+              "The peer-group with which this neighbor is
+               associated.";
+          }
 
           leaf remote-address {
             type inet:ip-address;
@@ -414,15 +358,6 @@ module ietf-bgp {
                          for Confederation internal and external.";
           }
 
-          leaf peer-group {
-            type leafref {
-              path "../../../peer-groups/peer-group/name";
-            }
-            description
-              "The peer-group with which this neighbor is
-               associated.";
-          }
-
           leaf identifier {
             type yang:dotted-quad;
             config false;
@@ -459,73 +394,73 @@ module ietf-bgp {
               "RFC 4271, Section 8.1.2.";
           }
 
-          leaf secure-session-enable {
-            type boolean;
-            default "false";
+          uses neighbor-group-config;
+          container graceful-restart {
+            if-feature "bt:graceful-restart";
             description
-              "Does this session need to be secured?";
-          }
-
-          container secure-session {
-            when "../secure-session-enable = 'true'";
-            description
-              "Container for describing how a particular BGP session
-               is to be secured.";
-
-            choice option {
-              case ao {
-                leaf ao-keychain {
-                  type key-chain:key-chain-ref;
-                  description
-                    "Reference to the key chain that will be used by
-                     this model. Applicable for TCP-AO and TCP-MD5
-                     only";
-                  reference
-                    "RFC 8177: YANG Key Chain.";
-                }
-                description
-                  "Uses TCP-AO to secure the session. Parameters for
-                   those are defined as a grouping in the TCP YANG
-                   model.";
-                reference
-                  "RFC 5925 - The TCP Authentication Option.";
+              "Parameters relating the graceful restart mechanism for
+               BGP";
+            reference
+              "RFC 4724: Graceful Restart Mechanism for BGP.";
+            uses graceful-restart-config;
+            leaf peer-restart-time {
+              type uint16 {
+                range "0..4096";
               }
-
-              case md5 {
-                leaf md5-keychain {
-                  type key-chain:key-chain-ref;
-                  description
-                    "Reference to the key chain that will be used by
-                     this model. Applicable for TCP-AO and TCP-MD5
-                     only";
-                  reference
-                    "RFC 8177: YANG Key Chain.";
-                }
-                description
-                  "Uses TCP-MD5 to secure the session. Parameters for
-                   those are defined as a grouping in the TCP YANG
-                   model.";
-                reference
-                  "RFC 5925: The TCP Authentication Option.";
-              }
-
+              config false;
               description
-                "Choice of authentication options.";
+                "The period of time (advertised by the peer) that the
+                 peer expects a restart of a BGP session to take.";
+            }
+
+            leaf peer-restarting {
+              type boolean;
+              config false;
+              description
+                "This flag indicates whether the remote neighbor is
+                 currently in the process of restarting, and hence
+                 received routes are currently stale.";
+            }
+
+            leaf local-restarting {
+              type boolean;
+              config false;
+              description
+                "This flag indicates whether the local neighbor is
+                 currently restarting. The flag is cleared after all
+                 NLRI have been advertised to the peer, and the
+                 End-of-RIB (EOR) marker has been cleared.";
+            }
+
+            leaf mode {
+              type enumeration {
+                enum helper-only {
+                  description
+                    "The local router is operating in helper-only
+                     mode, and hence will not retain forwarding state
+                     during a local session restart, but will do so
+                     during a restart of the remote peer";
+                }
+                enum bilateral {
+                  description
+                    "The local router is operating in both helper
+                     mode, and hence retains forwarding state during
+                     a remote restart, and also maintains forwarding
+                     state during local session restart";
+                }
+                enum remote-helper {
+                  description
+                    "The local system is able to retain routes during
+                     restart but the remote system is only able to
+                     act as a helper";
+                }
+              }
+              config false;
+              description
+                "This leaf indicates the mode of operation of BGP
+                 graceful restart with the peer";
             }
           }
-          leaf ttl-security {
-            if-feature "bt:ttl-security";
-            type uint8;
-            default "255";
-            description
-              "BGP Time To Live (TTL) security check.";
-            reference
-              "RFC 5082: The Generalized TTL Security Mechanism
-               (GTSM),
-               RFC 7454: BGP Operations and Security.";
-          }
-
-          uses neighbor-group-config;
           uses neighbor-and-peer-group-common;
 
           container afi-safis {
@@ -617,24 +552,6 @@ module ietf-bgp {
                contains the subcode.";
             reference
               "RFC 4271, Section 4.5.";
-          }
-          leaf treat-as-withdraw {
-            type boolean;
-            default "false";
-            description
-              "Specify whether erroneous UPDATE messages for which
-               the NLRI can be extracted are treated as though the
-               NLRI is withdrawn - avoiding session reset";
-            reference
-              "RFC 7606: Revised Error Handling for BGP UPDATE
-               Messages.";
-          }
-
-          container bfd {
-            if-feature "bt:bfd";
-            uses bfd-types:client-cfg-parms;
-            description
-              "BFD configuration per-neighbor.";
           }
 
           container statistics {
@@ -973,85 +890,18 @@ module ietf-bgp {
               "Name of the BGP peer-group";
           }
 
-          leaf secure-session-enable {
-            type boolean;
-            default "false";
-            description
-              "Does this session need to be secured?";
-          }
-
-          container secure-session {
-            when "../secure-session-enable = 'true'";
-            description
-              "Container for describing how a particular BGP session
-               is to be secured.";
-
-            choice option {
-              case ao {
-                leaf ao-keychain {
-                  type key-chain:key-chain-ref;
-                  description
-                    "Reference to the key chain that will be used by
-                     this model. Applicable for TCP-AO and TCP-MD5
-                     only";
-                  reference
-                    "RFC 8177: YANG Key Chain.";
-                }
-                description
-                  "Uses TCP-AO to secure the session. Parameters for
-                   those are defined as a grouping in the TCP YANG
-                   model.";
-                reference
-                  "RFC 5925 - The TCP Authentication Option.";
-              }
-              case md5 {
-                leaf md5-keychain {
-                  type key-chain:key-chain-ref;
-                  description
-                    "Reference to the key chain that will be used by
-                     this model. Applicable for TCP-AO and TCP-MD5
-                     only";
-                  reference
-                    "RFC 8177: YANG Key Chain.";
-                }
-                description
-                  "Uses TCP-MD5 to secure the session. Parameters for
-                   those are defined as a grouping in the TCP YANG
-                   model.";
-                reference
-                  "RFC 5925: The TCP Authentication Option.";
-              }
-              case ipsec {
-                leaf sa {
-                  type string;
-                  description
-                    "Security Association (SA) name.";
-                }
-                description
-                  "Currently, the IPsec/IKE YANG model has no
-                   grouping defined that this model can use. When
-                   such a grouping is defined, this model can import
-                   the grouping to add the key parameters
-                   needed to kick of IKE.";
-              }
-              description
-                "Choice of authentication options.";
-            }
-          }
-
-          leaf ttl-security {
-            if-feature "bt:ttl-security";
-            type uint8;
-            default "255";
-            description
-              "BGP Time To Live (TTL) security check.";
-            reference
-              "RFC 5082: The Generalized TTL Security Mechanism
-               (GTSM),
-               RFC 7454: BGP Operations and Security.";
-          }
-
           uses neighbor-group-config;
+
+          container graceful-restart {
+            if-feature "bt:graceful-restart";
+            description
+              "Parameters relating the graceful restart mechanism for
+               BGP";
+            reference
+              "RFC 4724: Graceful Restart Mechanism for BGP.";
+            uses graceful-restart-config;
+          }
+
           uses neighbor-and-peer-group-common;
 
           container afi-safis {
@@ -1063,6 +913,8 @@ module ietf-bgp {
               description
                 "AFI, SAFI configuration available for the
                  neighbor or group";
+              reference
+                "RFC 4724: Graceful Restart Mechanism for BGP.";
               uses mp-afi-safi-config;
               container graceful-restart {
                 if-feature "bt:graceful-restart";
@@ -1070,6 +922,7 @@ module ietf-bgp {
                   "Parameters relating to BGP graceful-restart";
                 uses mp-afi-safi-graceful-restart-config;
               }
+              uses structure-add-paths;
               uses bgp-neighbor-use-multiple-paths;
               uses mp-all-afi-safi-list-contents;
             }
@@ -1077,37 +930,6 @@ module ietf-bgp {
         }
       }
 
-      container interfaces {
-        list interface {
-          key "name";
-          leaf name {
-            type if:interface-ref;
-            description
-              "Reference to the interface within the routing
-               instance.";
-          }
-
-          container bfd {
-            if-feature "bt:bfd";
-            leaf enabled {
-              type boolean;
-              default "false";
-              description
-                "Indicates whether BFD is enabled on this
-                 interface.";
-            }
-            description
-              "BFD client configuration.";
-            reference
-              "RFC 9314: YANG Data Model for Bidirectional Forward
-               Detection (BFD).";
-          }
-          description
-            "List of interfaces within the routing instance.";
-        }
-        description
-          "Interface specific parameters.";
-      }
       uses rib;
     }
   }

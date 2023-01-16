@@ -8,8 +8,7 @@
   <?rfc toc="yes"?>
 
   <front>
-    <title abbrev="BGP YANG Model">BGP YANG Model for Service Provider
-    Networks</title>
+    <title abbrev="BGP YANG Model">YANG Model for Border Gateway Protocol (BGP-4)</title>
 
     <author fullname="Mahesh Jethanandani" initials="M."
             surname="Jethanandani">
@@ -917,6 +916,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.6991.xml'?>
 
+      <?rfc include='reference.RFC.7607.xml'?>
+
       <?rfc include='reference.RFC.7911.xml'?>
 
       <?rfc include='reference.RFC.7950.xml'?>
@@ -953,11 +954,15 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
     <references title="Informative references">
       <?rfc include='reference.RFC.2385.xml'?>
 
+      <?rfc include='reference.RFC.2622.xml'?>
+
       <?rfc include='reference.RFC.3765.xml'?>
 
       <?rfc include='reference.RFC.4451.xml'?>
 
       <?rfc include='reference.RFC.5082.xml'?>
+
+      <?rfc include='reference.RFC.5398.xml'?>
 
       <?rfc include='reference.RFC.5925.xml'?>
 
@@ -967,7 +972,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.8342.xml'?>
 
-      <?rfc include='reference.RFC.8349.xml?>
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
+      href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-idr-deprecate-as-set-confed-set.xml"/>
     </references>
 
     <section title="Examples">
@@ -1129,6 +1135,193 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
 
 ]]></artwork>
         </figure></t>
+    </section>
+    <section title="BGP YANG Model AS_PATH Regular Expressions">
+      <section title="AS_PATH Regular Expressions in Implementations">
+        <t>Implementations of BGP have different ways of rendering the received
+        BGP AS_PATH in their interfaces.  Deployed implementations generally
+        render the AS_PATHs consistently from left to right where the
+        left-most AS number matches the neighbor AS; most recently prepended AS,
+        per <xref target="RFC4271" section="5.1.2"/>. Deployed implementations
+        also use different characters to match the associated AS_PATH segment
+        types.  Those segment types are AS_SEQUENCE, AS_SET, AS_CONFED_SEQUENCE,
+        AS_CONFED_SET.  Implementations also have no fully standardized way to
+        render white-space between AS numbers in combination with possible
+        characters denoting the AS_PATH segment types.</t>
+
+        <t>This YANG model standardizes no particular rendering format for an
+        AS_PATH.  This permits the model to be generally applicable for
+        implementations of BGP and does not conflict with deployed formatting
+        choices.</t>
+
+        <t>AS_PATH regular expressions are a common tool used in BGP policy.
+        Such regular expressions match on components of the AS_PATH.  In
+        deployed implementations of BGP, there are two common high-level forms
+        of AS_PATH matching:</t>
+
+        <ul>
+        <li>Character based tokens. In this form, AS numbers are treated as a
+        string of characters. Regular expressions are evaluated vs. the
+        characters in the string. E.g. "64503+" will match "64503", "645033",
+        etc.</li>
+
+        <li>Integer based tokens. In this form, AS numbers are treated as
+        tokens.  Regular expressions are evaluated vs. the full integers. E.g.
+        "64503+" will match "64503", "64503 64503".</li>
+        </ul>
+      </section>
+      <section title="Why not use standard POSIX regular expressions?">
+        <ul>
+        <li>It would be necessary to standardize the format of the AS_PATH
+        in this module.  See above for reasons this was not chosen.</li>
+
+        <li>Consistently dealing with separator token in the configured AS_PATH
+        regular expression can be error-prone.  Operators interacting with BGP
+        data using "grep" are familiar with this challenge.</li>
+
+        <li>POSIX character-based regular expressions readily map to
+        implementations that match on character based tokens, but do not easily
+        map to integer based token implementation.  Integer based token matches
+        can be expressed in implementations that do character based tokens.</li>
+
+        <li>Additionally, YANG by default doesn't use POSIX for its regular
+        expressions.</li>
+        </ul>
+      </section>
+      <section title="BGP YANG AS_PATH Regular Expressions"
+       anchor="aspath-regex">
+        <t>To address the points above, the BGP YANG AS_PATH regular expressions
+        are a subset of, and are inspired by, the prior work in 
+        <xref target="RFC2622" section="5.4">RPSL</xref>.</t>
+
+        <dl newline="true">
+          <dt>ASN</dt>
+          <dd>ASN is an 4-byte AS Number, from 1..4294967295.  0 is not a valid
+          AS Number and is not permitted to be advertised in BGP AS_PATHs per 
+          <xref target="RFC7607"/>.</dd>
+
+          <dt>.</dt>
+          <dd>matches any single AS number in the AS_PATH.</dd>
+
+          <dt>[...]</dt>
+          <dd>is an AS number set.  It matches AS_PATHs with AS numbers listed
+          between the brackets.  The AS numbers in the set are separated by
+          white-space characters.  If a '-' is used between two AS numbers in
+          this set, all AS numbers in the range between the two AS numbers are
+          included in the set.</dd>
+
+          <dt>[^...]</dt>
+          <dd>is a complemented AS number set.  It matches an AS_PATH which is
+          not matched by the numbers in the set.</dd>
+
+          <dt>^</dt>
+          <dd>Matches the empty string at the beginning of an AS_PATH.</dd>
+          
+          <dt>$</dt>
+          <dd>Matches the empty string at the end of an AS_PATH.</dd>
+          
+          <dt>Unary postfix operators * + ?  {m} {m,n} {m,}</dt>
+          <dd>For a regular expression A, A* matches zero or more occurrences of
+          A; A+ matches one or more occurrences of A; A?  matches zero or one
+          occurrence of A; A{m} matches m occurrence of A; A{m,n} matches m to n
+          occurrence of A; A{m,} matches m or more occurrence of A. For example,
+          [AS1 AS2]{2} matches AS1 AS1, AS1 AS2, AS2 AS1, and AS2 AS2.</dd>
+
+          <dt>Binary catenation operator</dt>
+          <dd>This is an implicit operator and exists between two regular
+          expressions A and B when no other explicit operator is specified.  The
+          resulting expression A B matches an AS-path if A matches some prefix
+          of the AS-path and B matches the rest of the AS-path.</dd>
+
+          <dt>Binary alternative (or) operator |</dt>
+          <dd>For a regular expressions A and B, A | B matches any AS-path that
+          is matched by A or B.</dd>
+
+          <dt>(...)</dt>
+          <dd>Parenthesis can be used to override the default order of
+          evaluation.</dd>
+        </dl>
+
+        <t>Whitespace in a BGP YANG AS_PATH regular expression is only used to
+        separate tokens within the regular expression.  It is otherwise without
+        meaning and may be included or omitted for visual clarity.</t>
+      </section>
+      <section title="Matching AS_PATH Segment Types in AS_PATH Regular
+       Expressions">
+        <t>There are no deployed implementations of BGP AS_PATH regular
+        expression matches that permit matching of AS_PATH segment types.  Known
+        implementations simply ignore the segment types for their internal
+        representation strings used by that implementation's regular
+        expression.  While this would seem to be problematic, and may create
+        difficulties in some specific scenarios, the following reasons have
+        mitigated this consideration over the years:</t>
+
+        <ul>
+        <li>AS_SET or AS_CONFED_SET in the AS_PATH not only introduces
+        additional character tokens for delimiting the segment, but mean that
+        the contents of that position within the AS_PATH may vary.  In general,
+        implementations of AS_SETs will sort the contents of the AS_SET, but
+        this is only a recommendation and not a protocol requirement.  AS_SETs
+        are being deprecated for implementation and deployment in BGP due to the
+        issues that they raise in BGP security features.  See
+        <xref target="I-D.ietf-idr-deprecate-as-set-confed-set"/>.</li>
+
+        <li>BGP Confederation are the always the left-most ASes in the AS_PATH.
+        As a result, matching on confederation ASes may be done using the '^'
+        anchor character against the locally-configured Confederation member
+        ASes.  These are typically either publicly registered AS numbers under
+        the control of a single entity, or private AS numbers that are scrubbed
+        as part of route filtering purposes at the provider's network edge.</li>
+        </ul>
+      </section>
+      <section title="BGP YANG AS_PATH Regular Expressions ABNF">
+        <t>TBD...</t>
+      </section>
+      <section title="Example BGP YANG AS_PATH Regular Expressions">
+        <dl newline="true">
+          <dt>64496</dt>
+          <dd>Matches the AS_PATH that contains at least one instance of 64496,
+          regardless of its position.</dd>
+
+          <dt>^64496$</dt>
+          <dd>Matches the AS_PATH that is exactly one AS long, and that AS is
+          64496.</dd>
+
+          <dt>^64496</dt>
+          <dd>Matches the AS_PATH where the left-most (neighbor) AS is
+          64496.</dd>
+
+          <dt>64496$</dt>
+          <dd>Matches the AS_PATH where the right-most (origin) AS is
+          64496.</dd>
+
+          <dt>[64496 64500]</dt>
+          <dd>Matches the AS_PATH where at least one of the ASes is either 64496
+          or 64500.</dd>
+
+          <dt>[^64496 64500]</dt>
+          <dd>Matches the AS_PATH where neither 64496 nor 64500 are present in
+          the AS_PATH.</dd>
+
+          <dt>[64496-64511]</dt>
+          <dd>Matches the AS_PATH where at least one AS number is in the range
+          64496..64511, inclusive.  This matches the documentation AS numbers in
+          <xref target="RFC5398"/>.</dd>
+
+          <dt>64496 64500</dt>
+          <dd>Matches the AS_PATH where 64496 is present and immediately
+          followed by 64500.</dd>
+
+          <dt>64496 | 64500</dt>
+          <dd>Matches the AS_PATH where 64496 or 64500 occur in the
+          AS_PATH.</dd>
+
+          <dt>^ 64496 .{2} ( 64500 |  [64505-64511] )</dt>
+          <dd>Matches the AS_PATH where the left-most (neighbor) AS is 64496, is
+          followed immediately by any two ASes and either 64500 or an AS in the
+          range 64505..64511.</dd>
+        </dl>
+      </section>
     </section>
   </back>
 </rfc>
