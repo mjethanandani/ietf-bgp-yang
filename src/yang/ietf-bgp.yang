@@ -264,9 +264,11 @@ module ietf-bgp {
       description
         "The last NOTIFICATION error for the peer on this
          connection.  If no identity is registered for the
-         Error code / Error subcode, the last-error-code and
-         last-error-subcode will have the information received
-         in the NOTIFICATION PDU.";
+         Error code / Error subcode, this leaf contains the most
+	 applicable identity for the BGP NOTIFICATION base code.
+
+	 The last-error-code and last-error-subcode will always have
+	 the information received in the NOTIFICATION PDU.";
       reference
         "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
          4.5.";
