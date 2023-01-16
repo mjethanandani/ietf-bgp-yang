@@ -25,7 +25,7 @@ module ietf-bgp {
   }
   import iana-bgp-types {
     prefix bt;
-    reference/
+    reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import ietf-inet-types {
