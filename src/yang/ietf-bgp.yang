@@ -529,13 +529,14 @@ module ietf-bgp {
               "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
                8.";
           }
-          leaf-list negotiated-capabilities {
-            type identityref {
-              base bt:bgp-capability;
-            }
+
+          uses bgp-capabilities;
+
+          leaf negotiated-hold-time {
+            type uint16;
             config false;
             description
-              "Negotiated BGP capabilities.";
+              "The negotiated hold-time for the BGP session";
           }
           leaf last-error {
             type binary {

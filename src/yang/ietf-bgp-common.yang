@@ -486,9 +486,7 @@ submodule ietf-bgp-common {
         "Enable or disable the graceful-restart capability.";
     }
     leaf restart-time {
-      type uint16 {
-        range "0..4096";
-      }
+      type bt:graceful-restart-time-type;
       description
         "Estimated time (in seconds) for the local BGP speaker to
          restart a session. This value is advertise in the graceful

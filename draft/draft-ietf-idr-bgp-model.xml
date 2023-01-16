@@ -624,6 +624,9 @@ reference: RFC XXXX
 
       <t>The main module, ietf-bgp.yang, includes the following submodules:
       <ul>
+          <li>ietf-bgp-capabilities - defines the groupings that are common
+          to the BGP Capabilities feature.</li>
+
           <li>ietf-bgp-common - defines the groupings that are common across
           more than one context (where contexts are neighbor, group,
           global).</li>
@@ -702,6 +705,18 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
           </figure>
 	</t>
 	</section>
+	<section title = "ietf-bgp-capabilities submodule">
+	  <t>
+	  <figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-capabilities@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-capabilities@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure>
+	  </t>
+	</section>
 	<section title = "ietf-bgp-common submodule">
 	  <t>
 	  <figure>
@@ -709,7 +724,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
 <CODE BEGINS> file "ietf-bgp-common@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
 <CODE ENDS>
- 
+
         ]]></artwork>
           </figure>
 	  </t>
