@@ -57,7 +57,7 @@ submodule ietf-bgp-common-multiprotocol {
     description
       "Initial Version";
     reference
-      "RFC XXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   grouping mp-afi-safi-graceful-restart-config {
@@ -71,6 +71,8 @@ submodule ietf-bgp-common-multiprotocol {
       description
         "This leaf indicates whether graceful-restart is enabled for
          this AFI-SAFI.";
+      reference
+        "RFC 4724: Graceful Restart Mechanism for BGP.";
     }
   }
 

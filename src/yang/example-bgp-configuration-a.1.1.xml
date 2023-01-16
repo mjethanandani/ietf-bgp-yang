@@ -42,15 +42,15 @@
                 <name>bt:ipv4-unicast</name>
               </afi-safi>
             </afi-safis>
-            <bfd>
-              <enabled>true</enabled>
-              <local-multiplier>2</local-multiplier>
-              <desired-min-tx-interval>3300</desired-min-tx-interval>
-              <required-min-rx-interval>3300</required-min-rx-interval>
-            </bfd>
 	    <transport>
 	      <tcp-mss>1400</tcp-mss>
 	      <mtu-discovery>true</mtu-discovery>
+              <bfd>
+                <enabled>true</enabled>
+                <local-multiplier>2</local-multiplier>
+                <desired-min-tx-interval>3300</desired-min-tx-interval>
+                <required-min-rx-interval>3300</required-min-rx-interval>
+              </bfd>
 	    </transport>
           </neighbor>
         </neighbors>
