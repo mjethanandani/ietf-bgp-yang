@@ -62,7 +62,7 @@ module iana-bgp-notification {
       "Base identity for BGP NOTIFICATION state.";
   }
 
-  identity bgp-notification-message-header-error {
+  identity message-header-error {
     base bgp-notification;
     description
       "All errors detected while processing the Message Header MUST
@@ -74,8 +74,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.1.";
   }
 
-  identity bgp-message-header-unspecific {
-    base bgp-notification-message-header-error;
+  identity message-header-unspecific {
+    base message-header-error;
     description
       "If no appropriate Error Subcode is defined, then a zero
        (Unspecific) value is used for the Error Subcode field.
@@ -85,8 +85,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.5.";
   }
 
-  identity bgp-message-header-connection-not-synchronized {
-    base bgp-notification-message-header-error;
+  identity message-header-connection-not-synchronized {
+    base message-header-error;
     description
       "If the Marker field of the message header is not as expected,
        then a synchronization error has occurred and the Error
@@ -98,8 +98,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.1.";
   }
 
-  identity bgp-message-header-bad-message-length {
-    base bgp-notification-message-header-error;
+  identity message-header-bad-message-length {
+    base message-header-error;
     description
       "If at least one of the following is true:
 
@@ -126,8 +126,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.1.";
   }
 
-  identity bgp-message-header-bad-message-type {
-    base bgp-notification-message-header-error;
+  identity message-header-bad-message-type {
+    base message-header-error;
     description
       "If the Type field of the message header is not recognized,
        then the Error Subcode MUST be set to Bad Message Type.  The
@@ -138,7 +138,7 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.1.";
   }
 
-  identity bgp-notification-open-message-error {
+  identity open-message-error {
     base bgp-notification;
     description
       "All errors detected while processing the OPEN message MUST be
@@ -150,8 +150,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.2.";
   }
 
-  identity bgp-open-message-unspecific {
-    base bgp-notification-open-message-error;
+  identity open-message-unspecific {
+    base open-message-error;
     description
       "From Section 4.5:
        If no appropriate Error Subcode is defined, then a zero
@@ -168,8 +168,8 @@ module iana-bgp-notification {
        RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.2.";
   }
 
-  identity bgp-open-unsupported-version-number {
-    base bgp-notification-open-message-error;
+  identity open-unsupported-version-number {
+    base open-message-error;
     description
       "If the version number in the Version field of the received
        OPEN message is not supported, then the Error Subcode MUST be
@@ -187,8 +187,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.2.";
   }
 
-  identity bgp-open-bad-peer-as {
-    base bgp-notification-open-message-error;
+  identity open-bad-peer-as {
+    base open-message-error;
     description
       "If the Autonomous System field of the OPEN message is
        unacceptable, then the Error Subcode MUST be set to Bad Peer
@@ -200,8 +200,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.2.";
   }
 
-  identity bgp-open-bad-bgp-id {
-    base bgp-notification-open-message-error;
+  identity open-bad-bgp-id {
+    base open-message-error;
     description
       "From RFC 4271, Section 6.2:
        If the BGP Identifier field of the OPEN message is
@@ -226,8 +226,8 @@ module iana-bgp-notification {
        BGP-4., Section 2.2.";
   }
 
-  identity bgp-open-unsupported-optional-parameter {
-    base bgp-notification-open-message-error;
+  identity open-unsupported-optional-parameter {
+    base open-message-error;
     description
       "If one of the Optional Parameters in the OPEN message is not
       recognized, then the Error Subcode MUST be set to Unsupported
@@ -239,8 +239,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.2.";
   }
 
-  identity bgp-open-unacceptable-hold-time {
-    base bgp-notification-open-message-error;
+  identity open-unacceptable-hold-time {
+    base open-message-error;
     description
       "If the Hold Time field of the OPEN message is unacceptable,
        then the Error Subcode MUST be set to Unacceptable Hold Time.
@@ -255,8 +255,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.2.";
   }
 
-  identity bgp-open-unsupported-capability {
-    base bgp-notification-open-message-error;
+  identity open-unsupported-capability {
+    base open-message-error;
     description
       "If a BGP speaker that supports a certain capability determines
        that its peer doesn't support this capability, the speaker MAY
@@ -276,8 +276,8 @@ module iana-bgp-notification {
       "RFC 5492: Capabilities Advertisement with BGP-4, Section 3.";
   }
 
-  identity bgp-open-role-mismatch {
-    base bgp-notification-open-message-error;
+  identity open-role-mismatch {
+    base open-message-error;
     description
       "If the BGP Role Capability is advertised, and one is also
        received from the peer, the Roles MUST correspond to the
@@ -289,7 +289,7 @@ module iana-bgp-notification {
        UPDATE and OPEN Messages, Section 4.2.";
   }
 
-  identity bgp-notification-update-message-error {
+  identity update-message-error {
     base bgp-notification;
     description
       "All errors detected while processing the UPDATE message MUST
@@ -301,8 +301,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-update-unspecific {
-    base bgp-notification-update-message-error;
+  identity update-unspecific {
+    base update-message-error;
     description
       "If no appropriate Error Subcode is defined, then a zero
        (Unspecific) value is used for the Error Subcode field.
@@ -312,8 +312,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.5.";
   }
 
-  identity bgp-update-malformed-attribute-list {
-    base bgp-notification-update-message-error;
+  identity update-malformed-attribute-list {
+    base update-message-error;
     description
       "Error checking of an UPDATE message begins by examining the
        path attributes.  If the Withdrawn Routes Length or Total
@@ -332,8 +332,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-update-unrecognized-well-known-attribute {
-    base bgp-notification-update-message-error;
+  identity update-unrecognized-well-known-attribute {
+    base update-message-error;
     description
       "If any of the well-known mandatory attributes are not
        recognized, then the Error Subcode MUST be set to Unrecognized
@@ -346,8 +346,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-update-missing-well-known-attribute {
-    base bgp-notification-update-message-error;
+  identity update-missing-well-known-attribute {
+    base update-message-error;
     description
       "If any of the well-known mandatory attributes are not present,
        then the Error Subcode MUST be set to Missing Well-known
@@ -360,8 +360,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-update-attribute-flags-error {
-    base bgp-notification-update-message-error;
+  identity update-attribute-flags-error {
+    base update-message-error;
     description
       "If any recognized attribute has Attribute Flags that conflict
        with the Attribute Type Code, then the Error Subcode MUST be
@@ -373,8 +373,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-update-attribute-length-error {
-    base bgp-notification-update-message-error;
+  identity update-attribute-length-error {
+    base update-message-error;
     description
       "If any recognized attribute has an Attribute Length that
        conflicts with the expected length (based on the attribute
@@ -388,8 +388,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-update-invalid-origin-attribute {
-    base bgp-notification-update-message-error;
+  identity update-invalid-origin-attribute {
+    base update-message-error;
     description
       "If the ORIGIN attribute has an undefined value, then the Error
        Sub-code MUST be set to Invalid Origin Attribute.  The Data
@@ -402,8 +402,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-update-invalid-next-hop-attribute {
-    base bgp-notification-update-message-error;
+  identity update-invalid-next-hop-attribute {
+    base update-message-error;
     description
       "If the NEXT_HOP attribute field is syntactically incorrect,
        then the Error Subcode MUST be set to Invalid NEXT_HOP
@@ -418,8 +418,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-open-optional-attribute-error {
-    base bgp-notification-update-message-error;
+  identity open-optional-attribute-error {
+    base update-message-error;
     description
       "If an optional attribute is recognized, then the value of this
        attribute MUST be checked.  If an error is detected, the
@@ -433,8 +433,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-open-invalid-network-field {
-    base bgp-notification-update-message-error;
+  identity open-invalid-network-field {
+    base update-message-error;
     description
       "The NLRI field in the UPDATE message is checked for syntactic
       validity.  If the field is syntactically incorrect, then the
@@ -445,8 +445,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-open-malformed-as-path {
-    base bgp-notification-update-message-error;
+  identity open-malformed-as-path {
+    base update-message-error;
     description
       "The AS_PATH attribute is checked for syntactic correctness.
        If the path is syntactically incorrect, then the Error Subcode
@@ -465,7 +465,7 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.3.";
   }
 
-  identity bgp-notification-hold-timer-expired-error {
+  identity hold-timer-expired-error {
     base bgp-notification;
     description
       "If a system does not receive successive KEEPALIVE, UPDATE,
@@ -479,8 +479,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.5.";
   }
 
-  identity bgp-hold-timer-expired-unspecific {
-    base bgp-notification-hold-timer-expired-error;
+  identity timer-expired-unspecific {
+    base hold-timer-expired-error;
     description
       "If no appropriate Error Subcode is defined, then a zero
        (Unspecific) value is used for the Error Subcode field.
@@ -491,7 +491,7 @@ module iana-bgp-notification {
   }
 
 
-  identity bgp-notification-fsm-error {
+  identity fsm-error {
     base bgp-notification;
     description
       "Any error detected by the BGP Finite State Machine (e.g.,
@@ -506,8 +506,8 @@ module iana-bgp-notification {
        RFC 6608: Subcodes for BGP Finite State Machine Error.";
   }
 
-  identity bgp-fsm-error-unspecified {
-    base bgp-notification-fsm-error;
+  identity fsm-error-unspecified {
+    base fsm-error;
     description
       "If no appropriate Error Subcode is defined, then a zero
        (Unspecific) value is used for the Error Subcode field.
@@ -519,8 +519,8 @@ module iana-bgp-notification {
        3.";
   }
 
-  identity bgp-fsm-error-unexpected-in-opensent {
-    base bgp-notification-fsm-error;
+  identity fsm-error-unexpected-in-opensent {
+    base fsm-error;
     description
       "If a BGP speaker receives an unexpected message (e.g.,
        KEEPALIVE/ UPDATE/ROUTE-REFRESH message) on a session in
@@ -537,8 +537,8 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-fsm-error-unexpected-in-openconfirm {
-    base bgp-notification-fsm-error;
+  identity fsm-error-unexpected-in-openconfirm {
+    base fsm-error;
     description
       "If a BGP speaker receives an unexpected message (e.g.,
        OPEN/UPDATE/ ROUTE-REFRESH message) on a session in
@@ -555,8 +555,8 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-fsm-error-unexpected-in-established {
-    base bgp-notification-fsm-error;
+  identity fsm-error-unexpected-in-established {
+    base fsm-error;
     description
       "If a BGP speaker receives an unexpected message (e.g., OPEN
        message) on a session in Established State, it MUST send to
@@ -573,7 +573,7 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-notification-cease {
+  identity cease {
     base bgp-notification;
     description
       "In the absence of any fatal errors (that are indicated in this
@@ -588,8 +588,8 @@ module iana-bgp-notification {
       "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 6.7.";
   }
 
-  identity bgp-cease-max-prefixes {
-    base bgp-notification-cease;
+  identity cease-max-prefixes {
+    base cease;
     description
       "From RFC 4271, Section 6.7:
        A BGP speaker MAY support the ability to impose a
@@ -625,8 +625,8 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-cease-admin-shutdown {
-    base bgp-notification-cease;
+  identity cease-admin-shutdown {
+    base cease;
     description
       "If a BGP speaker decides to administratively shut down its
        peering with a neighbor, then the speaker SHOULD send a
@@ -640,8 +640,8 @@ module iana-bgp-notification {
        4.";
   }
   
-  identity bgp-cease-peer-deconfigured {
-    base bgp-notification-cease;
+  identity cease-peer-deconfigured {
+    base cease;
     description
       "If a BGP speaker decides to de-configure a peer, then the
        speaker SHOULD send a NOTIFICATION message with the Error Code
@@ -653,8 +653,8 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-cease-admin-reset {
-    base bgp-notification-cease;
+  identity cease-admin-reset {
+    base cease;
     description
       "If a BGP speaker decides to administratively reset the peering
        with a neighbor, then the speaker SHOULD send a NOTIFICATION
@@ -667,8 +667,8 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-cease-connection-rejected {
-    base bgp-notification-cease;
+  identity cease-connection-rejected {
+    base cease;
     description
       "If a BGP speaker decides to disallow a BGP connection (e.g.,
        the peer is not configured locally) after the speaker accepts
@@ -682,8 +682,8 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-cease-other-configuration-change {
-    base bgp-notification-cease;
+  identity cease-other-configuration-change {
+    base cease;
     description
       "If a BGP speaker decides to administratively reset the peering
        with a neighbor due to a configuration change other than the
@@ -698,8 +698,8 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-cease-connection-collision {
-    base bgp-notification-cease;
+  identity cease-connection-collision {
+    base cease;
     description
       "If a BGP speaker decides to send a NOTIFICATION message with
        the Error Code Cease as a result of the collision resolution
@@ -713,8 +713,8 @@ module iana-bgp-notification {
        4.";
   }
   
-  identity bgp-cease-out-of-resources {
-    base bgp-notification-cease;
+  identity cease-out-of-resources {
+    base cease;
     description
       "If a BGP speaker runs out of resources (e.g., memory) and
        decides to reset a session, then the speaker MAY send a
@@ -727,8 +727,8 @@ module iana-bgp-notification {
        4.";
   }
 
-  identity bgp-cease-hard-reset {
-    base bgp-notification-cease;
+  identity cease-hard-reset {
+    base cease;
     description
       "[RFC 8538] defines a new subcode for BGP Cease NOTIFICATION
        messages, called the Hard Reset subcode.  The value of this
@@ -742,8 +742,8 @@ module iana-bgp-notification {
        Restart, Section 3.";
   }
 
-  identity bgp-cease-bfd-down {
-    base bgp-notification-cease;
+  identity cease-bfd-down {
+    base cease;
     description
       "When a BGP session is terminated due to a BFD session going
        into the Down state, the BGP Speaker SHOULD send a
@@ -757,7 +757,7 @@ module iana-bgp-notification {
       2.";
   }
 
-  identity bgp-notification-route-refresh-message-error {
+  identity route-refresh-message-error {
     base bgp-notification;
     description
       "The ROUTE-REFRESH Message Error code was defined in RFC 7313.
@@ -769,8 +769,8 @@ module iana-bgp-notification {
        5.";
   }
 
-  identity bgp-route-refresh-reserved {
-    base bgp-notification-route-refresh-message-error;
+  identity route-refresh-reserved {
+    base route-refresh-message-error;
     description
       "If no appropriate Error Subcode is defined, then a zero
        (Unspecific) value is used for the Error Subcode field.
@@ -782,8 +782,8 @@ module iana-bgp-notification {
        6.";
   }
 
-  identity bgp-route-refresh-invalid-message-length {
-    base bgp-notification-route-refresh-message-error;
+  identity route-refresh-invalid-message-length {
+    base route-refresh-message-error;
     description
       "If the length, excluding the fixed-size message header, of the
        received ROUTE-REFRESH message with Message Subtype 1 and 2 is
