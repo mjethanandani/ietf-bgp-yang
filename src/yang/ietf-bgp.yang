@@ -33,6 +33,9 @@ module ietf-bgp {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
+  include ietf-bgp-capabilities {
+    revision-date YYYY-MM-DD;
+  }
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
   }
@@ -532,12 +535,6 @@ module ietf-bgp {
 
           uses bgp-capabilities;
 
-          leaf negotiated-hold-time {
-            type uint16;
-            config false;
-            description
-              "The negotiated hold-time for the BGP session";
-          }
           leaf last-error {
             type binary {
               length "2";
