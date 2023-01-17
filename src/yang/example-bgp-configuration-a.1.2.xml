@@ -16,10 +16,7 @@
           <end-date-time>2017-02-01T00:00:05Z</end-date-time>
         </accept-lifetime>
       </lifetime>
-      <crypto-algorithm
-        xmlns:tcp=
-	"urn:ietf:params:xml:ns:yang:ietf-tcp">tcp:aes-128
-      </crypto-algorithm>
+      <crypto-algorithm>aes-cmac-prf-128</crypto-algorithm>
       <key-string>
         <keystring>testvector</keystring>
       </key-string>
@@ -44,10 +41,7 @@
           <end-date-time>2017-02-01T00:00:05Z</end-date-time>
         </accept-lifetime>
       </lifetime>
-      <crypto-algorithm
-        xmlns:tcp=
-	"urn:ietf:params:xml:ns:yang:ietf-tcp">tcp:aes-128
-      </crypto-algorithm>
+      <crypto-algorithm>aes-cmac-prf-128</crypto-algorithm>
       <key-string>
         <keystring>testvector</keystring>
       </key-string>
@@ -86,10 +80,14 @@
           <neighbor>
             <remote-address>2001:db8::</remote-address>
             <enabled>true</enabled>
-            <secure-session-enable>true</secure-session-enable>
-            <secure-session>
-              <ao-keychain>bgp-key-chain</ao-keychain>
-            </secure-session>
+            <transport>
+              <secure-session>
+                <enabled>true</enabled>
+                <options>
+                  <ao-keychain>bgp-key-chain</ao-keychain>
+                </options>
+              </secure-session>
+            </transport>
             <peer-as>64497</peer-as>
             <description>"Peer Router B"</description>
             <timers>

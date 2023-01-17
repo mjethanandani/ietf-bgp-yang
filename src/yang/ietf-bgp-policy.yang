@@ -59,7 +59,7 @@ module ietf-bgp-policy {
     description
       "Initial Version";
     reference
-      "RFC XXX, BGP Model for Service Provider Network.";
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   /*
@@ -283,9 +283,13 @@ module ietf-bgp-policy {
           leaf-list member {
             type string;
             description
-              "AS path regular expression -- list of ASes in the
-               set. If any of the regular expressions in the lists
-               are matched, the as-path-set is considered matched.";
+              "AS path regular expression using BGP YANG AS_PATH
+               regular expression syntax.  If any of the regular
+               expressions in the lists are matched, the as-path-set
+               is considered matched.";
+            reference
+              "RFC XXXX: BGP YANG Model for Service Provider
+               Networks, Appendix F.3.";
           }
         }
       }
@@ -339,10 +343,9 @@ module ietf-bgp-policy {
             "BGP LOCAL_PREF value for comparison to the entry in the
              BGP route.";
         }
-
+        
         uses equality-operator;
       }
-
 
       container med {
         description
