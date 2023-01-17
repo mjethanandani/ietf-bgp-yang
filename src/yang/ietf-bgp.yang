@@ -18,6 +18,11 @@ module ietf-bgp {
     reference
       "RFC 9067, A YANG Data Model for Routing Policy.";
   }
+  import iana-bgp-notification {
+    prefix bn;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
   import iana-bgp-types {
     prefix bt;
     reference
@@ -170,6 +175,72 @@ module ietf-bgp {
     uses structure-add-paths;
     uses bgp-neighbor-use-multiple-paths;
     uses rt-pol:apply-policy-group;
+  }
+
+  grouping bgp-errors-common {
+    description
+      "BGP NOTIFICATION state that is common in the sent and received
+       direction.";
+      
+    leaf last-notification {
+      type yang:date-and-time;
+      description
+        "The timestamp indicates the time that a BGP
+         NOTIFICATION message was last handled.";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
+    }
+    leaf last-error {
+      type identityref {
+        base bn:bgp-notification;
+      }
+      description
+        "The last NOTIFICATION error for the peer on this
+         connection.  If no identity is registered for the
+         Error code / Error subcode, this leaf contains the most
+         applicable identity for the BGP NOTIFICATION base code.
+
+         The last-error-code and last-error-subcode will always have
+         the information received in the NOTIFICATION PDU.";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
+    }
+    leaf last-error-code {
+      type uint8;
+      description
+        "The last NOTIFICATION Error code for the peer on
+         this connection.";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
+    }
+    leaf last-error-subcode {
+      type uint8;
+      description
+        "The last NOTIFICATION Error subcode for the peer on
+         this connection.";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
+    }
+  }
+  grouping bgp-errors-common-data {
+    description
+      "BGP NOTIFICATION data state that is common in the sent and
+       received direction.";
+
+    leaf last-error-data {
+      type binary {
+        length "0..65535";
+      }
+      description
+        "Content of the BGP NOTIFICATION PDU's Data field.  This data
+         is NOTIFICATION Error code / Error subcode specific.";
+      reference
+        "RFC 4271, Section 4.5.";
+    }
   }
 
   /*
@@ -534,21 +605,27 @@ module ietf-bgp {
           }
 
           uses bgp-capabilities;
-
-          leaf last-error {
-            type binary {
-              length "2";
-            }
+          
+          container errors {
             config false;
             description
-              "The last error code and subcode seen by this
-               peer on this connection.  If no error has
-               occurred, this field is zero.  Otherwise, the
-               first byte of this two byte OCTET STRING
-               contains the error code, and the second byte
-               contains the subcode.";
-            reference
-              "RFC 4271, Section 4.5.";
+              "Information about BGP NOTIFICATION messages, sent and
+               received for this neighbor.";
+
+            container received {
+              description
+                "BGP NOTIFICATION message state received from this
+                 neighbor.";
+              uses bgp-errors-common;
+              uses bgp-errors-common-data;
+            }
+            container sent {
+              description
+                "BGP NOTIFICATION message state sent to this
+                 neighbor.";
+              uses bgp-errors-common;
+              uses bgp-errors-common-data;
+            }
           }
 
           container statistics {
@@ -735,29 +812,6 @@ module ietf-bgp {
               "IP address of the neighbor that went into established
                state.";
           }
-          leaf last-error {
-            type leafref {
-              path "../../neighbor/last-error";
-            }
-            description
-              "The last error code and subcode seen by this
-               peer on this connection.  If no error has
-               occurred, this field is zero.  Otherwise, the
-               first octet of this two byte OCTET STRING
-               contains the error code, and the second octet
-               contains the subcode.";
-            reference
-              "RFC 4271, Section 4.5.";
-          }
-          leaf session-state {
-            type leafref {
-              path "../../neighbor/session-state";
-            }
-            description
-              "The BGP peer connection state.";
-            reference
-              "RFC 4271, Section 8.2.2.";
-          }
           description
             "The established event is generated
              when the BGP FSM enters the established state.";
@@ -772,29 +826,21 @@ module ietf-bgp {
               "IP address of the neighbor that changed its state from
                established state.";
           }
-          leaf last-error {
-            type leafref {
-              path "../../neighbor/last-error";
-            }
+          container notification-received {
             description
-              "The last error code and subcode seen by this
-               peer on this connection.  If no error has
-               occurred, this field is zero.  Otherwise, the
-               first byte of this two byte OCTET STRING
-               contains the error code, and the second byte
-               contains the subcode.";
-            reference
-              "RFC 4271, Section 4.5.";
+              "If the backwards transition was caused by receiving a
+               BGP NOTIFICATION message, this is the information
+               received in the NOTIFICATION PDU.";
+
+            uses bgp-errors-common;
           }
-          /* This lingers from RFC 4273 and might not be helpful? */
-          leaf session-state {
-            type leafref {
-              path "../../neighbor/session-state";
-            }
+          container notification-sent {
             description
-              "The BGP peer connection state.";
-            reference
-              "RFC 4271, Section 8.2.2.";
+              "If the backwards transition was caused by sending a
+               BGP NOTIFICATION message, this is the information
+               sent in the NOTIFICATION PDU.";
+
+            uses bgp-errors-common;
           }
           description
             "The backward-transition event is
