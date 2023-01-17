@@ -149,7 +149,8 @@ module ietf-bgp-policy {
   }
 
   grouping equality-operator {
-    description "";
+    description
+      "Grouping used for common equality operations in BGP policy.";
     choice operation {
       case eq {
         leaf eq {
@@ -329,7 +330,8 @@ module ietf-bgp-policy {
           "Value and comparison operations for conditions based on
            the value of the BGP LOCAL_PREF.";
         reference
-          "RFC 4271: Section 5.1.5.";
+          "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+           5.1.5.";
 
         leaf value {
           type uint32;
@@ -347,7 +349,8 @@ module ietf-bgp-policy {
           "Value and comparison operations for conditions based on
            the value of the BGP MULTI_EXIT_DISC (MED)";
         reference
-          "RFC 4271: Section 5.1.4.";
+          "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+           5.1.4.";
 
         leaf value {
           type uint32;
@@ -432,7 +435,7 @@ module ietf-bgp-policy {
            The as-path-length SHALL be calculated and SHALL follow
            RFC 4271 rules.";
         reference
-          "RFC 4271: BGP-4.";
+          "RFC 4271: A Border Gateway Protocol 4 (BGP-4).";
 
         leaf as-path-length {
           type uint32;
