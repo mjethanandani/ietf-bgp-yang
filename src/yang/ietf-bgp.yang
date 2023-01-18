@@ -10,13 +10,13 @@ module ietf-bgp {
   import ietf-routing {
     prefix rt;
     reference
-      "RFC 8349, A YANG Data Model for Routing Management
+      "RFC 8349: A YANG Data Model for Routing Management
        (NMDA Version).";
   }
   import ietf-routing-policy {
     prefix rt-pol;
     reference
-      "RFC 9067, A YANG Data Model for Routing Policy.";
+      "RFC 9067: A YANG Data Model for Routing Policy.";
   }
   import iana-bgp-notification {
     prefix bn;
@@ -239,7 +239,8 @@ module ietf-bgp {
         "Content of the BGP NOTIFICATION PDU's Data field.  This data
          is NOTIFICATION Error code / Error subcode specific.";
       reference
-        "RFC 4271, Section 4.5.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
+         4.5.";
     }
   }
 
@@ -426,7 +427,7 @@ module ietf-bgp {
               "The type of peering session associated with this
                neighbor.";
             reference
-              "RFC 4271: A Border Gateway Protocol 4 (BGP-4)
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
                          Section 1.1 for iBGP and eBGP.
                RFC 5065: Autonomous System Configuration
                          for Confederation internal and external.";
@@ -441,7 +442,8 @@ module ietf-bgp {
                session state is in the openconfirm or the
                established state.";
             reference
-              "RFC 4271, Section 4.2, 'BGP Identifier'.";
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+                         Section 4.2, 'BGP Identifier'.";
           }
 
           leaf enabled {
@@ -465,7 +467,8 @@ module ietf-bgp {
                write access to this object without adequate
                authentication.";
             reference
-              "RFC 4271, Section 8.1.2.";
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+               Section 8.1.2.";
           }
 
           uses neighbor-group-config;
@@ -584,7 +587,8 @@ module ietf-bgp {
             description
               "The BGP peer connection state.";
             reference
-              "RFC 4271, Section 8.1.2.";
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+               Section 8.1.2.";
           }
           leaf last-established {
             type yang:date-and-time;
@@ -600,8 +604,8 @@ module ietf-bgp {
                in UTC (assuming the session is in the Established
                state, per the session-state leaf).";
             reference
-              "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
-               8.";
+              "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+               Section 8.";
           }
 
           uses bgp-capabilities;

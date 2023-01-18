@@ -32,7 +32,7 @@ submodule ietf-bgp-common {
   import ietf-bfd-types {
     prefix bfd-types;
     reference
-      "RFC XXXX, YANG Data Model for Bidirectional Forward
+      "RFC 9127: YANG Data Model for Bidirectional Forward
        Detection.";
   }
   import ietf-tcp {
@@ -100,8 +100,8 @@ submodule ietf-bgp-common {
         "Time interval (in seconds) for the ConnectRetryTimer. The
          suggested value for this timer is 120 seconds.";
       reference
-        "RFC 4271, Section 8.2.2.  This is the value used
-         to initialize the 'ConnectRetryTimer'.";
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+         Section 8.2.2.";
     }
     leaf hold-time {
       type uint16 {
@@ -471,7 +471,7 @@ submodule ietf-bgp-common {
       description
         "BFD client configuration.";
       reference
-        "RFC XXXX, YANG Data Model for Bidirectional Forwarding
+        "RFC 9127: YANG Data Model for Bidirectional Forwarding
          Detection.";
     }
   }
