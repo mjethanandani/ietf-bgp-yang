@@ -10,9 +10,6 @@ submodule ietf-bgp-common-multiprotocol {
   import ietf-routing-policy {
     prefix rt-pol;
   }
-  import ietf-routing-types {
-    prefix rt-types;
-  }
   include ietf-bgp-common;
 
   // meta

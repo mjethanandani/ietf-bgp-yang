@@ -13,10 +13,15 @@ module ietf-bgp {
       "RFC 8349, A YANG Data Model for Routing Management
        (NMDA Version).";
   }
+  import ietf-routing-types {
+    prefix rt-types;
+    reference
+      "RFC 8294: Common YANG Data Types for the Routing Area.";
+  }
   import ietf-routing-policy {
     prefix rt-pol;
     reference
-      "RFC 9067, A YANG Data Model for Routing Policy.";
+      "RFC 9067: A YANG Data Model for Routing Policy.";
   }
   import iana-bgp-types {
     prefix bt;
@@ -181,6 +186,8 @@ module ietf-bgp {
   }
 
   grouping prefix-limit-state-common {
+    description
+      "Common operational state for prefix-limit feature.";
     leaf prefix-limit-exceeded {
       type boolean;
       config false;
