@@ -7,7 +7,7 @@ submodule ietf-bgp-common-structure {
   import ietf-routing-policy {
     prefix rt-pol;
     reference
-      "RFC ZZZZ, A YANG Data Model for Routing Policy Management";
+      "RFC 9067: A YANG Data Model for Routing Policy Management.";
   }
   import iana-bgp-types {
     prefix bt;

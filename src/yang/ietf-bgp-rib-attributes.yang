@@ -100,7 +100,7 @@ submodule ietf-bgp-rib-attributes {
              Set in the high-order bit of the BGP attribute
              flags octet.";
           reference
-            "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4).";
         }
 
         leaf transitive {
@@ -112,7 +112,7 @@ submodule ietf-bgp-rib-attributes {
              set to true. Set in the second high-order bit of the BGP
              attribute flags octet.";
           reference
-            "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4).";
         }
 
         leaf partial {
@@ -125,7 +125,7 @@ submodule ietf-bgp-rib-attributes {
              the partial flag must be set to false. Set in the third
              high-order bit of the BGP attribute flags octet.";
           reference
-            "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4).";
         }
 
         leaf extended {
@@ -136,7 +136,7 @@ submodule ietf-bgp-rib-attributes {
              the fourth high-order bit of the BGP attribute flags
              octet.";
           reference
-            "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4).";
         }
 
         leaf attr-type {
@@ -144,7 +144,7 @@ submodule ietf-bgp-rib-attributes {
           description
             "1-octet value encoding the attribute type code";
           reference
-            "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4).";
         }
 
         leaf attr-len {
@@ -155,7 +155,7 @@ submodule ietf-bgp-rib-attributes {
              Length attribute flag is set, the length field is 2
              octets, otherwise it is 1 octet";
           reference
-            "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4).";
         }
 
         leaf attr-value {
@@ -168,7 +168,7 @@ submodule ietf-bgp-rib-attributes {
              of the attribute value data is 2^16-1 per the max value
              of the attr-len field (2 octets).";
           reference
-            "RFC 4271 - A Border Gateway Protocol 4 (BGP-4)";
+            "RFC 4271: A Border Gateway Protocol 4 (BGP-4).";
         }
       }
     }
@@ -191,7 +191,7 @@ submodule ietf-bgp-rib-attributes {
          should be the value sent to a neighbor when add-paths is
          used, i.e., the capability has been negotiated.";
       reference
-        "RFC 7911: Advertisement of Multiple Paths in BGP";
+        "RFC 7911: Advertisement of Multiple Paths in BGP.";
     }
   }
 
@@ -221,7 +221,7 @@ submodule ietf-bgp-rib-attributes {
          type or unknown, represented by an 8-octet value
          formatted according to RFC 4360.";
       reference
-        "RFC 4360 - BGP Extended Communities Attribute";
+        "RFC 4360: BGP Extended Communities Attribute.";
     }
 
     leaf-list ext-community-raw {

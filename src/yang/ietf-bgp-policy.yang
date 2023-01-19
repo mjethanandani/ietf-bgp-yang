@@ -212,8 +212,8 @@ module ietf-bgp-policy {
                expressions in the lists are matched, the as-path-set
                is considered matched.";
             reference
-              "RFC XXXX: BGP YANG Model for Service Provider
-               Networks, Appendix F.3.";
+              "RFC XXXX: YANG Model for Border Gateway Protocol
+               (BGP-4), Appendix F.3.";
           }
         }
       }
