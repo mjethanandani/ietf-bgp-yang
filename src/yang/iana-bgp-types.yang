@@ -82,10 +82,10 @@ module iana-bgp-types {
     description
       "Support for BFD detection of BGP neighbor reachability.";
     reference
-      "RFC 5880, Bidirectional Forward Detection (BFD),
-       RFC 5881, Bidirectional Forward Detection for IPv4 and IPv6
+      "RFC 5880: Bidirectional Forward Detection (BFD),
+       RFC 5881: Bidirectional Forward Detection for IPv4 and IPv6
                  (Single Hop),
-       RFC 5883, Bidirectional Forwarding Detection (BFD) for
+       RFC 5883: Bidirectional Forwarding Detection (BFD) for
                  Multihop Paths.";
   }
 
@@ -130,7 +130,7 @@ module iana-bgp-types {
     description
       "BGP Time To Live (TTL) security check support.";
     reference
-      "RFC 5082, The Generalized TTL Security Mechanism (GTSM).";
+      "RFC 5082: The Generalized TTL Security Mechanism (GTSM).";
   }
 
   /*
@@ -191,7 +191,7 @@ module iana-bgp-types {
     description
       "Base identity type for AFI,SAFI tuples for BGP-4";
     reference
-      "RFC4760: Multiprotocol Extentions for BGP-4";
+      "RFC4760: Multiprotocol Extentions for BGP-4.";
   }
 
   identity ipv4-unicast {
@@ -199,7 +199,7 @@ module iana-bgp-types {
     description
       "IPv4 unicast (AFI,SAFI = 1,1)";
     reference
-      "RFC4760: Multiprotocol Extentions for BGP-4";
+      "RFC4760: Multiprotocol Extentions for BGP-4.";
   }
 
   identity ipv6-unicast {
@@ -207,7 +207,7 @@ module iana-bgp-types {
     description
       "IPv6 unicast (AFI,SAFI = 2,1)";
     reference
-      "RFC4760: Multiprotocol Extentions for BGP-4";
+      "RFC4760: Multiprotocol Extentions for BGP-4.";
   }
 
   identity ipv4-labeled-unicast {
@@ -361,7 +361,7 @@ module iana-bgp-types {
       "Ordered set of Member Autonomous Systems in the local
        confederation that the UPDATE message has traversed.";
     reference
-      "RFC 5065, Autonomous System Configuration for BGP.";
+      "RFC 5065: Autonomous System Configuration for BGP.";
   }
 
   identity as-confed-set {
@@ -370,7 +370,7 @@ module iana-bgp-types {
       "Unordered set of Member Autonomous Systems in the local
        confederation that the UPDATE message has traversed.";
     reference
-      "RFC 5065, Autonomous System Configuration for BGP.";
+      "RFC 5065: Autonomous System Configuration for BGP.";
   }
 
   identity send-community-feature {
@@ -447,7 +447,7 @@ module iana-bgp-types {
     description
       "Type definition for standard community attributes.";
     reference
-      "RFC 1997 - BGP Communities Attribute";
+      "RFC 1997: BGP Communities Attribute.";
   }
 
   typedef bgp-ext-community-type {
@@ -505,7 +505,7 @@ module iana-bgp-types {
        is followed by 8 bytes of octet string to support
        new and experimental type definitions.";
     reference
-      "RFC 4360 - BGP Extended Communities Attribute";
+      "RFC 4360: BGP Extended Communities Attribute.";
   }
 
   typedef bgp-community-regexp-type {
@@ -533,7 +533,7 @@ module iana-bgp-types {
     description
       "Type definition for standard BGP origin attribute";
     reference
-      "RFC 4271 - A Border Gateway Protocol 4 (BGP-4), Sec 4.3";
+      "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Sec 4.3.";
   }
 
   typedef bgp-large-community-type {
@@ -575,8 +575,8 @@ module iana-bgp-types {
       "Labels a peer or peer group as explicitly internal,
        external, or the related confederation type.";
     reference
-      "RFC 4271 - A Border Gateway Protocol 4 (BGP-4), Sec 1.1.
-       RFC 5065, Autonomous System Configuration for BGP.";
+      "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Sec 1.1.
+       RFC 5065: Autonomous System Configuration for BGP.";
   }
 
   identity remove-private-as-option {
