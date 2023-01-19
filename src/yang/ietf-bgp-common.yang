@@ -94,7 +94,7 @@ submodule ietf-bgp-common {
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
-  grouping neighbor-group-timers-config {
+  grouping neighbor-group-timers {
     description
       "Config parameters related to timers associated with the BGP
        peer";
@@ -352,7 +352,7 @@ submodule ietf-bgp-common {
     container timers {
       description
         "Timers related to a BGP neighbor";
-      uses neighbor-group-timers-config;
+      uses neighbor-group-timers;
     }
 
     container transport {
