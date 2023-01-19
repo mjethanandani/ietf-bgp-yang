@@ -146,35 +146,6 @@ module ietf-bgp {
     description
       "Neighbor and Peer Group configuration that is common.";
 
-    container timers {
-      description
-        "Timers related to a BGP neighbor";
-      uses neighbor-group-timers-config;
-    }
-
-    container transport {
-      description
-        "Transport session parameters for the BGP neighbor";
-      uses neighbor-group-transport-config;
-    }
-
-    leaf treat-as-withdraw {
-      type boolean;
-      default "false";
-      description
-        "Specify whether erroneous UPDATE messages for which the NLRI
-         can be extracted are treated as though the NLRI is withdrawn
-         - avoiding session reset";
-      reference
-        "RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
-    }
-
-    uses structure-neighbor-group-logging-options;
-    uses structure-neighbor-group-route-reflector;
-    uses structure-neighbor-group-as-path-options;
-    uses structure-add-paths;
-    uses bgp-neighbor-use-multiple-paths;
-    uses rt-pol:apply-policy-group;
   }
 
   grouping bgp-errors-common {
@@ -472,6 +443,7 @@ module ietf-bgp {
           }
 
           uses neighbor-group-config;
+
           container graceful-restart {
             if-feature "bt:graceful-restart";
             description
@@ -538,7 +510,6 @@ module ietf-bgp {
                  graceful restart with the peer";
             }
           }
-          uses neighbor-and-peer-group-common;
 
           container afi-safis {
             description
@@ -948,8 +919,6 @@ module ietf-bgp {
               "RFC 4724: Graceful Restart Mechanism for BGP.";
             uses graceful-restart-config;
           }
-
-          uses neighbor-and-peer-group-common;
 
           container afi-safis {
             description

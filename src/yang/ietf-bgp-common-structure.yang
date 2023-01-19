@@ -14,8 +14,6 @@ submodule ietf-bgp-common-structure {
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
-  include ietf-bgp-common-multiprotocol;
-  include ietf-bgp-common;
 
   // meta
 

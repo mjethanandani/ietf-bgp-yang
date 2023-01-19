@@ -24,6 +24,11 @@ submodule ietf-bgp-common {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
+  import ietf-routing-policy {
+    prefix rt-pol;
+    reference
+      "RFC 9067: A YANG Data Model for Routing Policy.";
+  }
   import ietf-yang-types {
     prefix yang;
     reference
@@ -40,6 +45,9 @@ submodule ietf-bgp-common {
     reference
       "I-D.ietf-tcpm-yang-tcp: Transmission Control Protocol (TCP)
        YANG Model.";
+  }
+  include ietf-bgp-common-structure {
+    revision-date YYYY-MM-DD;
   }
 
   organization
@@ -196,6 +204,36 @@ submodule ietf-bgp-common {
     }
   }
 
+  grouping bgp-neighbor-use-multiple-paths {
+    description
+      "Multi-path configuration and state applicable to a BGP
+       neighbor";
+    container use-multiple-paths {
+      description
+        "Parameters related to the use of multiple-paths for the same
+         NLRI when they are received only from this neighbor";
+      leaf enabled {
+        type boolean;
+        default "false";
+        description
+          "Whether the use of multiple paths for the same NLRI is
+           enabled for the neighbor.";
+      }
+      container ebgp {
+        description
+          "Multi-path configuration for eBGP";
+        leaf allow-multiple-as {
+          type boolean;
+          default "false";
+          description
+            "Allow multi-path to use paths from different neighboring
+             ASes. The default is to only consider multiple paths
+             from the same neighboring AS.";
+        }
+      }
+    }
+  }
+
   grouping neighbor-group-config {
     description
       "Neighbor level configuration items.";
@@ -310,6 +348,36 @@ submodule ietf-bgp-common {
         "An optional textual description (intended primarily for use
          with a peer or group";
     }
+
+    container timers {
+      description
+        "Timers related to a BGP neighbor";
+      uses neighbor-group-timers-config;
+    }
+
+    container transport {
+      description
+        "Transport session parameters for the BGP neighbor";
+      uses neighbor-group-transport-config;
+    }
+
+    leaf treat-as-withdraw {
+      type boolean;
+      default "false";
+      description
+        "Specify whether erroneous UPDATE messages for which the NLRI
+         can be extracted are treated as though the NLRI is withdrawn
+         - avoiding session reset";
+      reference
+        "RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
+    }
+
+    uses structure-neighbor-group-logging-options;
+    uses structure-neighbor-group-route-reflector;
+    uses structure-neighbor-group-as-path-options;
+    uses structure-add-paths;
+    uses bgp-neighbor-use-multiple-paths;
+    uses rt-pol:apply-policy-group;
   }
 
   grouping neighbor-group-transport-config {
