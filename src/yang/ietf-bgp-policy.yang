@@ -191,6 +191,33 @@ module ietf-bgp-policy {
     container bgp-defined-sets {
       description
         "BGP-related set definitions for policy match conditions.";
+      container as-path-sets {
+        description
+          "Enclosing container for list of define AS path sets.";
+        list as-path-set {
+          key "name";
+          description
+            "List of defined AS path sets.";
+          leaf name {
+            type string;
+            description
+              "Name of the AS path set -- this is used to reference
+               the set in match conditions.";
+          }
+          leaf-list member {
+            type string;
+            description
+              "AS path regular expression using BGP YANG AS_PATH
+               regular expression syntax.  If any of the regular
+               expressions in the lists are matched, the as-path-set
+               is considered matched.";
+            reference
+              "RFC XXXX: YANG Model for Border Gateway Protocol
+               (BGP-4), Appendix F.3.";
+          }
+        }
+      }
+
       container community-sets {
         description
           "Enclosing container for list of defined BGP community
@@ -263,33 +290,6 @@ module ietf-bgp-policy {
             }
             description
               "Members of the large community set.";
-          }
-        }
-      }
-
-      container as-path-sets {
-        description
-          "Enclosing container for list of define AS path sets.";
-        list as-path-set {
-          key "name";
-          description
-            "List of defined AS path sets.";
-          leaf name {
-            type string;
-            description
-              "Name of the AS path set -- this is used to reference
-               the set in match conditions.";
-          }
-          leaf-list member {
-            type string;
-            description
-              "AS path regular expression using BGP YANG AS_PATH
-               regular expression syntax.  If any of the regular
-               expressions in the lists are matched, the as-path-set
-               is considered matched.";
-            reference
-              "RFC XXXX: YANG Model for Border Gateway Protocol
-               (BGP-4), Appendix F.3.";
           }
         }
       }
