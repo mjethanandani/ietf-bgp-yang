@@ -771,6 +771,38 @@ module iana-bgp-types {
       }
 
       type string {
+        pattern 'color:'
+              + '(((co=[01][01],?):)|'
+              + '((6[0-5][0-5][0-3][0-5]|[1-5][0-9]{4}|'
+              + '[1-9][0-9]{1,4}|[0-9]):))'
+              + '(4[0-2][0-9][0-4][0-9][0-6][0-7][0-2][0-9][0-6]|'
+              + '[1-3][0-9]{9}|[1-9]([0-9]{1,7})?[0-9]|[0-9])';
+        /*
+         * description
+         *   "Type 0x03, Sub-Type 0x0b: Color
+         *    color:(16-bit decimalized flags):(color)
+         *    color:co=(flag bits):(color) - color-only
+         *    16-bit decimalized flags [01][01]
+         *    4 octets color.
+         *
+         *    When the Flags field is zero, or there are unknown Flag
+         *    values, the flags are rendered as a decimal value.
+         *    When all flags are known, they are rendered with their
+         *    flag name (e.g. co) as comma-separated sets.  The final
+         *    flag SHOULD NOT include a trailing comma.  The order of
+         *    flag names MUST be in the order of the assigned bits to
+         *    enable matching via regular expressions.
+         *
+         *    New flags may be allocated in futured RFCs.";
+         * reference
+         *   "RFC 9012: The BGP Tunnel Encapsulation Attribute,
+         *    Section 4.3,
+         *    draft-ietf-idr-segment-routing-te-policy: Advertising
+         *    Segment Routing Policies in BGP, Section 3.";
+         */
+      }
+
+      type string {
         // raw with 8 octets
         pattern 'raw:([0-9A-F][0-9A-F]:){7}[0-9A-F][0-9A-F]';
       }
