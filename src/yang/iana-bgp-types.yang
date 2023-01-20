@@ -669,7 +669,7 @@ module iana-bgp-types {
               + '[1-3][0-9]{9}|[1-9]([0-9]{1,7})?[0-9]|[0-9])';
         /*
          * description
-         *   "Type 0, Sub-Type 2: Route-Target
+         *   "Type 0x00, Sub-Type 0x02: Route-Target
          *    route-target:(ASN):(local-admin)
          *    2 octets global administrator and 4 octets local
          *    administrator.";
@@ -688,7 +688,7 @@ module iana-bgp-types {
               + '[1-9][0-9]{1,4}|[0-9])';
         /*
          * description
-         *   "Type 1, Sub-Type 2: Route-Target
+         *   "Type 0x01, Sub-Type 0x02: Route-Target
          *    route-target:(IPv4):(local-admin)
          *    4 octets IP address global administrator and 2 octets
          *    local administrator.";
@@ -706,7 +706,7 @@ module iana-bgp-types {
               + '[1-9][0-9]{1,4}|[0-9])';
         /*
          * description
-         *   "Type 2, Sub-Type 2: Route-Target
+         *   "Type 0x02, Sub-Type 0x02: Route-Target
          *    route-target:(ASN):(local-admin)
          *    4 octets global administrator and 2 octets local
          *    administrator.";
@@ -723,7 +723,7 @@ module iana-bgp-types {
               + '[1-3][0-9]{9}|[1-9]([0-9]{1,7})?[0-9]|[0-9])';
         /*
          * description
-         *   "Type 1, Sub-Type 3: Route-Origin
+         *   "Type 0x01, Sub-Type 0x03: Route-Origin
          *    route-target:(ASN):(local-admin)
          *    2 octets global administrator and 4 octets local
          *    administrator.";
@@ -742,7 +742,7 @@ module iana-bgp-types {
               + '[1-9][0-9]{1,4}|[0-9])';
         /*
          * description
-         *   "Type 1, Sub-Type 3: Route-Target
+         *   "Type 0x01, Sub-Type 0x03: Route-Target
          *    route-target:(IPv4):(local-admin)
          *    4 octets IP address global administrator and 2 octets
          *    local administrator.";
@@ -760,7 +760,7 @@ module iana-bgp-types {
               + '[1-9][0-9]{1,4}|[0-9])';
         /*
          * description
-         *   "Type 2, Sub-Type 3: Route-Origin
+         *   "Type 0x02, Sub-Type 0x03: Route-Origin
          *    route-origin:(ASN):(local-admin)
          *    4 octets global administrator and 2 octets local
          *    administrator.";
