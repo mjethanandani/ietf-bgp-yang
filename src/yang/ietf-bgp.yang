@@ -638,7 +638,7 @@ module ietf-bgp {
               "Statistics per neighbor.";
 
             leaf established-transitions {
-              type yang:zero-based-counter64;
+              type yang:zero-based-counter32;
               description
                 "Number of transitions to the Established state for
                  the neighbor session. This value is analogous to the
@@ -655,7 +655,7 @@ module ietf-bgp {
                 "Counters for BGP messages sent and received from the
                  neighbor";
               leaf total-received {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 description
                   "Total number of BGP messages received from this
                    neighbor";
@@ -664,7 +664,7 @@ module ietf-bgp {
                    BGP-4, bgpPeerInTotalMessages.";
               }
               leaf total-sent {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 description
                   "Total number of BGP messages sent do this
                    neighbor";
@@ -673,7 +673,7 @@ module ietf-bgp {
                    BGP-4, bgpPeerOutTotalMessages.";
               }
               leaf updates-received {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 description
                   "Number of BGP UPDATE messages received from this
                    neighbor.";
@@ -682,7 +682,7 @@ module ietf-bgp {
                    BGP-4, bgpPeerInUpdates.";
               }
               leaf updates-sent {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 description
                   "Number of BGP UPDATE messages sent to this
                    neighbor";
@@ -691,7 +691,7 @@ module ietf-bgp {
                    BGP-4, bgpPeerOutUpdates.";
               }
               leaf erroneous-updates-withdrawn {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 config false;
                 description
                   "The number of BGP UPDATE messages for which the
@@ -702,7 +702,7 @@ module ietf-bgp {
                    Messages, Section 2.";
               }
               leaf erroneous-updates-attribute-discarded {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 config false;
                 description
                   "The number of BGP UPDATE messages for which the
@@ -727,7 +727,7 @@ module ietf-bgp {
                    Established state.";
               }
               leaf notifications-received {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 description
                   "Number of BGP NOTIFICATION messages indicating an
                    error condition has occurred exchanged received
@@ -737,7 +737,7 @@ module ietf-bgp {
                    Section 4.5.";
               }
               leaf notifications-sent {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 description
                   "Number of BGP NOTIFICATION messages indicating an
                    error condition has occurred exchanged sent to
@@ -747,7 +747,7 @@ module ietf-bgp {
                    Section 4.5.";
               }
               leaf route-refreshes-received {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 description
                   "Number of BGP ROUTE-REFRESH messages received from
                    this peer.";
@@ -755,7 +755,7 @@ module ietf-bgp {
                   "RFC 2918: Route Refresh Capability for BGP-4.";
               }
               leaf route-refreshes-sent {
-                type yang:zero-based-counter64;
+                type yang:zero-based-counter32;
                 description
                   "Number of BGP ROUTE-REFRESH messages sent to
                    this peer.";
@@ -768,13 +768,13 @@ module ietf-bgp {
                 "Counters related to queued messages associated with
                  the BGP neighbor";
               leaf input {
-                type yang:counter32;
+                type yang:gauge32;
                 description
                   "The number of messages received from the peer
                    currently queued";
               }
               leaf output {
-                type yang:counter32;
+                type yang:gauge32;
                 description
                   "The number of messages queued to be sent to the
                    peer";
