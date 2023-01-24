@@ -245,6 +245,55 @@ module ietf-bgp {
     }
   }
 
+  grouping bgp-encapsulated-errors-common {
+    description
+      "BGP NOTIFICATION state that is common in the sent and received
+       direction that has been encapsulated in a CEASE/HARD RESET
+       NOTIFICATION.
+
+       Note that these leaves are only present when carrying the RFC
+       8538 encapsulated NOTIFICATION state. In this case,
+       the last-error-data leaf will carry the encapsulated Data.";
+      
+    leaf last-encapsulated-error {
+      type identityref {
+        base bn:bgp-notification;
+      }
+      description
+        "The last RFC 8538 encapsulated NOTIFICATION error for the
+         peer on this connection.  If no identity is registered for
+         the Error code / Error subcode, this leaf contains the most
+         applicable identity for the BGP NOTIFICATION base code.
+
+         The last-encapsulated-error-code and
+         last-encapsulated-error-subcode will always have the
+         encapsulated information received in the CEASE/HARD RESET
+         NOTIFICATION PDU's encapsulated ErrCode and Subcode
+         fields.";
+      reference
+        "RFC 8538: Notification Message Support for BGP Graceful
+         Restart, Section 3.1.";
+    }
+    leaf last-encapsulated-error-code {
+      type uint8;
+      description
+        "The last RFC 8538 encapsulated NOTIFICATION Error code for
+         the peer on this connection.";
+      reference
+        "RFC 8538: Notification Message Support for BGP Graceful
+         Restart, Section 3.1.";
+    }
+    leaf last-encapsulated-error-subcode {
+      type uint8;
+      description
+        "The last RFC 8538 encapsulated NOTIFICATION Error subcode
+         for the peer on this connection.";
+      reference
+        "RFC 8538: Notification Message Support for BGP Graceful
+         Restart, Section 3.1.";
+    }
+  }
+
   /*
    * Containers
    */
@@ -630,6 +679,7 @@ module ietf-bgp {
                 "BGP NOTIFICATION message state received from this
                  neighbor.";
               uses bgp-errors-common;
+              uses bgp-encapsulated-errors-common;
               uses bgp-errors-common-data;
             }
             container sent {
@@ -637,6 +687,7 @@ module ietf-bgp {
                 "BGP NOTIFICATION message state sent to this
                  neighbor.";
               uses bgp-errors-common;
+              uses bgp-encapsulated-errors-common;
               uses bgp-errors-common-data;
             }
           }
@@ -846,6 +897,7 @@ module ietf-bgp {
                received in the NOTIFICATION PDU.";
 
             uses bgp-errors-common;
+            uses bgp-encapsulated-errors-common;
           }
           container notification-sent {
             description
@@ -854,6 +906,7 @@ module ietf-bgp {
                sent in the NOTIFICATION PDU.";
 
             uses bgp-errors-common;
+            uses bgp-encapsulated-errors-common;
           }
           description
             "The backward-transition event is
