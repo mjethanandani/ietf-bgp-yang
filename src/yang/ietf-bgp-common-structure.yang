@@ -14,6 +14,11 @@ submodule ietf-bgp-common-structure {
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
+  import ietf-inet-types {
+    prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types.";
+  }
   include ietf-bgp-common-multiprotocol;
   include ietf-bgp-common;
 
@@ -209,6 +214,32 @@ submodule ietf-bgp-common-structure {
         description
           "A reference to a routing policy which can be used to
            restrict the prefixes for which add-paths is enabled";
+      }
+    }
+  }
+
+  grouping structure-dynamic-peers {
+    description
+      "Structural grouping to contain dyamic BGP peers. Dynamic
+       peers are configured from a list of IP prefixes matching the
+       IP source address of the dynamic peer.";
+
+    container dynamic-peers {
+      description
+        "Configuration and operational state for dynamically
+         configured peers.";
+
+      list dynamic-peer-list {
+        key "prefix";
+        description
+          "List of peers by IP prefix for this configuration scope
+           that are dynamically configured.";
+
+        leaf prefix {
+          type inet:ip-prefix;
+          description
+            "Prefix for dynamic peer at this configuration scope.";
+        }
       }
     }
   }
