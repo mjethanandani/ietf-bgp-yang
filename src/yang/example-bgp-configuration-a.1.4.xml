@@ -111,7 +111,8 @@
 
 <routing
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing"
-    xmlns:bt="urn:ietf:params:xml:ns:yang:iana-bgp-types">
+    xmlns:bt="urn:ietf:params:xml:ns:yang:iana-bgp-types"
+    xmlns:bct="urn:ietf:params:xml:ns:yang:iana-bgp-community-types">
   <control-plane-protocols>
     <control-plane-protocol>
       <type
@@ -136,7 +137,7 @@
                 <name>bt:ipv4-unicast</name>
               </afi-safi>
             </afi-safis>
-            <send-community>bt:standard</send-community>
+            <send-community>bct:standard</send-community>
             <apply-policy>
               <export-policy>TO_R2</export-policy>
               <default-export-policy>accept-route</default-export-policy>

@@ -9,6 +9,11 @@ submodule ietf-bgp-common {
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
+  import iana-bgp-community-types {
+    prefix bct;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
   import ietf-interfaces {
     prefix if;
     reference
@@ -296,9 +301,9 @@ submodule ietf-bgp-common {
          dampening.";
     }
     leaf-list send-community {
-      if-feature "bt:send-communities";
+      if-feature "bct:send-communities";
       type identityref {
-        base "bt:send-community-feature";
+        base "bct:send-community-feature";
       }
       description
         "When supported, this tells the router to propagate any

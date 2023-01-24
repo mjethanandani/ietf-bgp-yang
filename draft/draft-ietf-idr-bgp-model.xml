@@ -587,6 +587,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 URI: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
 URI: urn:ietf:params:xml:ns:yang:iana-bgp-notification
 URI: urn:ietf:params:xml:ns:yang:iana-bgp-types
+URI: urn:ietf:params:xml:ns:yang:iana-bgp-community-types
 ]]></artwork>
           </figure></t>
 
@@ -616,6 +617,11 @@ reference: RFC XXXX
 
 name: iana-bgp-types
 namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
+prefix: bt
+reference: RFC XXXX
+
+name: iana-bgp-community-types
+namespace: urn:ietf:params:xml:ns:yang:iana-bgp-community-types
 prefix: bt
 reference: RFC XXXX
 ]]></artwork>
@@ -662,6 +668,9 @@ reference: RFC XXXX
 
           <li>iana-bgp-types - common type and identity definitions for BGP,
           including BGP policy.</li>
+
+          <li>iana-bgp-community-types - common type and identity definitions
+          for BGP Communities.</li>
 
           <li>ietf-bgp-policy - BGP-specific policy data definitions for use
           with <xref target="RFC9067"/> (described in more
@@ -792,6 +801,17 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/iana-bgp-notification@YYYY-MM-DD.yang)
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-types@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/iana-bgp-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="BGP Community types module">
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-community-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>

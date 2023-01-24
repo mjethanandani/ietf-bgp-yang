@@ -19,7 +19,9 @@ push:
 	docker push $(image):$(VER)
 
 debug:
-	docker run -it $(image) bash
+	docker run \
+	--mount type=bind,src="$(PWD)",dst=/app \
+        -it $(image) bash
 
 clean:
 	make -C draft clean
