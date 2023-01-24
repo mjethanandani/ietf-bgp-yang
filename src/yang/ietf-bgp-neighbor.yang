@@ -121,17 +121,17 @@ submodule ietf-bgp-neighbor {
         description
           "Prefix counters for the AFI/SAFI in this BGP session";
         leaf received {
-          type yang:counter32;
+          type yang:zero-based-counter32;
           description
             "The number of prefixes received from the neighbor";
         }
         leaf sent {
-          type yang:counter32;
+          type yang:zero-based-counter32;
           description
             "The number of prefixes advertised to the neighbor";
         }
         leaf installed {
-          type yang:counter32;
+          type yang:gauge32;
           description
             "The number of advertised prefixes installed in the
              Loc-RIB";
