@@ -479,6 +479,26 @@ module ietf-bgp-policy {
           description
             "References a defined extended community set.";
         }
+        leaf ext-community-match-kind {
+          type enumeration {
+            enum ext-community {
+              description
+                "Perform the match against the ext-community RIB
+                 attribute.";
+            }
+            enum ext-community-raw {
+              description
+                "Perform the match against the ext-community-raw RIB
+                 attribute.";
+            }
+          }
+          default ext-community;
+          description
+            "Extended communities may be matched by the ext-community
+             RIB attribute, or the ext-community-raw RIB attribute.
+             This leaf selects which leaf to perform the match
+             operation against.";
+        }
         uses rt-pol:match-set-options-group;
       }
 
