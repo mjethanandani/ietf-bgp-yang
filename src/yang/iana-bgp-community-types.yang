@@ -176,7 +176,21 @@ module iana-bgp-community-types {
     type string;
     description
       "Type definition for communities specified as regular
-       expression patterns";
+       expression patterns.
+
+       A compliant implementation of this type MUST accept a POSIX.2
+       Extended Regular Expression excluding the following features:
+       - character class expressions (Section 9.3.5)
+       - collating symbols (Section 9.3.5)
+       - equivalence classes (Section 9.3.5)
+       - back-reference expressions (Section 9.3.6)
+
+       Implementations MAY accept additional forms of regular
+       expressions as long as the minimally compliant form documented
+       above is accepted.";
+    reference
+      "IEEE Std 1003.1-2017: The Open Group Base Specifications Issue
+       7, 2018 edition.";
   }
 
   typedef bgp-std-community-type {
