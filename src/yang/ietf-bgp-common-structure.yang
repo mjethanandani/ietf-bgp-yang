@@ -20,7 +20,6 @@ submodule ietf-bgp-common-structure {
       "RFC 6991: Common YANG Data Types.";
   }
   include ietf-bgp-common-multiprotocol;
-  include ietf-bgp-common;
 
   // meta
 
