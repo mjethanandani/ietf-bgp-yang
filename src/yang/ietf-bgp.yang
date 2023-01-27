@@ -573,8 +573,6 @@ module ietf-bgp {
             uses prefix-limit-state-common;
           }
 
-          uses neighbor-and-peer-group-common;
-
           container afi-safis {
             description
               "Per-address-family configuration parameters associated
@@ -995,8 +993,6 @@ module ietf-bgp {
 
             uses prefix-limit-config-common;
           }
-
-          uses neighbor-and-peer-group-common;
 
           container afi-safis {
             description
