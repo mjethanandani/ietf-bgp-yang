@@ -18,6 +18,9 @@ module ietf-bgp-policy {
   import iana-bgp-types {
     prefix bt;
   }
+  import iana-bgp-community-types {
+    prefix bct;
+  }
 
   organization
     "IETF IDR Working Group";
@@ -234,9 +237,9 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              type bt:bgp-well-known-community-type;
-              type bt:bgp-std-community-type;
-              type bt:bgp-community-regexp-type;
+              type bct:bgp-well-known-community-type;
+              type bct:bgp-std-community-type;
+              type bct:bgp-community-regexp-type;
             }
             description
               "Members of the community set";
@@ -260,8 +263,8 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              type bt:bgp-ext-community-type;
-              type bt:bgp-community-regexp-type;
+              type bct:bgp-ext-community-type;
+              type bct:bgp-community-regexp-type;
             }
             description
               "Members of the extended community set.";
@@ -285,8 +288,8 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              type bt:bgp-large-community-type;
-              type bt:bgp-community-regexp-type;
+              type bct:bgp-large-community-type;
+              type bct:bgp-community-regexp-type;
             }
             description
               "Members of the large community set.";
@@ -624,8 +627,8 @@ module ietf-bgp-policy {
           case inline {
             leaf-list communities {
               type union {
-                type bt:bgp-well-known-community-type;
-                type bt:bgp-std-community-type;
+                type bct:bgp-well-known-community-type;
+                type bct:bgp-std-community-type;
               }
               description
                 "Set the community values for the update inline with
@@ -669,7 +672,7 @@ module ietf-bgp-policy {
              communities for the set-ext-community action";
           case inline {
             leaf-list communities {
-              type bt:bgp-ext-community-type;
+              type bct:bgp-ext-community-type;
               description
                 "Set the extended community values for the update
                  inline with a list.";
@@ -712,7 +715,7 @@ module ietf-bgp-policy {
              communities for the set-large-community action";
           case inline {
             leaf-list communities {
-              type bt:bgp-large-community-type;
+              type bct:bgp-large-community-type;
               description
                 "Set the large community values for the update
                  inline with a list.";
