@@ -975,6 +975,7 @@ module ietf-bgp {
           }
 
           uses neighbor-group-config;
+          uses structure-dynamic-peers;
 
           container graceful-restart {
             if-feature "bt:graceful-restart";
