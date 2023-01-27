@@ -237,6 +237,34 @@ submodule ietf-bgp-rib-attributes {
     }
   }
 
+  grouping ipv6-ext-community-attributes {
+    description
+      "A grouping for all IPv6 extended community parameters.";
+
+    leaf-list ipv6-ext-community {
+      type bct:bgp-ipv6-ext-community-type;
+      description
+        "List of BGP IPv6 extended community attributes. The received
+         IPv6 extended community may be an explicitly modeled
+         type or unknown, represented by an 20-octet value
+         formatted according to RFC 5701.";
+      reference
+        "RFC 5701: IPv6 Address Specific BGP Extended Community
+         Attribute, Section 3.";
+    }
+
+    leaf-list ipv6-ext-community-raw {
+      type string {
+        // raw with 20 octets
+        pattern 'ipv6-raw:'
+             + '([0-9A-Fa-f][0-9A-Fa-f]:){19}'
+             + '[0-9A-Fa-f][0-9A-Fa-f]';
+      }
+      description
+        "IPv6 ext-community type in raw format only.";
+    }
+  }
+
   grouping large-community-attributes {
     description
       "A grouping for all large community parameters.";

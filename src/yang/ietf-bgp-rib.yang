@@ -386,6 +386,27 @@ submodule ietf-bgp-rib {
           uses ext-community-attributes;
         }
       }
+      container ipv6-ext-communities {
+        description
+          "Enclosing container for the list of IPv6 extended
+           community attribute sets.";
+        list ipv6-ext-community {
+          key "index";
+          config false;
+          description
+            "List of path attributes that may be in use by multiple
+             routes in the table.";
+          leaf index {
+            type uint64;
+            description
+              "System generated index for each attribute set.  The
+               index is used to reference an attribute set from a
+               specific path.  Multiple paths may reference the same
+               attribute set.";
+          }
+          uses ipv6-ext-community-attributes;
+        }
+      }
       container large-communities {
         description
           "Enclosing container for the list of large community

@@ -138,6 +138,7 @@
         in <xref target="RFC4271">BGP</xref>, <xref
         target="RFC1997">BGP Communities Attribute </xref>, <xref
         target="RFC4360">BGP Extended Communities Attributes</xref>,
+        <xref target="RFC5701">IPv6 Extended Communities Attributes</xref>,
         <xref target="RFC8092">BGP Large Communities
         Attributes</xref>, <xref target="RFC4456">BGP Route
         Reflection</xref>, <xref target="RFC4760">Multiprotocol
@@ -536,10 +537,10 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       address/port.</li>
 
       <li> The 'rib' container. This container contains sensitive information
-      such as attribute sets, communities, extended communities, and large
-      communities. Being able to read the contents of this container will allow
-      a malicious user to understand how the system decide how to route a
-      packet, and thus try to affect a change.</li>
+      such as attribute sets, communities, extended communities, IPv6 extended
+      communities, and large communities. Being able to read the contents of
+      this container will allow a malicious user to understand how the system
+      decide how to route a packet, and thus try to affect a change.</li>
       </ul>
 
       <t>Some of the RPC operations in this YANG module may be considered
@@ -694,6 +695,7 @@ reference: RFC XXXX
       <li><xref target="RFC4761">Virtual Private LAN Service (VPLS) Using BGP for Auto-Discovery and Signaling</xref></li>
       <li><xref target="RFC5065">Autonomous System Configuration for BGP</xref></li>
       <li><xref target="RFC5082">The Generalized TTL Security Mechanism (GTSM)</xref></li>
+      <li><xref target="RFC5701">IPv6 Address Specific BGP Extended Community Attribute</xref></li>
       <li><xref target="RFC5880">Bidirectional Forward Detection (BFD)</xref></li>
       <li><xref target="RFC5881">Bidirectional Forward Detection for IPv4 and IPv6 (Single Hop)</xref></li>
       <li><xref target="RFC5883">Bidirectional Forwarding Detection (BFD) for Multihop Paths</xref></li>
@@ -935,6 +937,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <?rfc include='reference.RFC.4761.xml'?>
 
       <?rfc include='reference.RFC.5065.xml'?>
+
+      <?rfc include='reference.RFC.5701.xml'?>
 
       <?rfc include='reference.RFC.5880.xml'?>
 
