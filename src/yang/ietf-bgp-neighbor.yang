@@ -66,37 +66,6 @@ submodule ietf-bgp-neighbor {
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
-  grouping bgp-neighbor-use-multiple-paths {
-    description
-      "Multi-path configuration and state applicable to a BGP
-       neighbor";
-    container use-multiple-paths {
-      description
-        "Parameters related to the use of multiple-paths for the same
-         NLRI when they are received only from this neighbor";
-      leaf enabled {
-        type boolean;
-        default "false";
-        description
-          "Whether the use of multiple paths for the same NLRI is
-           enabled for the neighbor.";
-      }
-      container ebgp {
-        description
-          "Multi-path configuration for eBGP";
-        leaf allow-multiple-as {
-          type boolean;
-          default "false";
-          description
-            "Allow multi-path to use paths from different neighboring
-             ASes. The default is to only consider multiple paths
-             from the same neighboring AS.";
-        }
-      }
-    }
-  }
-
-
   grouping bgp-neighbor-afi-safi-list {
     description
       "List of address-families associated with the BGP neighbor";
