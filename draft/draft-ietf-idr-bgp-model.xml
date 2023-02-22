@@ -429,13 +429,10 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 
         <section title="Local Routing">
           <t>The loc-rib is the main BGP routing table for the local routing
-          instance, containing best-path selections for each prefix. The
-          loc-rib table may contain multiple routes for a given prefix, with
-          an attribute to indicate which was selected as the best-path. Note
-          that multiple paths may be used or advertised even if only one path
-          is marked as best, e.g., when using BGP add-paths. An implementation
-          may choose to mark multiple paths in the RIB as best-path by setting
-          the flag to true for multiple entries.</t>
+          instance, containing best-path selections for each prefix.
+          The key for the loc-rib will correspond either to a route in the
+          adj-rib-in-post table, described below, or a route redistributed from
+          another protocol.</t>
         </section>
 
         <section title="Pre updates per-neighbor">
@@ -449,6 +446,12 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           <t>The adj-rib-in-post table is a per-neighbor table containing the
           routes received from the neighbor that are eligible for best-path
           selection after local input policy rules have been applied.</t>
+
+          <t>The "best-path" leaf is attached to the route selected by the BGP
+          Decision Process <xref target="RFC4271" section="9.1"/>.  Such routes
+          may be present in the loc-rib table, described above, when local
+          configuration determines that the BGP best-path will be used for that
+          destination.</t>
         </section>
 
         <section title="Pre route advertisements per-neighbor">
@@ -655,10 +658,10 @@ reference: RFC XXXX
           context.</li>
 
           <li>ietf-bgp-rib - grouping for representing BGP RIBs.</li>
-	  <li>ietf-bgp-rib-attributes - common data definitions for BGP
-	  attributes used in BGP RIB tables.</li>
-	  <li>ietf-bgp-rib-tables - structural data definitions for BGP
-	  routing tables.</li>
+          <li>ietf-bgp-rib-attributes - common data definitions for BGP
+          attributes used in BGP RIB tables.</li>
+          <li>ietf-bgp-rib-tables - structural data definitions for BGP
+          routing tables.</li>
         </ul></t>
 
       <t>Additionally, modules include:
@@ -711,9 +714,9 @@ reference: RFC XXXX
       </ul></t>
 
       <section title="Modules and submodules for base items">
-	<section title="ietf-bgp module">
+        <section title="ietf-bgp module">
         <t>
-	  <figure>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
@@ -721,11 +724,11 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
 
 ]]></artwork>
           </figure>
-	</t>
-	</section>
-	<section title = "ietf-bgp-capabilities submodule">
-	  <t>
-	  <figure>
+        </t>
+        </section>
+        <section title = "ietf-bgp-capabilities submodule">
+          <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-capabilities@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-capabilities@YYYY-MM-DD.yang)
@@ -733,11 +736,11 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-capabilities@YYYY-MM-DD.yang)
 
         ]]></artwork>
           </figure>
-	  </t>
-	</section>
-	<section title = "ietf-bgp-common submodule">
-	  <t>
-	  <figure>
+          </t>
+        </section>
+        <section title = "ietf-bgp-common submodule">
+          <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
@@ -745,11 +748,11 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
 
         ]]></artwork>
           </figure>
-	  </t>
-	</section>
-	<section title = "ietf-bgp-common-multiprotocol submodule">
-	  <t>
-	  <figure>
+          </t>
+        </section>
+        <section title = "ietf-bgp-common-multiprotocol submodule">
+          <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD.yang)
@@ -757,11 +760,11 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD
 
         ]]></artwork>
           </figure>
-	  </t>
-	</section>
-	<section title = "ietf-bgp-common-structure submodule">
-	  <t>
-	    <figure>
+          </t>
+        </section>
+        <section title = "ietf-bgp-common-structure submodule">
+          <t>
+            <figure>
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-common-structure@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yang)
@@ -769,11 +772,11 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yan
 
         ]]></artwork>
             </figure>
-	  </t>
-	</section>
-	<section title = "ietf-bgp-neighbors submodule">
-	  <t>
-	    <figure>
+          </t>
+        </section>
+        <section title = "ietf-bgp-neighbors submodule">
+          <t>
+            <figure>
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-neighbor@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
@@ -781,8 +784,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
 
 ]]></artwork>
             </figure>
-	  </t>
-	</section>
+          </t>
+        </section>
       </section>
 
       <section title="BGP notification module">
@@ -829,9 +832,9 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
       </section>
 
       <section title="RIB submodules">
-	<section title = "ietf-bgp-rib submodule">
+        <section title = "ietf-bgp-rib submodule">
           <t>
-	    <figure>
+            <figure>
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
@@ -839,10 +842,10 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
 
 ]]></artwork>
             </figure>
-	  </t>
-	</section>
-	<section title = "ietf-bgp-rib-types submodule">
-	  <t>
+          </t>
+        </section>
+        <section title = "ietf-bgp-rib-types submodule">
+          <t>
             <figure>
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-types@YYYY-MM-DD.yang"
@@ -851,10 +854,10 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-types@YYYY-MM-DD.yang)
 
 ]]></artwork>
             </figure>
-	  </t>
-	</section>
-	<section title = "ietf-bgp-rib-attributes submodule">
-	  <t>
+          </t>
+        </section>
+        <section title = "ietf-bgp-rib-attributes submodule">
+          <t>
             <figure>
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-attributes@YYYY-MM-DD.yang"
@@ -863,11 +866,11 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-attributes@YYYY-MM-DD.yang)
 
 ]]></artwork>
             </figure>
-	  </t>
+          </t>
         </section>
-	<section title = "ietf-bgp-rib-tables submodule">
+        <section title = "ietf-bgp-rib-tables submodule">
           <t>
-	    <figure>
+            <figure>
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-tables@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
@@ -875,7 +878,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
 ]]></artwork>
             </figure>
-	  </t>
+          </t>
         </section>
       </section>
     </section>
@@ -1077,31 +1080,31 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.3.xml,68)
       </section>
       <section title="BGP Policy - Match Prefix and Set Community">
         <t>Routing policy using community value involves configuring
-	rules to match community values in the inbound or outbound
-	direction. In this example, which is heavily borrowed from
-	the example on the Cisco community page, we look at
-	"match community exact" match, which happens only when BGP
-	updates have the same community values as specified in the
-	community list.</t>
-	<t>The topology in this example consists of three routers,
+        rules to match community values in the inbound or outbound
+        direction. In this example, which is heavily borrowed from
+        the example on the Cisco community page, we look at
+        "match community exact" match, which happens only when BGP
+        updates have the same community values as specified in the
+        community list.</t>
+        <t>The topology in this example consists of three routers,
         R1, R2, and R3, configured with AS value of 1, 2 and 3 
         respectively. R1 advertises 5 prefixes to R2 and R3, as
         shown below.</t>
         <ul spacing="normal" indent="3">
-	  <li>1.1.1.1/32 and 2.2.2.2/32 with community 11:11</li>
-	  <li>3.3.3.3/32 and 4.4.4.4/32 with community 11:11 and
-	  22:22</li>
-	  <li>5.5.5.5/32 with community 33.33</li>
-	</ul>
-	<t>Route Policy TO_R2 defines the policy that R1 uses in route
-	updates towards R2. It consists of three statements, statement
-	10 that has a exact match rule for the prefix list L0andL1,
-	and a set-community action of add for 11:11.  The second
-	statement, statement 20, consists of an exact match rule for
-	prefix list L2andL3, with a set community action of remove for
-	11:11 22:22. The final statement, statement 30, consists of an
-	exact match rule for prefix list L4, with a set community
-	action of replace for 33:33.</t>
+          <li>1.1.1.1/32 and 2.2.2.2/32 with community 11:11</li>
+          <li>3.3.3.3/32 and 4.4.4.4/32 with community 11:11 and
+          22:22</li>
+          <li>5.5.5.5/32 with community 33.33</li>
+        </ul>
+        <t>Route Policy TO_R2 defines the policy that R1 uses in route
+        updates towards R2. It consists of three statements, statement
+        10 that has a exact match rule for the prefix list L0andL1,
+        and a set-community action of add for 11:11.  The second
+        statement, statement 20, consists of an exact match rule for
+        prefix list L2andL3, with a set community action of remove for
+        11:11 22:22. The final statement, statement 30, consists of an
+        exact match rule for prefix list L4, with a set community
+        action of replace for 33:33.</t>
 
         <figure>
           <artwork><![CDATA[

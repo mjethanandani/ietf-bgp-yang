@@ -51,18 +51,23 @@ submodule ietf-bgp-rib {
 
      loc-rib: This is the main BGP routing table for the local
      routing instance, containing best-path selections for each
-     prefix. The loc-rib table may contain multiple routes for a
-     given prefix, with an attribute to indicate which was selected
-     as the best path.  Note that multiple paths may be used or
-     advertised even if only one path is marked as best; e.g., when
-     using BGP add-paths.  An implementation may choose to mark
-     multiple paths in the RIB as best path by setting the flag to
-     true for multiple entries.
+     prefix.  The key for the loc-rib will correspond either to a
+     route in the adj-rib-in-post table, described below, or a route
+     redistributed from another protocol.
 
      adj-rib-in-pre: This is a per-neighbor table containing the BGP
      routes received from the neighbor before any local input policy
      rules has been applied.  This can be considered the 'raw' routes
      from a given neighbor.
+
+     adj-rib-in-post: This table is a per-neighbor table containing
+     the routes received from the neighbor that are eligible for
+     best-path selection after local input policy rules have been
+     applied. The 'best-path' leaf is attached to the route selected
+     by the BGP Decision Process (RFC 4271, Section 9.1).  Such
+     routes may be present in the loc-rib table, described above,
+     when local configuration determines that the BGP best-path will
+     be used for that destination.
 
      adj-rib-in-post: This is a per-neighbor table containing the
      routes received from the neighbor that are eligible for
