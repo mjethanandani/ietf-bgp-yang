@@ -111,6 +111,7 @@ submodule ietf-bgp-rib-tables {
        Adj-RIB-In post-policy table";
     leaf best-path {
       type boolean;
+      default "false";
       description
         "Current path was selected as the best path. Best path
          should indicate that the route is present in BGP Loc-RIB.";
