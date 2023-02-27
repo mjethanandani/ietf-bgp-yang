@@ -272,6 +272,32 @@ module ietf-bgp-policy {
         }
       }
 
+      container ipv6-ext-community-sets {
+        description
+          "Enclosing container for list of extended IPv6 BGP
+           community sets";
+        list ipv6-ext-community-set {
+          key "name";
+          description
+            "List of defined IPv6 extended BGP community sets";
+          leaf name {
+            type string;
+            description
+              "Name / label of the IPv6 extended community set --
+               this is used to reference the set in match
+               conditions";
+          }
+          leaf-list member {
+            type union {
+              type bct:bgp-ipv6-ext-community-type;
+              type bct:bgp-community-regexp-type;
+            }
+            description
+              "Members of the IPv6 extended community set.";
+          }
+        }
+      }
+
       container large-community-sets {
         description
           "Enclosing container for list of large BGP community
@@ -505,6 +531,42 @@ module ietf-bgp-policy {
         uses rt-pol:match-set-options-group;
       }
 
+      container match-ipv6-ext-community-set {
+        description
+          "Match a referenced IPv6 extended community-set according
+           to the logic defined in the match-set-options leaf.";
+        leaf ipv6-ext-community-set {
+          type leafref {
+            path "/rt-pol:routing-policy/rt-pol:defined-sets/"
+               + "bgp-defined-sets/ipv6-ext-community-sets/"
+               + "ipv6-ext-community-set/name";
+          }
+          description
+            "References a defined IPv6 extended community set.";
+        }
+        leaf ipv6-ext-community-match-kind {
+          type enumeration {
+            enum ipv6-ext-community {
+              description
+                "Perform the match against the IPv6 ext-community RIB
+                 attribute.";
+            }
+            enum ipv6-ext-community-raw {
+              description
+                "Perform the match against the IPv6 ext-community-raw
+                 RIB attribute.";
+            }
+          }
+          default ipv6-ext-community;
+          description
+            "IPv6 Extended communities may be matched by the
+             ipv6-ext-community RIB attribute, or the
+             ipv6-ext-community-raw RIB attribute.  This leaf selects
+             which leaf to perform the match operation against.";
+        }
+        uses rt-pol:match-set-options-group;
+      }
+
       container match-large-community-set {
         description
           "Match a referenced large community-set according to the
@@ -687,6 +749,49 @@ module ietf-bgp-policy {
               }
               description
                 "References a defined extended community set by
+                 name.";
+            }
+          }
+        }
+      }
+
+      container set-ipv6-ext-community {
+        description
+          "Action to set the IPv6 extended community attributes of
+           the route, along with options to modify how the community
+           is modified. IPv6 extended communities may be set using an
+           inline list OR a reference to an existing defined set (but
+           not both).";
+
+        leaf options {
+          type bgp-set-community-option-type;
+          description
+            "Options for modifying the community attribute with
+             the specified values.  These options apply to both
+             methods of setting the community attribute.";
+        }
+
+        choice method {
+          description
+            "Indicates the method used to specify the IPv6 extended
+             communities for the set-ipv6-ext-community action";
+          case inline {
+            leaf-list communities {
+              type bct:bgp-ipv6-ext-community-type;
+              description
+                "Set the IPv6 extended community values for the
+                 update inline with a list.";
+            }
+          }
+          case reference {
+            leaf ipv6-ext-community-set-ref {
+              type leafref {
+                path "/rt-pol:routing-policy/rt-pol:defined-sets/"
+                   + "bgp-defined-sets/ipv6-ext-community-sets/"
+                   + "ipv6-ext-community-set/name";
+              }
+              description
+                "References a defined IPv6 extended community set by
                  name.";
             }
           }
