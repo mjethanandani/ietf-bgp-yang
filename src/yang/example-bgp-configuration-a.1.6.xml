@@ -1,0 +1,37 @@
+<!--
+    This example configures a box to be a route reflector
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<routing
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-routing"
+    xmlns:bt="urn:ietf:params:xml:ns:yang:iana-bgp-types"
+    xmlns:bct="urn:ietf:params:xml:ns:yang:iana-bgp-community-types">
+  <control-plane-protocols>
+    <control-plane-protocol>
+      <type
+          xmlns:bgp="urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp</type>
+      <name>name:BGP</name>
+      <bgp
+          xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
+        <global>
+          <as>64496</as>
+          <afi-safis>
+            <afi-safi>
+              <name>bt:ipv4-unicast</name>
+            </afi-safi>
+          </afi-safis>
+        </global>
+        <neighbors>
+          <neighbor>
+            <remote-address>192.0.2.1</remote-address>
+            <peer-as>64497</peer-as>
+	    <route-reflector>
+	      <no-client-reflect>true</no-client-reflect>
+	    </route-reflector>
+          </neighbor>
+        </neighbors>
+      </bgp>
+    </control-plane-protocol>
+  </control-plane-protocols>
+</routing>
