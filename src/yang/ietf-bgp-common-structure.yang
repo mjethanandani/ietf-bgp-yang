@@ -88,42 +88,6 @@ submodule ietf-bgp-common-structure {
     }
   }
 
-  grouping structure-neighbor-group-route-reflector {
-    description
-      "Structural grouping used to include route reflector
-       configuration and state for both BGP neighbors and peer
-       groups";
-    container route-reflector {
-      presence "BGP Route Reflection presence container.";
-      description
-        "Route reflector parameters for the BGP peer-group";
-      reference
-        "RFC 4456: BGP Route Reflection.";
-
-      leaf cluster-id {
-        type bt:rr-cluster-id-type;
-        description
-          "Route Reflector cluster id to use when local router is
-           configured as a route reflector.  Commonly set at the
-           group level, but allows a different cluster id to be set
-           for each neighbor.";
-        reference
-          "RFC 4456: BGP Route Reflection: An Alternative to
-                     Full Mesh.";
-      }
-
-      leaf no-client-reflect {
-        type boolean;
-        default "false";
-        description
-          "When set to 'true', this disables route redistribution
-           by the Route Reflector. It is set 'true' when the client
-           is fully meshed in its peer-group to prevent sending of
-           redundant route advertisements.";
-      }
-    }
-  }
-
   grouping structure-neighbor-group-as-path-options {
     description
       "Structural grouping used to include AS_PATH manipulation

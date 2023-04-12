@@ -655,9 +655,6 @@ reference: RFC XXXX
           multiple contexts, but are used only to create structural elements;
           i.e., containers (leaf nodes are defined in separate groupings).</li>
 
-          <li>ietf-bgp-neighbor - groupings with data specific to the neighbor
-          context.</li>
-
           <li>ietf-bgp-rib - grouping for representing BGP RIBs.</li>
           <li>ietf-bgp-rib-attributes - common data definitions for BGP
           attributes used in BGP RIB tables.</li>
@@ -773,18 +770,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yan
 <CODE ENDS>
 
         ]]></artwork>
-            </figure>
-          </t>
-        </section>
-        <section title = "ietf-bgp-neighbors submodule">
-          <t>
-            <figure>
-              <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp-neighbor@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
-<CODE ENDS>
-
-]]></artwork>
             </figure>
           </t>
         </section>

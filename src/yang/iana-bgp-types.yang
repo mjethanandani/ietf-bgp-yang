@@ -420,7 +420,7 @@ module iana-bgp-types {
 
   /* BGP Route Reflector Types. */
 
-  typedef rr-cluster-id-type {
+  typedef rr-cluster-id {
     type union {
       type uint32;
       type yang:dotted-quad;

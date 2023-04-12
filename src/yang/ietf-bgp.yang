@@ -50,9 +50,6 @@ module ietf-bgp {
   include ietf-bgp-common-structure {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-neighbor {
-    revision-date YYYY-MM-DD;
-  }
   include ietf-bgp-rib-types {
     revision-date YYYY-MM-DD;
   }
@@ -142,6 +139,30 @@ module ietf-bgp {
   /*
    * Groupings
    */
+  grouping no-client-reflect {
+    description
+      "Grouping for route reflect option.";
+
+    container no-client-reflect {
+      presence
+        "Presence container to define route-reflect option.";
+      description
+        "When set to 'true', this disables route redistribution
+         by the Route Reflector. It is set 'true' when the client
+         is fully meshed in its peer-group to prevent sending of
+         redundant route advertisements.";
+
+      leaf-list cluster-ids {
+        type leafref {
+          path "../../../neighbors/neighbor/route-reflector" +
+               "/cluster-id";
+        }
+        description
+          "Cluster id to which the no-client-reflect option
+           applies.";
+      }
+    }
+  }
 
   grouping bgp-errors-common {
     description
@@ -380,6 +401,7 @@ module ietf-bgp {
           }
         }
         uses rt-pol:apply-policy-group;
+        uses no-client-reflect;
         uses state;
       }
 
@@ -576,8 +598,129 @@ module ietf-bgp {
           container afi-safis {
             description
               "Per-address-family configuration parameters associated
-               with the neighbor";
-            uses bgp-neighbor-afi-safi-list;
+               with the neighbor.";
+
+            list afi-safi {
+              key "name";
+              description
+                "AFI, SAFI configuration available for the neighbor
+                 or group.";
+
+              uses mp-afi-safi-config;
+
+              leaf active {
+                type boolean;
+                config false;
+                description
+                  "This value indicates whether a particular AFI-SAFI
+                   has been successfully negotiated with the peer.
+                   An AFI-SAFI may be enabled in the current running
+                   configuration, but a session restart may be
+                   required in order to negotiate the new
+                   capability.";
+              }
+
+              container prefixes {
+                config false;
+                description
+                  "Prefix counters for the AFI/SAFI in this BGP
+                   session.";
+
+                leaf received {
+                  type yang:zero-based-counter32;
+                  description
+                    "The number of prefixes received from the
+                     neighbor.";
+                }
+
+                leaf sent {
+                  type yang:zero-based-counter32;
+                  description
+                    "The number of prefixes advertised to the
+                     neighbor.";
+                }
+
+                leaf installed {
+                  type yang:gauge32;
+                  description
+                    "The number of advertised prefixes installed in
+                     the Loc-RIB.";
+                }
+              }
+
+              container graceful-restart {
+                if-feature "bt:graceful-restart";
+                description
+                  "Parameters relating to BGP graceful-restart";
+                reference
+                  "RFC 4724: Graceful Restart Mechanism for BGP.";
+
+                uses mp-afi-safi-graceful-restart-config;
+
+                leaf received {
+                  type boolean;
+                  config false;
+                  description
+                    "This leaf indicates whether the neighbor
+                     advertised the ability to support
+                     graceful-restart for this AFI-SAFI.";
+                  reference
+                    "RFC 4724: Graceful Restart Mechanism for BGP,
+                               Section 3.";
+                }
+
+                leaf advertised {
+                  type boolean;
+                  config false;
+                  description
+                    "This leaf indicates whether the ability to
+                     support graceful-restart has been advertised to
+                     the peer.";
+                  reference
+                    "RFC 4724: Graceful Restart Mechanism for BGP,
+                               Section 3.";
+                }
+
+                leaf local-forwarding-state-preserved {
+                  type boolean;
+                  config false;
+                  description
+                    "This leaf indicates whether the local router has
+                     or would advertise the Forwarding State bit in
+                     its Graceful Restart capability for this
+                     AFI-SAFI.";
+                  reference
+                    "RFC 4724: Graceful Restart Mechanism for BGP,
+                               Section 3.";
+                }
+
+                leaf forwarding-state-preserved {
+                  type boolean;
+                  config false;
+                  description
+                    "This leaf indicates whether the neighbor has
+                     advertised the Forwarding State bit in its
+                     Graceful Restart capability for this AFI-SAFI.";
+                  reference
+                    "RFC 4724: Graceful Restart Mechanism for BGP,
+                               Section 3.";
+                }
+
+                leaf end-of-rib-received {
+                  type boolean;
+                  config false;
+                  description
+                    "This leaf indicates whether the neighbor has
+                     advertised the End-of-RIB marker for this
+                     AFI-SAFI.";
+                  reference
+                    "RFC 4724: Graceful Restart Mechanism for BGP,
+                               Section 2.";
+                }
+              }
+              uses mp-all-afi-safi-list-contents;
+              uses bgp-neighbor-use-multiple-paths;
+            }
           }
 
           leaf session-state {

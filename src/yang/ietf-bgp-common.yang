@@ -378,7 +378,26 @@ submodule ietf-bgp-common {
     }
 
     uses structure-neighbor-group-logging-options;
-    uses structure-neighbor-group-route-reflector;
+
+    container route-reflector {
+      presence "BGP Route Reflection presence container.";
+      description
+        "Route reflector parameters for the BGP peer-group";
+      reference
+        "RFC 4456: BGP Route Reflection.";
+
+      leaf cluster-id {
+        type bt:rr-cluster-id;
+        description
+          "Route Reflector cluster id to use when local router is
+           configured as a route reflector.  Commonly set at the
+           group level, but allows a different cluster id to be set
+           for each neighbor.";
+        reference
+          "RFC 4456: BGP Route Reflection: An Alternative to
+                     Full Mesh.";
+      }
+    }
     uses structure-neighbor-group-as-path-options;
     uses structure-add-paths;
     uses bgp-neighbor-use-multiple-paths;

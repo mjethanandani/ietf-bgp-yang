@@ -1,5 +1,9 @@
 <!--
-    This example configures a box to be a route reflector
+    This example configures a box to be a route reflector.
+    While there is configuration at global, neighbor and at
+    peer-group level, since nieghbor configuration overrides
+    peer-group configuration, which overrides global configuration
+    the neighbor configuration will ultimately previal.
 -->
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -21,16 +25,28 @@
               <name>bt:ipv4-unicast</name>
             </afi-safi>
           </afi-safis>
+	  <no-client-reflect>
+	    <cluster-ids>192.0.2.1</cluster-ids>
+	  </no-client-reflect>
         </global>
         <neighbors>
           <neighbor>
             <remote-address>192.0.2.1</remote-address>
             <peer-as>64497</peer-as>
 	    <route-reflector>
-	      <no-client-reflect>true</no-client-reflect>
+	      <cluster-id>192.0.2.1</cluster-id>
 	    </route-reflector>
           </neighbor>
         </neighbors>
+	<peer-groups>
+	  <peer-group>
+	    <name>group-1</name>
+	    <peer-as>40000</peer-as>
+	    <route-reflector>
+	      <cluster-id>192.0.2.2</cluster-id>
+	    </route-reflector>
+	  </peer-group>
+	</peer-groups>
       </bgp>
     </control-plane-protocol>
   </control-plane-protocols>
