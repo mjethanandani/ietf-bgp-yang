@@ -26,7 +26,7 @@ submodule ietf-bgp-common-structure {
   organization
     "IETF IDR Working Group";
   contact
-    "WG Web:   <http://tools.ietf.org/wg/idr>
+    "WG Web:   <http://datatracker.ietf.org/wg/idr>
      WG List:  <idr@ietf.org>
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
