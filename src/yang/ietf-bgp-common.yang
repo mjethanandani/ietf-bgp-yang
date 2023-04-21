@@ -377,7 +377,23 @@ submodule ietf-bgp-common {
         "RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
     }
 
-    uses structure-neighbor-group-logging-options;
+    container logging-options {
+      description
+        "Logging options for events related to the BGP neighbor or
+         group";
+      leaf log-neighbor-state-changes {
+        type boolean;
+        default "true";
+        description
+          "Configure logging of peer state changes.  Default is to
+           enable logging of peer state changes.
+
+           Note: Documenting demotion from ESTABLISHED state is
+                 desirable, but documenting all backward transitions
+                 is problematic, and should be avoided.";
+      }
+    }
+
     uses structure-neighbor-group-route-reflector;
     uses structure-neighbor-group-as-path-options;
     uses structure-add-paths;
