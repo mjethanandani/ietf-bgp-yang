@@ -393,6 +393,12 @@ module ietf-bgp {
             "List of BGP neighbors configured on the local system,
              uniquely identified by remote IPv[46] address.";
 
+          leaf remote-address {
+            type inet:ip-address;
+            description
+              "The remote IP address of this entry's BGP peer.";
+          }
+
           leaf peer-group {
             type leafref {
               path "../../../peer-groups/peer-group/name";
@@ -400,12 +406,6 @@ module ietf-bgp {
             description
               "The peer-group with which this neighbor is
                associated.";
-          }
-
-          leaf remote-address {
-            type inet:ip-address;
-            description
-              "The remote IP address of this entry's BGP peer.";
           }
 
           leaf local-address {
