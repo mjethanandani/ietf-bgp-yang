@@ -1,7 +1,7 @@
 submodule ietf-bgp-rib-tables {
   yang-version 1.1;
   belongs-to ietf-bgp {
-    prefix br;
+    prefix bgp;
   }
 
   // import some basic types

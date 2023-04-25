@@ -17,9 +17,13 @@ module ietf-bgp-policy {
   }
   import iana-bgp-types {
     prefix bt;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import iana-bgp-community-types {
     prefix bct;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
   organization

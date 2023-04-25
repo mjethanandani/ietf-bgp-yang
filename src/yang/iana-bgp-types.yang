@@ -5,6 +5,8 @@ module iana-bgp-types {
 
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC 6991: Common YANG Types.";
   }
   import ietf-yang-types {
     prefix yang;

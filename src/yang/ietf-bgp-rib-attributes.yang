@@ -1,19 +1,25 @@
 submodule ietf-bgp-rib-attributes {
   yang-version 1.1;
   belongs-to ietf-bgp {
-    prefix br;
+    prefix bgp;
   }
 
   // import some basic types
 
   import iana-bgp-types {
     prefix bt;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import iana-bgp-community-types {
     prefix bct;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import ietf-inet-types {
     prefix inet;
+    reference
+      "RFC 6991: Common YANG Data Types.";
   }
   include ietf-bgp-rib-types;
 
