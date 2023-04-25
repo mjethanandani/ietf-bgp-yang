@@ -590,15 +590,15 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             <artwork><![CDATA[
             URI:urn:ietf:params:xml:ns:yang:ietf-bgp
             URI:urn:ietf:params:xml:ns:yang:ietf-bgp-policy
-            URI:urn:ietf:params:xml:ns:yang:iana-bgp-notification
-            URI:urn:ietf:params:xml:ns:yang:iana-bgp-types
-            URI:urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-community-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-notification
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-types
             ]]></artwork>
           </figure></t>
 
-        <t>Registrant Contact: The IESG. XML: N/A, the requested URI is an XML
-        namespace.</t>
+        <t>Registrant Contact: The IESG. XML: N/A, the requested URI
+        is an XML namespace.</t>
       </section>
 
       <section title="YANG Module Name Registration">
@@ -606,89 +606,91 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
         Names registry <xref target="RFC6020">YANG</xref>.</t>
 
         <t><figure>
-            <artwork><![CDATA[name: ietf-bgp
-namespace: urn:ietf:params:xml:ns:yang:ietf-bgp
-prefix: bgp
-reference: RFC XXXX
+            <artwork><![CDATA[
+	    name: ietf-bgp
+	    namespace: urn:ietf:params:xml:ns:yang:ietf-bgp
+	    prefix: bgp
+	    reference: RFC XXXX
 
-name: ietf-bgp-policy
-namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
-prefix: bp
-reference: RFC XXXX
+	    name: ietf-bgp-policy
+	    namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
+	    prefix: bp
+	    reference: RFC XXXX
 
-name: iana-bgp-notification
-namespace: urn:ietf:params:xml:ns:yang:iana-bgp-notification
-prefix: bn
-reference: RFC XXXX
+	    name: iana-bgp-community-types
+	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-community-types
+	    prefix: bct
+	    reference: RFC XXXX
 
-name: iana-bgp-types
-namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
-prefix: bt
-reference: RFC XXXX
+	    name: iana-bgp-notification
+	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-notification
+	    prefix: bn
+	    reference: RFC XXXX
 
-name: iana-bgp-rib-types
-namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
-prefix: brt
-reference: RFC XXXX
+	    name: iana-bgp-types
+	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
+	    prefix: bt
+	    reference: RFC XXXX
 
-name: iana-bgp-community-types
-namespace: urn:ietf:params:xml:ns:yang:iana-bgp-community-types
-prefix: bt
-reference: RFC XXXX
-]]></artwork>
+	    name: iana-bgp-rib-types
+	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
+	    prefix: brt
+	    reference: RFC XXXX
+	    ]]>
+	    </artwork>
           </figure></t>
       </section>
     </section>
 
     <section anchor="models" title="YANG modules">
-      <t>The modules comprising the BGP configuration and operational model
-      are described by the YANG modules and submodules in the sections
-      below.</t>
+      <t>The modules comprising the BGP configuration and operational
+      model are described by the YANG modules and submodules in the
+      sections below.</t>
 
-      <t>The main module, ietf-bgp.yang, includes the following submodules:
+      <t>The main module, ietf-bgp.yang, includes the following
+      submodules:
       <ul>
-          <li>ietf-bgp-capabilities - defines the groupings that are common
-          to the BGP Capabilities feature.</li>
+          <li>ietf-bgp-capabilities - defines the groupings that are
+          common to the BGP Capabilities feature.</li>
 
-          <li>ietf-bgp-common - defines the groupings that are common across
-          more than one context (where contexts are neighbor, group,
-          global).</li>
+          <li>ietf-bgp-common - defines the groupings that are common
+          across more than one context (where contexts are neighbor,
+          group, global).</li>
 
-          <li>ietf-bgp-common-multiprotocol - defines the groupings that are
-          common across more than one context, and relate to multi-protocol
-          BGP.</li>
+          <li>ietf-bgp-common-multiprotocol - defines the groupings
+          that are common across more than one context, and relate to
+          multi-protocol BGP.</li>
 
-          <li>ietf-bgp-common-structure - defines groupings that are shared by
-          multiple contexts, but are used only to create structural elements;
-          i.e., containers (leaf nodes are defined in separate groupings).</li>
+          <li>ietf-bgp-common-structure - defines groupings that are
+          shared by multiple contexts, but are used only to create
+          structural elements; i.e., containers (leaf nodes are
+          defined in separate groupings).</li>
 
-          <li>ietf-bgp-neighbor - groupings with data specific to the neighbor
-          context.</li>
+          <li>ietf-bgp-neighbor - groupings with data specific to the
+          neighbor context.</li>
 
           <li>ietf-bgp-rib - grouping for representing BGP RIBs.</li>
-          <li>ietf-bgp-rib-attributes - common data definitions for BGP
-          attributes used in BGP RIB tables.</li>
-          <li>ietf-bgp-rib-tables - structural data definitions for BGP
-          routing tables.</li>
+          <li>ietf-bgp-rib-attributes - common data definitions for
+          BGP attributes used in BGP RIB tables.</li>
+          <li>ietf-bgp-rib-tables - structural data definitions for
+          BGP routing tables.</li>
         </ul></t>
 
-      <t>Additionally, modules include:
+      <t>Additionally, the above modules include the following
+      modules:
       <ul>
-          <li>iana-bgp-notification - identity definitions for BGP NOTIFICATION
-          message Error Codes and Error subcodes.</li>
+          <li>iana-bgp-community-types - common type and identity
+          definitions for BGP Communities.</li>
 
-          <li>iana-bgp-types - common type and identity definitions for BGP,
-          including BGP policy.</li>
+          <li>ietf-bgp-policy - BGP-specific policy data definitions
+          for use with <xref target="RFC9067"/> (described in more
+          detail <xref target="overview.policy"/>).</li>
+
+          <li>iana-bgp-types - common type and identity definitions
+          for BGP, including BGP policy.</li>
 
           <li>iana-bgp-rib-types - common type and identity
           definitions for BGP RIB.</li>
-
-          <li>iana-bgp-community-types - common type and identity definitions
-          for BGP Communities.</li>
-
-          <li>ietf-bgp-policy - BGP-specific policy data definitions for use
-          with <xref target="RFC9067"/> (described in more
-          detail <xref target="overview.policy"/>).</li>
         </ul></t>
     </section>
 
@@ -725,8 +727,8 @@ reference: RFC XXXX
       <li><xref target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
       </ul></t>
 
-      <section title="Modules and submodules for base items">
-        <section title="ietf-bgp module">
+      <section title="BGP module and submodules">
+        <section title="BGP module">
         <t>
           <figure>
             <artwork><![CDATA[
@@ -738,7 +740,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD.yang)
           </figure>
         </t>
         </section>
-        <section title = "ietf-bgp-capabilities submodule">
+        <section title = "BGP capabilities submodule">
           <t>
           <figure>
             <artwork><![CDATA[
@@ -750,7 +752,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-capabilities@YYYY-MM-DD.yang)
           </figure>
           </t>
         </section>
-        <section title = "ietf-bgp-common submodule">
+        <section title = "BGP common submodule">
           <t>
           <figure>
             <artwork><![CDATA[
@@ -762,7 +764,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
           </figure>
           </t>
         </section>
-        <section title = "ietf-bgp-common-multiprotocol submodule">
+        <section title = "BGP common multiprotocol submodule">
           <t>
           <figure>
             <artwork><![CDATA[
@@ -774,7 +776,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD
           </figure>
           </t>
         </section>
-        <section title = "ietf-bgp-common-structure submodule">
+        <section title = "BGP common structure submodule">
           <t>
             <figure>
               <artwork><![CDATA[
@@ -786,7 +788,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yan
             </figure>
           </t>
         </section>
-        <section title = "ietf-bgp-neighbors submodule">
+        <section title = "BGP neighbors submodule">
           <t>
             <figure>
               <artwork><![CDATA[
@@ -799,7 +801,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
           </t>
         </section>
       </section>
-
       <section title="BGP notification module">
         <t><figure>
             <artwork><![CDATA[
@@ -822,18 +823,7 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-types@YYYY-MM-DD.yang)
           </figure></t>
       </section>
 
-      <section title="BGP RIB types module">
-        <t><figure>
-            <artwork><![CDATA[
-<CODE BEGINS> file "iana-bgp-rib-types@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/iana-bgp-rib-types@YYYY-MM-DD.yang)
-<CODE ENDS>
-
-        ]]></artwork>
-          </figure></t>
-      </section>
-
-      <section title="BGP Community types module">
+      <section title="BGP community types module">
         <t><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-community-types@YYYY-MM-DD.yang"
@@ -854,8 +844,19 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
           </figure></t>
       </section>
 
-      <section title="RIB submodules">
-        <section title = "ietf-bgp-rib submodule">
+      <section title="RIB modules and submodules">
+	<section title="BGP RIB types module">
+          <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-rib-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-rib-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure></t>
+	</section>
+
+        <section title = "BGP rib submodule">
           <t>
             <figure>
               <artwork><![CDATA[
@@ -868,7 +869,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
           </t>
         </section>
 
-        <section title = "ietf-bgp-rib-attributes submodule">
+        <section title = "BGP rib attributes submodule">
           <t>
             <figure>
               <artwork><![CDATA[
@@ -880,7 +881,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-attributes@YYYY-MM-DD.yang)
             </figure>
           </t>
         </section>
-        <section title = "ietf-bgp-rib-tables submodule">
+        <section title = "BGP RIB tables submodule">
           <t>
             <figure>
               <artwork><![CDATA[
