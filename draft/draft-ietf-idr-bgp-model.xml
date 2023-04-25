@@ -581,18 +581,20 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
     </section>
 
     <section title="IANA Considerations">
-      <t>This document registers three URIs and three YANG modules.</t>
+      <t>This document registers six URIs and six YANG modules.</t>
 
       <section title="URI Registration">
         <t>Following the format in the <xref target="RFC3688">IETF XML
         registry</xref> [RFC3688], the following registration is requested to
         be made: <figure>
-            <artwork><![CDATA[URI: urn:ietf:params:xml:ns:yang:ietf-bgp
-URI: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
-URI: urn:ietf:params:xml:ns:yang:iana-bgp-notification
-URI: urn:ietf:params:xml:ns:yang:iana-bgp-types
-URI: urn:ietf:params:xml:ns:yang:iana-bgp-community-types
-]]></artwork>
+            <artwork><![CDATA[
+            URI:urn:ietf:params:xml:ns:yang:ietf-bgp
+            URI:urn:ietf:params:xml:ns:yang:ietf-bgp-policy
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-notification
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-community-types
+            ]]></artwork>
           </figure></t>
 
         <t>Registrant Contact: The IESG. XML: N/A, the requested URI is an XML
@@ -600,8 +602,8 @@ URI: urn:ietf:params:xml:ns:yang:iana-bgp-community-types
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers three YANG modules in the YANG Module Names
-        registry <xref target="RFC6020">YANG</xref>.</t>
+        <t>This document registers six YANG modules in the YANG Module
+        Names registry <xref target="RFC6020">YANG</xref>.</t>
 
         <t><figure>
             <artwork><![CDATA[name: ietf-bgp
@@ -622,6 +624,11 @@ reference: RFC XXXX
 name: iana-bgp-types
 namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
 prefix: bt
+reference: RFC XXXX
+
+name: iana-bgp-rib-types
+namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
+prefix: brt
 reference: RFC XXXX
 
 name: iana-bgp-community-types
@@ -672,6 +679,9 @@ reference: RFC XXXX
 
           <li>iana-bgp-types - common type and identity definitions for BGP,
           including BGP policy.</li>
+
+          <li>iana-bgp-rib-types - common type and identity
+          definitions for BGP RIB.</li>
 
           <li>iana-bgp-community-types - common type and identity definitions
           for BGP Communities.</li>
@@ -812,6 +822,17 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-types@YYYY-MM-DD.yang)
           </figure></t>
       </section>
 
+      <section title="BGP RIB types module">
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-rib-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-rib-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure></t>
+      </section>
+
       <section title="BGP Community types module">
         <t><figure>
             <artwork><![CDATA[
@@ -846,18 +867,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
             </figure>
           </t>
         </section>
-        <section title = "ietf-bgp-rib-types submodule">
-          <t>
-            <figure>
-              <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp-rib-types@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-types@YYYY-MM-DD.yang)
-<CODE ENDS>
 
-]]></artwork>
-            </figure>
-          </t>
-        </section>
         <section title = "ietf-bgp-rib-attributes submodule">
           <t>
             <figure>

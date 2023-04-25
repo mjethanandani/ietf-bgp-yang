@@ -53,9 +53,6 @@ module ietf-bgp {
   include ietf-bgp-neighbor {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-rib-types {
-    revision-date YYYY-MM-DD;
-  }
   include ietf-bgp-rib {
     revision-date YYYY-MM-DD;
   }

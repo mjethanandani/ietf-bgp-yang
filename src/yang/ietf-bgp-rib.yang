@@ -1,7 +1,7 @@
 submodule ietf-bgp-rib {
   yang-version 1.1;
   belongs-to ietf-bgp {
-    prefix br;
+    prefix bgp;
   }
 
   /*
@@ -23,7 +23,6 @@ submodule ietf-bgp-rib {
     reference
       "RFC 6991: Common YANG Types.";
   }
-  include ietf-bgp-rib-types;
   include ietf-bgp-rib-tables;
 
   // groupings of attributes in three categories:

@@ -1,14 +1,19 @@
-submodule ietf-bgp-rib-types {
+module iana-bgp-rib-types {
   yang-version 1.1;
-  belongs-to ietf-bgp {
-    prefix br;
-  }
+  namespace "urn:ietf:params:xml:ns:yang:iana-bgp-rib-types";
+  prefix brt;
 
   organization
-    "IETF IDR Working Group";
+    "IANA";
   contact
-    "WG Web:   <http://datatracker.ietf.org/wg/idr>
-     WG List:  <idr@ietf.org>
+    "Internet Assigned Numbers Authority
+
+     Postal: ICANN
+             12025 Waterfront Drive, Suite 300
+             Los Angeles, CA 90094-2536
+             United States of America
+     Tel:    +1 310 301 5800
+     <mailto:iana@iana.org>
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
