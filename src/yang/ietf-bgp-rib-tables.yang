@@ -26,6 +26,11 @@ submodule ietf-bgp-rib-tables {
     reference
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
   }
+  import iana-bgp-rib-types {
+    prefix brt;
+    reference
+      "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
+  }
   include ietf-bgp-rib-attributes;
 
   organization
@@ -93,7 +98,7 @@ submodule ietf-bgp-rib-tables {
     }
     leaf ineligible-reason {
       type identityref {
-        base ineligible-route-reason;
+        base brt:ineligible-route-reason;
       }
       description
         "If the route is ineligible for selection for the best route
@@ -124,10 +129,10 @@ submodule ietf-bgp-rib-tables {
     leaf reject-reason {
       type union {
         type identityref {
-          base bgp-not-selected-bestpath;
+          base brt:bgp-not-selected-bestpath;
         }
         type identityref {
-          base bgp-not-selected-policy;
+          base brt:bgp-not-selected-policy;
         }
       }
       description

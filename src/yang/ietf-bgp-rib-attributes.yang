@@ -21,7 +21,6 @@ submodule ietf-bgp-rib-attributes {
     reference
       "RFC 6991: Common YANG Data Types.";
   }
-  include ietf-bgp-rib-types;
 
   // meta
 
