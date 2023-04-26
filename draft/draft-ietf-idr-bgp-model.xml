@@ -856,7 +856,7 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-rib-types@YYYY-MM-DD.yang)
           </figure></t>
 	</section>
 
-        <section title = "BGP rib submodule">
+        <section title = "BGP RIB submodule">
           <t>
             <figure>
               <artwork><![CDATA[
@@ -869,7 +869,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
           </t>
         </section>
 
-        <section title = "BGP rib attributes submodule">
+        <section title = "BGP RIB attributes submodule">
           <t>
             <figure>
               <artwork><![CDATA[
