@@ -87,15 +87,6 @@ submodule ietf-bgp-common-structure {
           "RFC 4456: BGP Route Reflection: An Alternative to
                      Full Mesh.";
       }
-      leaf no-client-reflect {
-        type boolean;
-        default "false";
-        description
-          "When set to 'true', this disables route redistribution
-           by the Route Reflector. It is set 'true' when the client
-           is fully meshed in its peer-group to prevent sending of
-           redundant route advertisements.";
-      }
       leaf client {
         type boolean;
         default "false";
