@@ -899,7 +899,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
     <section title="Contributors">
       <t>Previous versions of this document saw contributions from Anees
       Shaikh, Rob Shakir, Kevin D'Souza, Alexander Clemm, Aleksandr Zhadkin,
-      and Xyfeng Liu.</t>
+      and Xufeng Liu.</t>
     </section>
 
     <section title="Acknowledgements">
