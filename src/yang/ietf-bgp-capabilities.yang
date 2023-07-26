@@ -110,7 +110,7 @@ submodule ietf-bgp-capabilities {
          4.";
 
       container mpbgp {
-        when "../../name = 'bt:mp-bgp'";
+        when "derived-from-or-self(../../name, 'bt:mp-bgp')";
         description
           "Multi-Protocol BGP-specific values.";
         reference
@@ -146,7 +146,7 @@ submodule ietf-bgp-capabilities {
       }
 
       container graceful-restart {
-        when "../../name = 'bt:graceful-restart'";
+        when "derived-from-or-self(../../name, 'bt:graceful-restart')";
         description
           "BGP Graceful Restart-specific values.";
         reference
@@ -276,7 +276,7 @@ submodule ietf-bgp-capabilities {
       }
 
       container asn32 {
-        when "../../name = 'bt:asn32'";
+        when "derived-from-or-self(../../name, 'bt:asn32')";
         description
           "Four-byte AS Number-specific values.";
         reference
@@ -295,7 +295,7 @@ submodule ietf-bgp-capabilities {
       }
 
       container add-paths {
-        when "../../name = 'bt:add-paths'";
+        when "derived-from-or-self(../../name, 'bt:add-paths')";
         description
           "BGP add-paths-specific values.";
         reference
