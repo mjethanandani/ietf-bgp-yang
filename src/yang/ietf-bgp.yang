@@ -18,6 +18,11 @@ module ietf-bgp {
     reference
       "RFC 9067: A YANG Data Model for Routing Policy.";
   }
+  import ietf-routing-types {
+    prefix rt-types;
+    reference
+      "RFC 8294: Common YANG Data Types for the Routing Area.";
+  }
   import iana-bgp-notification {
     prefix bn;
     reference
@@ -378,6 +383,36 @@ module ietf-bgp {
         }
         uses rt-pol:apply-policy-group;
         uses state;
+      }
+
+      container rd {
+        description
+          "Route distinguisher parameters.";
+
+        leaf rd {
+          type union {
+            type rt-types:route-distinguisher;
+            type enumeration {
+              enum auto {
+                description
+                  "Route distinguisher is assigned automatically.";
+              }
+            }
+          }
+          description
+            "Route distinguisher value.";
+          reference
+            "RFC 4364: BGP/MPLS IP Virtual Private Networks
+                       (VPNs).";
+        }
+
+        leaf auto-rd {
+          type rt-types:route-distinguisher;
+          config false;
+          description
+            "Automatically assigned RD value when rd is configured
+             as 'auto'.";
+        }
       }
 
       container neighbors {
