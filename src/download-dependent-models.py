@@ -8,7 +8,8 @@ list_of_ietf_models =\
   ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "20"],
   ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "10"],
   ["ietf-tcp-server", "draft-ietf-netconf-tcp-client-server", "10"],
-  ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "10"] ]
+  ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "10"],
+  ["ietf-bfd-large", "draft-ietf-bfd-large-packets", "07"] ]
 
 
 list_of_ieee_models =\

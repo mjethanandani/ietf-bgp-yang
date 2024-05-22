@@ -51,6 +51,7 @@
                 <local-multiplier>2</local-multiplier>
                 <desired-min-tx-interval>3300</desired-min-tx-interval>
                 <required-min-rx-interval>3300</required-min-rx-interval>
+                <pdu-size>1512</pdu-size>
               </bfd>
 	    </transport>
           </neighbor>

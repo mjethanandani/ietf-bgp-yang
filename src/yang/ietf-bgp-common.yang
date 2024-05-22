@@ -45,6 +45,10 @@ submodule ietf-bgp-common {
       "RFC 9127: YANG Data Model for Bidirectional Forward
        Detection.";
   }
+  import ietf-bfd-large {
+    prefix bfd-large-types;
+    reference "XXX";
+  }
   import ietf-tcp {
     prefix tcp;
     reference
@@ -557,6 +561,7 @@ submodule ietf-bgp-common {
     container bfd {
       if-feature "bt:bfd";
       uses bfd-types:client-cfg-parms;
+      uses bfd-large-types:bfd-large-common;
       description
         "BFD client configuration.";
       reference
