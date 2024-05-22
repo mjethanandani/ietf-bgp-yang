@@ -1171,6 +1171,17 @@ INSERT_TEXT_FROM_FILE(../bin/example-newco-bgp-a.2@YYYY-MM-DD.yang)
       </figure>
     </section>
 
+    <section title="A BGP BFD Large Augmentation for Reshad">
+      <t>Proof that you can augment the bfd large module onto BGP.</t>
+
+      <figure>
+        <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-bfd-large@YYYY-MM-DD.yang)
+
+]]></artwork>
+      </figure>
+    </section>
+
     <section title="Complete configuration tree diagram">
       <t>Here is a complete tree diagram for the configuration and
       operational part of the model.</t>

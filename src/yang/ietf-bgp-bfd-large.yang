@@ -1,0 +1,54 @@
+module ietf-bgp-bfd-large {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-bfd-large";
+  prefix bgp-bfd-large;
+
+  /*
+   * Import and Include
+   */
+
+  import ietf-routing {
+    prefix rt;
+    reference
+      "RFC 8349, A YANG Data Model for Routing Management
+       (NMDA Version)";
+  }
+  import ietf-bgp {
+    prefix bgp;
+    reference
+      "RFC XXXX: BGP YANG Model for Service Provider Networks.";
+  }
+  import ietf-bfd-large {
+    prefix bfd-large-types;
+    reference "XXX";
+  }
+
+  organization
+    "IETF IDR Working Group";
+  contact
+    "WG Web:   <http://datatracker.ietf.org/wg/idr>
+     WG List:  <idr@ietf.org>
+
+     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
+              Keyur Patel (keyur at arrcus.com),
+              Susan Hares (shares at ndzh.com),
+              Jeffrey Haas (jhaas at juniper.net).";
+
+  description
+    "Prove that we can augment bfd-large onto bgp's bfd container.";
+
+  revision YYYY-MM-DD {
+    description
+      "Initial Version";
+    reference
+      "RFC XXXX, PoC BFD large";
+  }
+
+  augment "/rt:routing/rt:control-plane-protocols/" +
+          "rt:control-plane-protocol/bgp:bgp/bgp:neighbors" +
+          "/bgp:neighbor/bgp:transport/bgp:bfd" {
+    description "PoC";
+    uses bfd-large-types:bfd-large-common;
+  }
+
+}
