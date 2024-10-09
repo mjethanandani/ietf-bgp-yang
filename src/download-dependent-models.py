@@ -2,13 +2,13 @@ import os
 
 list_of_ietf_models =\
 [ ["ietf-tcp", "draft-ietf-tcpm-yang-tcp", "09"],
-  ["ietf-if-extensions", "draft-ietf-netmod-intf-ext-yang", "10"],
-  ["ietf-if-vlan-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "07"],
-  ["ietf-if-flexible-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "07"],
-  ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "20"],
-  ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "10"],
-  ["ietf-tcp-server", "draft-ietf-netconf-tcp-client-server", "10"],
-  ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "10"] ]
+  ["ietf-if-extensions", "draft-ietf-netmod-intf-ext-yang", "14"],
+  ["ietf-if-vlan-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "11"],
+  ["ietf-if-flexible-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "11"],
+  ["ietf-crypto-types", "draft-ietf-netconf-crypto-types", "34"],
+  ["ietf-tcp-client", "draft-ietf-netconf-tcp-client-server", "26"],
+  ["ietf-tcp-server", "draft-ietf-netconf-tcp-client-server", "26"],
+  ["ietf-tcp-common", "draft-ietf-netconf-tcp-client-server", "26"] ]
 
 
 list_of_ieee_models =\
