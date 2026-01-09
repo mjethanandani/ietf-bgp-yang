@@ -9,12 +9,12 @@ submodule ietf-bgp-rib-tables {
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991: Common YANG Data Types.";
+      "RFC 9911: Common YANG Data Types.";
   }
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Data Types.";
+      "RFC 9911: Common YANG Data Types.";
   }
   import ietf-routing {
     prefix rt;
@@ -30,6 +30,11 @@ submodule ietf-bgp-rib-tables {
     prefix brt;
     reference
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
+  }
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
   include ietf-bgp-rib-attributes;
 
@@ -48,7 +53,7 @@ submodule ietf-bgp-rib-tables {
     "This submodule contains structural data definitions for
      BGP routing tables.
 
-     Copyright (c) 2023 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -71,6 +76,7 @@ submodule ietf-bgp-rib-tables {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }

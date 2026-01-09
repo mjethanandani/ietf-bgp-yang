@@ -3,6 +3,12 @@ module iana-bgp-notification {
   namespace "urn:ietf:params:xml:ns:yang:iana-bgp-notification";
   prefix bn;
 
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
+
   // meta
 
   organization
@@ -29,7 +35,7 @@ module iana-bgp-notification {
      'BGP Error (Notification) Codes' and 'BGP Error Subcodes'
      registry at IANA.
 
-     Copyright (c) 2023 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or

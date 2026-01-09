@@ -13,6 +13,11 @@ module iana-bgp-types {
     reference
       "RFC 6991: Common YANG Types.";
   }
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
 
   // meta
 
