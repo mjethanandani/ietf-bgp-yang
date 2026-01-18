@@ -882,8 +882,8 @@ module ietf-bgp {
           }
           description
             "The backward-transition event is
-             generated when the BGP FSM moves from a higher
-             numbered state to a lower numbered state.";
+             generated when the BGP FSM moves out of the
+             Established state.";
         }
         action clear {
           if-feature "bt:clear-neighbors";
