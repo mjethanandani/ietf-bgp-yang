@@ -698,7 +698,7 @@ module ietf-bgp {
               leaf total-sent {
                 type yang:zero-based-counter32;
                 description
-                  "Total number of BGP messages sent do this
+                  "Total number of BGP messages sent to this
                    neighbor";
                 reference
                   "RFC 4273: Definitions of Managed Objects for
