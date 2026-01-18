@@ -33,7 +33,7 @@ submodule ietf-bgp-capabilities {
               Jeffrey Haas (jhaas at juniper.net).";
 
   description
-    "This sub-module contains groupings that used for BGP
+    "This sub-module contains groupings that are used for BGP
      Capabilities within the BGP module.
 
      Copyright (c) 2023 IETF Trust and the persons identified as
