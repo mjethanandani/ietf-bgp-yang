@@ -101,8 +101,8 @@ submodule ietf-bgp-common {
 
   grouping neighbor-group-timers {
     description
-      "Config parameters related to timers associated with the BGP
-       peer";
+      "Configuration parameters related to timers associated with
+       the BGP peer.";
     leaf connect-retry-interval {
       type uint16 {
         range "1..max";
