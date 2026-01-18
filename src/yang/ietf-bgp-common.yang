@@ -48,8 +48,7 @@ submodule ietf-bgp-common {
   import ietf-tcp {
     prefix tcp;
     reference
-      "I-D.ietf-tcpm-yang-tcp: Transmission Control Protocol (TCP)
-       YANG Model.";
+      "RFC 9648: YANG Data Model for TCP.";
   }
   include ietf-bgp-common-structure {
     revision-date YYYY-MM-DD;
