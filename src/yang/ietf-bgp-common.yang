@@ -226,7 +226,7 @@ submodule ietf-bgp-common {
       }
       container ebgp {
         description
-          "Multi-path configuration for eBGP";
+          "Multi-path configuration for eBGP.";
         leaf allow-multiple-as {
           type boolean;
           default "false";
@@ -630,7 +630,7 @@ submodule ietf-bgp-common {
       }
       container ebgp {
         description
-          "Multi-Path parameters for eBGP";
+          "Multi-Path parameters for eBGP.";
         leaf allow-multiple-as {
           type boolean;
           default "false";
@@ -649,7 +649,7 @@ submodule ietf-bgp-common {
       }
       container ibgp {
         description
-          "Multi-Path parameters for iBGP";
+          "Multi-Path parameters for iBGP.";
         leaf maximum-paths {
           type uint32;
           default "1";
