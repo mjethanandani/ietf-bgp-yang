@@ -21,8 +21,6 @@ submodule ietf-bgp-common-structure {
   }
   include ietf-bgp-common-multiprotocol;
 
-  // meta
-
   organization
     "IETF IDR Working Group";
   contact

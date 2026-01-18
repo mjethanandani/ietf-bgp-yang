@@ -16,8 +16,6 @@ submodule ietf-bgp-common-multiprotocol {
     prefix rt-pol;
   }
 
-  // meta
-
   organization
     "IETF IDR Working Group";
   contact

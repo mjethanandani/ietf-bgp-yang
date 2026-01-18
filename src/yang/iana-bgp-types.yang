@@ -14,8 +14,6 @@ module iana-bgp-types {
       "RFC 6991: Common YANG Types.";
   }
 
-  // meta
-
   organization
     "IANA";
   contact
