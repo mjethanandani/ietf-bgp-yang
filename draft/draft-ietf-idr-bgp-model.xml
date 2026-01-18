@@ -543,7 +543,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       such as attribute sets, communities, extended communities, IPv6 extended
       communities, and large communities. Being able to read the contents of
       this container will allow a malicious user to understand how the system
-      decide how to route a packet, and thus try to affect a change.</li>
+      decides how to route a packet, and thus try to affect a change.</li>
       </ul>
 
       <t>Some of the RPC operations in this YANG module may be considered
