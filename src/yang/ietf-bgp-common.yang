@@ -254,6 +254,9 @@ submodule ietf-bgp-common {
          establishing sessions with the remote peer or peer group, if
          this differs from the global BGP router autonomous system
          number.";
+      reference
+        "RFC 7705: Autonomous System Migration Mechanisms and Their
+         Effects on the BGP AS_PATH Attribute.";
     }
     leaf remove-private-as {
       type bt:remove-private-as-option;
