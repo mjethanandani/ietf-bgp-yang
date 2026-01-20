@@ -59,7 +59,7 @@ submodule ietf-bgp-rib {
      rules has been applied.  This can be considered the 'raw' routes
      from a given neighbor.
 
-     adj-rib-in-post: This table is a per-neighbor table containing
+     adj-rib-in-post: This is a per-neighbor table containing
      the routes received from the neighbor that are eligible for
      best-path selection after local input policy rules have been
      applied. The 'best-path' leaf is attached to the route selected
@@ -67,11 +67,6 @@ submodule ietf-bgp-rib {
      routes may be present in the loc-rib table, described above,
      when local configuration determines that the BGP best-path will
      be used for that destination.
-
-     adj-rib-in-post: This is a per-neighbor table containing the
-     routes received from the neighbor that are eligible for
-     best-path selection after local input policy rules have been
-     applied.
 
      adj-rib-out-pre: This is a per-neighbor table containing routes
      eligible for sending (advertising) to the neighbor before output
