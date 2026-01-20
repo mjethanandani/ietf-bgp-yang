@@ -1030,8 +1030,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.8342.xml'?>
 
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-      href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-idr-deprecate-as-set-confed-set.xml"/>
+      <?rfc include='reference.RFC.9774.xml'?>
     </references>
 
     <section title="Examples">
@@ -1322,7 +1321,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
         this is only a recommendation and not a protocol requirement.  AS_SETs
         are being deprecated for implementation and deployment in BGP due to the
         issues that they raise in BGP security features.  See
-        <xref target="I-D.ietf-idr-deprecate-as-set-confed-set"/>.</li>
+        <xref target="RFC9774"/>.</li>
 
         <li>BGP Confederation are the always the left-most ASes in the AS_PATH.
         As a result, matching on confederation ASes may be done using the '^'
