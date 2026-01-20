@@ -1131,7 +1131,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.4.xml,68)
             
       <section title="BGP Policy - Match Next-hop and Set Community">
         <t>In this example, a "next-hop-set" is configured using option "invert"
-          from "matct-set-options" to match next-hop not equal to "192.0.2.2" and
+          from "match-set-options" to match next-hop not equal to "192.0.2.2" and
           then set community to 55:55.</t>
         <figure>
           <artwork><![CDATA[
