@@ -74,11 +74,11 @@ submodule ietf-bgp-rib {
      applied.
 
      adj-rib-out-pre: This is a per-neighbor table containing routes
-     eligible for sending (advertising) to the neighbor before output
+     eligible to be sent (advertised) to the neighbor before output
      policy rules have been applied.
 
      adj-rib-out-post: This is a per-neighbor table containing routes
-     eligible for sending (advertising) to the neighbor after output
+     eligible to be sent (advertised) to the neighbor after output
      policy rules have been applied.
 
      Copyright (c) 2023 IETF Trust and the persons identified as
