@@ -30,7 +30,7 @@ module example-newafi-bgp {
     "Newafi model group.";
 
   contact
-    "abc@newafi.com";
+    "abc@example.com";
   description
     "This YANG module defines and uses new AFI.";
 

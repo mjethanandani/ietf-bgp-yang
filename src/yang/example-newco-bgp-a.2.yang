@@ -11,7 +11,7 @@ module example-newco-bgp {
     "Newco model group.";
 
   contact
-    "abc@newco.com";
+    "abc@example.com";
   description
     "This YANG module deviates IETF BGP YANG module.";
 
