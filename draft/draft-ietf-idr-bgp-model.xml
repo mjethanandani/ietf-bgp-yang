@@ -904,7 +904,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
     <section title="Acknowledgements">
       <t>The authors are grateful for valuable contributions to this
-      document and the associated models from: Ebben Aires, Pavan
+      document and the associated models from: Ebben Aries, Pavan
       Beeram, Chris Chase, Ed Crabbe, Luyuan Fang, Bill Fenner, Akshay
       Gattani, Josh George, Vijay Gill, Matt John, Dhanendra Jain,
       Acee Lindem, Ina Minei, Carl Moberg, Ashok Narayanan, Einar
