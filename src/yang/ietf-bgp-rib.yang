@@ -149,6 +149,24 @@ submodule ietf-bgp-rib {
             "List of AS PATH segments";
         }
       }
+      container as4-path {
+        description
+          "This is the path encoded with 4-octet
+           AS numbers in the optional transitive AS4_PATH attribute.
+           This value is populated with the received or sent
+           attribute in Adj-RIB-In or Adj-RIB-Out, respectively.
+           It should not be populated in Loc-RIB since the Loc-RIB
+           is expected to store the effective AS-Path in the
+           as-path leaf regardless of being 4-octet or 2-octet.";
+        reference
+          "RFC 6793: BGP Support for Four-octet AS Number Space";
+        list segment {
+          config false;
+          uses bgp-as-path-segment;
+          description
+            "List of AS PATH segments";
+        }
+      }
       leaf next-hop {
         type inet:ip-address;
         description
@@ -189,24 +207,6 @@ submodule ietf-bgp-rib {
         reference
           "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
            5.1.5.";
-      }
-      container as4-path {
-        description
-          "This is the path encoded with 4-octet
-           AS numbers in the optional transitive AS4_PATH attribute.
-           This value is populated with the received or sent
-           attribute in Adj-RIB-In or Adj-RIB-Out, respectively.
-           It should not be populated in Loc-RIB since the Loc-RIB
-           is expected to store the effective AS-Path in the
-           as-path leaf regardless of being 4-octet or 2-octet.";
-        reference
-          "RFC 6793: BGP Support for Four-octet AS Number Space";
-        list segment {
-          config false;
-          uses bgp-as-path-segment;
-          description
-            "List of AS PATH segments";
-        }
       }
       container aggregator {
         config false;
