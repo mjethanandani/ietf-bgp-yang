@@ -143,6 +143,13 @@ module iana-bgp-community-types {
       "Base identity to identify send-community feature.";
   }
 
+  identity none {
+    base send-community-feature;
+    description
+      "Send no communities.  When used, no other community types
+       should be present.";
+  }
+
   identity standard {
     base send-community-feature;
     description
