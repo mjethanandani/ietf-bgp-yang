@@ -602,10 +602,11 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers six YANG modules in the YANG Module
+        <t>This document registers 14 YANG modules in the YANG Module
         Names registry <xref target="RFC6020">YANG</xref>.</t>
 
-        <t><figure>
+        <t>
+	  <figure>
             <artwork><![CDATA[
 	    name: ietf-bgp
 	    namespace: urn:ietf:params:xml:ns:yang:ietf-bgp
@@ -618,7 +619,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 	    reference: RFC XXXX
 
 	    name: iana-bgp-community-types
-	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-community-types
+	    namespace: 
+	      urn:ietf:params:xml:ns:yang:iana-bgp-community-types
 	    prefix: bct
 	    reference: RFC XXXX
 
@@ -636,9 +638,41 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
 	    prefix: brt
 	    reference: RFC XXXX
+
+	    name: ietf-bgp-capabilities
+	    belongs to: ietf-bgp
+	    reference: RFC XXXX
+
+	    name: ietf-bgp-common-multiprotocol
+	    belongs to: ietf-bgp
+	    reference: RFC XXXX
+
+	    name: ietf-bgp-common-structure
+	    belongs to: ietf-bgp
+	    reference: RFC XXXX
+
+	    name: ietf-bgp-common
+	    belongs to: ietf-bgp
+	    reference: RFC XXXX
+
+	    name: ietf-bgp-neighbors
+	    belongs to: ietf-bgp
+	    reference: RFC XXXX
+
+	    name: ietf-bgp-rib-attributes
+	    belongs to: ietf-bgp
+	    reference: RFC XXXX
+
+	    name: ietf-bgp-rib-tables
+	    belongs to: ietf-bgp
+	    reference: RFC XXXX
+
+	    name: ietf-bgp-rib
+	    belongs to: ietf-bgp
+	    reference: RFC XXXX
 	    ]]>
 	    </artwork>
-          </figure></t>
+        </figure></t>
       </section>
     </section>
 
