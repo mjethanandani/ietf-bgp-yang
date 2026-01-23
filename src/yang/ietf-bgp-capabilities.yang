@@ -146,7 +146,8 @@ submodule ietf-bgp-capabilities {
       }
 
       container graceful-restart {
-        when "derived-from-or-self(../../name, 'bt:graceful-restart')";
+        when "derived-from-or-self(../../name, " +
+             "'bt:graceful-restart')";
         description
           "BGP Graceful Restart-specific values.";
         reference
