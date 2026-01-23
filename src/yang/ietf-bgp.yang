@@ -612,8 +612,7 @@ module ietf-bgp {
                    established.";
               }
             }
-            //  notification does not like a non-config statement.
-            //  config false;
+            config false;
             description
               "The BGP peer connection state.";
             reference
