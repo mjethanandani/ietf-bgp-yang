@@ -758,7 +758,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li><xref target="RFC9067">A YANG Data Model for Routing Policy</xref></li>
       <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9293">Transmission Control Protocol</xref></li>
-      <li><xref target="I-D.ietf-tcpm-yang-tcp">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
+      <li><xref target="RFC9648">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
       </ul></t>
 
       <section title="BGP module and submodules">
@@ -1040,7 +1040,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <?rfc include='reference.RFC.9314.xml'?>
 
-      <?rfc include='reference.I-D.ietf-tcpm-yang-tcp.xml'?>
+      <?rfc include='reference.RFC.9648.xml'?>
     </references>
 
     <references title="Informative references">
