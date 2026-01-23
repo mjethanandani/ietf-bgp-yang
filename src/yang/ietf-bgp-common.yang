@@ -100,8 +100,8 @@ submodule ietf-bgp-common {
 
   grouping neighbor-group-timers {
     description
-      "Config parameters related to timers associated with the BGP
-       peer";
+      "Configuration parameters related to timers associated with
+       the BGP peer.";
     leaf connect-retry-interval {
       type uint16 {
         range "1..max";
@@ -225,7 +225,7 @@ submodule ietf-bgp-common {
       }
       container ebgp {
         description
-          "Multi-path configuration for eBGP";
+          "Multi-path configuration for eBGP.";
         leaf allow-multiple-as {
           type boolean;
           default "false";
@@ -632,7 +632,7 @@ submodule ietf-bgp-common {
       }
       container ebgp {
         description
-          "Multi-Path parameters for eBGP";
+          "Multi-Path parameters for eBGP.";
         leaf allow-multiple-as {
           type boolean;
           default "false";
@@ -651,7 +651,7 @@ submodule ietf-bgp-common {
       }
       container ibgp {
         description
-          "Multi-Path parameters for iBGP";
+          "Multi-Path parameters for iBGP.";
         leaf maximum-paths {
           type uint32;
           default "1";

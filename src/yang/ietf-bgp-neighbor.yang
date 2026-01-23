@@ -22,8 +22,6 @@ submodule ietf-bgp-neighbor {
   include ietf-bgp-common-multiprotocol;
   include ietf-bgp-common-structure;
 
-  // meta
-
   organization
     "IETF IDR Working Group";
   contact

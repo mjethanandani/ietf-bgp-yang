@@ -14,8 +14,6 @@ module iana-bgp-types {
       "RFC 6991: Common YANG Types.";
   }
 
-  // meta
-
   organization
     "IANA";
   contact
@@ -239,7 +237,7 @@ module iana-bgp-types {
   identity mp-bgp {
     base bgp-capability;
     description
-      "Multi-protocol extensions to BGP";
+      "Multi-protocol extensions to BGP.";
     reference
       "RFC 4760: Multiprotocol Extentions for BGP-4.";
   }

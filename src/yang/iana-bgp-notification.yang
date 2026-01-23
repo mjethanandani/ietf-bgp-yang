@@ -3,8 +3,6 @@ module iana-bgp-notification {
   namespace "urn:ietf:params:xml:ns:yang:iana-bgp-notification";
   prefix bn;
 
-  // meta
-
   organization
     "IANA";
   contact

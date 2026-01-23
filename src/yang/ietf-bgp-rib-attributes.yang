@@ -22,8 +22,6 @@ submodule ietf-bgp-rib-attributes {
       "RFC 6991: Common YANG Data Types.";
   }
 
-  // meta
-
   organization
     "IETF IDR Working Group";
   contact
