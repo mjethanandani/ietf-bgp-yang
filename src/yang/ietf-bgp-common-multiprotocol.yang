@@ -27,7 +27,7 @@ submodule ietf-bgp-common-multiprotocol {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This sub-module contains groupings that are related to support

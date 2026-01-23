@@ -20,7 +20,7 @@ module iana-bgp-notification {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This YANG module is maintained by IANA and contains definitions
