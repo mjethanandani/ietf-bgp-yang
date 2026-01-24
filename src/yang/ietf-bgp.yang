@@ -322,22 +322,26 @@ module ietf-bgp {
             "Configuration options specifying parameters when the
              local router is within an autonomous system which is
              part of a BGP confederation.";
-          leaf enabled {
-            type boolean;
-            description
-              "When this leaf is set to true it indicates that
-               the local-AS is part of a BGP confederation.";
-          }
+          reference
+            "RFC 5065: Autonomous System Confederations for BGP.";
           leaf identifier {
             type inet:as-number;
             description
-              "Confederation identifier for the autonomous system.";
+              "Confederation identifier for the autonomous system.
+               Setting the identifier indicates that the local-AS is
+               part of the BGP confederation.";
+            reference
+              "RFC 5065: Autonomous System Confederations for BGP,
+               Section 1.2.";
           }
           leaf-list member-as {
             type inet:as-number;
             description
-              "Remote autonomous systems that are to be treated
+              "Autonomous system numbers that are to be treated
                as part of the local confederation.";
+            reference
+              "RFC 5065: Autonomous System Confederations for BGP,
+               Section 1.2.";
           }
         }
         container graceful-restart {
