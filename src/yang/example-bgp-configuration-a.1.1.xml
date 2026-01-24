@@ -24,7 +24,7 @@
         </global>
         <neighbors>
           <neighbor>
-            <remote-address>192.0.2.1</remote-address>
+            <remote-address>2001:db8:100::1</remote-address>
             <peer-as>64497</peer-as>
             <route-flap-damping>
               <enable>true</enable>
@@ -40,7 +40,7 @@
             <description>"Peer Router B"</description>
             <afi-safis>
               <afi-safi>
-                <name>bt:ipv4-unicast</name>
+                <name>bt:ipv6-unicast</name>
               </afi-safi>
             </afi-safis>
 	    <transport>
