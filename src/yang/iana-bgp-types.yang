@@ -154,48 +154,47 @@ module iana-bgp-types {
 
   /* BGP AS_PATH Segment Type Identities. */
 
-  identity as-path-segment-type {
-    description
-      "Base AS Path Segment Type. In [BGP-4], the path segment type
-       is a 1-octet field with the following values defined.";
-    reference
-      "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.3.";
-  }
+  typedef as-path-segment-type {
+    type enumeration {
+      enum as-set {
+        description
+          "Unordered set of autonomous systems that a route in the
+           UPDATE message has traversed.";
+        value 1;
+        reference
+          "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+           Section 4.3."; }
 
-  identity as-set {
-    base as-path-segment-type;
-    description
-      "Unordered set of autonomous systems that a route in the UPDATE
-       message has traversed.";
-    reference
-      "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.3.";
-  }
+      enum as-sequence {
+        description
+          "Ordered set of autonomous systems that a route in the
+           UPDATE message has traversed.";
+        value 2;
+        reference
+          "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+           Section 4.3.";
+      }
 
-  identity as-sequence {
-    base as-path-segment-type;
-    description
-      "Ordered set of autonomous systems that a route in the UPDATE
-       message has traversed.";
-    reference
-      "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.3.";
-  }
+      enum as-confed-sequence {
+        description
+          "Ordered set of Member Autonomous Systems in the local
+           confederation that the UPDATE message has traversed.";
+        value 3;
+        reference
+          "RFC 5065: Autonomous System Configuration for BGP.";
+      }
 
-  identity as-confed-sequence {
-    base as-path-segment-type;
+      enum as-confed-set {
+        description
+          "Unordered set of Member Autonomous Systems in the local
+           confederation that the UPDATE message has traversed.";
+        value 4;
+        reference
+          "RFC 5065: Autonomous System Configuration for BGP.";
+      }
+    }
     description
-      "Ordered set of Member Autonomous Systems in the local
-       confederation that the UPDATE message has traversed.";
-    reference
-      "RFC 5065: Autonomous System Configuration for BGP.";
-  }
-
-  identity as-confed-set {
-    base as-path-segment-type;
-    description
-      "Unordered set of Member Autonomous Systems in the local
-       confederation that the UPDATE message has traversed.";
-    reference
-      "RFC 5065: Autonomous System Configuration for BGP.";
+      "BGP AS_PATH segment types.";
   }
 
   /* BGP Peer-Types */

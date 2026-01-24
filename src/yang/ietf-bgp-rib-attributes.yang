@@ -69,9 +69,7 @@ submodule ietf-bgp-rib-attributes {
       "Data for representing BGP AS-PATH segment";
 
     leaf type {
-      type identityref {
-        base bt:as-path-segment-type;
-      }
+      type bt:as-path-segment-type;
       description
         "The type of AS-PATH segment";
     }
