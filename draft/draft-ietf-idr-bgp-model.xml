@@ -521,10 +521,27 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li> The attribute 'enabled' in the 'confederation' container. This
       attribute defines whether a local-AS is part of a BGP confederation.</li>
 
-      <li> Finally, there are a whole set of route selection options such as
+      <li> There are a whole set of route selection options such as
       'always-compare-med', 'ignore-as-path-length' that affect the way the
       system picks up a particular route. Being able to change will adversely
       affect how the route selection happens.</li>
+
+      <li>This module defines a container, 'secure-session' providing
+      configuration for BGP peering session transport security.
+      Misconfiguration of nodes in this container can prevent peering sessions
+      from coming up, or upon change, cause peering sessions to reset. Improper
+      operational exposure of the content of these nodes can compromise the
+      transport security of BGP peering sessions.</li>
+
+      <li>The nodes of 'secure-session' contains a
+      choice of using <xref target="RFC5925">TCP-Authentication Option
+      (TCP-AO)</xref>, or <xref target="RFC2385">Protection of BGP
+      Sessions via the TCP MD5 Signature Option</xref>. The support
+      for MD5 has been made available for legacy reasons. However,
+      because of vulnerabilities in MD5 as described in <xref
+      target="RFC6151">MD5 and HMAC-MD5 Security
+      Considerations</xref>, operators are strongly encouraged to use
+      TCP-AO or other methods to secure their BGP session.</li>
       </ul>
 
       <t>Some of the readable data nodes in this YANG module may be considered
@@ -568,16 +585,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       target="RFC5082">Generalized TTL Security Mechanism
       (GTSM)</xref> capability to make it harder to spoof a BGP
       session. This module allows implementations that want to support
-      the capability to configure a TTL value, under a feature flag.
-      It also defines a container 'secure-session' that contains a
-      choice of using <xref target="RFC5925">TCP-Authentication Option
-      (TCP-AO)</xref>, or <xref target="RFC2385">Protection of BGP
-      Sessions via the TCP MD5 Signature Option</xref>. The support
-      for MD5 has been made available for legacy reasons. However,
-      because of vulnerabilities in MD5 as described in <xref
-      target="RFC6151">MD5 and HMAC-MD5 Security
-      Considerations</xref>, operators are strongly encouraged to use
-      TCP-AO or other methods to secure their BGP session.</t>
+      the capability to configure a TTL value, under a feature flag.</t>
+
     </section>
 
     <section title="IANA Considerations">
