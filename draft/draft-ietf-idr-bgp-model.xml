@@ -505,14 +505,15 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       sensitivity/vulnerability are described here.</t>
 
       <ul>
-      <li> The attribute 'as'. If a user is allowed to change this attribute,
-      it will have the net effect of bringing down the entire routing
-      instance, causing it to delete all the current routing entries, and
-      learning new ones.</li>
+      <li>The attribute 'as'. If a user is allowed to change this attribute, it
+      will have the net effect of resetting all BGP sessions in the
+      routing instance, causing it to delete all of the current routing entries,
+      and learning new ones.</li>
 
-      <li> The attribute 'identifier'. If a user is allowed to change this
-      attribute, it will have the net effect of this routing instance
-      re-advertising all its routes.</li>
+      <li>The attribute 'identifier'. If a user is allowed to change this
+      attribute, it will have the net effect of resetting all BGP sessions in
+      the routing instance, causing it to delete all of the current routing
+      entries, and learning new ones.</li>
 
       <li> The attribute 'distance'. If a user is allowed to change this
       attribute, it will cause the preference for routes, e.g. external vs
