@@ -750,9 +750,8 @@ module iana-bgp-notification {
 
        The value of the 'BFD Down' Error subocde is 10.";
     reference
-      "draft-ietf-idr-bfd-subcode-05: A BGP Cease Notification
-      Subcode For Bidirectional Forwarding Detection (BFD), Section
-      2.";
+      "RFC 9384: A BGP Cease Notification Subcode For Bidirectional
+       Forwarding Detection (BFD), Section 2.";
   }
 
   identity route-refresh-message-error {
