@@ -8,12 +8,12 @@
 	<mode>ipv4</mode>
         <prefixes>
           <prefix-list>
-            <ip-prefix>1.1.1.1/32</ip-prefix>
+            <ip-prefix>192.0.2.1/32</ip-prefix>
 	    <mask-length-lower>32</mask-length-lower>
 	    <mask-length-upper>32</mask-length-upper>
           </prefix-list>
           <prefix-list>
-            <ip-prefix>2.2.2.2/32</ip-prefix>
+            <ip-prefix>192.0.2.5/32</ip-prefix>
 	    <mask-length-lower>32</mask-length-lower>
 	    <mask-length-upper>32</mask-length-upper>
           </prefix-list>
@@ -24,12 +24,12 @@
 	<mode>ipv4</mode>
         <prefixes>
           <prefix-list>
-            <ip-prefix>3.3.3.3/32</ip-prefix>
+            <ip-prefix>192.0.2.9/32</ip-prefix>
 	    <mask-length-lower>32</mask-length-lower>
 	    <mask-length-upper>32</mask-length-upper>
           </prefix-list>
           <prefix-list>
-            <ip-prefix>4.4.4.4/32</ip-prefix>
+            <ip-prefix>192.0.2.13/32</ip-prefix>
 	    <mask-length-lower>32</mask-length-lower>
 	    <mask-length-upper>32</mask-length-upper>
           </prefix-list>
@@ -40,7 +40,7 @@
 	<mode>ipv4</mode>
         <prefixes>
           <prefix-list>
-            <ip-prefix>5.5.5.5/32</ip-prefix>
+            <ip-prefix>192.0.2.17/32</ip-prefix>
 	    <mask-length-lower>32</mask-length-lower>
 	    <mask-length-upper>32</mask-length-upper>
           </prefix-list>
