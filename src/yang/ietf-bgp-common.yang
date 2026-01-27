@@ -263,8 +263,8 @@ submodule ietf-bgp-common {
         "When this leaf is specified, remove private AS numbers from
          updates sent to peers.";
       reference
-        "RFC 2270: Using a Dedicated AS for Sites Homed to a Single
-         Provider.";
+	"RFC 6996: Autonomous System (AS) Reservation for Private
+	 Use.";
     }
     container route-flap-damping {
       if-feature "bt:damping";
