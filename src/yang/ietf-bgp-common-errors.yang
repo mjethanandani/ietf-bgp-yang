@@ -12,7 +12,7 @@ submodule ietf-bgp-common-errors {
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Data Types.";
+      "RFC 9911: Common YANG Data Types.";
   }
 
   organization
@@ -136,7 +136,7 @@ submodule ietf-bgp-common-errors {
        direction that has been encapsulated in a CEASE/HARD RESET
        NOTIFICATION.
 
-       Note that these leaves are only present when carrying the RFC
+       Note that these leafs are only present when carrying the RFC
        8538 encapsulated NOTIFICATION state. In this case,
        the last-error-data leaf will carry the encapsulated Data.";
       
