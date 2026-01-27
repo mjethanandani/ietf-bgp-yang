@@ -661,16 +661,17 @@ module ietf-bgp-policy {
           }
           description
             "Number of times to prepend the AS number to the AS
-             path. If no value is specified by the asn leaf, the local
-             AS number is used. The value should be between 1 and the
-             maximum supported by the implementation.";
+             path. If no value is specified by the asn or use-last-as
+             leafs, the local AS number is used. The value should be
+             between 1 and the maximum supported by the
+             implementation.";
         }
         leaf asn {
           type inet:as-number;
           must "../repeat-n and not(../use-last-as)";
           description
             "The AS number to prepend to the AS path. If neither this
-             leaf nor use-last-as leaf is specified but repeat-n is
+             leaf nor use-last-as leaf is specified, but repeat-n is
              set, then the local AS number will be used for
              prepending.";
         }
@@ -680,9 +681,9 @@ module ietf-bgp-policy {
           description
             "Indicates whether to use the last AS number, which is
              also the most recent AS number, to prepend to the AS
-             path.  If neither this leaf nor asn leaf is specified but
-             repeat-n is set, then the local AS number will be used
-             for prepending.";
+             path.  If neither this leaf, nor asn leaf is specified,
+             but repeat-n is set, then the local AS number will be
+             used for prepending.";
         }
       }
 
