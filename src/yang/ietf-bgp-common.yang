@@ -270,6 +270,9 @@ submodule ietf-bgp-common {
       description
         "When this leaf is specified, remove private AS numbers from
          updates sent to peers.";
+      reference
+	"RFC 6996: Autonomous System (AS) Reservation for Private
+	 Use.";
     }
     container route-flap-damping {
       if-feature "bt:damping";
