@@ -561,7 +561,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       operation, causing all the individual statistics to be cleared.</li>
 
       <li> The model also allows for neighbors that have been learnt by the
-      system to be cleared by using the 'clear' RPC operation.</li>
+      system to be cleared by using the 'clear' RPC operation.  This results
+      in a session bounce and all of the routes being cleared and re-learned.</li>
       </ul>
 
       <t><xref target="RFC7454">BGP OPSEC</xref> describes several
