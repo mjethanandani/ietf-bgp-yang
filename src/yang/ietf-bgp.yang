@@ -347,8 +347,8 @@ module ietf-bgp {
             description
               "The BGP Identifier of this entry's BGP peer.
                This entry MUST be 0.0.0.0 unless the
-               session state is in the openconfirm or the
-               established state.";
+               session state is in the OpenConfirm or the
+               Established state.";
             reference
               "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
                          Section 4.2, 'BGP Identifier'.";
@@ -740,12 +740,12 @@ module ietf-bgp {
               path "../../neighbor/remote-address";
             }
             description
-              "IP address of the neighbor that went into established
+              "IP address of the neighbor that went into Established
                state.";
           }
           description
             "The established event is generated
-             when the BGP FSM enters the established state.";
+             when the BGP FSM enters the Established state.";
         }
 
         notification backward-transition {
@@ -755,7 +755,7 @@ module ietf-bgp {
             }
             description
               "IP address of the neighbor that changed its state from
-               established state.";
+               Established state.";
           }
           container notification-received {
             description

@@ -401,7 +401,7 @@ submodule ietf-bgp-common {
           "Configure logging of peer state changes.  Default is to
            enable logging of peer state changes.
 
-           Note: Documenting demotion from ESTABLISHED state is
+           Note: Documenting demotion from Established state is
                  desirable, but documenting all backward transitions
                  is problematic, and should be avoided.";
       }
