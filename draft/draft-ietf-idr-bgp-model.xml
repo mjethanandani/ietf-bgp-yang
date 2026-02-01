@@ -618,76 +618,76 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
         Names registry <xref target="RFC6020">YANG</xref>.</t>
 
         <t>
-	  <figure>
+          <figure>
             <artwork><![CDATA[
-	    name: ietf-bgp
-	    namespace: urn:ietf:params:xml:ns:yang:ietf-bgp
-	    prefix: bgp
-	    reference: RFC XXXX
+            name: ietf-bgp
+            namespace: urn:ietf:params:xml:ns:yang:ietf-bgp
+            prefix: bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-policy
-	    namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
-	    prefix: bp
-	    reference: RFC XXXX
+            name: ietf-bgp-policy
+            namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
+            prefix: bp
+            reference: RFC XXXX
 
-	    name: iana-bgp-community-types
-	    namespace: 
-	      urn:ietf:params:xml:ns:yang:iana-bgp-community-types
-	    prefix: bct
-	    reference: RFC XXXX
+            name: iana-bgp-community-types
+            namespace: 
+              urn:ietf:params:xml:ns:yang:iana-bgp-community-types
+            prefix: bct
+            reference: RFC XXXX
 
-	    name: iana-bgp-notification
-	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-notification
-	    prefix: bn
-	    reference: RFC XXXX
+            name: iana-bgp-notification
+            namespace: urn:ietf:params:xml:ns:yang:iana-bgp-notification
+            prefix: bn
+            reference: RFC XXXX
 
-	    name: iana-bgp-types
-	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
-	    prefix: bt
-	    reference: RFC XXXX
+            name: iana-bgp-types
+            namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
+            prefix: bt
+            reference: RFC XXXX
 
-	    name: iana-bgp-rib-types
-	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
-	    prefix: brt
-	    reference: RFC XXXX
+            name: iana-bgp-rib-types
+            namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
+            prefix: brt
+            reference: RFC XXXX
 
-	    name: ietf-bgp-capabilities
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
+            name: ietf-bgp-capabilities
+            belongs to: ietf-bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-common-multiprotocol
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
+            name: ietf-bgp-common-multiprotocol
+            belongs to: ietf-bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-common-structure
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
+            name: ietf-bgp-common-structure
+            belongs to: ietf-bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-common
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
+            name: ietf-bgp-common
+            belongs to: ietf-bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-common-errors
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
+            name: ietf-bgp-common-errors
+            belongs to: ietf-bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-neighbors
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
+            name: ietf-bgp-neighbors
+            belongs to: ietf-bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-rib-attributes
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
+            name: ietf-bgp-rib-attributes
+            belongs to: ietf-bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-rib-tables
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
+            name: ietf-bgp-rib-tables
+            belongs to: ietf-bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-rib
-	    belongs to: ietf-bgp
-	    reference: RFC XXXX
-	    ]]>
-	    </artwork>
+            name: ietf-bgp-rib
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+            ]]>
+            </artwork>
         </figure></t>
       </section>
     </section>
@@ -708,8 +708,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           group, global).</li>
 
           <li>ietf-bgp-common-errors - defines the groupings that are common
-	  to BGP NOTIFICATION error reporting across more than one context
-	  (where contexts are neighbor, group, global).</li>
+          to BGP NOTIFICATION error reporting across more than one context
+          (where contexts are neighbor, group, global).</li>
 
           <li>ietf-bgp-common-multiprotocol - defines the groupings
           that are common across more than one context, and relate to
@@ -911,7 +911,7 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
       </section>
 
       <section title="RIB modules and submodules">
-	<section title="BGP RIB types module">
+        <section title="BGP RIB types module">
           <t><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-rib-types@YYYY-MM-DD.yang"
@@ -920,7 +920,7 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-rib-types@YYYY-MM-DD.yang)
 
         ]]></artwork>
           </figure></t>
-	</section>
+        </section>
 
         <section title = "BGP RIB submodule">
           <t>
