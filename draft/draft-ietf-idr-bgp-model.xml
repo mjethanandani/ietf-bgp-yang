@@ -1403,8 +1403,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
         </ul>
       </section>
       <section title="BGP YANG AS_PATH Regular Expressions ABNF">
-	<t>This module's AS_PATH regular expression syntax is documented using
-	<xref target="RFC5234">ABNF</xref> format.</t>
+        <t>This module's AS_PATH regular expression syntax is documented using
+        <xref target="RFC5234">ABNF</xref> format.</t>
 
         <sourcecode>
 <![CDATA[
