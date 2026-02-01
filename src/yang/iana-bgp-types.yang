@@ -106,6 +106,13 @@ module iana-bgp-types {
       "Weighted route dampening is supported.";
   }
 
+  feature distance {
+    description
+      "BGP distance for implementations that expose routing table
+       preferences for route selection for internal and external
+       BGP.";
+  }
+
   feature graceful-restart {
     description
       "Graceful restart as defined in RFC 4724 is supported.";
