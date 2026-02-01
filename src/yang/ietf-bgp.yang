@@ -26,12 +26,12 @@ module ietf-bgp {
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991: Common YANG Data Types.";
+      "RFC 9911: Common YANG Data Types.";
   }
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Data Types.";
+      "RFC 9911: Common YANG Data Types.";
   }
   include ietf-bgp-capabilities {
     revision-date YYYY-MM-DD;
@@ -160,7 +160,7 @@ module ietf-bgp {
           mandatory true;
           description
             "Local autonomous system number of the router.  Uses
-             the 32-bit as-number type from the model in RFC 6991.";
+             the 32-bit as-number type from the model in RFC 9911.";
         }
         leaf enforce-first-as {
            type boolean;

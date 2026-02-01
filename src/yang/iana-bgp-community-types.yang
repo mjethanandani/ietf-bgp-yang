@@ -10,7 +10,7 @@ module iana-bgp-community-types {
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Types.";
+      "RFC 9911: Common YANG Types.";
   }
 
   organization

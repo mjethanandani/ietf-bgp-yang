@@ -17,7 +17,7 @@ submodule ietf-bgp-common-structure {
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991: Common YANG Data Types.";
+      "RFC 9911: Common YANG Data Types.";
   }
   include ietf-bgp-common-multiprotocol;
 

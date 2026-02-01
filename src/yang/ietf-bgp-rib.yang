@@ -16,12 +16,12 @@ submodule ietf-bgp-rib {
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991: Common YANG Types.";
+      "RFC 9911: Common YANG Types.";
   }
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Types.";
+      "RFC 9911: Common YANG Types.";
   }
   include ietf-bgp-rib-tables;
 
