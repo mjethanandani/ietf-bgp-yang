@@ -520,8 +520,11 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       attribute, it will cause the preference for routes, e.g. external vs
       internal to change.</li>
 
-      <li> The attribute 'enabled' in the 'confederation' container. This
-      attribute defines whether a local-AS is part of a BGP confederation.</li>
+      <li> In the 'confederation' container, 'identifier' and 'member-as'
+      defines whether ASes are part of the BGP confederation.  Improperly
+      configuring these attributes may result in BGP session resets by
+      advertising confederation routes to non-confederation peers or
+      non-confederation routes to peers expecting such routes.</li>
 
       <li> There are a whole set of route selection options such as
       'always-compare-med', 'ignore-as-path-length' that affect the way the
