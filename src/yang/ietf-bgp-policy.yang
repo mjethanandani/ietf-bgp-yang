@@ -463,6 +463,21 @@ module ietf-bgp-policy {
         uses equality-operator;
       }
 
+      container extended-community-count {
+        description
+          "Value and comparison operations for conditions based on
+           the number of extended communities in the route update.";
+
+        leaf extended-community-count {
+          type uint32;
+          description
+            "Value for the number of communities in the route
+             update.";
+        }
+
+        uses equality-operator;
+      }
+
       container as-path-length {
         description
           "Value and comparison operations for conditions based on
