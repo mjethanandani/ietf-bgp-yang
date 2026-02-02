@@ -7,7 +7,7 @@ submodule ietf-bgp-neighbor {
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Data Types.";
+      "RFC 9911: Common YANG Data Types.";
   }
 
   import iana-bgp-types {

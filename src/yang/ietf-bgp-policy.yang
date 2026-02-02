@@ -8,7 +8,7 @@ module ietf-bgp-policy {
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991: Common YANG Data Types";
+      "RFC 9911: Common YANG Data Types";
   }
   import ietf-routing-policy {
     prefix rt-pol;

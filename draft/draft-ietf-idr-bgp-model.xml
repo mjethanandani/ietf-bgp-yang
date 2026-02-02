@@ -293,7 +293,7 @@
 
       <t>These modules also make use of standard Internet types, such as IP
       addresses and prefixes, autonomous system numbers, etc., defined in
-      <xref target="RFC6991">Common YANG Data Types </xref>.</t>
+      <xref target="RFC9911">Common YANG Data Types </xref>.</t>
 
       <section anchor="overview.protocol" title="BGP protocol configuration">
         <t>The BGP protocol configuration model is organized hierarchically,
@@ -1041,8 +1041,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6811.xml"/>
 
-      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6991.xml"/>
-
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7607.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7911.xml"/>
@@ -1076,6 +1074,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9314.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9648.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9911.xml"/>
     </references>
 
     <references title="Informative references">
