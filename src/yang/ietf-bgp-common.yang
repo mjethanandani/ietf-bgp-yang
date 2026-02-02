@@ -120,7 +120,6 @@ submodule ietf-bgp-common {
         range "0 | 3..65535";
       }
       units "seconds";
-      default "90";
       description
         "Time interval (in seconds) for the HoldTimer established
          with the peer.  When read as operational data (ro), the
@@ -128,6 +127,8 @@ submodule ietf-bgp-common {
          using the smaller of the values in hold-time that was
          configured (rw) in the running datastore and the Hold Time
          received in the OPEN message.
+
+         The suggested value for this timer is 90 seconds.
 
          This value must be at least three seconds
          if it is not zero (0).
