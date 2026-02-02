@@ -83,27 +83,60 @@ submodule ietf-bgp-neighbor {
            a session restart may be required in order to negotiate
            the new capability.";
       }
+
       container prefixes {
         config false;
         description
           "Prefix counters for the AFI/SAFI in this BGP session";
+
+        leaf received-pre-policy {
+          type yang:zero-based-counter32;
+          description
+            "The number of prefixes that are received from the
+             neighbor before applying any policies. This count is the
+             number of prefixes present in the pre-policy
+             adj-rib-in-pre table for this AFI/SAFI.";
+        }
+
         leaf received {
           type yang:zero-based-counter32;
           description
-            "The number of prefixes received from the neighbor";
+            "The number of prefixes that are received from the
+             neighbor after applying any policies. This count is the
+             number of prefixes present in the adj-rib-in-post table
+             for this AFI/SAFI.";
         }
+
         leaf sent {
           type yang:zero-based-counter32;
           description
-            "The number of prefixes advertised to the neighbor";
+            "The number of prefixes that are advertised to the
+             neighbor after applying any policies. This count is the
+             number of prefixes present in the adj-rib-out-post table
+             for this AFI/SAFI.";
         }
+
         leaf installed {
           type yang:gauge32;
           description
-            "The number of advertised prefixes installed in the
-             Loc-RIB";
+            "The number of prefixes received from the neighbor for
+             this AFI/SAFI that are installed in loc-rib table.";
+         }
+
+         leaf installed-multiple-paths {
+           type yang:gauge32;
+           description
+             "The number of prefixes received from the neighbor for
+              this AFI/SAFI that are used for forwarding.  These
+              include route that are:
+
+              - 'elibigle-route' is true.
+              - 'best-path' true, or the implementation installs this
+                route as part of multiple path load balancing
+                procedures."; 
         }
       }
+
       container graceful-restart {
         if-feature "bt:graceful-restart";
         description
