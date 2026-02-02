@@ -639,14 +639,14 @@ module ietf-bgp {
                   "RFC 7606: Revised Error Handling for BGP UPDATE
                    Messages, Section 2.";
               }
-              leaf in-update-elapsed-time {
-                type yang:gauge32;
-                units "seconds";
+              leaf in-update-time {
+                type yang:timeticks;
                 description
-                  "Elapsed time (in seconds) since the last BGP
-                   UPDATE message was received from the peer.
-                   Each time in-updates is incremented,
-                   the value of this object is set to zero (0).";
+                  "Timestamp when the last BGP UPDATE message was
+                   received from the peer.
+
+                   The value is the timestamp in seconds relative to
+                   the Unix Epoch (Jan 1, 1970 00:00:00 UTC).";
                 reference
                   "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
                    Section 4.3 
