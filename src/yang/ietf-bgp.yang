@@ -162,6 +162,17 @@ module ietf-bgp {
             "Local autonomous system number of the router.  Uses
              the 32-bit as-number type from the model in RFC 6991.";
         }
+        leaf treat-as-withdraw {
+          type boolean;
+          default "false";
+          description
+            "Specify whether erroneous UPDATE messages for which the
+             NLRI can be extracted are treated as though the NLRI is
+             withdrawn - avoiding session reset";
+          reference
+            "RFC 7606: Revised Error Handling for BGP UPDATE
+             Messages.";
+        }
         leaf enforce-first-as {
            type boolean;
            description
