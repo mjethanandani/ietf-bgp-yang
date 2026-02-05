@@ -192,7 +192,7 @@ module ietf-bgp {
             "RFC 6286: AS-Wide Unique BGP ID for BGP-4. Section 2.1";
         }
         container distance {
-	  if-feature "bt:distance";
+          if-feature "bt:distance";
           description
             "Administrative distances (or preferences) assigned to
              routes received from different sources (external, and
