@@ -988,6 +988,9 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       contributed to the policy part of the module, and to Derek Yeung
       in helping out with Extended Communities support in the
       model.</t>
+
+      <t>Adrian Farrel provided review of the AS_PATH regular expression
+      ABNF.</t>
     </section>
   </middle>
 
@@ -1404,7 +1407,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
       </section>
       <section title="BGP YANG AS_PATH Regular Expressions ABNF">
         <t>This module's AS_PATH regular expression syntax is documented using
-        <xref target="RFC5234">ABNF</xref> format.</t>
+        <xref target="RFC5234">ABNF</xref>.</t>
 
         <sourcecode>
 <![CDATA[
