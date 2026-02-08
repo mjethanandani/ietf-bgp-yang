@@ -705,6 +705,53 @@ module ietf-bgp {
                 reference
                   "RFC 2918: Route Refresh Capability for BGP-4.";
               }
+              container end-of-rib {
+                description
+                  "BGP speakers that are capable of sending
+                   End-of-RIB markers for a given AFI-SAFI do so by
+                   sending an empty UPDATE or empty MP_UNREACH_NLRI
+                   message.  The counters in this container apply to
+                   the subset of BGP updates that are End-of-RIB
+                   markers.";
+                reference
+                  "RFC 4724, Section 2: Graceful Restart Mechanism
+                   for BGP";
+                list afi-safis {
+                  key "afi-safi";
+                  description
+                    "AFI-SAFI for this End-of-RIB.";
+                  reference
+                    "RFC 4724, Section 2: Graceful Restart Mechanism
+                     for BGP";
+
+                  leaf afi-safi {
+                    type identityref {
+                      base bt:afi-safi-type;
+                    }
+                    description
+                      "RFC 4724, Section 2: Graceful Restart
+                       Mechanism for BGP";
+                  }
+                  leaf received {
+                    type yang:zero-based-counter32;
+                    description
+                      "Number of End-of-RIB messages received for
+                       this AFI-SAFI from this neighbor.";
+                    reference
+                      "RFC 4724, Section 2: Graceful Restart
+                       Mechanism for BGP";
+                  }
+                  leaf sent {
+                    type yang:zero-based-counter32;
+                    description
+                      "Number of End-of-RIB messages sent for this
+                       AFI-SAFI to this neighbor.";
+                    reference
+                      "RFC 4724, Section 2: Graceful Restart
+                       Mechanism for BGP";
+                  }
+                }
+              }
             }
             container queues {
               description
