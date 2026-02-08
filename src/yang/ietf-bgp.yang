@@ -689,21 +689,62 @@ module ietf-bgp {
                   "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
                    Section 4.5.";
               }
-              leaf route-refreshes-received {
-                type yang:zero-based-counter32;
+              container route-refreshes {
+                if-feature "bt:route-refresh";
                 description
-                  "Number of BGP ROUTE-REFRESH messages received from
-                   this peer.";
+                  "Route refreshes for this BGP neighbor,
+                   excluding outbound route filter updates and
+                   including enhanced route refresh messages.";
                 reference
-                  "RFC 2918: Route Refresh Capability for BGP-4.";
-              }
-              leaf route-refreshes-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP ROUTE-REFRESH messages sent to
-                   this peer.";
-                reference
-                  "RFC 2918: Route Refresh Capability for BGP-4.";
+                  "RFC 2918: Route Refresh Capability for BGP-4.
+                   RFC 5921: Outbound Route Filtering Capability for
+                   BGP-4.
+                   RFC 7313: Enhanced Route Refresh Capability for
+                   BGP-4.";
+
+                list afi-safis {
+                  key "afi-safi";
+                  description
+                    "AFI, SAFI used for this refresh message.";
+                  reference
+                    "RFC 2918, Section 3: Route Refresh Capability
+                     for BGP-4.";
+
+                  leaf afi-safi {
+                    type identityref {
+                      base bt:afi-safi-type;
+                    }
+                    description
+                      "AFI,SAFI used in route refresh message.";
+                  }
+
+                  leaf received {
+                    type yang:zero-based-counter32;
+                    description
+                      "Number of BGP ROUTE-REFRESH messages received
+                       from this peer for this AFI/SAFI. When
+                       enhanced route refresh is supported, only
+                       subtype 0 is included in this counter.";
+                    reference
+                      "RFC 2918: Route Refresh Capability for
+                       BGP-4.
+                       RFC 7313: Enhanced Route Refresh Capability
+                       for BGP-4.";
+                  }
+                  leaf sent {
+                    type yang:zero-based-counter32;
+                    description
+                      "Number of BGP ROUTE-REFRESH messages sent to
+                       to this peer for this AFI/SAFI. When
+                       enhanced route refresh is supported, only
+                       subtype 0 is included in this counter.";
+                    reference
+                      "RFC 2918: Route Refresh Capability for
+                       BGP-4.
+                       RFC 7313: Enhanced Route Refresh Capability
+                       for BGP-4.";
+                  }
+                }
               }
             }
             container queues {
