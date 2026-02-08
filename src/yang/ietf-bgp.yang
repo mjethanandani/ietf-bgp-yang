@@ -595,202 +595,45 @@ module ietf-bgp {
             }
             container messages {
               description
-                "Counters for BGP messages sent and received from the
-                 neighbor";
-              leaf total-received {
-                type yang:zero-based-counter32;
+                "Counters for BGP messages sent to and received from
+                 the neighbor";
+              container received {
                 description
-                  "Total number of BGP messages received from this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerInTotalMessages.";
-              }
-              leaf total-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Total number of BGP messages sent to this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerOutTotalMessages.";
-              }
-              leaf updates-received {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP UPDATE messages received from this
+                  "BGP messages counters received from this
                    neighbor.";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerInUpdates.";
+                uses bgp-neighbor-messages-common;
               }
-              leaf updates-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP UPDATE messages sent to this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerOutUpdates.";
-              }
-              leaf erroneous-updates-withdrawn {
-                type yang:zero-based-counter32;
-                config false;
-                description
-                  "The number of BGP UPDATE messages for which the
-                   treat-as-withdraw mechanism has been applied based
-                   on erroneous message contents.";
-                reference
-                  "RFC 7606: Revised Error Handling for BGP UPDATE
-                   Messages, Section 2.";
-              }
-              leaf erroneous-updates-attribute-discarded {
-                type yang:zero-based-counter32;
-                config false;
-                description
-                  "The number of BGP UPDATE messages for which the
-                   attribute discard mechanism has been applied based
-                   on erroneous message contents.";
-                reference
-                  "RFC 7606: Revised Error Handling for BGP UPDATE
-                   Messages, Section 2.";
-              }
-              leaf in-update-time {
-                type yang:timeticks;
-                description
-                  "Timestamp when the last BGP UPDATE message was
-                   received from the peer.
 
-                   The value is the timestamp in seconds relative to
-                   the Unix Epoch (Jan 1, 1970 00:00:00 UTC).";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.3 
-                   RFC 4271: A Border Gateway Protocol 4 (BGP-4),
-                   Established state.";
-              }
-              leaf notifications-received {
-                type yang:zero-based-counter32;
+              container sent {
                 description
-                  "Number of BGP NOTIFICATION messages indicating an
-                   error condition has occurred exchanged received
-                   from this peer.";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.5.";
+                  "BGP messages counters sent to this neighbor.";
+                uses bgp-neighbor-messages-common;
               }
-              leaf notifications-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP NOTIFICATION messages indicating an
-                   error condition has occurred exchanged sent to
-                   this peer.";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.5.";
-              }
-              container route-refreshes {
-                if-feature "bt:route-refresh";
-                description
-                  "Route refreshes for this BGP neighbor,
-                   excluding outbound route filter updates and
-                   including enhanced route refresh messages.";
-                reference
-                  "RFC 2918: Route Refresh Capability for BGP-4.
-                   RFC 5921: Outbound Route Filtering Capability for
-                   BGP-4.
-                   RFC 7313: Enhanced Route Refresh Capability for
-                   BGP-4.";
 
-                list afi-safis {
-                  key "afi-safi";
+              container errors {
+                description
+                  "BGP errors counted vs. this neighbor.";
+                leaf erroneous-updates-withdrawn {
+                  type yang:zero-based-counter32;
+                  config false;
                   description
-                    "AFI, SAFI used for this refresh message.";
+                    "The number of BGP UPDATE messages for which the
+                     treat-as-withdraw mechanism has been applied
+                     based on erroneous message contents.";
                   reference
-                    "RFC 2918, Section 3: Route Refresh Capability
-                     for BGP-4.";
-
-                  leaf afi-safi {
-                    type identityref {
-                      base bt:afi-safi-type;
-                    }
-                    description
-                      "AFI,SAFI used in route refresh message.";
-                  }
-
-                  leaf received {
-                    type yang:zero-based-counter32;
-                    description
-                      "Number of BGP ROUTE-REFRESH messages received
-                       from this peer for this AFI/SAFI. When
-                       enhanced route refresh is supported, only
-                       subtype 0 is included in this counter.";
-                    reference
-                      "RFC 2918: Route Refresh Capability for
-                       BGP-4.
-                       RFC 7313: Enhanced Route Refresh Capability
-                       for BGP-4.";
-                  }
-                  leaf sent {
-                    type yang:zero-based-counter32;
-                    description
-                      "Number of BGP ROUTE-REFRESH messages sent to
-                       to this peer for this AFI/SAFI. When
-                       enhanced route refresh is supported, only
-                       subtype 0 is included in this counter.";
-                    reference
-                      "RFC 2918: Route Refresh Capability for
-                       BGP-4.
-                       RFC 7313: Enhanced Route Refresh Capability
-                       for BGP-4.";
-                  }
+                    "RFC 7606: Revised Error Handling for BGP UPDATE
+                     Messages, Section 2.";
                 }
-              }
-              container end-of-rib {
-                description
-                  "BGP speakers that are capable of sending
-                   End-of-RIB markers for a given AFI-SAFI do so by
-                   sending an empty UPDATE or empty MP_UNREACH_NLRI
-                   message.  The counters in this container apply to
-                   the subset of BGP updates that are End-of-RIB
-                   markers.";
-                reference
-                  "RFC 4724, Section 2: Graceful Restart Mechanism
-                   for BGP";
-                list afi-safis {
-                  key "afi-safi";
+                leaf erroneous-updates-attribute-discarded {
+                  type yang:zero-based-counter32;
+                  config false;
                   description
-                    "AFI-SAFI for this End-of-RIB.";
+                    "The number of BGP UPDATE messages for which the
+                     attribute discard mechanism has been applied
+                     based on erroneous message contents.";
                   reference
-                    "RFC 4724, Section 2: Graceful Restart Mechanism
-                     for BGP";
-
-                  leaf afi-safi {
-                    type identityref {
-                      base bt:afi-safi-type;
-                    }
-                    description
-                      "RFC 4724, Section 2: Graceful Restart
-                       Mechanism for BGP";
-                  }
-                  leaf received {
-                    type yang:zero-based-counter32;
-                    description
-                      "Number of End-of-RIB messages received for
-                       this AFI-SAFI from this neighbor.";
-                    reference
-                      "RFC 4724, Section 2: Graceful Restart
-                       Mechanism for BGP";
-                  }
-                  leaf sent {
-                    type yang:zero-based-counter32;
-                    description
-                      "Number of End-of-RIB messages sent for this
-                       AFI-SAFI to this neighbor.";
-                    reference
-                      "RFC 4724, Section 2: Graceful Restart
-                       Mechanism for BGP";
-                  }
+                    "RFC 7606: Revised Error Handling for BGP UPDATE
+                     Messages, Section 2.";
                 }
               }
             }

@@ -168,4 +168,99 @@ submodule ietf-bgp-neighbor {
       uses bgp-neighbor-use-multiple-paths;
     }
   }
+
+  grouping bgp-neighbor-messages-common {
+    description
+      "BGP neighbor message counters common to received and sent
+       messages.";
+
+    leaf total {
+      type yang:zero-based-counter32;
+      description
+        "Total number of BGP messages from this neighbor";
+      reference
+        "RFC 4273: Definitions of Managed Objects for BGP-4,
+        bgpPeerIn/OutTotalMessages.";
+    }
+    leaf updates {
+      type yang:zero-based-counter32;
+      description
+        "Number of BGP UPDATE messages for this neighbor.";
+      reference
+        "RFC 4273: Definitions of Managed Objects for BGP-4,
+         bgpPeerIn/OutUpdates.";
+    }
+    leaf update-time {
+      type yang:timeticks;
+      description
+        "Timestamp for the last BGP UPDATE message for the peer.
+
+         The value is the timestamp in seconds relative to
+         the Unix Epoch (Jan 1, 1970 00:00:00 UTC).";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.3 
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Established
+         state.";
+    }
+    leaf notifications {
+      type yang:zero-based-counter32;
+      description
+        "Number of BGP NOTIFICATION messages indicating an error
+         condition has happend for this peer.";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
+         Section 4.5.";
+    }
+
+    list afi-safis {
+      key "afi-safi-name";
+      description
+        "Per-AFI-SAFI message counters";
+
+      leaf afi-safi-name {
+        type identityref {
+          base bt:afi-safi-type;
+        }
+        description
+          "AFI-SAFI for these message counters.";
+      }
+
+      leaf updates {
+        type yang:zero-based-counter32;
+        description
+          "Number of BGP UPDATE messages per-AFI-SAFI that may be
+           carried in UPDATE (AFI-SAFI 1-1), MP_REACH_NLRI or
+           MP_UNREACH_NLRI. This counter is a subset of the total
+           updates.";
+        reference
+          "RFC 4271, Section 4.3: A Border Gateway Protocol 4
+           (BGP-4).
+           RFC 4760, Sections 3-4: Multiprotocol Extensions for
+           BGP-4.";
+      }
+      leaf route-refresh {
+        if-feature "bt:route-refresh";
+        type yang:zero-based-counter32;
+        description
+          "Number of BGP ROUTE-REFRESH messages for this peer for
+           this AFI/SAFI. When enhanced route refresh is supported,
+           only subtype 0 is included in this counter.";
+        reference
+          "RFC 2918: Route Refresh Capability for BGP-4.
+           RFC 7313: Enhanced Route Refresh Capability for BGP-4.";
+      }
+
+      leaf end-of-rib {
+        type yang:zero-based-counter32;
+        description
+          "BGP speakers that are capable of exchanging End-of-RIB
+           markers for a given AFI-SAFI do so by sending an empty
+           UPDATE or empty MP_UNREACH_NLRI message.  This counter
+           applies to the subset of BGP updates that are End-of-RIB
+           markers.";
+        reference
+          "RFC 4724, Section 2: Graceful Restart Mechanism for BGP";
+      }
+    }
+  }
 }
