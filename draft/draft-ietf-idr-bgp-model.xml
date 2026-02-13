@@ -1007,6 +1007,9 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       contributed to the policy part of the module, and to Derek Yeung
       in helping out with Extended Communities support in the
       model.</t>
+
+      <t>Adrian Farrel provided review of the AS_PATH regular expression
+      ABNF.</t>
     </section>
   </middle>
 
@@ -1042,6 +1045,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5065.xml"/>
 
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
+      
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5492.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5668.xml"/>
@@ -1452,7 +1457,69 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
         </ul>
       </section>
       <section title="BGP YANG AS_PATH Regular Expressions ABNF">
-        <t>TBD...</t>
+        <t>This module's AS_PATH regular expression syntax is documented using
+        <xref target="RFC5234">ABNF</xref>.</t>
+
+        <sourcecode>
+<![CDATA[
+aspath-regex = 0*1<BOL> 0*1<terms> 0*1<EOL>
+
+terms = *<SP> term-list *<SP> ; Ignore surrounding space
+
+term-list = term / concatenation / alternative
+
+term = asn-or-any 0*1<postfix-oper> /
+       paren-expr 0*1<postfix-oper> /
+       set-expr   0*1<postfix-oper>
+
+asn-or-any = ASN / ANY
+
+concatenation = term-list 1*<SP> term-list ; Separated by spaces.
+
+alternative = term-list *<SP> "|" *<SP> term-list ; Choice.
+
+paren-expr = "(" terms ")" ; Grouping.
+
+; Sets with optional negation.
+set-expr = "[" 0*1<NEG> *<SP> set-expr-asns *<SP> "]"
+
+set-expr-asns = asn-or-range / asn-or-range 1*<SP> set-expr-asns
+
+; First ASN MUST be <= the second ASN
+asn-or-range = ASN / ( ASN "-" ASN)
+
+postfix-oper = "*" / "+" / "?" / "{" postfix-range "}"
+
+; First digit MUST be <= second digit. White space is irrelevant.
+postfix-range = (*<SP> 1*<DIGIT> *<SP>) /
+                (*<SP> 1*<DIGIT> *<SP> "," *<SP>) /
+                (*<SP> "," *<SP> 1*<DIGIT> *<SP>) /
+                (*<SP> 1*<DIGIT> *<SP> "," *<SP> 1*<DIGIT> *<SP>)
+
+; Terminal tokens
+
+ANY = "." ; Represents any ASN
+
+ASN = ; A 32-bit unsigned integer 1..4294967295
+    ("1"/"2"/"3"/"4"/"5"/"6"/"7"/"8"/"9") 0*8<DIGIT> /
+    ("1"/"2"/"3") 9<DIGIT> /
+    "4"        ("0"/"1") 8<DIGIT> /
+    "42"       ("0"/"1"/"2"/"3"/"4"/"5"/"6"/"7"/"8") 7<DIGIT>
+    "429"      ("0"/"1"/"2"/"3") 6<DIGIT> /
+    "4294"     ("0"/"1"/"2"/"3"/"4"/"5"/"6"/"7"/"8") 5<DIGIT>
+    "42949"    ("0"/"1"/"2"/"3"/"4"/"5") 4<DIGIT> /
+    "429496"   ("0"/"1"/"2"/"3"/"4"/"5"/"6") 3<DIGIT> /
+    "4294967"  ("0"/"1") 2<DIGIT>
+    "4294972"  ("0"/"1"/"2"/"3"/"4"/"5"/"6"/"7"/"8") <DIGIT> /
+    "42949729" ("0"/"1"/"2"/"3"/"4"/"5")
+
+BOL = "^" ; Match empty beginning of line
+
+EOL = "$" ; Match empty end of line
+
+NEG = "^" ; Negate set contents
+]]>
+        </sourcecode>
       </section>
       <section title="Example BGP YANG AS_PATH Regular Expressions">
         <dl newline="true">
