@@ -42,7 +42,7 @@ submodule ietf-bgp-common {
   import ietf-bfd-types {
     prefix bfd-types;
     reference
-      "RFC 9127: YANG Data Model for Bidirectional Forward
+      "RFC 9314: YANG Data Model for Bidirectional Forward
        Detection.";
   }
   import ietf-tcp {
@@ -585,7 +585,7 @@ submodule ietf-bgp-common {
       description
         "BFD client configuration.";
       reference
-        "RFC 9127: YANG Data Model for Bidirectional Forwarding
+        "RFC 9314: YANG Data Model for Bidirectional Forwarding
          Detection.";
     }
   }
