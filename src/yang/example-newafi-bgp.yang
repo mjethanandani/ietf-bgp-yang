@@ -125,31 +125,31 @@ module example-newafi-bgp {
           }
           container adj-rib-in-pre {
             description
-              "Per-neighbor table containing the NLRI updates
-             received from the neighbor before any local input
-             policy rules or filters have been applied.  This can
-             be considered the 'raw' updates from the neighbor.";
+	      "Per-neighbor table containing the NLRI updates
+	       received from the neighbor before any local input
+	       policy rules or filters have been applied.  This can
+	       be considered the 'raw' updates from the neighbor.";
             uses bgp:ipv4-adj-rib-common;
           }
           container adj-rib-in-post {
             description
-              "Per-neighbor table containing the paths received from
-             the neighbor that are eligible for best-path selection
-             after local input policy rules have been applied.";
+	      "Per-neighbor table containing the paths received from
+	       the neighbor that are eligible for best-path selection
+	       after local input policy rules have been applied.";
             uses bgp:ipv4-adj-rib-in-post;
           }
           container adj-rib-out-pre {
             description
-              "Per-neighbor table containing paths eligible for
-             sending (advertising) to the neighbor before output
-             policy rules have been applied.";
+	      "Per-neighbor table containing paths eligible for
+	       sending (advertising) to the neighbor before output
+	       policy rules have been applied.";
             uses bgp:ipv4-adj-rib-common;
           }
           container adj-rib-out-post {
             description
-              "Per-neighbor table containing paths eligible for
-             sending (advertising) to the neighbor after output
-             policy rules have been applied.";
+	      "Per-neighbor table containing paths eligible for
+	       sending (advertising) to the neighbor after output
+	       policy rules have been applied.";
             uses bgp:ipv4-adj-rib-common;
           }
         }
