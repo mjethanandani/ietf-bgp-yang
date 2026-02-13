@@ -758,29 +758,48 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li><xref target="RFC1997">BGP Communities Attribute </xref></li>
       <li><xref target="RFC2918">Route Refresh Capability for BGP-4</xref></li>
       <li><xref target="RFC3765">NOPEER Community for BGP</xref></li>
+      <li><xref target="RFC4271">A Border Gateway Protocol 4 (BGP-4)</xref></li>
+      <li><xref target="RFC4273">Definitions of Managed Objects for BGP-4</xref></li>
       <li><xref target="RFC4360">BGP Extended Communities Attributes</xref></li>
       <li><xref target="RFC4364">BGP/MPLS IP Virtual Private Networks (VPNs)</xref></li>
       <li><xref target="RFC4451">BGP MED Considerations</xref></li>
+      <li><xref target="RFC4456">BGP Route Reflection</xref></li>
       <li><xref target="RFC4659">BGP-MPLS IP Virtual Private Network (VPN) Extension for IPv6 VPN</xref></li>
       <li><xref target="RFC4724">Graceful Restart Mechanism for BGP</xref></li>
       <li><xref target="RFC4760">Multiprotocol Extentions for BGP-4</xref></li>
       <li><xref target="RFC4761">Virtual Private LAN Service (VPLS) Using BGP for Auto-Discovery and Signaling</xref></li>
       <li><xref target="RFC5065">Autonomous System Configuration for BGP</xref></li>
       <li><xref target="RFC5082">The Generalized TTL Security Mechanism (GTSM)</xref></li>
+      <li><xref target="RFC5492">Capabilities Advertisement with BGP-4</xref></li>
+      <li><xref target="RFC5668">4-Octet AS Specific BGP Extended Community</xref></li>
       <li><xref target="RFC5701">IPv6 Address Specific BGP Extended Community Attribute</xref></li>
       <li><xref target="RFC5880">Bidirectional Forward Detection (BFD)</xref></li>
       <li><xref target="RFC5881">Bidirectional Forward Detection for IPv4 and IPv6 (Single Hop)</xref></li>
       <li><xref target="RFC5883">Bidirectional Forwarding Detection (BFD) for Multihop Paths</xref></li>
       <li><xref target="RFC5925">The TCP Authentication Option</xref></li>
       <li><xref target="RFC6514">BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs</xref></li>
+      <li><xref target="RFC6286">AS-Wide Unique BGP ID for BGP-4</xref></li>
+      <li><xref target="RFC6608">Subcodes for BGP Finite State Machine Error</xref></li>
       <li><xref target="RFC6793">BGP Support for Four-Octet Autonomous System (AS) Number Space</xref></li>
-      <li><xref target="RFC7911">Advertisement of Multiple Paths in BGP </xref></li>
+      <li><xref target="RFC6996">Autonomous System (AS) Reservation for Private Use</xref></li>
+      <li><xref target="RFC7223">A YANG Data Model for Interface Management</xref></li>
+      <li><xref target="RFC7311">AIGP Metric Attribute for BGP</xref></li>
+      <li><xref target="RFC7313">Enhanced Route Refresh Capability for BGP-4</xref></li>
+      <li><xref target="RFC7342">BGP MPLS-Based Ethernet VPN</xref></li>
+      <li><xref target="RFC7454">BGP Operations and Security</xref></li>
+      <li><xref target="RFC7606">Revised Error Handling for BGP UPDATE Messages</xref></li>
+      <li><xref target="RFC7705">Autonomous System Migration Mechanisms and Their Effects on the BGP AS_PATH Attribute</xref></li>
+      <li><xref target="RFC7854">BGP Monitoring Protocol</xref></li>
+      <li><xref target="RFC7911">Advertisement of Multiple Paths in BGP</xref></li>
       <li><xref target="RFC8092">BGP Large Communities Attributes</xref></li>
       <li><xref target="RFC8177">YANG Key Chain</xref></li>
       <li><xref target="RFC8277">Carrying Label Information in BGP-4 </xref></li>
+      <li><xref target="RFC8538">Notification Message Support for BGP Graceful Restart</xref></li>
       <li><xref target="RFC9067">A YANG Data Model for Routing Policy</xref></li>
+      <li><xref target="RFC9127">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9293">Transmission Control Protocol</xref></li>
+      <li><xref target="RFC9384">A BGP Cease Notification Subcode For Bidirectional Forwarding Detection (BFD)</xref></li>
       <li><xref target="RFC9648">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
       </ul></t>
 
@@ -1008,6 +1027,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4271.xml"/>
 
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4273.xml"/>
+
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4360.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4364.xml"/>
@@ -1025,6 +1046,10 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5065.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
+      
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5492.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5668.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5701.xml"/>
 
@@ -1040,13 +1065,31 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6242.xml"/>
 
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6286.xml"/>
+
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6514.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6608.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6793.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6811.xml"/>
 
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6996.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7223.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7313.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7342.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7606.xml"/>
+
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7607.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7705.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7854.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7911.xml"/>
 
@@ -1072,11 +1115,17 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8529.xml"/>
 
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8538.xml"/>
+
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9067.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9127.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9293.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9314.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9384.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9648.xml"/>
 
@@ -1099,6 +1148,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5925.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6151.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7311.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7454.xml"/>
 
