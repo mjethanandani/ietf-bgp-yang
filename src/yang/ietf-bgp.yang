@@ -45,9 +45,6 @@ module ietf-bgp {
   include ietf-bgp-common-multiprotocol {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-common-structure {
-    revision-date YYYY-MM-DD;
-  }
   include ietf-bgp-neighbor {
     revision-date YYYY-MM-DD;
   }
@@ -283,7 +280,7 @@ module ietf-bgp {
               uses mp-afi-safi-graceful-restart-config;
             }
             uses route-selection-options;
-            uses structure-add-paths;
+            uses add-paths;
             uses global-group-use-multiple-paths;
             uses mp-all-afi-safi-list-contents;
           }
@@ -814,7 +811,7 @@ module ietf-bgp {
           }
 
           uses neighbor-group-config;
-          uses structure-dynamic-peers;
+          uses dynamic-peers;
 
           container graceful-restart {
             if-feature "bt:graceful-restart";
@@ -852,7 +849,7 @@ module ietf-bgp {
                   "Parameters relating to BGP graceful-restart";
                 uses mp-afi-safi-graceful-restart-config;
               }
-              uses structure-add-paths;
+              uses add-paths;
               uses bgp-neighbor-use-multiple-paths;
               uses mp-all-afi-safi-list-contents;
             }

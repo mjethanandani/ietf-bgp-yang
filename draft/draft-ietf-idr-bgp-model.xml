@@ -662,10 +662,6 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             belongs to: ietf-bgp
             reference: RFC XXXX
 
-            name: ietf-bgp-common-structure
-            belongs to: ietf-bgp
-            reference: RFC XXXX
-
             name: ietf-bgp-common
             belongs to: ietf-bgp
             reference: RFC XXXX
@@ -717,11 +713,6 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           <li>ietf-bgp-common-multiprotocol - defines the groupings
           that are common across more than one context, and relate to
           multi-protocol BGP.</li>
-
-          <li>ietf-bgp-common-structure - defines groupings that are
-          shared by multiple contexts, but are used only to create
-          structural elements; i.e., containers (leaf nodes are
-          defined in separate groupings).</li>
 
           <li>ietf-bgp-neighbor - groupings with data specific to the
           neighbor context.</li>
@@ -862,18 +853,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD
 
         ]]></artwork>
           </figure>
-          </t>
-        </section>
-        <section title = "BGP common structure submodule">
-          <t>
-            <figure>
-              <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp-common-structure@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yang)
-<CODE ENDS>
-
-        ]]></artwork>
-            </figure>
           </t>
         </section>
         <section title = "BGP neighbors submodule">
