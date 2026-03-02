@@ -595,115 +595,46 @@ module ietf-bgp {
             }
             container messages {
               description
-                "Counters for BGP messages sent and received from the
-                 neighbor";
-              leaf total-received {
-                type yang:zero-based-counter32;
+                "Counters for BGP messages sent to and received from
+                 the neighbor";
+              container received {
                 description
-                  "Total number of BGP messages received from this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerInTotalMessages.";
-              }
-              leaf total-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Total number of BGP messages sent to this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerOutTotalMessages.";
-              }
-              leaf updates-received {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP UPDATE messages received from this
+                  "BGP messages counters received from this
                    neighbor.";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerInUpdates.";
+                uses bgp-neighbor-messages-common;
               }
-              leaf updates-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP UPDATE messages sent to this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerOutUpdates.";
-              }
-              leaf erroneous-updates-withdrawn {
-                type yang:zero-based-counter32;
-                config false;
-                description
-                  "The number of BGP UPDATE messages for which the
-                   treat-as-withdraw mechanism has been applied based
-                   on erroneous message contents.";
-                reference
-                  "RFC 7606: Revised Error Handling for BGP UPDATE
-                   Messages, Section 2.";
-              }
-              leaf erroneous-updates-attribute-discarded {
-                type yang:zero-based-counter32;
-                config false;
-                description
-                  "The number of BGP UPDATE messages for which the
-                   attribute discard mechanism has been applied based
-                   on erroneous message contents.";
-                reference
-                  "RFC 7606: Revised Error Handling for BGP UPDATE
-                   Messages, Section 2.";
-              }
-              leaf in-update-time {
-                type yang:timeticks;
-                description
-                  "Timestamp when the last BGP UPDATE message was
-                   received from the peer.
 
-                   The value is the timestamp in seconds relative to
-                   the Unix Epoch (Jan 1, 1970 00:00:00 UTC).";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.3 
-                   RFC 4271: A Border Gateway Protocol 4 (BGP-4),
-                   Established state.";
-              }
-              leaf notifications-received {
-                type yang:zero-based-counter32;
+              container sent {
                 description
-                  "Number of BGP NOTIFICATION messages indicating an
-                   error condition has occurred exchanged received
-                   from this peer.";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.5.";
+                  "BGP messages counters sent to this neighbor.";
+                uses bgp-neighbor-messages-common;
               }
-              leaf notifications-sent {
-                type yang:zero-based-counter32;
+
+              container errors {
                 description
-                  "Number of BGP NOTIFICATION messages indicating an
-                   error condition has occurred exchanged sent to
-                   this peer.";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.5.";
-              }
-              leaf route-refreshes-received {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP ROUTE-REFRESH messages received from
-                   this peer.";
-                reference
-                  "RFC 2918: Route Refresh Capability for BGP-4.";
-              }
-              leaf route-refreshes-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP ROUTE-REFRESH messages sent to
-                   this peer.";
-                reference
-                  "RFC 2918: Route Refresh Capability for BGP-4.";
+                  "BGP errors counted vs. this neighbor.";
+                leaf erroneous-updates-withdrawn {
+                  type yang:zero-based-counter32;
+                  config false;
+                  description
+                    "The number of BGP UPDATE messages for which the
+                     treat-as-withdraw mechanism has been applied
+                     based on erroneous message contents.";
+                  reference
+                    "RFC 7606: Revised Error Handling for BGP UPDATE
+                     Messages, Section 2.";
+                }
+                leaf erroneous-updates-attribute-discarded {
+                  type yang:zero-based-counter32;
+                  config false;
+                  description
+                    "The number of BGP UPDATE messages for which the
+                     attribute discard mechanism has been applied
+                     based on erroneous message contents.";
+                  reference
+                    "RFC 7606: Revised Error Handling for BGP UPDATE
+                     Messages, Section 2.";
+                }
               }
             }
             container queues {
