@@ -17,7 +17,7 @@ submodule ietf-bgp-common {
   import ietf-interfaces {
     prefix if;
     reference
-      "RFC 7223: A YANG Data Model for Interface Management.";
+      "RFC 8343: A YANG Data Model for Interface Management.";
   }
   import ietf-key-chain {
     prefix key-chain;
