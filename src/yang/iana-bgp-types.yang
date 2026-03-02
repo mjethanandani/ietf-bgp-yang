@@ -164,38 +164,38 @@ module iana-bgp-types {
   typedef as-path-segment-type {
     type enumeration {
       enum as-set {
+        value 1;
         description
           "Unordered set of autonomous systems that a route in the
            UPDATE message has traversed.";
-        value 1;
         reference
           "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
            Section 4.3."; }
 
       enum as-sequence {
+        value 2;
         description
           "Ordered set of autonomous systems that a route in the
            UPDATE message has traversed.";
-        value 2;
         reference
           "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
            Section 4.3.";
       }
 
       enum as-confed-sequence {
+        value 3;
         description
           "Ordered set of Member Autonomous Systems in the local
            confederation that the UPDATE message has traversed.";
-        value 3;
         reference
           "RFC 5065: Autonomous System Configuration for BGP.";
       }
 
       enum as-confed-set {
+        value 4;
         description
           "Unordered set of Member Autonomous Systems in the local
            confederation that the UPDATE message has traversed.";
-        value 4;
         reference
           "RFC 5065: Autonomous System Configuration for BGP.";
       }
