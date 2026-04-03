@@ -654,6 +654,17 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             prefix: brt
             reference: RFC XXXX
 
+            name: ietf-bgp-rib-attributes
+            namespace:
+              urn:ietf:params:xml:ns:yang:ietf-bgp-rib-attributes
+            prefix: bgp-rib-attr
+            reference: RFC XXXX
+
+            name: ietf-bgp-rib-tables
+            namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-rib-tables
+            prefix: bgp-rib-tbl
+            reference: RFC XXXX
+
             name: ietf-bgp-capabilities
             belongs to: ietf-bgp
             reference: RFC XXXX
@@ -675,14 +686,6 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             reference: RFC XXXX
 
             name: ietf-bgp-neighbors
-            belongs to: ietf-bgp
-            reference: RFC XXXX
-
-            name: ietf-bgp-rib-attributes
-            belongs to: ietf-bgp
-            reference: RFC XXXX
-
-            name: ietf-bgp-rib-tables
             belongs to: ietf-bgp
             reference: RFC XXXX
 
@@ -727,10 +730,6 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           neighbor context.</li>
 
           <li>ietf-bgp-rib - grouping for representing BGP RIBs.</li>
-          <li>ietf-bgp-rib-attributes - common data definitions for
-          BGP attributes used in BGP RIB tables.</li>
-          <li>ietf-bgp-rib-tables - structural data definitions for
-          BGP routing tables.</li>
         </ul></t>
 
       <t>Additionally, the above modules include the following
@@ -748,6 +747,12 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 
           <li>iana-bgp-rib-types - common type and identity
           definitions for BGP RIB.</li>
+
+          <li>ietf-bgp-rib-attributes - common data definitions for
+          BGP attributes used in BGP RIB tables.</li>
+
+          <li>ietf-bgp-rib-tables - structural data definitions for
+          BGP routing tables.</li>
         </ul></t>
     </section>
 
@@ -957,24 +962,24 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib@YYYY-MM-DD.yang)
           </t>
         </section>
 
-        <section title = "BGP RIB attributes submodule">
+        <section title = "BGP RIB attributes module">
           <t>
             <figure>
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-attributes@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-attributes@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib-attributes@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
             </figure>
           </t>
         </section>
-        <section title = "BGP RIB tables submodule">
+        <section title = "BGP RIB tables module">
           <t>
             <figure>
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-tables@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
