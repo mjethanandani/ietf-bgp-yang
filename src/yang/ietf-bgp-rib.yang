@@ -23,6 +23,11 @@ submodule ietf-bgp-rib {
     reference
       "RFC 9911: Common YANG Types.";
   }
+  import ietf-bgp-rib-attributes {
+    prefix bgp-rib-attr;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
   include ietf-bgp-rib-tables;
 
   // groupings of attributes in three categories:
@@ -30,7 +35,6 @@ submodule ietf-bgp-rib {
   //  - common to Loc-RIB and Adj-RIB, but not shared across routes
   //  - specific to Loc-RIB or Adj-RIB
   // groupings of annotations for each route or table
-  include ietf-bgp-rib-attributes;
 
   organization
     "IETF IDR Working Group";
@@ -139,7 +143,7 @@ submodule ietf-bgp-rib {
            RFC 6793: BGP Support for Four-octet AS Number Space.";
         list segment {
           config false;
-          uses bgp-as-path-segment;
+          uses bgp-rib-attr:bgp-as-path-segment;
           description
             "List of AS PATH segments";
         }
@@ -157,7 +161,7 @@ submodule ietf-bgp-rib {
           "RFC 6793: BGP Support for Four-octet AS Number Space";
         list segment {
           config false;
-          uses bgp-as-path-segment;
+          uses bgp-rib-attr:bgp-as-path-segment;
           description
             "List of AS PATH segments";
         }
@@ -361,7 +365,7 @@ submodule ietf-bgp-rib {
                specific path.  Multiple paths may reference the same
                attribute set.";
           }
-          uses bgp-community-attr-state;
+          uses bgp-rib-attr:bgp-community-attr-state;
         }
       }
       container ext-communities {
@@ -382,7 +386,7 @@ submodule ietf-bgp-rib {
                specific path.  Multiple paths may reference the same
                attribute set.";
           }
-          uses ext-community-attributes;
+          uses bgp-rib-attr:ext-community-attributes;
         }
       }
       container ipv6-ext-communities {
@@ -403,7 +407,7 @@ submodule ietf-bgp-rib {
                specific path.  Multiple paths may reference the same
                attribute set.";
           }
-          uses ipv6-ext-community-attributes;
+          uses bgp-rib-attr:ipv6-ext-community-attributes;
         }
       }
       container large-communities {
@@ -424,7 +428,7 @@ submodule ietf-bgp-rib {
                specific path.  Multiple paths may reference the same
                attribute set.";
           }
-          uses large-community-attributes;
+          uses bgp-rib-attr:large-community-attributes;
         }
       }
 
@@ -479,7 +483,7 @@ submodule ietf-bgp-rib {
                   uses bgp-loc-rib-common-keys;
                   uses bgp-loc-rib-common-attr-refs;
                   uses bgp-common-route-annotations-state;
-                  uses bgp-unknown-attr-top;
+                  uses bgp-rib-attr:bgp-unknown-attr-top;
                   uses rib-ext-route-annotations;
                 }
               }
@@ -598,7 +602,7 @@ submodule ietf-bgp-rib {
                   uses bgp-loc-rib-common-keys;
                   uses bgp-loc-rib-common-attr-refs;
                   uses bgp-common-route-annotations-state;
-                  uses bgp-unknown-attr-top;
+                  uses bgp-rib-attr:bgp-unknown-attr-top;
                   uses rib-ext-route-annotations;
                 }
               }

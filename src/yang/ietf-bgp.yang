@@ -54,9 +54,6 @@ module ietf-bgp {
   include ietf-bgp-rib {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-rib-attributes {
-    revision-date YYYY-MM-DD;
-  }
   include ietf-bgp-rib-tables {
     revision-date YYYY-MM-DD;
   }

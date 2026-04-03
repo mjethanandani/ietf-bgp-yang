@@ -1,8 +1,7 @@
-submodule ietf-bgp-rib-attributes {
+module ietf-bgp-rib-attributes {
   yang-version 1.1;
-  belongs-to ietf-bgp {
-    prefix bgp;
-  }
+  namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-rib-attributes";
+  prefix bgp-rib-attr;
 
   // import some basic types
 
@@ -34,7 +33,7 @@ submodule ietf-bgp-rib-attributes {
               Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
-    "This submodule contains common data definitions for BGP
+    "This module contains common data definitions for BGP
      attributes for use in BGP RIB tables.
 
      Copyright (c) 2023 IETF Trust and the persons identified as
