@@ -1,8 +1,7 @@
-submodule ietf-bgp-rib-tables {
+module ietf-bgp-rib-tables {
   yang-version 1.1;
-  belongs-to ietf-bgp {
-    prefix bgp;
-  }
+  namespace "urn:ietf:params:xml:ns:yang:ietf-bgp-rib-tables";
+  prefix bgp-rib-tbl;
 
   // import some basic types
 
@@ -49,7 +48,7 @@ submodule ietf-bgp-rib-tables {
               Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
-    "This submodule contains structural data definitions for
+    "This module contains structural data definitions for
      BGP routing tables.
 
      Copyright (c) 2023 IETF Trust and the persons identified as

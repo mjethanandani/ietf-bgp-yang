@@ -28,7 +28,11 @@ submodule ietf-bgp-rib {
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
-  include ietf-bgp-rib-tables;
+  import ietf-bgp-rib-tables {
+    prefix bgp-rib-tbl;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
 
   // groupings of attributes in three categories:
   //  - shared across multiple routes
@@ -480,11 +484,11 @@ submodule ietf-bgp-rib {
                     description
                       "The IPv4 prefix corresponding to the route.";
                   }
-                  uses bgp-loc-rib-common-keys;
-                  uses bgp-loc-rib-common-attr-refs;
-                  uses bgp-common-route-annotations-state;
+                  uses bgp-rib-tbl:bgp-loc-rib-common-keys;
+                  uses bgp-rib-tbl:bgp-loc-rib-common-attr-refs;
+                  uses bgp-rib-tbl:bgp-common-route-annotations-state;
                   uses bgp-rib-attr:bgp-unknown-attr-top;
-                  uses rib-ext-route-annotations;
+                  uses bgp-rib-tbl:rib-ext-route-annotations;
                 }
               }
             }
@@ -510,8 +514,8 @@ submodule ietf-bgp-rib {
                      input policy rules or filters have been applied.
                      This can be considered the 'raw' routes from
                      the neighbor.";
-                  uses ipv4-adj-rib-common;
-                  uses clear-routes {
+                  uses bgp-rib-tbl:ipv4-adj-rib-common;
+                  uses bgp-rib-tbl:clear-routes {
                     description
                       "Clears the adj-rib-in state for the containing
                        neighbor. Subsequently, implementations might
@@ -525,8 +529,8 @@ submodule ietf-bgp-rib {
                      from the neighbor that are eligible for
                      best-path selection after local input policy
                      rules have been applied.";
-                  uses ipv4-adj-rib-in-post;
-                  uses clear-routes {
+                  uses bgp-rib-tbl:ipv4-adj-rib-in-post;
+                  uses bgp-rib-tbl:clear-routes {
                     description
                       "Clears the adj-rib-in state for the containing
                        neighbor. Subsequently, implementations might
@@ -539,8 +543,8 @@ submodule ietf-bgp-rib {
                     "Per-neighbor table containing paths eligible for
                      sending (advertising) to the neighbor before
                      output policy rules have been applied.";
-                  uses ipv4-adj-rib-common;
-                  uses clear-routes {
+                  uses bgp-rib-tbl:ipv4-adj-rib-common;
+                  uses bgp-rib-tbl:clear-routes {
                     description
                       "Clears the adj-rib-out state for the
                        containing neighbor. Subsequently, neighbors
@@ -553,8 +557,8 @@ submodule ietf-bgp-rib {
                     "Per-neighbor table containing paths eligible for
                      sending (advertising) to the neighbor after
                      output policy rules have been applied.";
-                  uses ipv4-adj-rib-common;
-                  uses clear-routes {
+                  uses bgp-rib-tbl:ipv4-adj-rib-common;
+                  uses bgp-rib-tbl:clear-routes {
                     description
                       "Clears the adj-rib-out state for the
                        containing neighbor. Subsequently, neighbors
@@ -599,11 +603,11 @@ submodule ietf-bgp-rib {
                     description
                       "The IPv6 prefix corresponding to the route.";
                   }
-                  uses bgp-loc-rib-common-keys;
-                  uses bgp-loc-rib-common-attr-refs;
-                  uses bgp-common-route-annotations-state;
+                  uses bgp-rib-tbl:bgp-loc-rib-common-keys;
+                  uses bgp-rib-tbl:bgp-loc-rib-common-attr-refs;
+                  uses bgp-rib-tbl:bgp-common-route-annotations-state;
                   uses bgp-rib-attr:bgp-unknown-attr-top;
-                  uses rib-ext-route-annotations;
+                  uses bgp-rib-tbl:rib-ext-route-annotations;
                 }
               }
             }
@@ -629,8 +633,8 @@ submodule ietf-bgp-rib {
                      input policy rules or filters have been applied.
                      This can be considered the 'raw' routes from
                      the neighbor.";
-                  uses ipv6-adj-rib-common;
-                  uses clear-routes {
+                  uses bgp-rib-tbl:ipv6-adj-rib-common;
+                  uses bgp-rib-tbl:clear-routes {
                     description
                       "Clears the adj-rib-in state for the containing
                        neighbor. Subsequently, implementations might
@@ -644,8 +648,8 @@ submodule ietf-bgp-rib {
                      from the neighbor that are eligible for
                      best-path selection after local input policy
                      rules have been applied.";
-                  uses ipv6-adj-rib-in-post;
-                  uses clear-routes {
+                  uses bgp-rib-tbl:ipv6-adj-rib-in-post;
+                  uses bgp-rib-tbl:clear-routes {
                     description
                       "Clears the adj-rib-in state for the containing
                        neighbor. Subsequently, implementations might
@@ -658,8 +662,8 @@ submodule ietf-bgp-rib {
                     "Per-neighbor table containing paths eligible for
                      sending (advertising) to the neighbor before
                      output policy rules have been applied.";
-                  uses ipv6-adj-rib-common;
-                  uses clear-routes {
+                  uses bgp-rib-tbl:ipv6-adj-rib-common;
+                  uses bgp-rib-tbl:clear-routes {
                     description
                       "Clears the adj-rib-out state for the
                        containing neighbor. Subsequently, neighbors
@@ -672,8 +676,8 @@ submodule ietf-bgp-rib {
                     "Per-neighbor table containing paths eligible for
                      sending (advertising) to the neighbor after
                      output policy rules have been applied.";
-                  uses ipv6-adj-rib-common;
-                  uses clear-routes {
+                  uses bgp-rib-tbl:ipv6-adj-rib-common;
+                  uses bgp-rib-tbl:clear-routes {
                     description
                       "Clears the adj-rib-out state for the
                        containing neighbor. Subsequently, neighbors
