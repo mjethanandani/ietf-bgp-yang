@@ -596,7 +596,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
     </section>
 
     <section title="IANA Considerations">
-      <t>This document registers six URIs and six YANG modules.</t>
+      <t>This document registers eight URIs and eight YANG modules.</t>
 
       <section title="URI Registration">
         <t>Following the format in the <xref target="RFC3688">IETF XML
@@ -609,6 +609,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-notification
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-types
+            URI:urn:ietf:params:xml:ns:yang:ietf-bgp-rib-attributes
+            URI:urn:ietf:params:xml:ns:yang:ietf-bgp-rib-tables
             ]]></artwork>
           </figure></t>
 
