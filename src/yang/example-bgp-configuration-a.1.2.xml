@@ -78,6 +78,7 @@
         </global>
         <neighbors>
           <neighbor>
+            <neighbor-key>2001:db8::</neighbor-key>
             <remote-address>2001:db8::</remote-address>
             <enabled>true</enabled>
             <transport>

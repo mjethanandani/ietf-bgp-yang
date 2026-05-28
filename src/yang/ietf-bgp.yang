@@ -294,13 +294,29 @@ module ietf-bgp {
           "Configuration for BGP neighbors.";
 
         list neighbor {
-          key "remote-address";
+          key "neighbor-key";
           description
             "List of BGP neighbors configured on the local system,
-             uniquely identified by remote IPv[46] address.";
+             uniquely identified by a neighbor key that by default
+             corresponds to the remote peer's IP address.";
+
+          leaf neighbor-key {
+            type leafref {
+              path "../remote-address";
+            }
+            description
+              "The key used to identify this BGP neighbor in the
+               list. By default, this references the remote IP
+               address of the peer, decoupling the list key from
+               the peer address leaf so that implementations can
+               more easily augment or deviate the keying strategy
+               without disrupting other parts of the model that
+               depend on remote-address.";
+          }
 
           leaf remote-address {
             type inet:ip-address;
+            mandatory true;
             description
               "The remote IP address of this entry's BGP peer.";
           }

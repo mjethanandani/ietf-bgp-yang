@@ -24,6 +24,7 @@
         </global>
         <neighbors>
           <neighbor>
+            <neighbor-key>2001:db8:100::1</neighbor-key>
             <remote-address>2001:db8:100::1</remote-address>
             <peer-as>64497</peer-as>
             <route-flap-damping>
