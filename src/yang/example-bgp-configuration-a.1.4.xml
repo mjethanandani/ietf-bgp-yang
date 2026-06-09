@@ -130,6 +130,7 @@
         </global>
         <neighbors>
           <neighbor>
+            <neighbor-key>10.1.1.2</neighbor-key>
             <remote-address>10.1.1.2</remote-address>
             <peer-as>2</peer-as>
             <afi-safis>
