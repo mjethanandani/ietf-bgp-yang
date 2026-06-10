@@ -72,7 +72,7 @@ $(next).xml: $(draft).xml ../src/yang/ietf-bgp-capabilities.yang ../src/yang/iet
 rib: ../src/yang/ietf-bgp-rib.yang ../src/yang/ietf-bgp-rib-attributes.yang ../src/yang/ietf-bgp-rib-tables.yang ../src/yang/iana-bgp-rib-types.yang
 	-mkdir -p ../bin
 	-mkdir -p ../bin/submodules
-	-ln -s /app/yang-parameters ../bin/yang-parameters 
+	P=`pwd` && cd ../bin && ln -s ../yang-parameters yang-parameters && cd $P
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib.yang > ../bin/submodules/ietf-bgp-rib\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-attributes.yang > ../bin/submodules/ietf-bgp-rib-attributes\@$(shell date +%Y-%m-%d).yang
 	sed -e"s/YYYY-MM-DD/$(shell date +%Y-%m-%d)/" ../src/yang/ietf-bgp-rib-tables.yang > ../bin/submodules/ietf-bgp-rib-tables\@$(shell date +%Y-%m-%d).yang
