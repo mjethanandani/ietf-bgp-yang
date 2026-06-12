@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Extension data for yanglint schema mount validation.
+    Contains yang-library (RFC 8525) data describing the modules
+    available in the shared mounted schema, followed by the
+    schema-mounts (RFC 8528) data that defines the mount point.
+-->
+<yang-library
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-library">
+  <module-set>
+    <name>bgp-vrf-set</name>
+    <module>
+      <name>ietf-routing</name>
+      <revision>2018-03-13</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:ietf-routing</namespace>
+      <feature>router-id</feature>
+    </module>
+    <module>
+      <name>ietf-interfaces</name>
+      <revision>2018-02-20</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:ietf-interfaces</namespace>
+    </module>
+    <module>
+      <name>iana-if-type</name>
+      <revision>2023-01-26</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:iana-if-type</namespace>
+    </module>
+    <module>
+      <name>ietf-bgp</name>
+      <revision>YYYY-MM-DD</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:ietf-bgp</namespace>
+    </module>
+    <module>
+      <name>iana-bgp-types</name>
+      <revision>YYYY-MM-DD</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:iana-bgp-types</namespace>
+    </module>
+    <module>
+      <name>iana-bgp-community-types</name>
+      <revision>YYYY-MM-DD</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:iana-bgp-community-types</namespace>
+    </module>
+  </module-set>
+  <content-id>1</content-id>
+</yang-library>
+<modules-state
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-library">
+  <module-set-id>1</module-set-id>
+</modules-state>
+<schema-mounts
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount">
+  <namespace>
+    <prefix>if</prefix>
+    <uri>urn:ietf:params:xml:ns:yang:ietf-interfaces</uri>
+  </namespace>
+  <namespace>
+    <prefix>ni</prefix>
+    <uri>urn:ietf:params:xml:ns:yang:ietf-network-instance</uri>
+  </namespace>
+  <mount-point>
+    <module>ietf-network-instance</module>
+    <label>vrf-root</label>
+    <inline/>
+  </mount-point>
+</schema-mounts>
