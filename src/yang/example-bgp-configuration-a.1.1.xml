@@ -6,7 +6,7 @@
 <routing
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing"
     xmlns:bt="urn:ietf:params:xml:ns:yang:iana-bgp-types"
-    xmlns:bct="urn:ietf:params:xml:ns:yang:iana-bgp-community-types">
+    xmlns:ibct="urn:ietf:params:xml:ns:yang:ietf-bgp-community-types">
   <control-plane-protocols>
     <control-plane-protocol>
       <type
@@ -36,8 +36,11 @@
               <unreach-decay>500</unreach-decay>
               <keep-history>1000</keep-history>
             </route-flap-damping>
-	    <send-community>bct:standard</send-community>
-	    <send-community>bct:large</send-community>
+	    <send-community>ibct:standard</send-community>
+	    <send-community>ibct:large</send-community>
+            <graceful-restart>
+              <enabled>false</enabled>
+            </graceful-restart>
             <description>"Peer Router B"</description>
             <afi-safis>
               <afi-safi>
