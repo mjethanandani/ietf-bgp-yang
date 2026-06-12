@@ -1069,8 +1069,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li><xref target="RFC8538">Notification Message Support for BGP Graceful Restart</xref></li>
       <li><xref target="RFC9067">A YANG Data Model for Routing Policy</xref></li>
       <li><xref target="RFC9127">YANG Data Model for Bidirectional Forward Detection</xref></li>
-      <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9293">Transmission Control Protocol</xref></li>
+      <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9384">A BGP Cease Notification Subcode For Bidirectional Forwarding Detection (BFD)</xref></li>
       <li><xref target="RFC9648">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
       </ul></t>
@@ -1183,6 +1183,51 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
           </t>
         </section>
       </section>
+
+      <section title="BGP notification module">
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-notification@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/iana-bgp-notification@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="BGP capabilities module">
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-capabilities@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-capabilities@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="BGP AFI/SAFI types module">
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-afi-safi-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-afi-safi-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="BGP IANA community types module">
+        <t><figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-community-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure></t>
+      </section>
+
 
       <section title="BGP policy module">
         <t><figure>
