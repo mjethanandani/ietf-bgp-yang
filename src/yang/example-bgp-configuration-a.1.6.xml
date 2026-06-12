@@ -4,12 +4,14 @@
     realize per-VRF BGP using YANG Schema Mount (RFC 8528).
 
     Fragment 1 - schema-mounts (read-only operational state):
-    Describes how the Routing Management module (RFC 8349) is mounted
-    under the 'vrf-root' mount point (label 'root') of the Network
-    Instances module (RFC 8529). The shared-schema method is used so
-    all network instances share the same mounted schema. The
-    parent-reference XPath makes only those interfaces that are bound
-    to a given network instance visible within the mounted schema.
+    Describes how the Routing Management module (RFC 8349) is
+    mounted under the 'vrf-root' mount point (label 'root')
+    of the Network Instances module (RFC 8529). The 
+    shared-schema method is used so all network instances
+    share the same mounted schema. The parent-reference 
+    XPath makes only those interfaces that are bound
+    to a given network instance visible within the mounted 
+    schema.
 -->
 <schema-mounts
     xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount">
@@ -53,9 +55,10 @@
 
 <!--
     Fragment 3 - network-instances:
-    BGP is configured within the vrf-root mount point of each network
-    instance. The PE router (AS 64496) peers with two CE routers, one
-    per VRF, yielding isolated per-VRF BGP routing tables.
+    BGP is configured within the vrf-root mount point of each
+    network instance. The PE router (AS 64496) peers with two
+    CE routers, one per VRF, yielding isolated per-VRF BGP
+    routing tables.
 -->
 <network-instances
     xmlns="urn:ietf:params:xml:ns:yang:ietf-network-instance">
@@ -68,8 +71,8 @@
         <control-plane-protocols>
           <control-plane-protocol>
             <type
-                xmlns:bgp=
-                "urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp</type>
+              xmlns:bgp=
+              "urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp</type>
             <name>BGP</name>
             <bgp
                 xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
