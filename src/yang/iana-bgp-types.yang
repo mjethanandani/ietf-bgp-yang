@@ -63,6 +63,7 @@ module iana-bgp-types {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
   }

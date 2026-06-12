@@ -49,19 +49,12 @@ submodule ietf-bgp-common {
     prefix tcp;
     reference
       "RFC 9648: YANG Data Model for TCP.";
-<<<<<<< HEAD
   }
   import ietf-yang-semver {
     prefix ysv;
     reference
       "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
-  include ietf-bgp-common-structure {
-    revision-date YYYY-MM-DD;
-=======
->>>>>>> v20
-  }
-
   organization
     "IETF IDR Working Group";
   contact
