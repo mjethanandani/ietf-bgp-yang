@@ -34,11 +34,11 @@ submodule ietf-bgp-capabilities {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com,
-              Jeffrey Haas (jhaas at juniper.net).";
+              Susan Hares (shares at ndzh.com),
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
-    "This sub-module contains groupings that used for BGP
+    "This sub-module contains groupings that are used for BGP
      Capabilities within the BGP module.
 
      Copyright (c) 2026 IETF Trust and the persons identified as
@@ -152,7 +152,8 @@ submodule ietf-bgp-capabilities {
       }
 
       container graceful-restart {
-        when "derived-from-or-self(../../name, 'bt:graceful-restart')";
+        when "derived-from-or-self(../../name, " +
+             "'bt:graceful-restart')";
         description
           "BGP Graceful Restart-specific values.";
         reference

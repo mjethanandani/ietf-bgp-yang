@@ -6,20 +6,18 @@ module iana-bgp-types {
   import ietf-inet-types {
     prefix inet;
     reference
-      "RFC 6991: Common YANG Types.";
+      "RFC 9911: Common YANG Types.";
   }
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Types.";
+      "RFC 9911: Common YANG Types.";
   }
   import ietf-yang-semver {
     prefix ysv;
     reference
       "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
-
-  // meta
 
   organization
     "IANA";
@@ -36,7 +34,7 @@ module iana-bgp-types {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This module contains general data definitions for use in BGP.
@@ -113,6 +111,13 @@ module iana-bgp-types {
       "Weighted route dampening is supported.";
   }
 
+  feature distance {
+    description
+      "BGP distance for implementations that expose routing table
+       preferences for route selection for internal and external
+       BGP.";
+  }
+
   feature graceful-restart {
     description
       "Graceful restart as defined in RFC 4724 is supported.";
@@ -161,48 +166,47 @@ module iana-bgp-types {
 
   /* BGP AS_PATH Segment Type Identities. */
 
-  identity as-path-segment-type {
-    description
-      "Base AS Path Segment Type. In [BGP-4], the path segment type
-       is a 1-octet field with the following values defined.";
-    reference
-      "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.3.";
-  }
+  typedef as-path-segment-type {
+    type enumeration {
+      enum as-set {
+        value 1;
+        description
+          "Unordered set of autonomous systems that a route in the
+           UPDATE message has traversed.";
+        reference
+          "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+           Section 4.3."; }
 
-  identity as-set {
-    base as-path-segment-type;
-    description
-      "Unordered set of autonomous systems that a route in the UPDATE
-       message has traversed.";
-    reference
-      "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.3.";
-  }
+      enum as-sequence {
+        value 2;
+        description
+          "Ordered set of autonomous systems that a route in the
+           UPDATE message has traversed.";
+        reference
+          "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+           Section 4.3.";
+      }
 
-  identity as-sequence {
-    base as-path-segment-type;
-    description
-      "Ordered set of autonomous systems that a route in the UPDATE
-       message has traversed.";
-    reference
-      "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.3.";
-  }
+      enum as-confed-sequence {
+        value 3;
+        description
+          "Ordered set of Member Autonomous Systems in the local
+           confederation that the UPDATE message has traversed.";
+        reference
+          "RFC 5065: Autonomous System Configuration for BGP.";
+      }
 
-  identity as-confed-sequence {
-    base as-path-segment-type;
+      enum as-confed-set {
+        value 4;
+        description
+          "Unordered set of Member Autonomous Systems in the local
+           confederation that the UPDATE message has traversed.";
+        reference
+          "RFC 5065: Autonomous System Configuration for BGP.";
+      }
+    }
     description
-      "Ordered set of Member Autonomous Systems in the local
-       confederation that the UPDATE message has traversed.";
-    reference
-      "RFC 5065: Autonomous System Configuration for BGP.";
-  }
-
-  identity as-confed-set {
-    base as-path-segment-type;
-    description
-      "Unordered set of Member Autonomous Systems in the local
-       confederation that the UPDATE message has traversed.";
-    reference
-      "RFC 5065: Autonomous System Configuration for BGP.";
+      "BGP AS_PATH segment types.";
   }
 
   /* BGP Peer-Types */
@@ -244,7 +248,7 @@ module iana-bgp-types {
   identity mp-bgp {
     base bgp-capability;
     description
-      "Multi-protocol extensions to BGP";
+      "Multi-protocol extensions to BGP.";
     reference
       "RFC 4760: Multiprotocol Extentions for BGP-4.";
   }

@@ -24,7 +24,7 @@ module iana-bgp-rib-types {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "Defines identity and type definitions associated with

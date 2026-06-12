@@ -18,11 +18,6 @@ module ietf-bgp {
     reference
       "RFC 9067: A YANG Data Model for Routing Policy.";
   }
-  import iana-bgp-notification {
-    prefix bn;
-    reference
-      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
-  }
   import iana-bgp-types {
     prefix bt;
     reference
@@ -36,7 +31,7 @@ module ietf-bgp {
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991: Common YANG Data Types.";
+      "RFC 9911: Common YANG Data Types.";
   }
   import ietf-yang-semver {
     prefix ysv;
@@ -49,10 +44,10 @@ module ietf-bgp {
   include ietf-bgp-common {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-common-multiprotocol {
+  include ietf-bgp-common-errors {
     revision-date YYYY-MM-DD;
   }
-  include ietf-bgp-common-structure {
+  include ietf-bgp-common-multiprotocol {
     revision-date YYYY-MM-DD;
   }
   include ietf-bgp-neighbor {
@@ -77,7 +72,7 @@ module ietf-bgp {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This module describes a YANG model for BGP protocol
@@ -143,126 +138,6 @@ module ietf-bgp {
   }
 
   /*
-   * Groupings
-   */
-
-  grouping bgp-errors-common {
-    description
-      "BGP NOTIFICATION state that is common in the sent and received
-       direction.";
-      
-    leaf last-notification {
-      type yang:date-and-time;
-      description
-        "The timestamp indicates the time that a BGP
-         NOTIFICATION message was last handled.";
-      reference
-        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
-         4.5.";
-    }
-    leaf last-error {
-      type identityref {
-        base bn:bgp-notification;
-      }
-      description
-        "The last NOTIFICATION error for the peer on this
-         connection.  If no identity is registered for the
-         Error code / Error subcode, this leaf contains the most
-         applicable identity for the BGP NOTIFICATION base code.
-
-         The last-error-code and last-error-subcode will always have
-         the information received in the NOTIFICATION PDU.";
-      reference
-        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
-         4.5.";
-    }
-    leaf last-error-code {
-      type uint8;
-      description
-        "The last NOTIFICATION Error code for the peer on
-         this connection.";
-      reference
-        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
-         4.5.";
-    }
-    leaf last-error-subcode {
-      type uint8;
-      description
-        "The last NOTIFICATION Error subcode for the peer on
-         this connection.";
-      reference
-        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
-         4.5.";
-    }
-  }
-  grouping bgp-errors-common-data {
-    description
-      "BGP NOTIFICATION data state that is common in the sent and
-       received direction.";
-
-    leaf last-error-data {
-      type binary {
-        length "0..65535";
-      }
-      description
-        "Content of the BGP NOTIFICATION PDU's Data field.  This data
-         is NOTIFICATION Error code / Error subcode specific.";
-      reference
-        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section
-         4.5.";
-    }
-  }
-
-  grouping bgp-encapsulated-errors-common {
-    description
-      "BGP NOTIFICATION state that is common in the sent and received
-       direction that has been encapsulated in a CEASE/HARD RESET
-       NOTIFICATION.
-
-       Note that these leaves are only present when carrying the RFC
-       8538 encapsulated NOTIFICATION state. In this case,
-       the last-error-data leaf will carry the encapsulated Data.";
-      
-    leaf last-encapsulated-error {
-      type identityref {
-        base bn:bgp-notification;
-      }
-      description
-        "The last RFC 8538 encapsulated NOTIFICATION error for the
-         peer on this connection.  If no identity is registered for
-         the Error code / Error subcode, this leaf contains the most
-         applicable identity for the BGP NOTIFICATION base code.
-
-         The last-encapsulated-error-code and
-         last-encapsulated-error-subcode will always have the
-         encapsulated information received in the CEASE/HARD RESET
-         NOTIFICATION PDU's encapsulated ErrCode and Subcode
-         fields.";
-      reference
-        "RFC 8538: Notification Message Support for BGP Graceful
-         Restart, Section 3.1.";
-    }
-    leaf last-encapsulated-error-code {
-      type uint8;
-      description
-        "The last RFC 8538 encapsulated NOTIFICATION Error code for
-         the peer on this connection.";
-      reference
-        "RFC 8538: Notification Message Support for BGP Graceful
-         Restart, Section 3.1.";
-    }
-    leaf last-encapsulated-error-subcode {
-      type uint8;
-      description
-        "The last RFC 8538 encapsulated NOTIFICATION Error subcode
-         for the peer on this connection.";
-      reference
-        "RFC 8538: Notification Message Support for BGP Graceful
-         Restart, Section 3.1.";
-    }
-  }
-
-  /*
    * Containers
    */
 
@@ -280,7 +155,7 @@ module ietf-bgp {
       description
         "Top-level configuration for the BGP router.";
       container global {
-        presence "Enables global configuration of BGP";
+        presence "Enables global configuration of BGP.";
         description
           "Global configuration for the BGP router.";
         leaf as {
@@ -288,7 +163,36 @@ module ietf-bgp {
           mandatory true;
           description
             "Local autonomous system number of the router.  Uses
-             the 32-bit as-number type from the model in RFC 6991.";
+             the 32-bit as-number type from the model in RFC 9911.";
+        }
+        leaf treat-as-withdraw {
+          type boolean;
+          description
+            "Specify whether erroneous UPDATE messages for which the
+             NLRI can be extracted are treated as though the NLRI is
+             withdrawn - avoiding session reset.  The suggested
+             implementation default is true.";
+          reference
+            "RFC 7606: Revised Error Handling for BGP UPDATE
+             Messages.";
+        }
+        leaf enforce-first-as {
+           type boolean;
+           description
+             "When set to true, the leftmost AS in the AS_PATH of BGP
+              UPDATE messages received from external peers MUST be
+              equal to autonomous system number of the peer that sent
+              the message.
+
+              If the check determines they are not equal and
+              treat-as-withdraw is false, a BGP NOTIFICATION is sent.
+              If treat-as-withdraw is true, the routes will be
+              withdraw without and no NOTIFICATION is sent.";
+           reference
+             "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+              Section 6.3.
+              RFC 7606: Revised Error Handling for BGP UPDATE
+              Messages.";
         }
         leaf identifier {
           type yang:dotted-quad;
@@ -302,6 +206,7 @@ module ietf-bgp {
             "RFC 6286: AS-Wide Unique BGP ID for BGP-4. Section 2.1";
         }
         container distance {
+          if-feature "bt:distance";
           description
             "Administrative distances (or preferences) assigned to
              routes received from different sources (external, and
@@ -328,22 +233,26 @@ module ietf-bgp {
             "Configuration options specifying parameters when the
              local router is within an autonomous system which is
              part of a BGP confederation.";
-          leaf enabled {
-            type boolean;
-            description
-              "When this leaf is set to true it indicates that
-               the local-AS is part of a BGP confederation.";
-          }
+          reference
+            "RFC 5065: Autonomous System Confederations for BGP.";
           leaf identifier {
             type inet:as-number;
             description
-              "Confederation identifier for the autonomous system.";
+              "Confederation identifier for the autonomous system.
+               Setting the identifier indicates that the local-AS is
+               part of the BGP confederation.";
+            reference
+              "RFC 5065: Autonomous System Confederations for BGP,
+               Section 1.2.";
           }
           leaf-list member-as {
             type inet:as-number;
             description
-              "Remote autonomous systems that are to be treated
+              "Autonomous system numbers that are to be treated
                as part of the local confederation.";
+            reference
+              "RFC 5065: Autonomous System Confederations for BGP,
+               Section 1.2.";
           }
         }
         container graceful-restart {
@@ -377,7 +286,7 @@ module ietf-bgp {
               uses mp-afi-safi-graceful-restart-config;
             }
             uses route-selection-options;
-            uses structure-add-paths;
+            uses add-paths;
             uses global-group-use-multiple-paths;
             uses mp-all-afi-safi-list-contents;
           }
@@ -391,13 +300,29 @@ module ietf-bgp {
           "Configuration for BGP neighbors.";
 
         list neighbor {
-          key "remote-address";
+          key "neighbor-key";
           description
             "List of BGP neighbors configured on the local system,
-             uniquely identified by remote IPv[46] address.";
+             uniquely identified by a neighbor key that by default
+             corresponds to the remote peer's IP address.";
+
+          leaf neighbor-key {
+            type leafref {
+              path "../remote-address";
+            }
+            description
+              "The key used to identify this BGP neighbor in the
+               list. By default, this references the remote IP
+               address of the peer, decoupling the list key from
+               the peer address leaf so that implementations can
+               more easily augment or deviate the keying strategy
+               without disrupting other parts of the model that
+               depend on remote-address.";
+          }
 
           leaf remote-address {
             type inet:ip-address;
+            mandatory true;
             description
               "The remote IP address of this entry's BGP peer.";
           }
@@ -457,8 +382,8 @@ module ietf-bgp {
             description
               "The BGP Identifier of this entry's BGP peer.
                This entry MUST be 0.0.0.0 unless the
-               session state is in the openconfirm or the
-               established state.";
+               session state is in the OpenConfirm or the
+               Established state.";
             reference
               "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
                          Section 4.2, 'BGP Identifier'.";
@@ -503,7 +428,7 @@ module ietf-bgp {
             if-feature "bt:graceful-restart";
             description
               "Parameters relating the graceful restart mechanism for
-               BGP";
+               BGP.";
             reference
               "RFC 4724: Graceful Restart Mechanism for BGP.";
             uses graceful-restart-config;
@@ -618,8 +543,7 @@ module ietf-bgp {
                    established.";
               }
             }
-            //  notification does not like a non-config statement.
-            //  config false;
+            config false;
             description
               "The BGP peer connection state.";
             reference
@@ -632,13 +556,11 @@ module ietf-bgp {
             description
               "This timestamp indicates the time that the BGP session
                last transitioned in or out of the Established state.
-               The value is the timestamp in seconds relative to the
-               Unix Epoch (Jan 1, 1970 00:00:00 UTC).
 
                The BGP session uptime can be computed by clients as
                the difference between this value and the current time
-               in UTC (assuming the session is in the Established
-               state, per the session-state leaf).";
+               (assuming the session is in the Established state,
+               per the session-state leaf).";
             reference
               "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
                Section 8.";
@@ -690,115 +612,46 @@ module ietf-bgp {
             }
             container messages {
               description
-                "Counters for BGP messages sent and received from the
-                 neighbor";
-              leaf total-received {
-                type yang:zero-based-counter32;
+                "Counters for BGP messages sent to and received from
+                 the neighbor";
+              container received {
                 description
-                  "Total number of BGP messages received from this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerInTotalMessages.";
-              }
-              leaf total-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Total number of BGP messages sent do this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerOutTotalMessages.";
-              }
-              leaf updates-received {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP UPDATE messages received from this
+                  "BGP messages counters received from this
                    neighbor.";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerInUpdates.";
+                uses bgp-neighbor-messages-common;
               }
-              leaf updates-sent {
-                type yang:zero-based-counter32;
+
+              container sent {
                 description
-                  "Number of BGP UPDATE messages sent to this
-                   neighbor";
-                reference
-                  "RFC 4273: Definitions of Managed Objects for
-                   BGP-4, bgpPeerOutUpdates.";
+                  "BGP messages counters sent to this neighbor.";
+                uses bgp-neighbor-messages-common;
               }
-              leaf erroneous-updates-withdrawn {
-                type yang:zero-based-counter32;
-                config false;
+
+              container errors {
                 description
-                  "The number of BGP UPDATE messages for which the
-                   treat-as-withdraw mechanism has been applied based
-                   on erroneous message contents.";
-                reference
-                  "RFC 7606: Revised Error Handling for BGP UPDATE
-                   Messages, Section 2.";
-              }
-              leaf erroneous-updates-attribute-discarded {
-                type yang:zero-based-counter32;
-                config false;
-                description
-                  "The number of BGP UPDATE messages for which the
-                   attribute discard mechanism has been applied based
-                   on erroneous message contents.";
-                reference
-                  "RFC 7606: Revised Error Handling for BGP UPDATE
-                   Messages, Section 2.";
-              }
-              leaf in-update-elapsed-time {
-                type yang:gauge32;
-                units "seconds";
-                description
-                  "Elapsed time (in seconds) since the last BGP
-                   UPDATE message was received from the peer.
-                   Each time in-updates is incremented,
-                   the value of this object is set to zero (0).";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.3 
-                   RFC 4271: A Border Gateway Protocol 4 (BGP-4),
-                   Established state.";
-              }
-              leaf notifications-received {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP NOTIFICATION messages indicating an
-                   error condition has occurred exchanged received
-                   from this peer.";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.5.";
-              }
-              leaf notifications-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP NOTIFICATION messages indicating an
-                   error condition has occurred exchanged sent to
-                   this peer.";
-                reference
-                  "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
-                   Section 4.5.";
-              }
-              leaf route-refreshes-received {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP ROUTE-REFRESH messages received from
-                   this peer.";
-                reference
-                  "RFC 2918: Route Refresh Capability for BGP-4.";
-              }
-              leaf route-refreshes-sent {
-                type yang:zero-based-counter32;
-                description
-                  "Number of BGP ROUTE-REFRESH messages sent to
-                   this peer.";
-                reference
-                  "RFC 2918: Route Refresh Capability for BGP-4.";
+                  "BGP errors counted vs. this neighbor.";
+                leaf erroneous-updates-withdrawn {
+                  type yang:zero-based-counter32;
+                  config false;
+                  description
+                    "The number of BGP UPDATE messages for which the
+                     treat-as-withdraw mechanism has been applied
+                     based on erroneous message contents.";
+                  reference
+                    "RFC 7606: Revised Error Handling for BGP UPDATE
+                     Messages, Section 2.";
+                }
+                leaf erroneous-updates-attribute-discarded {
+                  type yang:zero-based-counter32;
+                  config false;
+                  description
+                    "The number of BGP UPDATE messages for which the
+                     attribute discard mechanism has been applied
+                     based on erroneous message contents.";
+                  reference
+                    "RFC 7606: Revised Error Handling for BGP UPDATE
+                     Messages, Section 2.";
+                }
               }
             }
             container queues {
@@ -851,12 +704,12 @@ module ietf-bgp {
               path "../../neighbor/remote-address";
             }
             description
-              "IP address of the neighbor that went into established
+              "IP address of the neighbor that went into Established
                state.";
           }
           description
             "The established event is generated
-             when the BGP FSM enters the established state.";
+             when the BGP FSM enters the Established state.";
         }
 
         notification backward-transition {
@@ -866,7 +719,7 @@ module ietf-bgp {
             }
             description
               "IP address of the neighbor that changed its state from
-               established state.";
+               Established state.";
           }
           container notification-received {
             description
@@ -888,8 +741,8 @@ module ietf-bgp {
           }
           description
             "The backward-transition event is
-             generated when the BGP FSM moves from a higher
-             numbered state to a lower numbered state.";
+             generated when the BGP FSM moves out of the
+             Established state.";
         }
         action clear {
           if-feature "bt:clear-neighbors";
@@ -978,13 +831,13 @@ module ietf-bgp {
           }
 
           uses neighbor-group-config;
-          uses structure-dynamic-peers;
+          uses dynamic-peers;
 
           container graceful-restart {
             if-feature "bt:graceful-restart";
             description
               "Parameters relating the graceful restart mechanism for
-               BGP";
+               BGP.";
             reference
               "RFC 4724: Graceful Restart Mechanism for BGP.";
             uses graceful-restart-config;
@@ -1016,7 +869,7 @@ module ietf-bgp {
                   "Parameters relating to BGP graceful-restart";
                 uses mp-afi-safi-graceful-restart-config;
               }
-              uses structure-add-paths;
+              uses add-paths;
               uses bgp-neighbor-use-multiple-paths;
               uses mp-all-afi-safi-list-contents;
             }

@@ -26,9 +26,6 @@ submodule ietf-bgp-neighbor {
 
   include ietf-bgp-common;
   include ietf-bgp-common-multiprotocol;
-  include ietf-bgp-common-structure;
-
-  // meta
 
   organization
     "IETF IDR Working Group";
@@ -39,7 +36,7 @@ submodule ietf-bgp-neighbor {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This sub-module contains groupings that are specific to the
@@ -92,27 +89,60 @@ submodule ietf-bgp-neighbor {
            a session restart may be required in order to negotiate
            the new capability.";
       }
+
       container prefixes {
         config false;
         description
           "Prefix counters for the AFI/SAFI in this BGP session";
+
+        leaf received-pre-policy {
+          type yang:zero-based-counter32;
+          description
+            "The number of prefixes that are received from the
+             neighbor before applying any policies. This count is the
+             number of prefixes present in the pre-policy
+             adj-rib-in-pre table for this AFI/SAFI.";
+        }
+
         leaf received {
           type yang:zero-based-counter32;
           description
-            "The number of prefixes received from the neighbor";
+            "The number of prefixes that are received from the
+             neighbor after applying any policies. This count is the
+             number of prefixes present in the adj-rib-in-post table
+             for this AFI/SAFI.";
         }
+
         leaf sent {
           type yang:zero-based-counter32;
           description
-            "The number of prefixes advertised to the neighbor";
+            "The number of prefixes that are advertised to the
+             neighbor after applying any policies. This count is the
+             number of prefixes present in the adj-rib-out-post table
+             for this AFI/SAFI.";
         }
+
         leaf installed {
           type yang:gauge32;
           description
-            "The number of advertised prefixes installed in the
-             Loc-RIB";
+            "The number of prefixes received from the neighbor for
+             this AFI/SAFI that are installed in loc-rib table.";
+         }
+
+         leaf installed-multiple-paths {
+           type yang:gauge32;
+           description
+             "The number of prefixes received from the neighbor for
+              this AFI/SAFI that are used for forwarding.  These
+              include route that are:
+
+              - 'elibigle-route' is true.
+              - 'best-path' true, or the implementation installs this
+                route as part of multiple path load balancing
+                procedures."; 
         }
       }
+
       container graceful-restart {
         if-feature "bt:graceful-restart";
         description
@@ -175,6 +205,101 @@ submodule ietf-bgp-neighbor {
       }
       uses mp-all-afi-safi-list-contents;
       uses bgp-neighbor-use-multiple-paths;
+    }
+  }
+
+  grouping bgp-neighbor-messages-common {
+    description
+      "BGP neighbor message counters common to received and sent
+       messages.";
+
+    leaf total {
+      type yang:zero-based-counter32;
+      description
+        "Total number of BGP messages from this neighbor";
+      reference
+        "RFC 4273: Definitions of Managed Objects for BGP-4,
+        bgpPeerIn/OutTotalMessages.";
+    }
+    leaf updates {
+      type yang:zero-based-counter32;
+      description
+        "Number of BGP UPDATE messages for this neighbor.";
+      reference
+        "RFC 4273: Definitions of Managed Objects for BGP-4,
+         bgpPeerIn/OutUpdates.";
+    }
+    leaf update-time {
+      type yang:timeticks;
+      description
+        "Timestamp for the last BGP UPDATE message for the peer.
+
+         The value is the timestamp in seconds relative to
+         the Unix Epoch (Jan 1, 1970 00:00:00 UTC).";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.3 
+         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Established
+         state.";
+    }
+    leaf notifications {
+      type yang:zero-based-counter32;
+      description
+        "Number of BGP NOTIFICATION messages indicating an error
+         condition has happend for this peer.";
+      reference
+        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), 
+         Section 4.5.";
+    }
+
+    list afi-safis {
+      key "afi-safi-name";
+      description
+        "Per-AFI-SAFI message counters";
+
+      leaf afi-safi-name {
+        type identityref {
+          base bt:afi-safi-type;
+        }
+        description
+          "AFI-SAFI for these message counters.";
+      }
+
+      leaf updates {
+        type yang:zero-based-counter32;
+        description
+          "Number of BGP UPDATE messages per-AFI-SAFI that may be
+           carried in UPDATE (AFI-SAFI 1-1), MP_REACH_NLRI or
+           MP_UNREACH_NLRI. This counter is a subset of the total
+           updates.";
+        reference
+          "RFC 4271, Section 4.3: A Border Gateway Protocol 4
+           (BGP-4).
+           RFC 4760, Sections 3-4: Multiprotocol Extensions for
+           BGP-4.";
+      }
+      leaf route-refresh {
+        if-feature "bt:route-refresh";
+        type yang:zero-based-counter32;
+        description
+          "Number of BGP ROUTE-REFRESH messages for this peer for
+           this AFI/SAFI. When enhanced route refresh is supported,
+           only subtype 0 is included in this counter.";
+        reference
+          "RFC 2918: Route Refresh Capability for BGP-4.
+           RFC 7313: Enhanced Route Refresh Capability for BGP-4.";
+      }
+
+      leaf end-of-rib {
+        type yang:zero-based-counter32;
+        description
+          "BGP speakers that are capable of exchanging End-of-RIB
+           markers for a given AFI-SAFI do so by sending an empty
+           UPDATE or empty MP_UNREACH_NLRI message.  This counter
+           applies to the subset of BGP updates that are End-of-RIB
+           markers.";
+        reference
+          "RFC 4724, Section 2: Graceful Restart Mechanism for BGP";
+      }
     }
   }
 }

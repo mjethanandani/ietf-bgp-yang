@@ -27,8 +27,6 @@ submodule ietf-bgp-rib-attributes {
       "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
 
-  // meta
-
   organization
     "IETF IDR Working Group";
   contact
@@ -38,7 +36,7 @@ submodule ietf-bgp-rib-attributes {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This submodule contains common data definitions for BGP
@@ -77,9 +75,7 @@ submodule ietf-bgp-rib-attributes {
       "Data for representing BGP AS-PATH segment";
 
     leaf type {
-      type identityref {
-        base bt:as-path-segment-type;
-      }
+      type bt:as-path-segment-type;
       description
         "The type of AS-PATH segment";
     }

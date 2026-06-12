@@ -11,6 +11,7 @@ src/yang/example-l2vpn-configuration-*
 src/yang/ietf-bgp.mib*
 src/yang/show-*
 state/*
+yang-parameters
 README.ncs
 ncs.conf
 setup.mk

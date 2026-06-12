@@ -26,7 +26,7 @@ module iana-bgp-notification {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This YANG module is maintained by IANA and contains definitions
@@ -758,9 +758,8 @@ module iana-bgp-notification {
 
        The value of the 'BFD Down' Error subocde is 10.";
     reference
-      "draft-ietf-idr-bfd-subcode-05: A BGP Cease Notification
-      Subcode For Bidirectional Forwarding Detection (BFD), Section
-      2.";
+      "RFC 9384: A BGP Cease Notification Subcode For Bidirectional
+       Forwarding Detection (BFD), Section 2.";
   }
 
   identity route-refresh-message-error {

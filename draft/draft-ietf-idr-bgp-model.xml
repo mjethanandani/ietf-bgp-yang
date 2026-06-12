@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <rfc
+    xmlns:xi="http://www.w3.org/2001/XInclude"
     category="std"
     docName="draft-ietf-idr-bgp-model-latest"
     ipr="trust200902"
@@ -76,7 +77,7 @@
     </author>
 
     <author fullname="Jeffrey Haas" initials="J." surname="Haas">
-      <organization>Juniper Networks</organization>
+      <organization>HPE</organization>
 
       <address>
         <postal>
@@ -95,7 +96,7 @@
 
         <facsimile/>
 
-        <email>jhaas@pfrc.org</email>
+        <email>jeffrey.haas@hpe.com</email>
 
         <uri/>
       </address>
@@ -508,26 +509,47 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       sensitivity/vulnerability are described here.</t>
 
       <ul>
-      <li> The attribute 'as'. If a user is allowed to change this attribute,
-      it will have the net effect of bringing down the entire routing
-      instance, causing it to delete all the current routing entries, and
-      learning new ones.</li>
+      <li>The attribute 'as'. If a user is allowed to change this attribute, it
+      will have the net effect of resetting all BGP sessions in the
+      routing instance, causing it to delete all of the current routing entries,
+      and learning new ones.</li>
 
-      <li> The attribute 'identifier'. If a user is allowed to change this
-      attribute, it will have the net effect of this routing instance
-      re-advertising all its routes.</li>
+      <li>The attribute 'identifier'. If a user is allowed to change this
+      attribute, it will have the net effect of resetting all BGP sessions in
+      the routing instance, causing it to delete all of the current routing
+      entries, and learning new ones.</li>
 
       <li> The attribute 'distance'. If a user is allowed to change this
       attribute, it will cause the preference for routes, e.g. external vs
       internal to change.</li>
 
-      <li> The attribute 'enabled' in the 'confederation' container. This
-      attribute defines whether a local-AS is part of a BGP confederation.</li>
+      <li> In the 'confederation' container, 'identifier' and 'member-as'
+      defines whether ASes are part of the BGP confederation.  Improperly
+      configuring these attributes may result in BGP session resets by
+      advertising confederation routes to non-confederation peers or
+      non-confederation routes to peers expecting such routes.</li>
 
-      <li> Finally, there are a whole set of route selection options such as
+      <li> There are a whole set of route selection options such as
       'always-compare-med', 'ignore-as-path-length' that affect the way the
       system picks up a particular route. Being able to change will adversely
       affect how the route selection happens.</li>
+
+      <li>This module defines a container, 'secure-session' providing
+      configuration for BGP peering session transport security.
+      Misconfiguration of nodes in this container can prevent peering sessions
+      from coming up, or upon change, cause peering sessions to reset. Improper
+      operational exposure of the content of these nodes can compromise the
+      transport security of BGP peering sessions.</li>
+
+      <li>The nodes of 'secure-session' contains a
+      choice of using <xref target="RFC5925">TCP-Authentication Option
+      (TCP-AO)</xref>, or <xref target="RFC2385">Protection of BGP
+      Sessions via the TCP MD5 Signature Option</xref>. The support
+      for MD5 has been made available for legacy reasons. However,
+      because of vulnerabilities in MD5 as described in <xref
+      target="RFC6151">MD5 and HMAC-MD5 Security
+      Considerations</xref>, operators are strongly encouraged to use
+      TCP-AO or other methods to secure their BGP session.</li>
       </ul>
 
       <t>Some of the readable data nodes in this YANG module may be considered
@@ -546,7 +568,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       such as attribute sets, communities, extended communities, IPv6 extended
       communities, and large communities. Being able to read the contents of
       this container will allow a malicious user to understand how the system
-      decide how to route a packet, and thus try to affect a change.</li>
+      decides how to route a packet, and thus try to affect a change.</li>
       </ul>
 
       <t>Some of the RPC operations in this YANG module may be considered
@@ -562,7 +584,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       operation, causing all the individual statistics to be cleared.</li>
 
       <li> The model also allows for neighbors that have been learnt by the
-      system to be cleared by using the 'clear' RPC operation.</li>
+      system to be cleared by using the 'clear' RPC operation.  This results
+      in a session bounce and all of the routes being cleared and re-learned.</li>
       </ul>
 
       <t><xref target="RFC7454">BGP OPSEC</xref> describes several
@@ -571,16 +594,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       target="RFC5082">Generalized TTL Security Mechanism
       (GTSM)</xref> capability to make it harder to spoof a BGP
       session. This module allows implementations that want to support
-      the capability to configure a TTL value, under a feature flag.
-      It also defines a container 'secure-session' that contains a
-      choice of using <xref target="RFC5925">TCP-Authentication Option
-      (TCP-AO)</xref>, or <xref target="RFC2385">Protection of BGP
-      Sessions via the TCP MD5 Signature Option</xref>. The support
-      for MD5 has been made available for legacy reasons. However,
-      because of vulnerabilities in MD5 as described in <xref
-      target="RFC6151">MD5 and HMAC-MD5 Security
-      Considerations</xref>, operators are strongly encouraged to use
-      TCP-AO or other methods to secure their BGP session.</t>
+      the capability to configure a TTL value, under a feature flag.</t>
+
     </section>
 
     <section title="IANA Considerations">
@@ -605,43 +620,77 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers six YANG modules in the YANG Module
+        <t>This document registers 14 YANG modules in the YANG Module
         Names registry <xref target="RFC6020">YANG</xref>.</t>
 
-        <t><figure>
+        <t>
+          <figure>
             <artwork><![CDATA[
-	    name: ietf-bgp
-	    namespace: urn:ietf:params:xml:ns:yang:ietf-bgp
-	    prefix: bgp
-	    reference: RFC XXXX
+            name: ietf-bgp
+            namespace: urn:ietf:params:xml:ns:yang:ietf-bgp
+            prefix: bgp
+            reference: RFC XXXX
 
-	    name: ietf-bgp-policy
-	    namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
-	    prefix: bp
-	    reference: RFC XXXX
+            name: ietf-bgp-policy
+            namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
+            prefix: bp
+            reference: RFC XXXX
 
-	    name: iana-bgp-community-types
-	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-community-types
-	    prefix: bct
-	    reference: RFC XXXX
+            name: iana-bgp-community-types
+            namespace: 
+              urn:ietf:params:xml:ns:yang:iana-bgp-community-types
+            prefix: bct
+            reference: RFC XXXX
 
-	    name: iana-bgp-notification
-	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-notification
-	    prefix: bn
-	    reference: RFC XXXX
+            name: iana-bgp-notification
+            namespace: urn:ietf:params:xml:ns:yang:iana-bgp-notification
+            prefix: bn
+            reference: RFC XXXX
 
-	    name: iana-bgp-types
-	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
-	    prefix: bt
-	    reference: RFC XXXX
+            name: iana-bgp-types
+            namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
+            prefix: bt
+            reference: RFC XXXX
 
-	    name: iana-bgp-rib-types
-	    namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
-	    prefix: brt
-	    reference: RFC XXXX
-	    ]]>
-	    </artwork>
-          </figure></t>
+            name: iana-bgp-rib-types
+            namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
+            prefix: brt
+            reference: RFC XXXX
+
+            name: ietf-bgp-capabilities
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+
+            name: ietf-bgp-common-multiprotocol
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+
+            name: ietf-bgp-common
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+
+            name: ietf-bgp-common-errors
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+
+            name: ietf-bgp-neighbors
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+
+            name: ietf-bgp-rib-attributes
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+
+            name: ietf-bgp-rib-tables
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+
+            name: ietf-bgp-rib
+            belongs to: ietf-bgp
+            reference: RFC XXXX
+            ]]>
+            </artwork>
+        </figure></t>
       </section>
     </section>
 
@@ -660,14 +709,13 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           across more than one context (where contexts are neighbor,
           group, global).</li>
 
+          <li>ietf-bgp-common-errors - defines the groupings that are common
+          to BGP NOTIFICATION error reporting across more than one context
+          (where contexts are neighbor, group, global).</li>
+
           <li>ietf-bgp-common-multiprotocol - defines the groupings
           that are common across more than one context, and relate to
           multi-protocol BGP.</li>
-
-          <li>ietf-bgp-common-structure - defines groupings that are
-          shared by multiple contexts, but are used only to create
-          structural elements; i.e., containers (leaf nodes are
-          defined in separate groupings).</li>
 
           <li>ietf-bgp-neighbor - groupings with data specific to the
           neighbor context.</li>
@@ -704,34 +752,50 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li><xref target="RFC1997">BGP Communities Attribute </xref></li>
       <li><xref target="RFC2918">Route Refresh Capability for BGP-4</xref></li>
       <li><xref target="RFC3765">NOPEER Community for BGP</xref></li>
+      <li><xref target="RFC4271">A Border Gateway Protocol 4 (BGP-4)</xref></li>
+      <li><xref target="RFC4273">Definitions of Managed Objects for BGP-4</xref></li>
       <li><xref target="RFC4360">BGP Extended Communities Attributes</xref></li>
       <li><xref target="RFC4364">BGP/MPLS IP Virtual Private Networks (VPNs)</xref></li>
       <li><xref target="RFC4451">BGP MED Considerations</xref></li>
+      <li><xref target="RFC4456">BGP Route Reflection</xref></li>
       <li><xref target="RFC4659">BGP-MPLS IP Virtual Private Network (VPN) Extension for IPv6 VPN</xref></li>
       <li><xref target="RFC4724">Graceful Restart Mechanism for BGP</xref></li>
       <li><xref target="RFC4760">Multiprotocol Extentions for BGP-4</xref></li>
       <li><xref target="RFC4761">Virtual Private LAN Service (VPLS) Using BGP for Auto-Discovery and Signaling</xref></li>
       <li><xref target="RFC5065">Autonomous System Configuration for BGP</xref></li>
       <li><xref target="RFC5082">The Generalized TTL Security Mechanism (GTSM)</xref></li>
+      <li><xref target="RFC5492">Capabilities Advertisement with BGP-4</xref></li>
+      <li><xref target="RFC5668">4-Octet AS Specific BGP Extended Community</xref></li>
       <li><xref target="RFC5701">IPv6 Address Specific BGP Extended Community Attribute</xref></li>
       <li><xref target="RFC5880">Bidirectional Forward Detection (BFD)</xref></li>
       <li><xref target="RFC5881">Bidirectional Forward Detection for IPv4 and IPv6 (Single Hop)</xref></li>
       <li><xref target="RFC5883">Bidirectional Forwarding Detection (BFD) for Multihop Paths</xref></li>
       <li><xref target="RFC5925">The TCP Authentication Option</xref></li>
       <li><xref target="RFC6514">BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs</xref></li>
+      <li><xref target="RFC6286">AS-Wide Unique BGP ID for BGP-4</xref></li>
+      <li><xref target="RFC6608">Subcodes for BGP Finite State Machine Error</xref></li>
       <li><xref target="RFC6793">BGP Support for Four-Octet Autonomous System (AS) Number Space</xref></li>
-      <li><xref target="RFC7911">Advertisement of Multiple Paths in BGP </xref></li>
+      <li><xref target="RFC6996">Autonomous System (AS) Reservation for Private Use</xref></li>
+      <li><xref target="RFC7311">AIGP Metric Attribute for BGP</xref></li>
+      <li><xref target="RFC7313">Enhanced Route Refresh Capability for BGP-4</xref></li>
+      <li><xref target="RFC7432">BGP MPLS-Based Ethernet VPN</xref></li>
+      <li><xref target="RFC7454">BGP Operations and Security</xref></li>
+      <li><xref target="RFC7606">Revised Error Handling for BGP UPDATE Messages</xref></li>
+      <li><xref target="RFC7705">Autonomous System Migration Mechanisms and Their Effects on the BGP AS_PATH Attribute</xref></li>
+      <li><xref target="RFC7854">BGP Monitoring Protocol</xref></li>
+      <li><xref target="RFC7911">Advertisement of Multiple Paths in BGP</xref></li>
       <li><xref target="RFC8092">BGP Large Communities Attributes</xref></li>
       <li><xref target="RFC8177">YANG Key Chain</xref></li>
       <li><xref target="RFC8277">Carrying Label Information in BGP-4 </xref></li>
+      <li><xref target="RFC8343">A YANG Data Model for Interface Management</xref></li>
+      <li><xref target="RFC8538">Notification Message Support for BGP Graceful Restart</xref></li>
       <li><xref target="RFC9067">A YANG Data Model for Routing Policy</xref></li>
+      <li><xref target="RFC9127">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9293">Transmission Control Protocol</xref></li>
-      <li><xref target="RFC9648">YANG Data Model for TCP</xref></li>
-      <li>
-	<xref target="I-D.ietf-netmod-yang-semver">YANG Semantic
-        Versioning</xref>
-      </li>
+      <li><xref target="RFC9384">A BGP Cease Notification Subcode For Bidirectional Forwarding Detection (BFD)</xref></li>
+      <li><xref target="RFC9648">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
+      <li><xref target="I-D.ietf-netmod-yang-semver">YANG Semantic Versioning</xref></li>
       </ul></t>
 
       <section title="BGP module and submodules">
@@ -771,6 +835,18 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common@YYYY-MM-DD.yang)
           </figure>
           </t>
         </section>
+        <section title = "BGP common errors submodule">
+          <t>
+          <figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-common-errors@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-errors@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure>
+          </t>
+        </section>
         <section title = "BGP common multiprotocol submodule">
           <t>
           <figure>
@@ -781,18 +857,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-multiprotocol@YYYY-MM-DD
 
         ]]></artwork>
           </figure>
-          </t>
-        </section>
-        <section title = "BGP common structure submodule">
-          <t>
-            <figure>
-              <artwork><![CDATA[
-<CODE BEGINS> file "ietf-bgp-common-structure@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-common-structure@YYYY-MM-DD.yang)
-<CODE ENDS>
-
-        ]]></artwork>
-            </figure>
           </t>
         </section>
         <section title = "BGP neighbors submodule">
@@ -852,7 +916,7 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
       </section>
 
       <section title="RIB modules and submodules">
-	<section title="BGP RIB types module">
+        <section title="BGP RIB types module">
           <t><figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-rib-types@YYYY-MM-DD.yang"
@@ -861,7 +925,7 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-rib-types@YYYY-MM-DD.yang)
 
         ]]></artwork>
           </figure></t>
-	</section>
+        </section>
 
         <section title = "BGP RIB submodule">
           <t>
@@ -911,7 +975,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
     <section title="Acknowledgements">
       <t>The authors are grateful for valuable contributions to this
-      document and the associated models from: Ebben Aires, Pavan
+      document and the associated models from: Ebben Aries, Pavan
       Beeram, Chris Chase, Ed Crabbe, Luyuan Fang, Bill Fenner, Akshay
       Gattani, Josh George, Vijay Gill, Matt John, Dhanendra Jain,
       Acee Lindem, Ina Minei, Carl Moberg, Ashok Narayanan, Einar
@@ -926,121 +990,157 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       contributed to the policy part of the module, and to Derek Yeung
       in helping out with Extended Communities support in the
       model.</t>
+
+      <t>Adrian Farrel provided review of the AS_PATH regular expression
+      ABNF.</t>
     </section>
   </middle>
 
   <back>
     <references title="Normative references">
-      <?rfc include='reference.RFC.1997.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.1997.xml"/>
 
-      <?rfc include='reference.RFC.2119.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
 
-      <?rfc include='reference.RFC.2439.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2439.xml"/>
 
-      <?rfc include='reference.RFC.2918.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2918.xml"/>
 
-      <?rfc include='reference.RFC.3688.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3688.xml"/>
 
-      <?rfc include='reference.RFC.4271.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4271.xml"/>
 
-      <?rfc include='reference.RFC.4360.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4273.xml"/>
 
-      <?rfc include='reference.RFC.4364.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4360.xml"/>
 
-      <?rfc include='reference.RFC.4456.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4364.xml"/>
 
-      <?rfc include='reference.RFC.4659.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4456.xml"/>
 
-      <?rfc include='reference.RFC.4724.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4659.xml"/>
 
-      <?rfc include='reference.RFC.4760.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4724.xml"/>
 
-      <?rfc include='reference.RFC.4761.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4760.xml"/>
 
-      <?rfc include='reference.RFC.5065.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4761.xml"/>
 
-      <?rfc include='reference.RFC.5701.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5065.xml"/>
 
-      <?rfc include='reference.RFC.5880.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5234.xml"/>
+      
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5492.xml"/>
 
-      <?rfc include='reference.RFC.5881.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5668.xml"/>
 
-      <?rfc include='reference.RFC.5883.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5701.xml"/>
 
-      <?rfc include='reference.RFC.6020.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5880.xml"/>
 
-      <?rfc include='reference.RFC.6241.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5881.xml"/>
 
-      <?rfc include='reference.RFC.6242.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5883.xml"/>
 
-      <?rfc include='reference.RFC.6514.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6020.xml"/>
 
-      <?rfc include='reference.RFC.6793.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6241.xml"/>
 
-      <?rfc include='reference.RFC.6811.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6242.xml"/>
 
-      <?rfc include='reference.RFC.7607.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6286.xml"/>
 
-      <?rfc include='reference.RFC.7911.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6514.xml"/>
 
-      <?rfc include='reference.RFC.7950.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6608.xml"/>
 
-      <?rfc include='reference.RFC.8040.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6793.xml"/>
 
-      <?rfc include='reference.RFC.8092.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6811.xml"/>
 
-      <?rfc include='reference.RFC.8174.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6996.xml"/>
 
-      <?rfc include='reference.RFC.8177.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7313.xml"/>
 
-      <?rfc include='reference.RFC.8277.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7432.xml"/>
 
-      <?rfc include='reference.RFC.8341.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7606.xml"/>
 
-      <?rfc include='reference.RFC.8349.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7607.xml"/>
 
-      <?rfc include='reference.RFC.8446.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7705.xml"/>
 
-      <?rfc include='reference.RFC.8528.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7854.xml"/>
 
-      <?rfc include='reference.RFC.8529.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7911.xml"/>
 
-      <?rfc include='reference.RFC.9067.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7950.xml"/>
 
-      <?rfc include='reference.RFC.9293.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8040.xml"/>
 
-      <?rfc include='reference.RFC.9314.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8092.xml"/>
 
-      <?rfc include='reference.RFC.9648.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
 
-      <?rfc include='reference.RFC.9911.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8177.xml"/>
 
-      <?rfc include='reference.I-D.ietf-netmod-yang-semver.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8277.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8341.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8343.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8349.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8528.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8529.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8538.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9067.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9127.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9293.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9314.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9384.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9648.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9911.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.I-D.ietf-netmod-yang-semver.xml'?>
     </references>
 
     <references title="Informative references">
-      <?rfc include='reference.RFC.2385.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2385.xml"/>
 
-      <?rfc include='reference.RFC.2622.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2622.xml"/>
 
-      <?rfc include='reference.RFC.3765.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3765.xml"/>
 
-      <?rfc include='reference.RFC.4451.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4451.xml"/>
 
-      <?rfc include='reference.RFC.5082.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5082.xml"/>
 
-      <?rfc include='reference.RFC.5398.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5398.xml"/>
 
-      <?rfc include='reference.RFC.5925.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5925.xml"/>
 
-      <?rfc include='reference.RFC.6151.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6151.xml"/>
 
-      <?rfc include='reference.RFC.7454.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7311.xml"/>
 
-      <?rfc include='reference.RFC.8342.xml'?>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7454.xml"/>
 
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-      href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-idr-deprecate-as-set-confed-set.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8342.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9774.xml"/>
     </references>
 
     <section title="Examples">
@@ -1140,7 +1240,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.4.xml,68)
             
       <section title="BGP Policy - Match Next-hop and Set Community">
         <t>In this example, a "next-hop-set" is configured using option "invert"
-          from "matct-set-options" to match next-hop not equal to "192.0.2.2" and
+          from "match-set-options" to match next-hop not equal to "192.0.2.2" and
           then set community to 55:55.</t>
         <figure>
           <artwork><![CDATA[
@@ -1331,7 +1431,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
         this is only a recommendation and not a protocol requirement.  AS_SETs
         are being deprecated for implementation and deployment in BGP due to the
         issues that they raise in BGP security features.  See
-        <xref target="I-D.ietf-idr-deprecate-as-set-confed-set"/>.</li>
+        <xref target="RFC9774"/>.</li>
 
         <li>BGP Confederation are the always the left-most ASes in the AS_PATH.
         As a result, matching on confederation ASes may be done using the '^'
@@ -1342,7 +1442,69 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
         </ul>
       </section>
       <section title="BGP YANG AS_PATH Regular Expressions ABNF">
-        <t>TBD...</t>
+        <t>This module's AS_PATH regular expression syntax is documented using
+        <xref target="RFC5234">ABNF</xref>.</t>
+
+        <sourcecode>
+<![CDATA[
+aspath-regex = 0*1<BOL> 0*1<terms> 0*1<EOL>
+
+terms = *<SP> term-list *<SP> ; Ignore surrounding space
+
+term-list = term / concatenation / alternative
+
+term = asn-or-any 0*1<postfix-oper> /
+       paren-expr 0*1<postfix-oper> /
+       set-expr   0*1<postfix-oper>
+
+asn-or-any = ASN / ANY
+
+concatenation = term-list 1*<SP> term-list ; Separated by spaces.
+
+alternative = term-list *<SP> "|" *<SP> term-list ; Choice.
+
+paren-expr = "(" terms ")" ; Grouping.
+
+; Sets with optional negation.
+set-expr = "[" 0*1<NEG> *<SP> set-expr-asns *<SP> "]"
+
+set-expr-asns = asn-or-range / asn-or-range 1*<SP> set-expr-asns
+
+; First ASN MUST be <= the second ASN
+asn-or-range = ASN / ( ASN "-" ASN)
+
+postfix-oper = "*" / "+" / "?" / "{" postfix-range "}"
+
+; First digit MUST be <= second digit. White space is irrelevant.
+postfix-range = (*<SP> 1*<DIGIT> *<SP>) /
+                (*<SP> 1*<DIGIT> *<SP> "," *<SP>) /
+                (*<SP> "," *<SP> 1*<DIGIT> *<SP>) /
+                (*<SP> 1*<DIGIT> *<SP> "," *<SP> 1*<DIGIT> *<SP>)
+
+; Terminal tokens
+
+ANY = "." ; Represents any ASN
+
+ASN = ; A 32-bit unsigned integer 1..4294967295
+    ("1"/"2"/"3"/"4"/"5"/"6"/"7"/"8"/"9") 0*8<DIGIT> /
+    ("1"/"2"/"3") 9<DIGIT> /
+    "4"        ("0"/"1") 8<DIGIT> /
+    "42"       ("0"/"1"/"2"/"3"/"4"/"5"/"6"/"7"/"8") 7<DIGIT>
+    "429"      ("0"/"1"/"2"/"3") 6<DIGIT> /
+    "4294"     ("0"/"1"/"2"/"3"/"4"/"5"/"6"/"7"/"8") 5<DIGIT>
+    "42949"    ("0"/"1"/"2"/"3"/"4"/"5") 4<DIGIT> /
+    "429496"   ("0"/"1"/"2"/"3"/"4"/"5"/"6") 3<DIGIT> /
+    "4294967"  ("0"/"1") 2<DIGIT>
+    "4294972"  ("0"/"1"/"2"/"3"/"4"/"5"/"6"/"7"/"8") <DIGIT> /
+    "42949729" ("0"/"1"/"2"/"3"/"4"/"5")
+
+BOL = "^" ; Match empty beginning of line
+
+EOL = "$" ; Match empty end of line
+
+NEG = "^" ; Negate set contents
+]]>
+        </sourcecode>
       </section>
       <section title="Example BGP YANG AS_PATH Regular Expressions">
         <dl newline="true">

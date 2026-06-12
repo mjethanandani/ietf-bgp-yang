@@ -25,8 +25,6 @@ submodule ietf-bgp-common-multiprotocol {
       "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
 
-  // meta
-
   organization
     "IETF IDR Working Group";
   contact
@@ -36,7 +34,7 @@ submodule ietf-bgp-common-multiprotocol {
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
               Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jhaas at juniper.net).";
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This sub-module contains groupings that are related to support
@@ -194,7 +192,8 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container ipv4-labeled-unicast {
-      when "derived-from-or-self(../name, 'bt:ipv4-labeled-unicast')" {
+      when "derived-from-or-self(../name, " +
+           "'bt:ipv4-labeled-unicast')" {
         description
           "Include this container for IPv4 Labeled Unicast specific
            configuration";
@@ -206,7 +205,8 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container ipv6-labeled-unicast {
-      when "derived-from-or-self(../name, 'bt:ipv6-labeled-unicast')" {
+      when "derived-from-or-self(../name, " +
+           "'bt:ipv6-labeled-unicast')" {
         description
           "Include this container for IPv6 Labeled Unicast specific
            configuration";
@@ -218,7 +218,8 @@ submodule ietf-bgp-common-multiprotocol {
       // options.
     }
     container l3vpn-ipv4-unicast {
-      when "derived-from-or-self(../name, 'bt:l3vpn-ipv4-unicast')" {
+      when "derived-from-or-self(../name, " +
+           "'bt:l3vpn-ipv4-unicast')" {
         description
           "Include this container for IPv4 Unicast L3VPN specific
            configuration";
@@ -230,7 +231,8 @@ submodule ietf-bgp-common-multiprotocol {
       // placeholder for IPv4 Unicast L3VPN specific config options.
     }
     container l3vpn-ipv6-unicast {
-      when "derived-from-or-self(../name, 'bt:l3vpn-ipv6-unicast')" {
+      when "derived-from-or-self(../name, " +
+           "'bt:l3vpn-ipv6-unicast')" {
         description
           "Include this container for unicast IPv6 L3VPN specific
            configuration";
@@ -243,7 +245,8 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container l3vpn-ipv4-multicast {
-      when "derived-from-or-self(../name, 'bt:l3vpn-ipv4-multicast')" {
+      when "derived-from-or-self(../name, " +
+           "'bt:l3vpn-ipv4-multicast')" {
         description
           "Include this container for multicast IPv6 L3VPN specific
            configuration";
@@ -256,7 +259,8 @@ submodule ietf-bgp-common-multiprotocol {
       // options
     }
     container l3vpn-ipv6-multicast {
-      when "derived-from-or-self(../name, 'bt:l3vpn-ipv6-multicast')" {
+      when "derived-from-or-self(../name, " +
+           "'bt:l3vpn-ipv6-multicast')" {
         description
           "Include this container for multicast IPv6 L3VPN specific
            configuration";

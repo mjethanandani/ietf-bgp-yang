@@ -17,7 +17,7 @@ submodule ietf-bgp-common {
   import ietf-interfaces {
     prefix if;
     reference
-      "RFC 7223: A YANG Data Model for Interface Management.";
+      "RFC 8343: A YANG Data Model for Interface Management.";
   }
   import ietf-key-chain {
     prefix key-chain;
@@ -42,13 +42,14 @@ submodule ietf-bgp-common {
   import ietf-bfd-types {
     prefix bfd-types;
     reference
-      "RFC 9127: YANG Data Model for Bidirectional Forward
+      "RFC 9314: YANG Data Model for Bidirectional Forward
        Detection.";
   }
   import ietf-tcp {
     prefix tcp;
     reference
       "RFC 9648: YANG Data Model for TCP.";
+<<<<<<< HEAD
   }
   import ietf-yang-semver {
     prefix ysv;
@@ -57,6 +58,8 @@ submodule ietf-bgp-common {
   }
   include ietf-bgp-common-structure {
     revision-date YYYY-MM-DD;
+=======
+>>>>>>> v20
   }
 
   organization
@@ -67,8 +70,8 @@ submodule ietf-bgp-common {
 
      Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
               Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com,
-              Jeffrey Haas (jhaas at juniper.net).";
+              Susan Hares (shares at ndzh.com),
+              Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
     "This sub-module contains common groupings that are common across
@@ -106,8 +109,8 @@ submodule ietf-bgp-common {
 
   grouping neighbor-group-timers {
     description
-      "Config parameters related to timers associated with the BGP
-       peer";
+      "Configuration parameters related to timers associated with
+       the BGP peer.";
     leaf connect-retry-interval {
       type uint16 {
         range "1..max";
@@ -126,7 +129,6 @@ submodule ietf-bgp-common {
         range "0 | 3..65535";
       }
       units "seconds";
-      default "90";
       description
         "Time interval (in seconds) for the HoldTimer established
          with the peer.  When read as operational data (ro), the
@@ -134,6 +136,8 @@ submodule ietf-bgp-common {
          using the smaller of the values in hold-time that was
          configured (rw) in the running datastore and the Hold Time
          received in the OPEN message.
+
+         The suggested value for this timer is 90 seconds.
 
          This value must be at least three seconds
          if it is not zero (0).
@@ -145,15 +149,6 @@ submodule ietf-bgp-common {
          If the configured value of hold-time object was
          a value of (0), then when read this object MUST have a
          value of (0) also.";
-      reference
-        "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.2,
-         RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
-    }
-    leaf negotiated-hold-time {
-      type uint16;
-      config false;
-      description
-        "The negotiated hold-time for the BGP session";
       reference
         "RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 4.2,
          RFC 4271: A Border Gateway Protocol 4 (BGP-4), Section 10.";
@@ -231,7 +226,7 @@ submodule ietf-bgp-common {
       }
       container ebgp {
         description
-          "Multi-path configuration for eBGP";
+          "Multi-path configuration for eBGP.";
         leaf allow-multiple-as {
           type boolean;
           default "false";
@@ -259,12 +254,45 @@ submodule ietf-bgp-common {
          establishing sessions with the remote peer or peer group, if
          this differs from the global BGP router autonomous system
          number.";
+      reference
+        "RFC 7705: Autonomous System Migration Mechanisms and Their
+         Effects on the BGP AS_PATH Attribute.";
+    }
+    leaf treat-as-withdraw {
+      type boolean;
+      description
+        "Specify whether erroneous UPDATE messages for which the NLRI
+         can be extracted are treated as though the NLRI is withdrawn
+         - avoiding session reset.  The suggested implementation
+         default is true.";
+      reference
+        "RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
+    }
+    leaf enforce-first-as {
+       type boolean;
+       description
+         "When set to true, the leftmost AS in the AS_PATH of BGP
+          UPDATE messages received from external peers MUST be equal
+          to autonomous system number of the peer that sent the
+          message.
+
+          If the check determines they are not equal and
+          treat-as-withdraw is false, a BGP NOTIFICATION is sent.  If
+          treat-as-withdraw is true, the routes will be withdraw
+          without and no NOTIFICATION is sent.";
+       reference
+         "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+          Section 6.3.
+          RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
     }
     leaf remove-private-as {
       type bt:remove-private-as-option;
       description
         "When this leaf is specified, remove private AS numbers from
          updates sent to peers.";
+      reference
+        "RFC 6996: Autonomous System (AS) Reservation for Private
+         Use.";
     }
     container route-flap-damping {
       if-feature "bt:damping";
@@ -371,17 +399,6 @@ submodule ietf-bgp-common {
       uses neighbor-group-transport-config;
     }
 
-    leaf treat-as-withdraw {
-      type boolean;
-      default "false";
-      description
-        "Specify whether erroneous UPDATE messages for which the NLRI
-         can be extracted are treated as though the NLRI is withdrawn
-         - avoiding session reset";
-      reference
-        "RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
-    }
-
     container logging-options {
       description
         "Logging options for events related to the BGP neighbor or
@@ -393,15 +410,27 @@ submodule ietf-bgp-common {
           "Configure logging of peer state changes.  Default is to
            enable logging of peer state changes.
 
-           Note: Documenting demotion from ESTABLISHED state is
+           Note: Documenting demotion from Established state is
                  desirable, but documenting all backward transitions
                  is problematic, and should be avoided.";
       }
     }
 
-    uses structure-neighbor-group-route-reflector;
-    uses structure-neighbor-group-as-path-options;
-    uses structure-add-paths;
+    uses neighbor-group-route-reflector;
+    uses neighbor-group-as-path-options;
+
+    leaf advertise-inactive-routes {
+      type boolean;
+      default "false";
+      description
+        "Advertise inactive routes to external peers.  The default
+         is to only advertise active routes.";
+      reference
+        "I-D.ietf-idr-best-external: Advertisement of the best
+         external route in BGP.";
+    }
+
+    uses add-paths;
     uses bgp-neighbor-use-multiple-paths;
     uses rt-pol:apply-policy-group;
   }
@@ -565,7 +594,7 @@ submodule ietf-bgp-common {
       description
         "BFD client configuration.";
       reference
-        "RFC 9127: YANG Data Model for Bidirectional Forwarding
+        "RFC 9314: YANG Data Model for Bidirectional Forwarding
          Detection.";
     }
   }
@@ -635,7 +664,7 @@ submodule ietf-bgp-common {
       }
       container ebgp {
         description
-          "Multi-Path parameters for eBGP";
+          "Multi-Path parameters for eBGP.";
         leaf allow-multiple-as {
           type boolean;
           default "false";
@@ -654,7 +683,7 @@ submodule ietf-bgp-common {
       }
       container ibgp {
         description
-          "Multi-Path parameters for iBGP";
+          "Multi-Path parameters for iBGP.";
         leaf maximum-paths {
           type uint32;
           default "1";
@@ -696,16 +725,6 @@ submodule ietf-bgp-common {
           "When comparing similar routes received from external BGP
            peers, use the router-id as a criterion to select the
            active path.";
-      }
-      leaf advertise-inactive-routes {
-        type boolean;
-        default "false";
-        description
-          "Advertise inactive routes to external peers.  The default
-           is to only advertise active routes.";
-        reference
-          "I-D.ietf-idr-best-external: Advertisement of the best
-           external route in BGP.";
       }
       leaf enable-aigp {
         type boolean;
@@ -788,6 +807,149 @@ submodule ietf-bgp-common {
         description
           "Total number of BGP prefixes (destinations) received
            within the context";
+      }
+    }
+  }
+
+  grouping neighbor-group-route-reflector {
+    description
+      "Grouping used to include route reflector configuration and
+       state for both BGP neighbors and peer groups";
+    container route-reflector {
+      description
+        "Route reflector parameters for the BGP peer-group";
+      reference
+        "RFC 4456: BGP Route Reflection.";
+      leaf cluster-id {
+        type bt:rr-cluster-id-type;
+        description
+          "Route Reflector cluster id to use when local router is
+           configured as a route reflector.  Commonly set at the
+           group level, but allows a different cluster id to be set
+           for each neighbor.";
+        reference
+          "RFC 4456: BGP Route Reflection: An Alternative to
+                     Full Mesh.";
+      }
+      leaf client {
+        type boolean;
+        default "false";
+        description
+          "Configure the neighbor as a route reflector client.";
+        reference
+          "RFC 4456: BGP Route Reflection: An Alternative to
+                     Full Mesh.";
+      }
+    }
+  }
+
+  grouping neighbor-group-as-path-options {
+    description
+      "Grouping used to include AS_PATH manipulation configuration
+       and state for both BGP neighbors and peer groups";
+    container as-path-options {
+      description
+        "AS_PATH manipulation parameters for the BGP neighbor or
+         group";
+      leaf allow-own-as {
+        type uint8;
+        default "0";
+        description
+          "Specify the number of occurrences of the local BGP
+           speaker's AS that can occur within the AS_PATH before it
+           is rejected as looped.";
+      }
+      leaf replace-peer-as {
+        type boolean;
+        default "false";
+        description
+          "Replace occurrences of the peer's AS in the AS_PATH with
+           the local autonomous system number";
+      }
+      leaf disable-peer-as-filter {
+        type boolean;
+        default "false";
+        description
+          "When set to true, the system advertises routes to a peer
+           even if the peer's AS was in the AS path.  The default
+           behavior (false) suppresses advertisements to peers if
+           their AS number is in the AS path of the route.";
+      }
+    }
+  }
+
+  grouping add-paths {
+    description
+      "Grouping used to include ADD-PATHs configuration and state.";
+    container add-paths {
+      if-feature "bt:add-paths";
+      description
+        "Parameters relating to the advertisement and receipt of
+         multiple paths for a single NLRI (add-paths)";
+      reference
+        "RFC 7911: Advertisements of Multiple Paths in BGP.";
+      leaf receive {
+        type boolean;
+        default "false";
+        description
+          "Enable ability to receive multiple path advertisements for
+           an NLRI from the neighbor or group";
+      }
+      choice send {
+        description
+          "Choice of sending the max. number of paths or to send
+           all.";
+        case max {
+          leaf max {
+            type uint8;
+            description
+              "The maximum number of paths to advertise to neighbors
+               for a single NLRI";
+          }
+        }
+        case all {
+          leaf all {
+            type empty;
+            description
+              "Send all the path advertisements to neighbors for a
+               single NLRI.";
+          }
+        }
+      }
+      leaf eligible-prefix-policy {
+        type leafref {
+          path "/rt-pol:routing-policy/rt-pol:policy-definitions/"
+             + "rt-pol:policy-definition/rt-pol:name";
+        }
+        description
+          "A reference to a routing policy which can be used to
+           restrict the prefixes for which add-paths is enabled";
+      }
+    }
+  }
+
+  grouping dynamic-peers {
+    description
+      "Grouping to contain dyamic BGP peers. Dynamic peers are
+       configured from a list of IP prefixes matching the IP source
+       address of the dynamic peer.";
+
+    container dynamic-peers {
+      description
+        "Configuration and operational state for dynamically
+         configured peers.";
+
+      list dynamic-peer-list {
+        key "prefix";
+        description
+          "List of peers by IP prefix for this configuration scope
+           that are dynamically configured.";
+
+        leaf prefix {
+          type inet:ip-prefix;
+          description
+            "Prefix for dynamic peer at this configuration scope.";
+        }
       }
     }
   }
