@@ -1,0 +1,26 @@
+{
+    "ietf-yang-schema-mount:schema-mounts": {
+	"namespace": [
+            {
+		"prefix": "if",
+		"uri": "urn:ietf:params:xml:ns:yang:ietf-interfaces"
+            },
+            {
+		"prefix": "ni",
+		"uri": "urn:ietf:params:xml:ns:yang:ietf-network-instance"
+            }
+	],
+	"mount-point": [
+            {
+		"module": "ietf-network-instance",
+		"label": "vrf-root",
+		"shared-schema": {
+		    "parent-reference": [
+			"/if:interfaces/if:interface[\
+                 ni:bind-network-instance-name = current()/../ni:name]"
+		    ]
+		}
+            }
+	]
+    }
+}
