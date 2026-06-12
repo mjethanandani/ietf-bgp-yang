@@ -13,6 +13,11 @@ submodule ietf-bgp-rib {
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
+  import ietf-bgp-types {
+    prefix ibt;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
   import ietf-inet-types {
     prefix inet;
     reference
@@ -112,7 +117,7 @@ submodule ietf-bgp-rib {
         "A container for attribute set parameters.";
 
       leaf origin {
-        type bt:bgp-origin-attr-type;
+        type ibt:bgp-origin-attr-type;
         description
           "BGP attribute defining the origin of the path
            information.";

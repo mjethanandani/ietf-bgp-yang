@@ -596,7 +596,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
     </section>
 
     <section title="IANA Considerations">
-      <t>This document registers six URIs, ten IETF YANG modules and
+      <t>This document registers eight URIs, twelve IETF YANG modules and
       submodules, and four IANA-maintained YANG modules.</t>
 
       <section title="URI Registration">
@@ -605,7 +605,9 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
         be made: <figure>
             <artwork><![CDATA[
             URI:urn:ietf:params:xml:ns:yang:ietf-bgp
+            URI:urn:ietf:params:xml:ns:yang:ietf-bgp-community-types
             URI:urn:ietf:params:xml:ns:yang:ietf-bgp-policy
+            URI:urn:ietf:params:xml:ns:yang:ietf-bgp-types
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-community-types
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-notification
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
@@ -618,7 +620,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers 14 YANG modules in the YANG Module
+        <t>This document registers 16 YANG modules in the YANG Module
         Names registry <xref target="RFC6020">YANG</xref>.</t>
 
         <t>
@@ -630,9 +632,22 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             maintained by IANA: N
             reference: RFC XXXX
 
+            name: ietf-bgp-community-types
+            namespace:
+              urn:ietf:params:xml:ns:yang:ietf-bgp-community-types
+            prefix: ibct
+            maintained by IANA: N
+            reference: RFC XXXX
+
             name: ietf-bgp-policy
             namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
             prefix: bp
+            maintained by IANA: N
+            reference: RFC XXXX
+
+            name: ietf-bgp-types
+            namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-types
+            prefix: ibt
             maintained by IANA: N
             reference: RFC XXXX
 
@@ -948,17 +963,23 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <t>Additionally, the above modules include the following
       modules:
       <ul>
-          <li>iana-bgp-community-types - common type and identity
-          definitions for BGP Communities.</li>
+          <li>ietf-bgp-community-types - non-IANA community type,
+          feature, and identity definitions for BGP Communities.</li>
+
+          <li>iana-bgp-community-types - IANA-maintained well-known
+          community identity definitions for BGP Communities.</li>
 
           <li>ietf-bgp-policy - BGP-specific policy data definitions
           for use with <xref target="RFC9067"/> (described in more
           detail <xref target="overview.policy"/>).</li>
 
-          <li>iana-bgp-types - common type and identity definitions
-          for BGP, including BGP policy.</li>
+          <li>ietf-bgp-types - non-IANA type, feature, and identity
+          definitions for BGP, including BGP policy.</li>
 
-          <li>iana-bgp-rib-types - common type and identity
+          <li>iana-bgp-types - IANA-maintained capability and
+          AFI/SAFI identity definitions for BGP.</li>
+
+          <li>iana-bgp-rib-types - IANA-maintained type and identity
           definitions for BGP RIB.</li>
         </ul></t>
     </section>
@@ -1021,6 +1042,32 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       purposes.  Per <xref target="RFC9907"/> Section 4.30.2, the
       authoritative versions of these modules are maintained by IANA and
       are available from the "YANG Parameters" registry group.</t>
+
+      <section title="BGP types module">
+        <t>
+          <figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+          </figure>
+        </t>
+      </section>
+
+      <section title="BGP community types module">
+        <t>
+          <figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-community-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-community-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+          </figure>
+        </t>
+      </section>
 
       <section title="BGP module and submodules">
         <section title="BGP module">

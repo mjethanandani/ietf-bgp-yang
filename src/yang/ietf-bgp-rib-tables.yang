@@ -21,8 +21,8 @@ submodule ietf-bgp-rib-tables {
     reference
       "RFC 8022: A YANG Data Model for Routing Management.";
   }
-  import iana-bgp-types {
-    prefix bt;
+  import ietf-bgp-types {
+    prefix ibt;
     reference
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
   }
@@ -261,7 +261,7 @@ submodule ietf-bgp-rib-tables {
     description
       "Action to clear BGP routes.";
     container clear-routes {
-      if-feature "bt:clear-routes";
+      if-feature "ibt:clear-routes";
       action clear {
         input {
           leaf clear-at {

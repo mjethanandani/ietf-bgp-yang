@@ -8,7 +8,11 @@ submodule ietf-bgp-capabilities {
     prefix bt;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
-
+  }
+  import ietf-bgp-types {
+    prefix ibt;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import iana-routing-types {
     prefix iana-rt-types;
@@ -154,7 +158,7 @@ submodule ietf-bgp-capabilities {
           "RFC 4724: Graceful Restart Mechanism for BGP.";
 
         leaf flags {
-          type bt:graceful-restart-flags;
+          type ibt:graceful-restart-flags;
           description
             "Restart Flags advertised by the Graceful Restart
              Capability";
@@ -186,7 +190,7 @@ submodule ietf-bgp-capabilities {
         }
 
         leaf restart-time {
-          type bt:graceful-restart-time-type;
+          type ibt:graceful-restart-time-type;
           description
             "The period of time (advertised by the peer) that the
              peer expects a restart of a BGP session to take.";
@@ -218,7 +222,7 @@ submodule ietf-bgp-capabilities {
                3.";
           }
           leaf afi-safi-flags {
-            type bt:graceful-restart-flags-for-afi;
+            type ibt:graceful-restart-flags-for-afi;
             description
               "Flags for Address Family advertised per-AFI/SAFI in
                the BGP Graceful Restart Capability.";

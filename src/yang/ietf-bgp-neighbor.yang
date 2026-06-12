@@ -15,6 +15,11 @@ submodule ietf-bgp-neighbor {
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
+  import ietf-bgp-types {
+    prefix ibt;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
 
   // Include the common submodule
 
@@ -137,7 +142,7 @@ submodule ietf-bgp-neighbor {
       }
 
       container graceful-restart {
-        if-feature "bt:graceful-restart";
+        if-feature "ibt:graceful-restart";
         description
           "Parameters relating to BGP graceful-restart";
         reference
@@ -271,7 +276,7 @@ submodule ietf-bgp-neighbor {
            BGP-4.";
       }
       leaf route-refresh {
-        if-feature "bt:route-refresh";
+        if-feature "ibt:route-refresh";
         type yang:zero-based-counter32;
         description
           "Number of BGP ROUTE-REFRESH messages for this peer for
