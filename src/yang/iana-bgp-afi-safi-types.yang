@@ -1,7 +1,7 @@
-module iana-bgp-types {
+module iana-bgp-afi-safi-types {
   yang-version 1.1;
-  namespace "urn:ietf:params:xml:ns:yang:iana-bgp-types";
-  prefix bt;
+  namespace "urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types";
+  prefix bast;
 
   organization
     "IANA";
@@ -21,11 +21,11 @@ module iana-bgp-types {
               Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
-    "This YANG module is maintained by IANA and contains general
-     data definitions for use in BGP.  It reflects the 'BGP
-     Capability Codes' and 'Address Family Numbers / Subsequent
-     Address Family Identifiers (SAFI)' registries at IANA.  It
-     can be imported by modules that make use of BGP attributes.
+    "This YANG module is maintained by IANA and contains identity
+     definitions for BGP AFI/SAFI types.  It reflects the 'Address
+     Family Numbers' and 'Subsequent Address Family Identifiers
+     (SAFI)' registries at IANA.  It can be imported by modules that
+     make use of BGP AFI/SAFI identifiers.
 
      Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
@@ -41,7 +41,7 @@ module iana-bgp-types {
      see the RFC itself for full legal notices.
 
      The most recent version of this YANG module is available at
-     <https://www.iana.org/assignments/iana-bgp-types>.
+     <https://www.iana.org/assignments/iana-bgp-afi-safi-types>.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
      NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -59,56 +59,6 @@ module iana-bgp-types {
   /*
    * Identities.
    */
-
-  /* BGP Capability Identities. */
-
-  identity bgp-capability {
-    description
-      "Base identity for a BGP capability";
-  }
-
-  identity mp-bgp {
-    base bgp-capability;
-    description
-      "Multi-protocol extensions to BGP.";
-    reference
-      "RFC 4760: Multiprotocol Extentions for BGP-4.";
-  }
-
-  identity route-refresh {
-    base bgp-capability;
-    description
-      "The BGP route-refresh functionality";
-    reference
-      "RFC 2918: Route Refresh Capability for BGP-4.";
-  }
-
-  identity asn32 {
-    base bgp-capability;
-    description
-      "4-byte (32-bit) AS number functionality";
-    reference
-      "RFC6793: BGP Support for Four-Octet Autonomous System (AS)
-                Number Space.";
-  }
-
-  identity graceful-restart {
-    base bgp-capability;
-    description
-      "Graceful restart functionality";
-    reference
-      "RFC 4724: Graceful Restart Mechanism for BGP.";
-  }
-
-  identity add-paths {
-    base bgp-capability;
-    description
-      "Advertisement of multiple paths for the same address prefix
-       without the new paths implicitly replacing any previous
-       ones.";
-    reference
-      "RFC 7911: Advertisement of Multiple Paths in BGP.";
-  }
 
   /* BGP AFI-SAFI Type Identities. */
 

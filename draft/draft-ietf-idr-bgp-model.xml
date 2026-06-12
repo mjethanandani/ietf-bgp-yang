@@ -596,8 +596,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
     </section>
 
     <section title="IANA Considerations">
-      <t>This document registers eight URIs, twelve IETF YANG modules and
-      submodules, and four IANA-maintained YANG modules.</t>
+      <t>This document registers nine URIs, twelve IETF YANG modules and
+      submodules, and five IANA-maintained YANG modules.</t>
 
       <section title="URI Registration">
         <t>Following the format in the <xref target="RFC3688">IETF XML
@@ -609,9 +609,10 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             URI:urn:ietf:params:xml:ns:yang:ietf-bgp-policy
             URI:urn:ietf:params:xml:ns:yang:ietf-bgp-types
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-community-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-capabilities
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-notification
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
-            URI:urn:ietf:params:xml:ns:yang:iana-bgp-types
             ]]></artwork>
           </figure></t>
 
@@ -620,7 +621,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers 16 YANG modules in the YANG Module
+        <t>This document registers 17 YANG modules in the YANG Module
         Names registry <xref target="RFC6020">YANG</xref>.</t>
 
         <t>
@@ -664,9 +665,17 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             maintained by IANA: Y
             reference: RFC XXXX
 
-            name: iana-bgp-types
-            namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
-            prefix: bt
+            name: iana-bgp-afi-safi-types
+            namespace:
+              urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types
+            prefix: bast
+            maintained by IANA: Y
+            reference: RFC XXXX
+
+            name: iana-bgp-capabilities
+            namespace:
+              urn:ietf:params:xml:ns:yang:iana-bgp-capabilities
+            prefix: bc
             maintained by IANA: Y
             reference: RFC XXXX
 
@@ -723,7 +732,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <section title="IANA-Maintained YANG Modules">
         <t>This section provides the instructions required by
         <xref target="RFC9907"/> Section 4.30.3 for IANA to maintain
-        the four IANA-maintained YANG modules defined in this
+        the five IANA-maintained YANG modules defined in this
         document.</t>
 
         <section title="iana-bgp-notification">
@@ -770,34 +779,61 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           </ul>
         </section>
 
-        <section title="iana-bgp-types">
+        <section title="iana-bgp-capabilities">
           <t>This document defines the initial version of the
-          IANA-maintained "iana-bgp-types" YANG module.  The most
+          IANA-maintained "iana-bgp-capabilities" YANG module.  The most
           recent version of the YANG module is available from the
           "YANG Parameters" registry group.</t>
 
-          <t>IANA is requested to add this note to the "iana-bgp-types"
-          entry in the "YANG Module Names" registry:</t>
+          <t>IANA is requested to add this note to the
+          "iana-bgp-capabilities" entry in the "YANG Module Names"
+          registry:</t>
           <blockquote>New values must not be directly added to the
-          "iana-bgp-types" YANG module.  They must instead be added to
-          the "BGP Capability Codes" or the "Address Family Numbers" /
-          "Subsequent Address Family Identifiers (SAFI)" registries.
+          "iana-bgp-capabilities" YANG module.  They must instead be
+          added to the "BGP Capability Codes" registry.
           </blockquote>
 
           <t>IANA is requested to add this note to the "BGP Capability
-          Codes" registry and the relevant AFI/SAFI registries:</t>
+          Codes" registry:</t>
           <blockquote>When this registry is modified, the YANG module
-          "iana-bgp-types"
-          &lt;https://www.iana.org/assignments/iana-bgp-types&gt;
+          "iana-bgp-capabilities"
+          &lt;https://www.iana.org/assignments/iana-bgp-capabilities&gt;
           must be updated as defined in RFC XXXX.</blockquote>
 
           <t>When a new Capability Code is added to the "BGP Capability
           Codes" registry, a new "identity" statement deriving from
-          "bgp-capability" must be added.  When a new AFI/SAFI pair is
-          added, a new "identity" statement deriving from "afi-safi-type"
-          must be added.  The "identity" statement MUST have the
-          substatements defined as described for iana-bgp-notification
-          above.</t>
+          "bgp-capability" must be added.  The "identity" statement MUST
+          have the substatements defined as described for
+          iana-bgp-notification above.</t>
+        </section>
+
+        <section title="iana-bgp-afi-safi-types">
+          <t>This document defines the initial version of the
+          IANA-maintained "iana-bgp-afi-safi-types" YANG module.  The
+          most recent version of the YANG module is available from the
+          "YANG Parameters" registry group.</t>
+
+          <t>IANA is requested to add this note to the
+          "iana-bgp-afi-safi-types" entry in the "YANG Module Names"
+          registry:</t>
+          <blockquote>New values must not be directly added to the
+          "iana-bgp-afi-safi-types" YANG module.  They must instead be
+          added to the "Address Family Numbers" / "Subsequent Address
+          Family Identifiers (SAFI)" registries.
+          </blockquote>
+
+          <t>IANA is requested to add this note to both the "Address
+          Family Numbers" and "Subsequent Address Family Identifiers
+          (SAFI)" registries:</t>
+          <blockquote>When this registry is modified, the YANG module
+          "iana-bgp-afi-safi-types"
+          &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types&gt;
+          must be updated as defined in RFC XXXX.</blockquote>
+
+          <t>When a new AFI/SAFI pair is added, a new "identity"
+          statement deriving from "afi-safi-type" must be added.  The
+          "identity" statement MUST have the substatements defined as
+          described for iana-bgp-notification above.</t>
         </section>
 
         <section title="iana-bgp-community-types">
@@ -976,8 +1012,11 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           <li>ietf-bgp-types - non-IANA type, feature, and identity
           definitions for BGP, including BGP policy.</li>
 
-          <li>iana-bgp-types - IANA-maintained capability and
-          AFI/SAFI identity definitions for BGP.</li>
+          <li>iana-bgp-capabilities - IANA-maintained BGP Capability
+          Code identity definitions for BGP.</li>
+
+          <li>iana-bgp-afi-safi-types - IANA-maintained AFI/SAFI
+          identity definitions for BGP.</li>
 
           <li>iana-bgp-rib-types - IANA-maintained type and identity
           definitions for BGP RIB.</li>
@@ -1037,8 +1076,9 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       </ul></t>
 
       <t>The initial versions of the IANA-maintained YANG modules
-      (iana-bgp-notification, iana-bgp-types, iana-bgp-community-types,
-      and iana-bgp-rib-types) are provided in the Appendices for review
+      (iana-bgp-notification, iana-bgp-capabilities,
+      iana-bgp-afi-safi-types, iana-bgp-community-types, and
+      iana-bgp-rib-types) are provided in the Appendices for review
       purposes.  Per <xref target="RFC9907"/> Section 4.30.2, the
       authoritative versions of these modules are maintained by IANA and
       are available from the "YANG Parameters" registry group.</t>
@@ -1799,19 +1839,37 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/iana-bgp-notification@YYYY-MM-DD.yang)
         </figure></t>
     </section>
 
-    <section title="Initial Version of iana-bgp-types YANG Module">
+    <section title="Initial Version of iana-bgp-capabilities YANG Module">
       <t><strong>RFC Editor: This appendix MUST be removed before
       publication.  Replace all occurrences of "RFC XXXX" with the RFC
       number assigned to this document.</strong></t>
       <t>This appendix contains the initial version of the
-      "iana-bgp-types" YANG module, provided here solely to allow
+      "iana-bgp-capabilities" YANG module, provided here solely to allow
       verification of correctness prior to publication.  The authoritative
       version will be maintained by IANA and is available at
-      &lt;https://www.iana.org/assignments/iana-bgp-types&gt;.</t>
+      &lt;https://www.iana.org/assignments/iana-bgp-capabilities&gt;.</t>
       <t><figure>
           <artwork><![CDATA[
-<CODE BEGINS> file "iana-bgp-types@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/iana-bgp-types@YYYY-MM-DD.yang)
+<CODE BEGINS> file "iana-bgp-capabilities@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-capabilities@YYYY-MM-DD.yang)
+<CODE ENDS>
+          ]]></artwork>
+        </figure></t>
+    </section>
+
+    <section title="Initial Version of iana-bgp-afi-safi-types YANG Module">
+      <t><strong>RFC Editor: This appendix MUST be removed before
+      publication.  Replace all occurrences of "RFC XXXX" with the RFC
+      number assigned to this document.</strong></t>
+      <t>This appendix contains the initial version of the
+      "iana-bgp-afi-safi-types" YANG module, provided here solely to allow
+      verification of correctness prior to publication.  The authoritative
+      version will be maintained by IANA and is available at
+      &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types&gt;.</t>
+      <t><figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-afi-safi-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-afi-safi-types@YYYY-MM-DD.yang)
 <CODE ENDS>
           ]]></artwork>
         </figure></t>

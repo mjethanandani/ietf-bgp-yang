@@ -5,7 +5,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routing
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing"
-    xmlns:bt="urn:ietf:params:xml:ns:yang:iana-bgp-types"
+    xmlns:bast="urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types"
     xmlns:ibct="urn:ietf:params:xml:ns:yang:ietf-bgp-community-types">
   <control-plane-protocols>
     <control-plane-protocol>
@@ -18,7 +18,7 @@
           <as>64496</as>
           <afi-safis>
             <afi-safi>
-              <name>bt:ipv4-unicast</name>
+              <name>bast:ipv4-unicast</name>
             </afi-safi>
           </afi-safis>
         </global>
@@ -44,7 +44,7 @@
             <description>"Peer Router B"</description>
             <afi-safis>
               <afi-safi>
-                <name>bt:ipv6-unicast</name>
+                <name>bast:ipv6-unicast</name>
               </afi-safi>
             </afi-safis>
 	    <transport>

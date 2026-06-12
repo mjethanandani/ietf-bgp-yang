@@ -13,8 +13,8 @@
           <afi-safis>
             <afi-safi>
               <name
-                  xmlns:bt=
-                  "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv4-unicast</name>
+                  xmlns:bast=
+                  "urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types">bast:ipv4-unicast</name>
             </afi-safi>
           </afi-safis>
         </global>

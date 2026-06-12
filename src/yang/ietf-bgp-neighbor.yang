@@ -10,8 +10,8 @@ submodule ietf-bgp-neighbor {
       "RFC 9911: Common YANG Data Types.";
   }
 
-  import iana-bgp-types {
-    prefix bt;
+  import iana-bgp-afi-safi-types {
+    prefix bast;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -256,7 +256,7 @@ submodule ietf-bgp-neighbor {
 
       leaf afi-safi-name {
         type identityref {
-          base bt:afi-safi-type;
+          base bast:afi-safi-type;
         }
         description
           "AFI-SAFI for these message counters.";

@@ -4,8 +4,13 @@ submodule ietf-bgp-capabilities {
     prefix bgp;
   }
 
-  import iana-bgp-types {
-    prefix bt;
+  import iana-bgp-capabilities {
+    prefix bc;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
+  import iana-bgp-afi-safi-types {
+    prefix bast;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -98,7 +103,7 @@ submodule ietf-bgp-capabilities {
     }
     leaf name {
       type identityref {
-        base bt:bgp-capability;
+        base bc:bgp-capability;
       }
       description
         "When known, name carries the bgp-capability identity for the
@@ -114,7 +119,7 @@ submodule ietf-bgp-capabilities {
          4.";
 
       container mpbgp {
-        when "derived-from-or-self(../../name, 'bt:mp-bgp')";
+        when "derived-from-or-self(../../name, 'bc:mp-bgp')";
         description
           "Multi-Protocol BGP-specific values.";
         reference
@@ -140,7 +145,7 @@ submodule ietf-bgp-capabilities {
         }
         leaf name {
           type identityref {
-            base bt:afi-safi-type;
+            base bast:afi-safi-type;
           }
           description
             "When known, name carries the BGP AFI-SAFI identity for
@@ -151,7 +156,7 @@ submodule ietf-bgp-capabilities {
 
       container graceful-restart {
         when "derived-from-or-self(../../name, " +
-             "'bt:graceful-restart')";
+             "'bc:graceful-restart')";
         description
           "BGP Graceful Restart-specific values.";
         reference
@@ -281,7 +286,7 @@ submodule ietf-bgp-capabilities {
       }
 
       container asn32 {
-        when "derived-from-or-self(../../name, 'bt:asn32')";
+        when "derived-from-or-self(../../name, 'bc:asn32')";
         description
           "Four-byte AS Number-specific values.";
         reference
@@ -300,7 +305,7 @@ submodule ietf-bgp-capabilities {
       }
 
       container add-paths {
-        when "derived-from-or-self(../../name, 'bt:add-paths')";
+        when "derived-from-or-self(../../name, 'bc:add-paths')";
         description
           "BGP add-paths-specific values.";
         reference
@@ -406,7 +411,7 @@ submodule ietf-bgp-capabilities {
 
       leaf-list negotiated-capabilities {
         type identityref {
-          base bt:bgp-capability;
+          base bc:bgp-capability;
         }
         description
           "Negotiated BGP capabilities.";

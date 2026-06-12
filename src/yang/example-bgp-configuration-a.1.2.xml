@@ -71,8 +71,8 @@
           <afi-safis>
             <afi-safi>
               <name
-                  xmlns:bt=
-                  "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv6-unicast</name>
+                  xmlns:bast=
+                  "urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types">bast:ipv6-unicast</name>
             </afi-safi>
           </afi-safis>
         </global>
@@ -98,8 +98,8 @@
             <afi-safis>
               <afi-safi>
                 <name
-                    xmlns:bt=
-                    "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv6-unicast</name>
+                    xmlns:bast=
+                    "urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types">bast:ipv6-unicast</name>
               </afi-safi>
             </afi-safis>
             <graceful-restart>

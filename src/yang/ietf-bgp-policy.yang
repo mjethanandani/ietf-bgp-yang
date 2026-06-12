@@ -15,8 +15,8 @@ module ietf-bgp-policy {
     reference
       "RFC 9067: A YANG Data Model for Routing Policy";
   }
-  import iana-bgp-types {
-    prefix bt;
+  import iana-bgp-afi-safi-types {
+    prefix bast;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -423,7 +423,7 @@ module ietf-bgp-policy {
            the match-set-options leaf.";
         leaf-list afi-safi-in {
           type identityref {
-            base bt:afi-safi-type;
+            base bast:afi-safi-type;
           }
           description
             "List of address families which the NLRI may be within.";
