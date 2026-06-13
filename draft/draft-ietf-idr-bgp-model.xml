@@ -540,9 +540,9 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 
       <li>The nodes of 'secure-session' contains a
       choice of using <xref target="RFC5925">TCP-Authentication Option
-      (TCP-AO)</xref>, or <xref target="RFC2385">Protection of BGP
-      Sessions via the TCP MD5 Signature Option</xref>. The support
-      for MD5 has been made available for legacy reasons. However,
+      (TCP-AO)</xref>, or the TCP MD5 Signature Option (obsoleted by
+      <xref target="RFC5925"/>). The support for MD5 has been made
+      available for legacy reasons. However,
       because of vulnerabilities in MD5 as described in <xref
       target="RFC6151">MD5 and HMAC-MD5 Security
       Considerations</xref>, operators are strongly encouraged to use
@@ -1114,8 +1114,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
     </references>
 
     <references title="Informative references">
-      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2385.xml"/>
-
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2622.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3765.xml"/>
@@ -1461,7 +1459,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-policy@YYYY-MM-DD-tree.txt)
           <dt>.</dt>
           <dd>matches any single AS number in the AS_PATH.</dd>
 
-          <dt>[...]</dt>
+          <dt><tt>[...]</tt></dt>
           <dd>is an AS number set.  It matches AS_PATHs with AS numbers listed
           between the brackets.  The AS numbers in the set are separated by
           white-space characters.  If a '-' is used between two AS numbers in
@@ -1623,7 +1621,7 @@ NEG = "^" ; Negate set contents
           <dd>Matches the AS_PATH where neither 64496 nor 64500 are present in
           the AS_PATH.</dd>
 
-          <dt>[64496-64511]</dt>
+          <dt><tt>[64496-64511]</tt></dt>
           <dd>Matches the AS_PATH where at least one AS number is in the range
           64496..64511, inclusive.  This matches the documentation AS numbers in
           <xref target="RFC5398"/>.</dd>
@@ -1636,7 +1634,7 @@ NEG = "^" ; Negate set contents
           <dd>Matches the AS_PATH where 64496 or 64500 occur in the
           AS_PATH.</dd>
 
-          <dt>^ 64496 .{2} ( 64500 |  [64505-64511] )</dt>
+          <dt><tt>^ 64496 .{2} ( 64500 |  [64505-64511] )</tt></dt>
           <dd>Matches the AS_PATH where the left-most (neighbor) AS is 64496, is
           followed immediately by any two ASes and either 64500 or an AS in the
           range 64505..64511.</dd>
