@@ -746,13 +746,13 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           registry:</t>
           <blockquote>New values must not be directly added to the
           "iana-bgp-notification" YANG module.  They must instead be
-          added to the "BGP Error (Notification) Codes" or "BGP Error
+          added to the "BGP Error (Notification) Codes" and/or "BGP Error
           Subcodes" registry.</blockquote>
 
           <t>IANA is requested to add this note to both the "BGP Error
-          (Notification) Codes" and "BGP Error Subcodes"
+          (Notification) Codes" and/or "BGP Error Subcodes"
           registries:</t>
-          <blockquote>When this registry is modified, the YANG module
+          <blockquote>When either of these registries is modified, the YANG module
           "iana-bgp-notification"
           &lt;https://www.iana.org/assignments/iana-bgp-notification&gt;
           must be updated as defined in RFC XXXX.</blockquote>

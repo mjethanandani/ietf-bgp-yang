@@ -36,8 +36,8 @@
               <unreach-decay>500</unreach-decay>
               <keep-history>1000</keep-history>
             </route-flap-damping>
-	    <send-community>ibct:standard</send-community>
-	    <send-community>ibct:large</send-community>
+            <send-community>ibct:standard</send-community>
+            <send-community>ibct:large</send-community>
             <graceful-restart>
               <enabled>false</enabled>
             </graceful-restart>
