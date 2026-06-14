@@ -9,7 +9,6 @@ module iana-bgp-notification {
       "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
 
-  // meta
 
   organization
     "IANA";
