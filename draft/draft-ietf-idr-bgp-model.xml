@@ -291,9 +291,12 @@
           of BGP operations.</t>
         </list></t>
 
-      <t>These modules also make use of standard Internet types, such as IP
-      addresses and prefixes, autonomous system numbers, etc., defined in
-      <xref target="RFC9911">Common YANG Data Types </xref>.</t>
+	<t>
+	  These modules also make use of standard Internet types, such
+	  as IP addresses and prefixes, autonomous system numbers,
+	  etc., defined in <xref target="RFC9911">Common YANG Data
+	  Types </xref>.
+	</t>
 
       <section anchor="overview.protocol" title="BGP protocol configuration">
         <t>The BGP protocol configuration model is organized hierarchically,
@@ -792,6 +795,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li><xref target="RFC9293">Transmission Control Protocol</xref></li>
       <li><xref target="RFC9384">A BGP Cease Notification Subcode For Bidirectional Forwarding Detection (BFD)</xref></li>
       <li><xref target="RFC9648">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
+      <li><xref target="I-D.ietf-netmod-yang-semver">YANG Semantic Versioning</xref></li>
       </ul></t>
 
       <section title="BGP module and submodules">
@@ -1111,6 +1115,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9648.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9911.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-netmod-yang-semver.xml"/>
     </references>
 
     <references title="Informative references">

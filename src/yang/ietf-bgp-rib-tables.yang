@@ -31,6 +31,11 @@ submodule ietf-bgp-rib-tables {
     reference
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
   }
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
   include ietf-bgp-rib-attributes;
 
   organization
@@ -48,7 +53,7 @@ submodule ietf-bgp-rib-tables {
     "This submodule contains structural data definitions for
      BGP routing tables.
 
-     Copyright (c) 2023 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -71,6 +76,7 @@ submodule ietf-bgp-rib-tables {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }

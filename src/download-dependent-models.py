@@ -3,7 +3,8 @@ import os
 list_of_ietf_models =\
 [  ["ietf-if-extensions", "draft-ietf-netmod-intf-ext-yang", "18"],
   ["ietf-if-vlan-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "17"],
-  ["ietf-if-flexible-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "17"] ]
+   ["ietf-if-flexible-encapsulation", "draft-ietf-netmod-sub-intf-vlan-model", "17"],
+   ["ietf-yang-semver", "draft-ietf-netmod-yang-semver", "24"] ]
 
 
 list_of_ieee_models =\

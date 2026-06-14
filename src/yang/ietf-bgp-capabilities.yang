@@ -20,6 +20,11 @@ submodule ietf-bgp-capabilities {
     reference
       "RFC 9911: Common YANG Data Types.";
   }
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
 
   organization
     "IETF IDR Working Group";
@@ -36,7 +41,7 @@ submodule ietf-bgp-capabilities {
     "This sub-module contains groupings that are used for BGP
      Capabilities within the BGP module.
 
-     Copyright (c) 2023 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -59,6 +64,7 @@ submodule ietf-bgp-capabilities {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
