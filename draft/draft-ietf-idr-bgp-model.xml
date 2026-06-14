@@ -1407,6 +1407,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
 
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8525.xml"/>
+
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8528.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8529.xml"/>
@@ -1503,7 +1505,7 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.2.xml,68)
           </figure></t>
       </section>
 
-      <section title="VRF Configuration">
+      <section anchor="vrf-configuration-example" title="VRF Configuration">
         <t>This example shows how BGP can be configured for two VRFs, red and
         blue. In this case, the two network instances share a common AS, and
         distinguish between the instances using the router id.</t>
@@ -1515,6 +1517,39 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.3.xml,68)
 ]]></artwork>
         </figure>
       </section>
+
+      <section anchor="schema-mount-configuration-example" title="Schema Mount Configuration">
+        <t>This example illustrates the three data fragments needed to
+        configure per-VRF BGP using <xref target="RFC8528">YANG Schema
+        Mount</xref>.</t>
+        <t>The first fragment is the read-only
+        <tt>schema-mounts</tt> operational state container. It
+        describes how the Routing Management module <xref
+        target="RFC8349"/> is mounted under the <tt>vrf-root</tt>
+        mount point (label <tt>vrf-root</tt>) of the Network Instances
+        module <xref target="RFC8529"/>. The
+        <tt>shared-schema</tt> method is used so that all network
+        instances share the same mounted schema. The
+        <tt>parent-reference</tt> XPath expression restricts the
+        interfaces visible within the mounted schema to only those
+        bound to the specific network instance.</t>
+        <t>The second fragment binds each CE-facing interface to its
+        network instance using the <tt>bind-ni-name</tt> leaf
+        augmented by <xref target="RFC8529"/>.</t>
+        <t>The third fragment configures BGP within the
+        <tt>vrf-root</tt> mount point of each network instance. The
+        PE router (AS 64496) peers with two CE routers, one per VRF
+        (vrf-red and vrf-blue), producing isolated per-VRF BGP
+        routing tables.</t>
+
+        <figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.6.xml,68)
+
+]]></artwork>
+        </figure>
+      </section>
+
       <section title="BGP Policy - Match Prefix and Set Community">
         <t>Routing policy using community value involves configuring
         rules to match community values in the inbound or outbound
@@ -1558,6 +1593,68 @@ INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.4.xml,68)
         <figure>
           <artwork><![CDATA[
 INSERT_TEXT_FROM_FILE(../src/yang/example-bgp-configuration-a.1.5.xml,68)
+
+]]></artwork>
+        </figure>
+      </section>
+
+      <section title="Schema Mount Validation Helper">
+        <t>Validators that implement <xref target="RFC8528">YANG Schema
+        Mount</xref> (e.g., yanglint via its <tt>-x</tt> flag) require
+        an ext-data file that provides <xref
+        target="RFC8525">YANG Library</xref> data describing the
+        modules available at each mount point. The file below enables
+        validation of the examples in <xref
+        target="vrf-configuration-example"/> and <xref
+        target="schema-mount-configuration-example"/>.</t>
+
+        <t>This file uses the <tt>inline</tt> schema mount method
+        rather than the <tt>shared-schema</tt> method shown in the
+        first fragment of the Schema Mount Configuration example.
+        The <tt>inline</tt> method is required here because yanglint's
+        command-line interface reads yang-library data from the
+        ext-data file when using <tt>inline</tt> mode; in
+        <tt>shared-schema</tt> mode, yanglint expects the yang-library
+        data to be present within the data instance being validated,
+        which is impractical when validating individual example
+        fragments.  The module revisions in this file correspond to
+        the versions used in this document and may need to be updated
+        to match locally available module versions.</t>
+
+        <t>To validate example A.1.3 (configuration data):</t>
+        <figure>
+          <artwork>
+yanglint -ii -t config -x sm-data.xml \
+    ietf-yang-schema-mount.yang \
+    ietf-yang-library.yang \
+    ietf-network-instance.yang \
+    ietf-interfaces.yang iana-if-type.yang \
+    ietf-routing.yang \
+    iana-bgp-types.yang iana-bgp-community-types.yang \
+    ietf-bgp.yang \
+    example-bgp-configuration-a.1.3.xml
+          </artwork>
+        </figure>
+
+        <t>To validate example A.1.6 (configuration and operational
+        state data):</t>
+        <figure>
+          <artwork>
+yanglint -ii -t get -x sm-data.xml \
+    ietf-yang-schema-mount.yang \
+    ietf-yang-library.yang \
+    ietf-network-instance.yang \
+    ietf-interfaces.yang iana-if-type.yang \
+    ietf-routing.yang \
+    iana-bgp-types.yang iana-bgp-community-types.yang \
+    ietf-bgp.yang \
+    example-bgp-configuration-a.1.6.xml
+          </artwork>
+        </figure>
+
+        <figure>
+          <artwork><![CDATA[
+INSERT_TEXT_FROM_FILE(../src/yang/sm-data.xml,68)
 
 ]]></artwork>
         </figure>

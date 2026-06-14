@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This example illustrates the three data fragments that together
+    realize per-VRF BGP using YANG Schema Mount (RFC 8528).
+
+    Fragment 1 - schema-mounts (read-only operational state):
+    Describes how the Routing Management module (RFC 8349) is
+    mounted under the 'vrf-root' mount point (label 'root')
+    of the Network Instances module (RFC 8529). The 
+    shared-schema method is used so all network instances
+    share the same mounted schema. The parent-reference 
+    XPath makes only those interfaces that are bound
+    to a given network instance visible within the mounted 
+    schema.
+-->
+<schema-mounts
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount">
+  <namespace>
+    <prefix>if</prefix>
+    <uri>urn:ietf:params:xml:ns:yang:ietf-interfaces</uri>
+  </namespace>
+  <namespace>
+    <prefix>ni</prefix>
+    <uri>urn:ietf:params:xml:ns:yang:ietf-network-instance</uri>
+  </namespace>
+  <mount-point>
+    <module>ietf-network-instance</module>
+    <label>vrf-root</label>
+    <shared-schema>
+      <parent-reference>/if:interfaces/if:interface[ni:bind-ni-name = current()/../ni:name]</parent-reference>
+    </shared-schema>
+  </mount-point>
+</schema-mounts>
+
+<!--
+    Fragment 2 - interfaces:
+    Bind each CE-facing interface to its network instance using the
+    bind-ni-name leaf augmented by the Network Instances module.
+-->
+<interfaces
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"
+    xmlns:ni="urn:ietf:params:xml:ns:yang:ietf-network-instance"
+    xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type">
+  <interface>
+    <name>eth0</name>
+    <type>ianaift:ethernetCsmacd</type>
+    <ni:bind-ni-name>vrf-red</ni:bind-ni-name>
+  </interface>
+  <interface>
+    <name>eth1</name>
+    <type>ianaift:ethernetCsmacd</type>
+    <ni:bind-ni-name>vrf-blue</ni:bind-ni-name>
+  </interface>
+</interfaces>
+
+<!--
+    Fragment 3 - network-instances:
+    BGP is configured within the vrf-root mount point of each
+    network instance. The PE router (AS 64496) peers with two
+    CE routers, one per VRF, yielding isolated per-VRF BGP
+    routing tables.
+-->
+<network-instances
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-network-instance">
+  <network-instance>
+    <name>vrf-red</name>
+    <vrf-root>
+      <routing
+          xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+        <router-id>192.0.2.1</router-id>
+        <control-plane-protocols>
+          <control-plane-protocol>
+            <type
+              xmlns:bgp=
+              "urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp</type>
+            <name>BGP</name>
+            <bgp
+                xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
+              <global>
+                <as>64496</as>
+                <afi-safis>
+                  <afi-safi>
+                    <name
+                        xmlns:bt=
+                        "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv4-unicast</name>
+                  </afi-safi>
+                </afi-safis>
+              </global>
+              <neighbors>
+                <neighbor>
+                  <neighbor-key>192.0.2.2</neighbor-key>
+                  <remote-address>192.0.2.2</remote-address>
+                  <peer-as>65100</peer-as>
+                  <afi-safis>
+                    <afi-safi>
+                      <name
+                          xmlns:bt=
+                          "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv4-unicast</name>
+                    </afi-safi>
+                  </afi-safis>
+                </neighbor>
+              </neighbors>
+            </bgp>
+          </control-plane-protocol>
+        </control-plane-protocols>
+      </routing>
+    </vrf-root>
+  </network-instance>
+  <network-instance>
+    <name>vrf-blue</name>
+    <vrf-root>
+      <routing
+          xmlns="urn:ietf:params:xml:ns:yang:ietf-routing">
+        <router-id>192.0.2.5</router-id>
+        <control-plane-protocols>
+          <control-plane-protocol>
+            <type
+                xmlns:bgp=
+                "urn:ietf:params:xml:ns:yang:ietf-bgp">bgp:bgp</type>
+            <name>BGP</name>
+            <bgp
+                xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp">
+              <global>
+                <as>64496</as>
+                <afi-safis>
+                  <afi-safi>
+                    <name
+                        xmlns:bt=
+                        "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv4-unicast</name>
+                  </afi-safi>
+                </afi-safis>
+              </global>
+              <neighbors>
+                <neighbor>
+                  <neighbor-key>192.0.2.6</neighbor-key>
+                  <remote-address>192.0.2.6</remote-address>
+                  <peer-as>65200</peer-as>
+                  <afi-safis>
+                    <afi-safi>
+                      <name
+                          xmlns:bt=
+                          "urn:ietf:params:xml:ns:yang:iana-bgp-types">bt:ipv4-unicast</name>
+                    </afi-safi>
+                  </afi-safis>
+                </neighbor>
+              </neighbors>
+            </bgp>
+          </control-plane-protocol>
+        </control-plane-protocols>
+      </routing>
+    </vrf-root>
+  </network-instance>
+</network-instances>

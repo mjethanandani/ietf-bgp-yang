@@ -99,8 +99,7 @@ rm ../bin/*-rib-tree.txt.tmp
 
 echo "Validating examples"
 
-# Validate BGP examples. Skip a.1.3 as it has schema mount
-# in it, and that is not supported by any tool.
+# Validate BGP examples (non-schema-mount)
 for i in yang/example-bgp-configuration-a.1.[0-2].xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
@@ -113,6 +112,52 @@ do
        exit 1
     fi
 done
+
+# Validate Schema Mount examples (RFC 8528) using yanglint -x ext-data.
+# a.1.3 uses -t config (config data only inside VRF mount points).
+# a.1.6 uses -t get (mix of config + the read-only schema-mounts fragment).
+# sm-data.xml uses YYYY-MM-DD as a placeholder for the BGP module revision
+# dates; substitute the real date into a temp file before invoking yanglint.
+SM_MODULES="../bin/yang-parameters/ietf-yang-schema-mount@2019-01-14.yang \
+    ../bin/yang-parameters/ietf-yang-library@2019-01-04.yang \
+    ../bin/yang-parameters/ietf-network-instance@2019-01-21.yang \
+    ../bin/yang-parameters/ietf-interfaces@2018-02-20.yang \
+    ../bin/yang-parameters/iana-if-type@2023-01-26.yang \
+    ../bin/yang-parameters/ietf-routing@2018-03-13.yang \
+    ../bin/iana-bgp-types@$(date +%Y-%m-%d).yang \
+    ../bin/iana-bgp-community-types@$(date +%Y-%m-%d).yang \
+    ../bin/ietf-bgp@$(date +%Y-%m-%d).yang"
+
+SM_DATA_TMP=$(mktemp /tmp/sm-data-XXXXXX.xml)
+sed "s/YYYY-MM-DD/$(date +%Y-%m-%d)/g" yang/sm-data.xml > "$SM_DATA_TMP"
+
+echo "Validating yang/example-bgp-configuration-a.1.3.xml"
+response=`yanglint -ii -t config \
+    -x "$SM_DATA_TMP" \
+    -p ../bin/yang-parameters -p ../bin -p ../bin/submodules \
+    $SM_MODULES \
+    yang/example-bgp-configuration-a.1.3.xml`
+if [ $? -ne 0 ]; then
+    rm -f "$SM_DATA_TMP"
+    printf "failed (error code: $?)\n"
+    printf "$response\n\n"
+    echo
+    exit 1
+fi
+
+echo "Validating yang/example-bgp-configuration-a.1.6.xml"
+response=`yanglint -ii -t get \
+    -x "$SM_DATA_TMP" \
+    -p ../bin/yang-parameters -p ../bin -p ../bin/submodules \
+    $SM_MODULES \
+    yang/example-bgp-configuration-a.1.6.xml`
+rm -f "$SM_DATA_TMP"
+if [ $? -ne 0 ]; then
+    printf "failed (error code: $?)\n"
+    printf "$response\n\n"
+    echo
+    exit 1
+fi
 
 # Validate BGP Policy examples
 for i in yang/example-bgp-configuration-a.1.[4-5].xml
