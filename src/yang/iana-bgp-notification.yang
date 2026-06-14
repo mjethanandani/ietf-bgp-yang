@@ -616,13 +616,13 @@ module iana-bgp-notification {
        If a BGP speaker decides to terminate its peering with a
        neighbor because the number of address prefixes received from
        the neighbor exceeds a locally configured upper bound (as
-       described in [BGP-4]), then the speaker MUST send to the
+       described in [RFC4271]), then the speaker MUST send to the
        neighbor a NOTIFICATION message with the Error Code Cease and
        the Error Subcode 'Maximum Number of Prefixes Reached'.  The
        message MAY optionally include the Address Family information
-       [BGP-MP] and the upper bound in the 'Data' field, as shown in
+       [RFC4760] and the upper bound in the 'Data' field, as shown in
        Figure 1, where the meaning and use of the <AFI, SAFI> tuple
-       is the same as defined in [BGP-MP], Section 7.
+       is the same as defined in [RFC4760], Section 7.
 
        The value of the 'Maximum Number of Prefixes Reached' Error
        subcode is 1.";
@@ -709,7 +709,7 @@ module iana-bgp-notification {
     description
       "If a BGP speaker decides to send a NOTIFICATION message with
        the Error Code Cease as a result of the collision resolution
-       procedure (as described in [BGP-4]), then the subcode SHOULD
+       procedure (as described in [RFC4271]), then the subcode SHOULD
        be set to 'Connection Collision Resolution'.
 
        The value of the 'Connection Collision Resolution' Error
@@ -736,9 +736,9 @@ module iana-bgp-notification {
   identity cease-hard-reset {
     base cease;
     description
-      "[RFC 8538] defines a new subcode for BGP Cease NOTIFICATION
+      "[RFC8538] defines a new subcode for BGP Cease NOTIFICATION
        messages, called the Hard Reset subcode.  The value of this
-       subcode is [9].  In this document, a BGP Cease NOTIFICATION
+       subcode is 9.  In this document, a BGP Cease NOTIFICATION
        message with the Hard Reset subcode is referred to as a 'Hard
        Reset message' or simply as a 'Hard Reset'.
 
