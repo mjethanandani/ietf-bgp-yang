@@ -871,7 +871,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           "YANG Parameters" registry group.</t>
 
           <t>IANA is requested to create three new registries under a
-          new "BGP YANG RIB Types" registry group:</t>
+          new "BGP RIB Entry State Types" registry group:</t>
 
           <t>Registry 1: BGP Route Ineligibility Reasons</t>
           <ul>
