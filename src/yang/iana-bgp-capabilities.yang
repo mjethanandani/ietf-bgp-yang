@@ -3,6 +3,12 @@ module iana-bgp-capabilities {
   namespace "urn:ietf:params:xml:ns:yang:iana-bgp-capabilities";
   prefix bc;
 
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
+
   organization
     "IANA";
   contact
@@ -51,6 +57,7 @@ module iana-bgp-capabilities {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
   }
