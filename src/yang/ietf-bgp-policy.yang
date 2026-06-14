@@ -279,7 +279,7 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              type ibct:bgp-ext-community-type;
+              type bct:bgp-ext-community-type;
               type ibct:bgp-community-regexp-type;
             }
             description
@@ -305,7 +305,7 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              type ibct:bgp-ipv6-ext-community-type;
+              type bct:bgp-ipv6-ext-community-type;
               type ibct:bgp-community-regexp-type;
             }
             description
@@ -781,7 +781,7 @@ module ietf-bgp-policy {
              communities for the set-ext-community action";
           case inline {
             leaf-list communities {
-              type ibct:bgp-ext-community-type;
+              type bct:bgp-ext-community-type;
               description
                 "Set the extended community values for the update
                  inline with a list.";
@@ -824,7 +824,7 @@ module ietf-bgp-policy {
              communities for the set-ipv6-ext-community action";
           case inline {
             leaf-list communities {
-              type ibct:bgp-ipv6-ext-community-type;
+              type bct:bgp-ipv6-ext-community-type;
               description
                 "Set the IPv6 extended community values for the
                  update inline with a list.";

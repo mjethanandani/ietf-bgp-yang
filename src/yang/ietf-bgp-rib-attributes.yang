@@ -223,7 +223,7 @@ submodule ietf-bgp-rib-attributes {
       "A grouping for all extended community parameters.";
 
     leaf-list ext-community {
-      type ibct:bgp-ext-community-type;
+      type bct:bgp-ext-community-type;
       description
         "List of BGP extended community attributes. The received
          extended community may be an explicitly modeled
@@ -248,7 +248,7 @@ submodule ietf-bgp-rib-attributes {
       "A grouping for all IPv6 extended community parameters.";
 
     leaf-list ipv6-ext-community {
-      type ibct:bgp-ipv6-ext-community-type;
+      type bct:bgp-ipv6-ext-community-type;
       description
         "List of BGP IPv6 extended community attributes. The received
          IPv6 extended community may be an explicitly modeled
