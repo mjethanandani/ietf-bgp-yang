@@ -50,7 +50,11 @@ submodule ietf-bgp-common {
     reference
       "RFC 9648: YANG Data Model for TCP.";
   }
-
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
   organization
     "IETF IDR Working Group";
   contact
@@ -91,6 +95,7 @@ submodule ietf-bgp-common {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }

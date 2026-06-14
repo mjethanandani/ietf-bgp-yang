@@ -33,6 +33,11 @@ module ietf-bgp {
     reference
       "RFC 9911: Common YANG Data Types.";
   }
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
   include ietf-bgp-capabilities {
     revision-date YYYY-MM-DD;
   }
@@ -117,6 +122,7 @@ module ietf-bgp {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }

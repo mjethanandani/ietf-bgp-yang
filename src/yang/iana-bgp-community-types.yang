@@ -4,6 +4,22 @@ module iana-bgp-community-types {
     "urn:ietf:params:xml:ns:yang:iana-bgp-community-types";
   prefix bct;
 
+  import ietf-inet-types {
+    prefix inet;
+    reference
+      "RFC 9911: Common YANG Types.";
+  }
+  import ietf-yang-types {
+    prefix yang;
+    reference
+      "RFC 9911: Common YANG Types.";
+  }
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
+
   organization
     "IANA";
   contact
@@ -54,6 +70,7 @@ module iana-bgp-community-types {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
   }

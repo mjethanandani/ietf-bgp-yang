@@ -21,6 +21,12 @@ submodule ietf-bgp-neighbor {
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
 
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
+
   // Include the common submodule
 
   include ietf-bgp-common;
@@ -64,6 +70,7 @@ submodule ietf-bgp-neighbor {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }

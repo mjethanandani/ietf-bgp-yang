@@ -26,6 +26,11 @@ submodule ietf-bgp-rib-attributes {
     reference
       "RFC 9911: Common YANG Data Types.";
   }
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
 
   organization
     "IETF IDR Working Group";
@@ -65,6 +70,7 @@ submodule ietf-bgp-rib-attributes {
   revision YYYY-MM-DD {
     description
       "Initial version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }

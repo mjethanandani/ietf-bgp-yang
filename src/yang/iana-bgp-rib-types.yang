@@ -3,6 +3,12 @@ module iana-bgp-rib-types {
   namespace "urn:ietf:params:xml:ns:yang:iana-bgp-rib-types";
   prefix brt;
 
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
+  }
+
   organization
     "IANA";
   contact
@@ -53,6 +59,7 @@ module iana-bgp-rib-types {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }

@@ -6,6 +6,8 @@ submodule ietf-bgp-common-multiprotocol {
 
   import iana-bgp-afi-safi-types {
     prefix bast;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import ietf-routing-types {
     prefix rt-types;
@@ -14,6 +16,13 @@ submodule ietf-bgp-common-multiprotocol {
   }
   import ietf-routing-policy {
     prefix rt-pol;
+    reference
+      "RFC 9067: A YANG Data Model for Routing Policy.";
+  }
+  import ietf-yang-semver {
+    prefix ysv;
+    reference
+      "I-D.ietf-netmod-yang-semver: YANG Semantic Versioning";
   }
 
   organization
@@ -55,6 +64,7 @@ submodule ietf-bgp-common-multiprotocol {
   revision YYYY-MM-DD {
     description
       "Initial Version";
+    ysv:version 0.0.9;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
