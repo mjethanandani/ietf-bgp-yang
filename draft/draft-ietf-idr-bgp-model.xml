@@ -905,7 +905,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             When a new AFI/SAFI pair is added, a new "identity"
             statement deriving from "afi-safi-type" must be added.
             The "identity" statement MUST have the substatements
-            defined as described for iana-bgp-notification above.
+            defined as described below:
           </t>
           <ul>
             <li>
