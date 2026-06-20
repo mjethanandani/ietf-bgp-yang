@@ -886,7 +886,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             new AFI must indicate if the AFI might be passed in
             BGP. If this is true, the YANG module
             "iana-bgp-afi-safi-types"
-            &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types>&gt;
+            &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types&gt;
             must be updated as defined in RFC XXXX.
           </blockquote>
 
@@ -897,7 +897,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           <blockquote>
             When this registry is modified, the YANG module
             "iana-bgp-afi-safi-types"
-            &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types>&gt;
+            &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types&gt;
             must be updated as defined in RFC XXXX.
           </blockquote>
 
