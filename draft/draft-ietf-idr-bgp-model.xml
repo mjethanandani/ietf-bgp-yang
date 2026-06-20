@@ -1205,47 +1205,55 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
       </section>
 
       <section title="BGP notification module">
-        <t><figure>
+        <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-notification@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/iana-bgp-notification@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure></t>
+          </figure>
+        </t>
       </section>
 
       <section title="BGP capabilities module">
-        <t><figure>
+        <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-capabilities@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/iana-bgp-capabilities@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure></t>
+          </figure>
+        </t>
       </section>
 
       <section title="BGP AFI/SAFI types module">
-        <t><figure>
+        <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-afi-safi-types@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/iana-bgp-afi-safi-types@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure></t>
+          </figure>
+        </t>
       </section>
 
       <section title="BGP IANA community types module">
-        <t><figure>
+        <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-community-types@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure></t>
+          </figure>
+        </t>
       </section>
 
 
