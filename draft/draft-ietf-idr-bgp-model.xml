@@ -733,126 +733,194 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       </section>
 
       <section title="IANA-Maintained YANG Modules">
-        <t>This section provides the instructions required by
-        <xref target="RFC9907"/> Section 4.30.3 for IANA to maintain
-        the five IANA-maintained YANG modules defined in this
-        document.</t>
+        <t>
+          This section provides the instructions required by <xref
+          target="RFC9907"/> Section 4.30.3 for IANA to maintain the
+          five IANA-maintained YANG modules defined in this
+          document.
+        </t>
 
         <section title="iana-bgp-notification">
-          <t>This document defines the initial version of the
-          IANA-maintained "iana-bgp-notification" YANG module.  The
-          most recent version of the YANG module is available from the
-          "YANG Parameters" registry group.</t>
+          <t>
+            This document defines the initial version of the
+            IANA-maintained "iana-bgp-notification" YANG module.  The
+            most recent version of the YANG module is available from
+            the "YANG Parameters" registry group.
+          </t>
 
-          <t>IANA is requested to add this note to the
-          "iana-bgp-notification" entry in the "YANG Module Names"
-          registry:</t>
-          <blockquote>New values must not be directly added to the
-          "iana-bgp-notification" YANG module.  They must instead be
-          added to the "BGP Error (Notification) Codes" and/or "BGP Error
-          Subcodes" registry.</blockquote>
+          <t>
+            IANA is requested to add this note to the
+            "iana-bgp-notification" entry in the "YANG Module Names"
+            registry:
+          </t>
+          <blockquote>
+            New values must not be directly added to the
+            "iana-bgp-notification" YANG module.  They must instead be
+            added to the "BGP Error (Notification) Codes" and/or "BGP
+            Error Subcodes" registry.
+          </blockquote>
 
-          <t>IANA is requested to add this note to both the "BGP Error
-          (Notification) Codes" and/or "BGP Error Subcodes"
-          registries:</t>
-          <blockquote>When either of these registries is modified, the YANG module
-          "iana-bgp-notification"
-          &lt;https://www.iana.org/assignments/iana-bgp-notification&gt;
-          must be updated as defined in RFC XXXX.</blockquote>
+          <t>
+            IANA is requested to add this note to both the "BGP Error
+            (Notification) Codes" and/or "BGP Error Subcodes"
+            registries:
+          </t>
+          <blockquote>
+            When either of these registries is modified, the YANG
+            module "iana-bgp-notification"
+            &lt;https://www.iana.org/assignments/iana-bgp-notification&gt;
+            must be updated as defined in RFC XXXX.
+          </blockquote>
 
-          <t>When a new Error Code is added to the "BGP Error
-          (Notification) Codes" registry, a new top-level "identity"
-          statement deriving from "bgp-notification" must be added to
-          the "iana-bgp-notification" YANG module.  When a new Error
-          Subcode is added to the "BGP Error Subcodes" registry, a new
-          "identity" statement deriving from the corresponding Error
-          Code identity must be added.  In both cases, the "identity"
-          statement MUST have the following substatements defined:</t>
+          <t>
+            When a new Error Code is added to the "BGP Error
+            (Notification) Codes" registry, a new top-level "identity"
+            statement deriving from "bgp-notification" must be added
+            to the "iana-bgp-notification" YANG module.  When a new
+            Error Subcode is added to the "BGP Error Subcodes"
+            registry, a new "identity" statement deriving from the
+            corresponding Error Code identity must be added.  In both
+            cases, the "identity" statement MUST have the following
+            substatements defined:
+          </t>
           <ul>
-            <li>"base": The parent identity ("bgp-notification" for
-            error codes; the error-code identity for subcodes).</li>
-            <li>"status": Include only if a registration has been
-            deprecated or obsoleted.  IANA "deprecated" maps to YANG
-            status "deprecated"; IANA "obsolete" maps to YANG status
-            "obsolete".</li>
-            <li>"description": Replicates the description from the
-            registry.</li>
-            <li>"reference": Replicates the reference(s) from the
-            registry with the title of the document(s) added.</li>
+            <li>
+              "base": The parent identity ("bgp-notification" for
+              error codes; the error-code identity for subcodes).
+            </li>
+            <li>
+              "status": Include only if a registration has been
+              deprecated or obsoleted.  IANA "deprecated" maps to YANG
+              status "deprecated"; IANA "obsolete" maps to YANG status
+              "obsolete".
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
           </ul>
         </section>
 
         <section title="iana-bgp-capabilities">
-          <t>This document defines the initial version of the
-          IANA-maintained "iana-bgp-capabilities" YANG module.  The most
-          recent version of the YANG module is available from the
-          "YANG Parameters" registry group.</t>
+          <t>
+            This document defines the initial version of the
+            IANA-maintained "iana-bgp-capabilities" YANG module.  The
+            most recent version of the YANG module is available from
+            the "YANG Parameters" registry group.
+          </t>
 
-          <t>IANA is requested to add this note to the
-          "iana-bgp-capabilities" entry in the "YANG Module Names"
-          registry:</t>
-          <blockquote>New values must not be directly added to the
-          "iana-bgp-capabilities" YANG module.  They must instead be
-          added to the "BGP Capability Codes" registry.
+          <t>
+            IANA is requested to add this note to the
+            "iana-bgp-capabilities" entry in the "YANG Module Names"
+            registry:
+          </t>
+          <blockquote>
+            New values must not be directly added to the
+            "iana-bgp-capabilities" YANG module.  They must instead be
+            added to the "BGP Capability Codes" registry.
           </blockquote>
 
-          <t>IANA is requested to add this note to the "BGP Capability
-          Codes" registry:</t>
-          <blockquote>When this registry is modified, the YANG module
-          "iana-bgp-capabilities"
-          &lt;https://www.iana.org/assignments/iana-bgp-capabilities&gt;
-          must be updated as defined in RFC XXXX.</blockquote>
+          <t>
+            IANA is requested to add this note to the "BGP Capability
+            Codes" registry:
+          </t>
+          <blockquote>
+            When this registry is modified, the YANG module
+            "iana-bgp-capabilities"
+            &lt;https://www.iana.org/assignments/iana-bgp-capabilities&gt;
+            must be updated as defined in RFC XXXX.
+          </blockquote>
 
-          <t>When a new Capability Code is added to the "BGP Capability
-          Codes" registry, a new "identity" statement deriving from
-          "bgp-capability" must be added.  The "identity" statement MUST
-          have the substatements defined as described for
-          iana-bgp-notification above.</t>
+          <t>
+            When a new Capability Code is added to the "BGP Capability
+            Codes" registry, a new "identity" statement deriving from
+            "bgp-capability" must be added.  The "identity" statement
+            MUST have the substatements defined as described below:
+          </t>
+          <ul>
+            <li>
+              "base": The parent identity ("bgp-capability" for
+              BGP capability).
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
         </section>
 
         <section title="iana-bgp-afi-safi-types">
-          <t>This document defines the initial version of the
-          IANA-maintained "iana-bgp-afi-safi-types" YANG module.  The
-          most recent version of the YANG module is available from the
-          "YANG Parameters" registry group.</t>
+          <t>
+            This document defines the initial version of the
+            IANA-maintained "iana-bgp-afi-safi-types" YANG module.
+            The most recent version of the YANG module is available
+            from the "YANG Parameters" registry group.
+          </t>
 
-          <t>IANA is requested to add this note to the
-          "iana-bgp-afi-safi-types" entry in the "YANG Module Names"
-          registry:</t>
-          <blockquote>New values must not be directly added to the
-          "iana-bgp-afi-safi-types" YANG module.  They must instead be
-          added to the "Address Family Numbers" / "Subsequent Address
-          Family Identifiers (SAFI)" registries.
+          <t>
+            IANA is requested to add this note to the
+            "iana-bgp-afi-safi-types" entry in the "YANG Module Names"
+            registry:
+          </t>
+          <blockquote>
+            New values must not be directly added to the
+            "iana-bgp-afi-safi-types" YANG module.  They must instead
+            be added to the "Address Family Numbers" / "Subsequent
+            Address Family Identifiers (SAFI)" registries.
           </blockquote>
 
           <t>
-	    IANA is requested to add this note to the "Address Family
-	    Numbers" registry:
-	  </t>
+            IANA is requested to add this note to the "Address Family
+            Numbers" registry:
+          </t>
           <blockquote>
-	    When this registry is modified, the entity registering the
-	    new AFI must indicate if the AFI might be passed in
-	    BGP. If this is true, the YANG module
-	    "iana-bgp-afi-safi-types"
-	    &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types>&gt;
-	    must be updated as defined in RFC XXXX.
-	  </blockquote>
+            When this registry is modified, the entity registering the
+            new AFI must indicate if the AFI might be passed in
+            BGP. If this is true, the YANG module
+            "iana-bgp-afi-safi-types"
+            &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types>&gt;
+            must be updated as defined in RFC XXXX.
+          </blockquote>
 
           <t>
-	    IANA is requested to add this note to the "Subsequent
-	    Address Family Numbers" registry:
-	  </t>
+            IANA is requested to add this note to the "Subsequent
+            Address Family Numbers" registry:
+          </t>
           <blockquote>
-	    When this registry is modified, the YANG module
-	    "iana-bgp-afi-safi-types"
-	    &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types>&gt;
-	    must be updated as defined in RFC XXXX.
-	  </blockquote>
+            When this registry is modified, the YANG module
+            "iana-bgp-afi-safi-types"
+            &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types>&gt;
+            must be updated as defined in RFC XXXX.
+          </blockquote>
 
-          <t>When a new AFI/SAFI pair is added, a new "identity"
-          statement deriving from "afi-safi-type" must be added.  The
-          "identity" statement MUST have the substatements defined as
-          described for iana-bgp-notification above.</t>
+          <t>
+            When a new AFI/SAFI pair is added, a new "identity"
+            statement deriving from "afi-safi-type" must be added.
+            The "identity" statement MUST have the substatements
+            defined as described for iana-bgp-notification above.
+          </t>
+          <ul>
+            <li>
+              "base": The parent identity ("afi-safi-type" for
+              AFI, SAFI tuples for BGP-4").
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
         </section>
 
         <section title="iana-bgp-community-types">
@@ -876,11 +944,28 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           &lt;https://www.iana.org/assignments/iana-bgp-community-types&gt;
           must be updated as defined in RFC XXXX.</blockquote>
 
-          <t>When a new community value is added to the "BGP Well Known
-          Communities" registry, a new "identity" statement deriving
-          from "bgp-well-known-std-community" must be added.  The
-          "identity" statement MUST have the substatements defined as
-          described for iana-bgp-notification above.</t>
+          <t>
+            When a new community value is added to the "BGP Well Known
+            Communities" registry, a new "identity" statement deriving
+            from "bgp-well-known-std-community" must be added.  The
+            "identity" statement MUST have the substatements defined
+            as described below.
+          </t>
+          <ul>
+            <li>
+              "base": The parent identity
+              ("bgp-well-known-std-community" for base identity for
+              reserved communities within the standard community).
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
         </section>
 
         <section title="iana-bgp-rib-types">
@@ -978,6 +1063,20 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           must be added.  The "identity" statement MUST have the
           substatements defined as described for iana-bgp-notification
           above.</t>
+          <ul>
+            <li>
+              "base": The parent identity ("bgp-capability" for
+              BGP capability).
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
         </section>
       </section>
     </section>
