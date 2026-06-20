@@ -1650,7 +1650,8 @@ yanglint -ii -t config -x sm-data.xml \
     ietf-network-instance.yang \
     ietf-interfaces.yang iana-if-type.yang \
     ietf-routing.yang \
-    iana-bgp-types.yang iana-bgp-community-types.yang \
+    iana-bgp-capabilities.yang iana-bgp-afi-safi-types.yang \
+    iana-bgp-community-types.yang \
     ietf-bgp.yang \
     example-bgp-configuration-a.1.3.xml
           </artwork>
@@ -1666,7 +1667,8 @@ yanglint -ii -t get -x sm-data.xml \
     ietf-network-instance.yang \
     ietf-interfaces.yang iana-if-type.yang \
     ietf-routing.yang \
-    iana-bgp-types.yang iana-bgp-community-types.yang \
+    iana-bgp-capabilities.yang iana-bgp-afi-safi-types.yang \
+    iana-bgp-community-types.yang \
     ietf-bgp.yang \
     example-bgp-configuration-a.1.6.xml
           </artwork>

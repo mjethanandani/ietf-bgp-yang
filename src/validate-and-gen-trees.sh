@@ -124,7 +124,8 @@ SM_MODULES="../bin/yang-parameters/ietf-yang-schema-mount@2019-01-14.yang \
     ../bin/yang-parameters/ietf-interfaces@2018-02-20.yang \
     ../bin/yang-parameters/iana-if-type@2023-01-26.yang \
     ../bin/yang-parameters/ietf-routing@2018-03-13.yang \
-    ../bin/iana-bgp-types@$(date +%Y-%m-%d).yang \
+    ../bin/iana-bgp-capabilities@$(date +%Y-%m-%d).yang \
+    ../bin/iana-bgp-afi-safi-types@$(date +%Y-%m-%d).yang \
     ../bin/iana-bgp-community-types@$(date +%Y-%m-%d).yang \
     ../bin/ietf-bgp@$(date +%Y-%m-%d).yang"
 
