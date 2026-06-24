@@ -762,7 +762,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
 
           <t>
             IANA is requested to add this note to both the "BGP Error
-            (Notification) Codes" and/or "BGP Error Subcodes"
+            (Notification) Codes" and "BGP Error Subcodes"
             registries:
           </t>
           <blockquote>
