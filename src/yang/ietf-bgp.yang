@@ -18,8 +18,8 @@ module ietf-bgp {
     reference
       "RFC 9067: A YANG Data Model for Routing Policy.";
   }
-  import iana-bgp-types {
-    prefix bt;
+  import ietf-bgp-types {
+    prefix ibt;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -99,7 +99,7 @@ module ietf-bgp {
           +-> [ optional pointer to peer-group ]
           +-> AFI / SAFI [ per-AFI overrides ]
 
-     Copyright (c) 2023 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code. All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -206,7 +206,7 @@ module ietf-bgp {
             "RFC 6286: AS-Wide Unique BGP ID for BGP-4. Section 2.1";
         }
         container distance {
-          if-feature "bt:distance";
+          if-feature "ibt:distance";
           description
             "Administrative distances (or preferences) assigned to
              routes received from different sources (external, and
@@ -256,7 +256,7 @@ module ietf-bgp {
           }
         }
         container graceful-restart {
-          if-feature "bt:graceful-restart";
+          if-feature "ibt:graceful-restart";
           description
             "Parameters relating the graceful restart mechanism for
              BGP.";
@@ -278,7 +278,7 @@ module ietf-bgp {
             uses mp-afi-safi-config;
             uses state;
             container graceful-restart {
-              if-feature "bt:graceful-restart";
+              if-feature "ibt:graceful-restart";
               description
                 "Parameters relating to BGP graceful-restart";
               reference
@@ -364,7 +364,7 @@ module ietf-bgp {
           }
 
           leaf peer-type {
-            type bt:peer-type;
+            type ibt:peer-type;
             config false;
             description
               "The type of peering session associated with this
@@ -425,7 +425,7 @@ module ietf-bgp {
           uses neighbor-group-config;
 
           container graceful-restart {
-            if-feature "bt:graceful-restart";
+            if-feature "ibt:graceful-restart";
             description
               "Parameters relating the graceful restart mechanism for
                BGP.";
@@ -672,7 +672,7 @@ module ietf-bgp {
               }
             }
             action clear {
-              if-feature "bt:clear-statistics";
+              if-feature "ibt:clear-statistics";
               description
                 "Clear statistics action command.
 
@@ -745,7 +745,7 @@ module ietf-bgp {
              Established state.";
         }
         action clear {
-          if-feature "bt:clear-neighbors";
+          if-feature "ibt:clear-neighbors";
           description
             "Clear neighbors action.";
 
@@ -788,7 +788,7 @@ module ietf-bgp {
               }
               case operation-soft-inbound {
                 leaf soft-inbound {
-                  if-feature "bt:route-refresh";
+                  if-feature "ibt:route-refresh";
                   type empty;
                   description
                     "Requests the Adj-Rib-In for this neighbor to be
@@ -834,7 +834,7 @@ module ietf-bgp {
           uses dynamic-peers;
 
           container graceful-restart {
-            if-feature "bt:graceful-restart";
+            if-feature "ibt:graceful-restart";
             description
               "Parameters relating the graceful restart mechanism for
                BGP.";
@@ -864,7 +864,7 @@ module ietf-bgp {
                 "RFC 4724: Graceful Restart Mechanism for BGP.";
               uses mp-afi-safi-config;
               container graceful-restart {
-                if-feature "bt:graceful-restart";
+                if-feature "ibt:graceful-restart";
                 description
                   "Parameters relating to BGP graceful-restart";
                 uses mp-afi-safi-graceful-restart-config;

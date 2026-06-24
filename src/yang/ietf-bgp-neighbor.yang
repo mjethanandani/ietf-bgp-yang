@@ -10,8 +10,13 @@ submodule ietf-bgp-neighbor {
       "RFC 9911: Common YANG Data Types.";
   }
 
-  import iana-bgp-types {
-    prefix bt;
+  import iana-bgp-afi-safi-types {
+    prefix bast;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
+  import ietf-bgp-types {
+    prefix ibt;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -144,7 +149,7 @@ submodule ietf-bgp-neighbor {
       }
 
       container graceful-restart {
-        if-feature "bt:graceful-restart";
+        if-feature "ibt:graceful-restart";
         description
           "Parameters relating to BGP graceful-restart";
         reference
@@ -258,7 +263,7 @@ submodule ietf-bgp-neighbor {
 
       leaf afi-safi-name {
         type identityref {
-          base bt:afi-safi-type;
+          base bast:afi-safi-type;
         }
         description
           "AFI-SAFI for these message counters.";
@@ -278,7 +283,7 @@ submodule ietf-bgp-neighbor {
            BGP-4.";
       }
       leaf route-refresh {
-        if-feature "bt:route-refresh";
+        if-feature "ibt:route-refresh";
         type yang:zero-based-counter32;
         description
           "Number of BGP ROUTE-REFRESH messages for this peer for

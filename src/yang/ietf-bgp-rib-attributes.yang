@@ -6,13 +6,18 @@ submodule ietf-bgp-rib-attributes {
 
   // import some basic types
 
-  import iana-bgp-types {
-    prefix bt;
+  import ietf-bgp-types {
+    prefix ibt;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import iana-bgp-community-types {
     prefix bct;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
+  import ietf-bgp-community-types {
+    prefix ibct;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -75,7 +80,7 @@ submodule ietf-bgp-rib-attributes {
       "Data for representing BGP AS-PATH segment";
 
     leaf type {
-      type bt:as-path-segment-type;
+      type ibt:as-path-segment-type;
       description
         "The type of AS-PATH segment";
     }
@@ -211,7 +216,7 @@ submodule ietf-bgp-rib-attributes {
     leaf-list community {
       type union {
         type bct:bgp-well-known-community-type;
-        type bct:bgp-std-community-type;
+        type ibct:bgp-std-community-type;
       }
       description
         "List of standard or well-known BGP community
@@ -277,7 +282,7 @@ submodule ietf-bgp-rib-attributes {
       "A grouping for all large community parameters.";
 
     leaf-list large-community {
-      type bct:bgp-large-community-type;
+      type ibct:bgp-large-community-type;
       description
         "List of BGP large community attributes.";
       reference

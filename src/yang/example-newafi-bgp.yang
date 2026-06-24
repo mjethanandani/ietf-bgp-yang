@@ -22,8 +22,8 @@ module example-newafi-bgp {
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP).";
   }
 
-  import iana-bgp-types {
-    prefix "bt";
+  import iana-bgp-afi-safi-types {
+    prefix bast;
   }
 
   organization
@@ -43,7 +43,7 @@ module example-newafi-bgp {
   }
 
   identity foo {
-    base bt:afi-safi-type;
+    base bast:afi-safi-type;
     description
       "New AFI type foo.";
   }

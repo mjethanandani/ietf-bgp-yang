@@ -31,9 +31,14 @@
       <namespace>urn:ietf:params:xml:ns:yang:ietf-bgp</namespace>
     </module>
     <module>
-      <name>iana-bgp-types</name>
+      <name>iana-bgp-capabilities</name>
       <revision>YYYY-MM-DD</revision>
-      <namespace>urn:ietf:params:xml:ns:yang:iana-bgp-types</namespace>
+      <namespace>urn:ietf:params:xml:ns:yang:iana-bgp-capabilities</namespace>
+    </module>
+    <module>
+      <name>iana-bgp-afi-safi-types</name>
+      <revision>YYYY-MM-DD</revision>
+      <namespace>urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types</namespace>
     </module>
     <module>
       <name>iana-bgp-community-types</name>

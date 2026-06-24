@@ -599,7 +599,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
     </section>
 
     <section title="IANA Considerations">
-      <t>This document registers six URIs and six YANG modules.</t>
+      <t>This document registers nine URIs, twelve IETF YANG modules and
+      submodules, and five IANA-maintained YANG modules.</t>
 
       <section title="URI Registration">
         <t>Following the format in the <xref target="RFC3688">IETF XML
@@ -607,11 +608,14 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
         be made: <figure>
             <artwork><![CDATA[
             URI:urn:ietf:params:xml:ns:yang:ietf-bgp
+            URI:urn:ietf:params:xml:ns:yang:ietf-bgp-community-types
             URI:urn:ietf:params:xml:ns:yang:ietf-bgp-policy
+            URI:urn:ietf:params:xml:ns:yang:ietf-bgp-types
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-community-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-capabilities
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-notification
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
-            URI:urn:ietf:params:xml:ns:yang:iana-bgp-types
             ]]></artwork>
           </figure></t>
 
@@ -620,7 +624,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       </section>
 
       <section title="YANG Module Name Registration">
-        <t>This document registers 14 YANG modules in the YANG Module
+        <t>This document registers 17 YANG modules in the YANG Module
         Names registry <xref target="RFC6020">YANG</xref>.</t>
 
         <t>
@@ -629,68 +633,451 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             name: ietf-bgp
             namespace: urn:ietf:params:xml:ns:yang:ietf-bgp
             prefix: bgp
+            maintained by IANA: N
+            reference: RFC XXXX
+
+            name: ietf-bgp-community-types
+            namespace:
+              urn:ietf:params:xml:ns:yang:ietf-bgp-community-types
+            prefix: ibct
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: ietf-bgp-policy
             namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-policy
             prefix: bp
+            maintained by IANA: N
+            reference: RFC XXXX
+
+            name: ietf-bgp-types
+            namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-types
+            prefix: ibt
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: iana-bgp-community-types
-            namespace: 
+            namespace:
               urn:ietf:params:xml:ns:yang:iana-bgp-community-types
             prefix: bct
+            maintained by IANA: Y
             reference: RFC XXXX
 
             name: iana-bgp-notification
             namespace: urn:ietf:params:xml:ns:yang:iana-bgp-notification
             prefix: bn
+            maintained by IANA: Y
             reference: RFC XXXX
 
-            name: iana-bgp-types
-            namespace: urn:ietf:params:xml:ns:yang:iana-bgp-types
-            prefix: bt
+            name: iana-bgp-afi-safi-types
+            namespace:
+              urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types
+            prefix: bast
+            maintained by IANA: Y
+            reference: RFC XXXX
+
+            name: iana-bgp-capabilities
+            namespace:
+              urn:ietf:params:xml:ns:yang:iana-bgp-capabilities
+            prefix: bc
+            maintained by IANA: Y
             reference: RFC XXXX
 
             name: iana-bgp-rib-types
             namespace: urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
             prefix: brt
+            maintained by IANA: Y
             reference: RFC XXXX
 
             name: ietf-bgp-capabilities
             belongs to: ietf-bgp
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: ietf-bgp-common-multiprotocol
             belongs to: ietf-bgp
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: ietf-bgp-common
             belongs to: ietf-bgp
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: ietf-bgp-common-errors
             belongs to: ietf-bgp
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: ietf-bgp-neighbors
             belongs to: ietf-bgp
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: ietf-bgp-rib-attributes
             belongs to: ietf-bgp
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: ietf-bgp-rib-tables
             belongs to: ietf-bgp
+            maintained by IANA: N
             reference: RFC XXXX
 
             name: ietf-bgp-rib
             belongs to: ietf-bgp
+            maintained by IANA: N
             reference: RFC XXXX
             ]]>
             </artwork>
         </figure></t>
+      </section>
+
+      <section title="IANA-Maintained YANG Modules">
+        <t>
+          This section provides the instructions required by <xref
+          target="RFC9907"/> Section 4.30.3 for IANA to maintain the
+          five IANA-maintained YANG modules defined in this
+          document.
+        </t>
+
+        <section title="iana-bgp-notification">
+          <t>
+            This document defines the initial version of the
+            IANA-maintained "iana-bgp-notification" YANG module.  The
+            most recent version of the YANG module is available from
+            the "YANG Parameters" registry group.
+          </t>
+
+          <t>
+            IANA is requested to add this note to the
+            "iana-bgp-notification" entry in the "YANG Module Names"
+            registry:
+          </t>
+          <blockquote>
+            New values must not be directly added to the
+            "iana-bgp-notification" YANG module.  They must instead be
+            added to the "BGP Error (Notification) Codes" and/or "BGP
+            Error Subcodes" registry.
+          </blockquote>
+
+          <t>
+            IANA is requested to add this note to both the "BGP Error
+            (Notification) Codes" and/or "BGP Error Subcodes"
+            registries:
+          </t>
+          <blockquote>
+            When either of these registries is modified, the YANG
+            module "iana-bgp-notification"
+            &lt;https://www.iana.org/assignments/iana-bgp-notification&gt;
+            must be updated as defined in RFC XXXX.
+          </blockquote>
+
+          <t>
+            When a new Error Code is added to the "BGP Error
+            (Notification) Codes" registry, a new top-level "identity"
+            statement deriving from "bgp-notification" must be added
+            to the "iana-bgp-notification" YANG module.  When a new
+            Error Subcode is added to the "BGP Error Subcodes"
+            registry, a new "identity" statement deriving from the
+            corresponding Error Code identity must be added.  In both
+            cases, the "identity" statement MUST have the following
+            substatements defined:
+          </t>
+          <ul>
+            <li>
+              "base": The parent identity ("bgp-notification" for
+              error codes; the error-code identity for subcodes).
+            </li>
+            <li>
+              "status": Include only if a registration has been
+              deprecated or obsoleted.  IANA "deprecated" maps to YANG
+              status "deprecated"; IANA "obsolete" maps to YANG status
+              "obsolete".
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
+        </section>
+
+        <section title="iana-bgp-capabilities">
+          <t>
+            This document defines the initial version of the
+            IANA-maintained "iana-bgp-capabilities" YANG module.  The
+            most recent version of the YANG module is available from
+            the "YANG Parameters" registry group.
+          </t>
+
+          <t>
+            IANA is requested to add this note to the
+            "iana-bgp-capabilities" entry in the "YANG Module Names"
+            registry:
+          </t>
+          <blockquote>
+            New values must not be directly added to the
+            "iana-bgp-capabilities" YANG module.  They must instead be
+            added to the "BGP Capability Codes" registry.
+          </blockquote>
+
+          <t>
+            IANA is requested to add this note to the "BGP Capability
+            Codes" registry:
+          </t>
+          <blockquote>
+            When this registry is modified, the YANG module
+            "iana-bgp-capabilities"
+            &lt;https://www.iana.org/assignments/iana-bgp-capabilities&gt;
+            must be updated as defined in RFC XXXX.
+          </blockquote>
+
+          <t>
+            When a new Capability Code is added to the "BGP Capability
+            Codes" registry, a new "identity" statement deriving from
+            "bgp-capability" must be added.  The "identity" statement
+            MUST have the substatements defined as described below:
+          </t>
+          <ul>
+            <li>
+              "base": The parent identity ("bgp-capability" for
+              BGP capability).
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
+        </section>
+
+        <section title="iana-bgp-afi-safi-types">
+          <t>
+            This document defines the initial version of the
+            IANA-maintained "iana-bgp-afi-safi-types" YANG module.
+            The most recent version of the YANG module is available
+            from the "YANG Parameters" registry group.
+          </t>
+
+          <t>
+            IANA is requested to add this note to the
+            "iana-bgp-afi-safi-types" entry in the "YANG Module Names"
+            registry:
+          </t>
+          <blockquote>
+            New values must not be directly added to the
+            "iana-bgp-afi-safi-types" YANG module.  They must instead
+            be added to the "Address Family Numbers" / "Subsequent
+            Address Family Identifiers (SAFI)" registries.
+          </blockquote>
+
+          <t>
+            IANA is requested to add this note to the "Address Family
+            Numbers" registry:
+          </t>
+          <blockquote>
+            When this registry is modified, the entity registering the
+            new AFI must indicate if the AFI might be passed in
+            BGP. If this is true, the YANG module
+            "iana-bgp-afi-safi-types"
+            &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types&gt;
+            must be updated as defined in RFC XXXX.
+          </blockquote>
+
+          <t>
+            IANA is requested to add this note to the "Subsequent
+            Address Family Numbers" registry:
+          </t>
+          <blockquote>
+            When this registry is modified, the YANG module
+            "iana-bgp-afi-safi-types"
+            &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types&gt;
+            must be updated as defined in RFC XXXX.
+          </blockquote>
+
+          <t>
+            When a new AFI/SAFI pair is added, a new "identity"
+            statement deriving from "afi-safi-type" must be added.
+            The "identity" statement MUST have the substatements
+            defined as described below:
+          </t>
+          <ul>
+            <li>
+              "base": The parent identity ("afi-safi-type" for
+              AFI, SAFI tuples for BGP-4").
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
+        </section>
+
+        <section title="iana-bgp-community-types">
+          <t>This document defines the initial version of the
+          IANA-maintained "iana-bgp-community-types" YANG module.  The
+          most recent version of the YANG module is available from the
+          "YANG Parameters" registry group.</t>
+
+          <t>IANA is requested to add this note to the
+          "iana-bgp-community-types" entry in the "YANG Module Names"
+          registry:</t>
+          <blockquote>New values must not be directly added to the
+          "iana-bgp-community-types" YANG module.  They must instead
+          be added to the "BGP Well Known Communities" registry.
+          </blockquote>
+
+          <t>IANA is requested to add this note to the "BGP Well Known
+          Communities" registry:</t>
+          <blockquote>When this registry is modified, the YANG module
+          "iana-bgp-community-types"
+          &lt;https://www.iana.org/assignments/iana-bgp-community-types&gt;
+          must be updated as defined in RFC XXXX.</blockquote>
+
+          <t>
+            When a new community value is added to the "BGP Well Known
+            Communities" registry, a new "identity" statement deriving
+            from "bgp-well-known-std-community" must be added.  The
+            "identity" statement MUST have the substatements defined
+            as described below.
+          </t>
+          <ul>
+            <li>
+              "base": The parent identity
+              ("bgp-well-known-std-community" for base identity for
+              reserved communities within the standard community).
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
+        </section>
+
+        <section title="iana-bgp-rib-types">
+          <t>This document defines the initial version of the
+          IANA-maintained "iana-bgp-rib-types" YANG module.  The most
+          recent version of the YANG module is available from the
+          "YANG Parameters" registry group.</t>
+
+          <t>IANA is requested to create three new registries under a
+          new "BGP RIB Entry State Types" registry group:</t>
+
+          <t>Registry 1: BGP Route Ineligibility Reasons</t>
+          <ul>
+            <li>Registration policy: Standards Action</li>
+            <li>Each entry records: Identity Name, Description,
+            Reference</li>
+            <li>Initial values:
+              <ul>
+                <li>ineligible-cluster-loop: Route was ineligible due
+                to CLUSTER_LIST loop (RFC 4456)</li>
+                <li>ineligible-as-loop: Route was ineligible due to
+                AS_PATH loop (RFC 4271)</li>
+                <li>ineligible-originator: Route was ineligible due to
+                ORIGINATOR_ID (RFC 4271)</li>
+                <li>ineligible-confed: Route was ineligible due to a
+                loop in AS_CONFED_SEQUENCE or AS_CONFED_SET (RFC 5065)
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <t>Registry 2: BGP Best-Path Non-Selection Reasons</t>
+          <ul>
+            <li>Registration policy: Standards Action</li>
+            <li>Each entry records: Identity Name, Description,
+            Reference</li>
+            <li>Initial values:
+              <ul>
+                <li>local-pref-lower: Route has a lower LOCAL_PREF
+                than the current best path (RFC 4271 Section 9.1.2)</li>
+                <li>as-path-longer: Route has a longer AS_PATH than the
+                current best path (RFC 4271 Section 9.1.2.2 (a))</li>
+                <li>origin-type-higher: Route has a higher origin type
+                (RFC 4271 Section 9.1.2.2 (b))</li>
+                <li>med-higher: Route has a higher MED than the current
+                best path (RFC 4271 Section 9.1.2.2 (c))</li>
+                <li>prefer-external: Route source is via IBGP, rather
+                than EBGP (RFC 4271 Section 9.1.2.2 (d))</li>
+                <li>nexthop-cost-higher: Route has a higher interior
+                cost to the next hop (RFC 4271 Section 9.1.2.2 (e))
+                </li>
+                <li>higher-router-id: Route was sent by a peer with a
+                higher BGP Identifier value (RFC 4271 Section 9.1.2.2
+                (f))</li>
+                <li>higher-peer-address: Route was sent by a peer with
+                a higher IP address (RFC 4271 Section 9.1.2.2 (g))
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <t>Registry 3: BGP Route Policy Non-Selection Reasons</t>
+          <ul>
+            <li>Registration policy: Standards Action</li>
+            <li>Each entry records: Identity Name, Description,
+            Reference</li>
+            <li>Initial values:
+              <ul>
+                <li>rejected-import-policy: Route was rejected after
+                applying import policies (RFC XXXX)</li>
+              </ul>
+            </li>
+          </ul>
+
+          <t>IANA is requested to add this note to the
+          "iana-bgp-rib-types" entry in the "YANG Module Names"
+          registry:</t>
+          <blockquote>New values must not be directly added to the
+          "iana-bgp-rib-types" YANG module.  They must instead be
+          added to the "BGP Route Ineligibility Reasons", "BGP
+          Best-Path Non-Selection Reasons", or "BGP Route Policy
+          Non-Selection Reasons" registries.</blockquote>
+
+          <t>IANA is requested to add this note to each of the three
+          new registries created above:</t>
+          <blockquote>When this registry is modified, the YANG module
+          "iana-bgp-rib-types"
+          &lt;https://www.iana.org/assignments/iana-bgp-rib-types&gt;
+          must be updated as defined in RFC XXXX.</blockquote>
+
+          <t>When a value is added to any of the three registries, a
+          new "identity" statement deriving from the appropriate base
+          identity ("ineligible-route-reason",
+          "bgp-not-selected-bestpath", or "bgp-not-selected-policy")
+          must be added.  The "identity" statement MUST have the
+          substatements defined as described for iana-bgp-notification
+          above.</t>
+          <ul>
+            <li>
+              "base": The parent identity ("bgp-capability" for
+              BGP capability).
+            </li>
+            <li>
+              "description": Replicates the description from the
+              registry.
+            </li>
+            <li>
+              "reference": Replicates the reference(s) from the
+              registry with the title of the document(s) added.
+            </li>
+          </ul>
+        </section>
       </section>
     </section>
 
@@ -730,17 +1117,26 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <t>Additionally, the above modules include the following
       modules:
       <ul>
-          <li>iana-bgp-community-types - common type and identity
-          definitions for BGP Communities.</li>
+          <li>ietf-bgp-community-types - non-IANA community type,
+          feature, and identity definitions for BGP Communities.</li>
+
+          <li>iana-bgp-community-types - IANA-maintained well-known
+          community identity definitions for BGP Communities.</li>
 
           <li>ietf-bgp-policy - BGP-specific policy data definitions
           for use with <xref target="RFC9067"/> (described in more
           detail <xref target="overview.policy"/>).</li>
 
-          <li>iana-bgp-types - common type and identity definitions
-          for BGP, including BGP policy.</li>
+          <li>ietf-bgp-types - non-IANA type, feature, and identity
+          definitions for BGP, including BGP policy.</li>
 
-          <li>iana-bgp-rib-types - common type and identity
+          <li>iana-bgp-capabilities - IANA-maintained BGP Capability
+          Code identity definitions for BGP.</li>
+
+          <li>iana-bgp-afi-safi-types - IANA-maintained AFI/SAFI
+          identity definitions for BGP.</li>
+
+          <li>iana-bgp-rib-types - IANA-maintained type and identity
           definitions for BGP RIB.</li>
         </ul></t>
     </section>
@@ -791,12 +1187,46 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li><xref target="RFC8538">Notification Message Support for BGP Graceful Restart</xref></li>
       <li><xref target="RFC9067">A YANG Data Model for Routing Policy</xref></li>
       <li><xref target="RFC9127">YANG Data Model for Bidirectional Forward Detection</xref></li>
-      <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9293">Transmission Control Protocol</xref></li>
+      <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
       <li><xref target="RFC9384">A BGP Cease Notification Subcode For Bidirectional Forwarding Detection (BFD)</xref></li>
       <li><xref target="RFC9648">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
       <li><xref target="I-D.ietf-netmod-yang-semver">YANG Semantic Versioning</xref></li>
       </ul></t>
+
+      <t>The initial versions of the IANA-maintained YANG modules
+      (iana-bgp-notification, iana-bgp-capabilities,
+      iana-bgp-afi-safi-types, iana-bgp-community-types, and
+      iana-bgp-rib-types) are provided in the Appendices for review
+      purposes.  Per <xref target="RFC9907"/> Section 4.30.2, the
+      authoritative versions of these modules are maintained by IANA and
+      are available from the "YANG Parameters" registry group.</t>
+
+      <section title="BGP types module">
+        <t>
+          <figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+          </figure>
+        </t>
+      </section>
+
+      <section title="BGP community types module">
+        <t>
+          <figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-community-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/ietf-bgp-community-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+          </figure>
+        </t>
+      </section>
 
       <section title="BGP module and submodules">
         <section title="BGP module">
@@ -872,38 +1302,59 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-neighbor@YYYY-MM-DD.yang)
           </t>
         </section>
       </section>
+
       <section title="BGP notification module">
-        <t><figure>
+        <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-notification@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/iana-bgp-notification@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure></t>
+          </figure>
+        </t>
       </section>
 
-      <section title="BGP types module">
-        <t><figure>
+      <section title="BGP capabilities module">
+        <t>
+          <figure>
             <artwork><![CDATA[
-<CODE BEGINS> file "iana-bgp-types@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/iana-bgp-types@YYYY-MM-DD.yang)
+<CODE BEGINS> file "iana-bgp-capabilities@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-capabilities@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure></t>
+          </figure>
+        </t>
       </section>
 
-      <section title="BGP community types module">
-        <t><figure>
+      <section title="BGP AFI/SAFI types module">
+        <t>
+          <figure>
+            <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-afi-safi-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-afi-safi-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+        ]]></artwork>
+          </figure>
+        </t>
+      </section>
+
+      <section title="BGP IANA community types module">
+        <t>
+          <figure>
             <artwork><![CDATA[
 <CODE BEGINS> file "iana-bgp-community-types@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
 <CODE ENDS>
 
         ]]></artwork>
-          </figure></t>
+          </figure>
+        </t>
       </section>
+
 
       <section title="BGP policy module">
         <t><figure>
@@ -916,17 +1367,6 @@ INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
       </section>
 
       <section title="RIB modules and submodules">
-        <section title="BGP RIB types module">
-          <t><figure>
-            <artwork><![CDATA[
-<CODE BEGINS> file "iana-bgp-rib-types@YYYY-MM-DD.yang"
-INSERT_TEXT_FROM_FILE(../bin/iana-bgp-rib-types@YYYY-MM-DD.yang)
-<CODE ENDS>
-
-        ]]></artwork>
-          </figure></t>
-        </section>
-
         <section title = "BGP RIB submodule">
           <t>
             <figure>
@@ -1103,6 +1543,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8538.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9067.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9907.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9127.xml"/>
 
@@ -1315,7 +1757,8 @@ yanglint -ii -t config -x sm-data.xml \
     ietf-network-instance.yang \
     ietf-interfaces.yang iana-if-type.yang \
     ietf-routing.yang \
-    iana-bgp-types.yang iana-bgp-community-types.yang \
+    iana-bgp-capabilities.yang iana-bgp-afi-safi-types.yang \
+    iana-bgp-community-types.yang \
     ietf-bgp.yang \
     example-bgp-configuration-a.1.3.xml
           </artwork>
@@ -1331,7 +1774,8 @@ yanglint -ii -t get -x sm-data.xml \
     ietf-network-instance.yang \
     ietf-interfaces.yang iana-if-type.yang \
     ietf-routing.yang \
-    iana-bgp-types.yang iana-bgp-community-types.yang \
+    iana-bgp-capabilities.yang iana-bgp-afi-safi-types.yang \
+    iana-bgp-community-types.yang \
     ietf-bgp.yang \
     example-bgp-configuration-a.1.6.xml
           </artwork>
@@ -1646,6 +2090,96 @@ NEG = "^" ; Negate set contents
           range 64505..64511.</dd>
         </dl>
       </section>
+    </section>
+
+    <section title="Initial Version of iana-bgp-notification YANG Module">
+      <t><strong>RFC Editor: This appendix MUST be removed before
+      publication.  Replace all occurrences of "RFC XXXX" with the RFC
+      number assigned to this document.</strong></t>
+      <t>This appendix contains the initial version of the
+      "iana-bgp-notification" YANG module, provided here solely to allow
+      verification of correctness prior to publication.  The authoritative
+      version will be maintained by IANA and is available at
+      &lt;https://www.iana.org/assignments/iana-bgp-notification&gt;.</t>
+      <t><figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-notification@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/iana-bgp-notification@YYYY-MM-DD.yang)
+<CODE ENDS>
+          ]]></artwork>
+        </figure></t>
+    </section>
+
+    <section title="Initial Version of iana-bgp-capabilities YANG Module">
+      <t><strong>RFC Editor: This appendix MUST be removed before
+      publication.  Replace all occurrences of "RFC XXXX" with the RFC
+      number assigned to this document.</strong></t>
+      <t>This appendix contains the initial version of the
+      "iana-bgp-capabilities" YANG module, provided here solely to allow
+      verification of correctness prior to publication.  The authoritative
+      version will be maintained by IANA and is available at
+      &lt;https://www.iana.org/assignments/iana-bgp-capabilities&gt;.</t>
+      <t><figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-capabilities@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-capabilities@YYYY-MM-DD.yang)
+<CODE ENDS>
+          ]]></artwork>
+        </figure></t>
+    </section>
+
+    <section title="Initial Version of iana-bgp-afi-safi-types YANG Module">
+      <t><strong>RFC Editor: This appendix MUST be removed before
+      publication.  Replace all occurrences of "RFC XXXX" with the RFC
+      number assigned to this document.</strong></t>
+      <t>This appendix contains the initial version of the
+      "iana-bgp-afi-safi-types" YANG module, provided here solely to allow
+      verification of correctness prior to publication.  The authoritative
+      version will be maintained by IANA and is available at
+      &lt;https://www.iana.org/assignments/iana-bgp-afi-safi-types&gt;.</t>
+      <t><figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-afi-safi-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-afi-safi-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+          ]]></artwork>
+        </figure></t>
+    </section>
+
+    <section title="Initial Version of iana-bgp-community-types YANG Module">
+      <t><strong>RFC Editor: This appendix MUST be removed before
+      publication.  Replace all occurrences of "RFC XXXX" with the RFC
+      number assigned to this document.</strong></t>
+      <t>This appendix contains the initial version of the
+      "iana-bgp-community-types" YANG module, provided here solely to allow
+      verification of correctness prior to publication.  The authoritative
+      version will be maintained by IANA and is available at
+      &lt;https://www.iana.org/assignments/iana-bgp-community-types&gt;.</t>
+      <t><figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-community-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-community-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+          ]]></artwork>
+        </figure></t>
+    </section>
+
+    <section title="Initial Version of iana-bgp-rib-types YANG Module">
+      <t><strong>RFC Editor: This appendix MUST be removed before
+      publication.  Replace all occurrences of "RFC XXXX" with the RFC
+      number assigned to this document.</strong></t>
+      <t>This appendix contains the initial version of the
+      "iana-bgp-rib-types" YANG module, provided here solely to allow
+      verification of correctness prior to publication.  The authoritative
+      version will be maintained by IANA and is available at
+      &lt;https://www.iana.org/assignments/iana-bgp-rib-types&gt;.</t>
+      <t><figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "iana-bgp-rib-types@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/iana-bgp-rib-types@YYYY-MM-DD.yang)
+<CODE ENDS>
+          ]]></artwork>
+        </figure></t>
     </section>
   </back>
 </rfc>

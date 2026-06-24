@@ -4,13 +4,13 @@ submodule ietf-bgp-common {
     prefix bgp;
   }
 
-  import iana-bgp-types {
-    prefix bt;
+  import ietf-bgp-types {
+    prefix ibt;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
-  import iana-bgp-community-types {
-    prefix bct;
+  import ietf-bgp-community-types {
+    prefix ibct;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -279,7 +279,7 @@ submodule ietf-bgp-common {
           RFC 7606: Revised Error Handling for BGP UPDATE Messages.";
     }
     leaf remove-private-as {
-      type bt:remove-private-as-option;
+      type ibt:remove-private-as-option;
       description
         "When this leaf is specified, remove private AS numbers from
          updates sent to peers.";
@@ -288,7 +288,7 @@ submodule ietf-bgp-common {
          Use.";
     }
     container route-flap-damping {
-      if-feature "bt:damping";
+      if-feature "ibt:damping";
       leaf enable {
         type boolean;
         default "false";
@@ -365,9 +365,9 @@ submodule ietf-bgp-common {
          dampening.";
     }
     leaf-list send-community {
-      if-feature "bct:send-communities";
+      if-feature "ibct:send-communities";
       type identityref {
-        base "bct:send-community-feature";
+        base "ibct:send-community-feature";
       }
       description
         "When supported, this tells the router to propagate any
@@ -495,7 +495,7 @@ submodule ietf-bgp-common {
     }
 
     leaf ttl-security {
-      if-feature "bt:ttl-security";
+      if-feature "ibt:ttl-security";
       type uint8;
       default "255";
       description
@@ -582,7 +582,7 @@ submodule ietf-bgp-common {
     }
 
     container bfd {
-      if-feature "bt:bfd";
+      if-feature "ibt:bfd";
       uses bfd-types:client-cfg-parms;
       description
         "BFD client configuration.";
@@ -602,7 +602,7 @@ submodule ietf-bgp-common {
         "Enable or disable the graceful-restart capability.";
     }
     leaf restart-time {
-      type bt:graceful-restart-time-type;
+      type ibt:graceful-restart-time-type;
       description
         "Estimated time (in seconds) for the local BGP speaker to
          restart a session. This value is advertise in the graceful
@@ -814,7 +814,7 @@ submodule ietf-bgp-common {
       reference
         "RFC 4456: BGP Route Reflection.";
       leaf cluster-id {
-        type bt:rr-cluster-id-type;
+        type ibt:rr-cluster-id-type;
         description
           "Route Reflector cluster id to use when local router is
            configured as a route reflector.  Commonly set at the
@@ -875,7 +875,7 @@ submodule ietf-bgp-common {
     description
       "Grouping used to include ADD-PATHs configuration and state.";
     container add-paths {
-      if-feature "bt:add-paths";
+      if-feature "ibt:add-paths";
       description
         "Parameters relating to the advertisement and receipt of
          multiple paths for a single NLRI (add-paths)";

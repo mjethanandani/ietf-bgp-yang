@@ -111,8 +111,8 @@
 
 <routing
     xmlns="urn:ietf:params:xml:ns:yang:ietf-routing"
-    xmlns:bt="urn:ietf:params:xml:ns:yang:iana-bgp-types"
-    xmlns:bct="urn:ietf:params:xml:ns:yang:iana-bgp-community-types">
+    xmlns:bast="urn:ietf:params:xml:ns:yang:iana-bgp-afi-safi-types"
+    xmlns:ibct="urn:ietf:params:xml:ns:yang:ietf-bgp-community-types">
   <control-plane-protocols>
     <control-plane-protocol>
       <type
@@ -124,7 +124,7 @@
           <as>1</as>
           <afi-safis>
             <afi-safi>
-              <name>bt:ipv4-unicast</name>
+              <name>bast:ipv4-unicast</name>
             </afi-safi>
           </afi-safis>
         </global>
@@ -135,10 +135,13 @@
             <peer-as>2</peer-as>
             <afi-safis>
               <afi-safi>
-                <name>bt:ipv4-unicast</name>
+                <name>bast:ipv4-unicast</name>
               </afi-safi>
             </afi-safis>
-            <send-community>bct:standard</send-community>
+            <graceful-restart>
+              <enabled>false</enabled>
+            </graceful-restart>
+            <send-community>ibct:standard</send-community>
             <apply-policy>
               <export-policy>TO_R2</export-policy>
               <default-export-policy>accept-route</default-export-policy>

@@ -104,7 +104,7 @@ for i in yang/example-bgp-configuration-a.1.[0-2].xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.xml"
-    response=`yanglint -ii -t config -p ../bin/yang-parameters -p ../bin -p ../bin/submodules ../bin/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/iana-bgp-types\@$(date +%Y-%m-%d).yang ../bin/iana-bgp-community-types\@$(date +%Y-%m-%d).yang  ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang $name.xml`
+    response=`yanglint -ii -t config -p ../bin/yang-parameters -p ../bin -p ../bin/submodules ../bin/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/iana-bgp-capabilities\@$(date +%Y-%m-%d).yang ../bin/iana-bgp-afi-safi-types\@$(date +%Y-%m-%d).yang ../bin/iana-bgp-community-types\@$(date +%Y-%m-%d).yang  ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang $name.xml`
     if [ $? -ne 0 ]; then
        printf "failed (error code: $?)\n"
        printf "$response\n\n"
@@ -124,7 +124,8 @@ SM_MODULES="../bin/yang-parameters/ietf-yang-schema-mount@2019-01-14.yang \
     ../bin/yang-parameters/ietf-interfaces@2018-02-20.yang \
     ../bin/yang-parameters/iana-if-type@2023-01-26.yang \
     ../bin/yang-parameters/ietf-routing@2018-03-13.yang \
-    ../bin/iana-bgp-types@$(date +%Y-%m-%d).yang \
+    ../bin/iana-bgp-capabilities@$(date +%Y-%m-%d).yang \
+    ../bin/iana-bgp-afi-safi-types@$(date +%Y-%m-%d).yang \
     ../bin/iana-bgp-community-types@$(date +%Y-%m-%d).yang \
     ../bin/ietf-bgp@$(date +%Y-%m-%d).yang"
 
@@ -164,7 +165,7 @@ for i in yang/example-bgp-configuration-a.1.[4-5].xml
 do
     name=$(echo $i | cut -f 1-3 -d '.')
     echo "Validating $name.xml"
-    response=`yanglint -ii -t config -p ../bin/yang-parameters -p ../bin -p ../bin/submodules ../bin/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/iana-bgp-types\@$(date +%Y-%m-%d).yang ../bin/iana-bgp-community-types\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp-policy\@$(date +%Y-%m-%d).yang $name.xml`
+    response=`yanglint -ii -t config -p ../bin/yang-parameters -p ../bin -p ../bin/submodules ../bin/yang-parameters/ietf-network-instance@2019-01-21.yang ../bin/iana-bgp-capabilities\@$(date +%Y-%m-%d).yang ../bin/iana-bgp-afi-safi-types\@$(date +%Y-%m-%d).yang ../bin/iana-bgp-community-types\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp\@$(date +%Y-%m-%d).yang ../bin/ietf-bgp-policy\@$(date +%Y-%m-%d).yang $name.xml`
     if [ $? -ne 0 ]; then
        printf "failed (error code: $?)\n"
        printf "$response\n\n"

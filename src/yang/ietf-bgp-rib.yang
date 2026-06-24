@@ -8,8 +8,13 @@ submodule ietf-bgp-rib {
    * Import and Include
    */
 
-  import iana-bgp-types {
-    prefix bt;
+  import iana-bgp-afi-safi-types {
+    prefix bast;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
+  import ietf-bgp-types {
+    prefix ibt;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -118,7 +123,7 @@ submodule ietf-bgp-rib {
         "A container for attribute set parameters.";
 
       leaf origin {
-        type bt:bgp-origin-attr-type;
+        type ibt:bgp-origin-attr-type;
         description
           "BGP attribute defining the origin of the path
            information.";
@@ -444,13 +449,13 @@ submodule ietf-bgp-rib {
             "List of afi-safi types.";
           leaf name {
             type identityref {
-              base bt:afi-safi-type;
+              base bast:afi-safi-type;
             }
             description
               "AFI,SAFI name.";
           }
           container ipv4-unicast {
-            when "derived-from-or-self(../name, 'bt:ipv4-unicast')" {
+            when "derived-from-or-self(../name, 'bast:ipv4-unicast')" {
               description
                 "Include this container for IPv4 unicast RIB.";
             }
@@ -569,7 +574,7 @@ submodule ietf-bgp-rib {
           }
 
           container ipv6-unicast {
-            when "derived-from-or-self(../name, 'bt:ipv6-unicast')" {
+            when "derived-from-or-self(../name, 'bast:ipv6-unicast')" {
               description
                 "Include this container for IPv6 unicast RIB.";
             }

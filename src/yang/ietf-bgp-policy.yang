@@ -15,13 +15,23 @@ module ietf-bgp-policy {
     reference
       "RFC 9067: A YANG Data Model for Routing Policy";
   }
-  import iana-bgp-types {
-    prefix bt;
+  import iana-bgp-afi-safi-types {
+    prefix bast;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
+  import ietf-bgp-types {
+    prefix ibt;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
   import iana-bgp-community-types {
     prefix bct;
+    reference
+      "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
+  }
+  import ietf-bgp-community-types {
+    prefix ibct;
     reference
       "RFC XXXX: YANG Model for Border Gateway Protocol (BGP-4).";
   }
@@ -250,8 +260,8 @@ module ietf-bgp-policy {
           leaf-list member {
             type union {
               type bct:bgp-well-known-community-type;
-              type bct:bgp-std-community-type;
-              type bct:bgp-community-regexp-type;
+              type ibct:bgp-std-community-type;
+              type ibct:bgp-community-regexp-type;
             }
             description
               "Members of the community set";
@@ -276,7 +286,7 @@ module ietf-bgp-policy {
           leaf-list member {
             type union {
               type bct:bgp-ext-community-type;
-              type bct:bgp-community-regexp-type;
+              type ibct:bgp-community-regexp-type;
             }
             description
               "Members of the extended community set.";
@@ -302,7 +312,7 @@ module ietf-bgp-policy {
           leaf-list member {
             type union {
               type bct:bgp-ipv6-ext-community-type;
-              type bct:bgp-community-regexp-type;
+              type ibct:bgp-community-regexp-type;
             }
             description
               "Members of the IPv6 extended community set.";
@@ -326,8 +336,8 @@ module ietf-bgp-policy {
           }
           leaf-list member {
             type union {
-              type bct:bgp-large-community-type;
-              type bct:bgp-community-regexp-type;
+              type ibct:bgp-large-community-type;
+              type ibct:bgp-community-regexp-type;
             }
             description
               "Members of the large community set.";
@@ -407,7 +417,7 @@ module ietf-bgp-policy {
       }
 
       leaf origin-eq {
-        type bt:bgp-origin-attr-type;
+        type ibt:bgp-origin-attr-type;
         description
           "Condition to check if the route origin is equal to the
            specified value.";
@@ -419,7 +429,7 @@ module ietf-bgp-policy {
            the match-set-options leaf.";
         leaf-list afi-safi-in {
           type identityref {
-            base bt:afi-safi-type;
+            base bast:afi-safi-type;
           }
           description
             "List of address families which the NLRI may be within.";
@@ -653,7 +663,7 @@ module ietf-bgp-policy {
       description
         "Top-level container for BGP-specific actions";
       leaf set-route-origin {
-        type bt:bgp-origin-attr-type;
+        type ibt:bgp-origin-attr-type;
         description
           "Set the origin attribute to the specified value";
       }
@@ -733,7 +743,7 @@ module ietf-bgp-policy {
             leaf-list communities {
               type union {
                 type bct:bgp-well-known-community-type;
-                type bct:bgp-std-community-type;
+                type ibct:bgp-std-community-type;
               }
               description
                 "Set the community values for the update inline with
@@ -863,7 +873,7 @@ module ietf-bgp-policy {
              communities for the set-large-community action";
           case inline {
             leaf-list communities {
-              type bct:bgp-large-community-type;
+              type ibct:bgp-large-community-type;
               description
                 "Set the large community values for the update
                  inline with a list.";
