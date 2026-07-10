@@ -85,7 +85,8 @@ module ietf-bgp-types {
     description
       "Clearing of BGP neighbors is supported.";
     reference
-      "RFC XXXX: YANG module for Border Gateway Protocol (BGP-4).";
+      "RFC 4271: A Border Gateway Protocol 4 (BGP-4),
+                 Section 8.1.2 - ManualStop.";
   }
 
   feature clear-routes {

@@ -28,7 +28,7 @@
               <bgp-actions xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
                 <set-community>
                   <options>add</options>
-                  <communities>55:55</communities>                  
+                  <community>55:55</community>
                 </set-community>
               </bgp-actions>
             </actions>
