@@ -256,7 +256,7 @@ submodule ietf-bgp-neighbor {
          Section 4.5.";
     }
 
-    list afi-safis {
+    list afi-safi {
       key "afi-safi-name";
       description
         "Per-AFI-SAFI message counters";

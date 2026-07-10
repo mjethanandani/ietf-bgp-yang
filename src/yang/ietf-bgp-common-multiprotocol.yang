@@ -149,7 +149,8 @@ submodule ietf-bgp-common-multiprotocol {
         base bast:afi-safi-type;
       }
       description
-        "AFI,SAFI";
+        "The AFI/SAFI identifier for this address family
+         configuration entry.";
     }
     leaf enabled {
       type boolean;
@@ -164,8 +165,10 @@ submodule ietf-bgp-common-multiprotocol {
     description
       "A common grouping used for contents of the list that is used
        for AFI-SAFI entries";
-    // import and export policy included for the afi/safi
-    uses rt-pol:apply-policy-group;
+    uses rt-pol:apply-policy-group {
+      description
+        "Import and export policy included for the AFI/SAFI.";
+    }
     container ipv4-unicast {
       when "derived-from-or-self(../name, 'bast:ipv4-unicast')" {
         description

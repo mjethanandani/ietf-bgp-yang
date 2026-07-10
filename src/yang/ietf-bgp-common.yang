@@ -932,7 +932,7 @@ submodule ietf-bgp-common {
         "Configuration and operational state for dynamically
          configured peers.";
 
-      list dynamic-peer-list {
+      list dynamic-peer {
         key "prefix";
         description
           "List of peers by IP prefix for this configuration scope

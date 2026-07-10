@@ -64,7 +64,7 @@
                 xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
               <set-community>
                 <options>add</options>
-                <communities>11:11</communities>
+                <community>11:11</community>
               </set-community>
             </bgp-actions>
           </actions>
@@ -81,8 +81,8 @@
                 xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
               <set-community>
                 <options>remove</options>
-                <communities>11:11</communities>
-                <communities>22:22</communities>
+                <community>11:11</community>
+                <community>22:22</community>
               </set-community>
             </bgp-actions>
           </actions>
@@ -99,7 +99,7 @@
                 xmlns="urn:ietf:params:xml:ns:yang:ietf-bgp-policy">
               <set-community>
                 <options>replace</options>
-                <communities>33:33</communities>
+                <community>33:33</community>
               </set-community>
             </bgp-actions>
           </actions>
