@@ -926,7 +926,7 @@ submodule ietf-bgp-common {
 
   grouping dynamic-peers {
     description
-      "Grouping to contain dyamic BGP peers. Dynamic peers are
+      "Grouping to contain dynamic BGP peers. Dynamic peers are
        configured from a list of IP prefixes matching the IP source
        address of the dynamic peer.";
 

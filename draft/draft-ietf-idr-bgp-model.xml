@@ -320,6 +320,12 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-sub-tree.txt)
         neighbor-specific configuration options which are relevant to the
         entire BGP instance.</t>
 
+        <t>In addition to explicit neighbor configuration, remote BGP neighbors
+        may establish sessions dynamically with the local BGP speaker.  This is
+        configured using the 'dynamic-peers' container which uses a prefix-list
+        to control IP subnets permitted to establish such dynamic peering
+        sessions.</t>
+
         <t>The model makes the simplifying assumption that most of the
         configuration items are available at all levels of the hierarchy. That
         is, very little configuration is specific to a particular level in the
