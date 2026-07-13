@@ -363,6 +363,8 @@ submodule ietf-bgp-common {
       description
         "Routes learned via BGP are subject to weighted route
          damping.";
+      reference
+        "RFC 2439: BGP Route Flap Damping.";
     }
     leaf-list send-community {
       if-feature "ibct:send-communities";
