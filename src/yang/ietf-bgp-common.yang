@@ -373,7 +373,8 @@ submodule ietf-bgp-common {
       }
       description
         "When supported, this tells the router to propagate any
-         prefixes that are attached to these community-types.";
+         communities that are attached to BGP routes for these
+         community-types.";
     }
     leaf description {
       type string;
