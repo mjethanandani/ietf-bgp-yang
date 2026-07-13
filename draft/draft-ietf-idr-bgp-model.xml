@@ -937,35 +937,127 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           be added to the "BGP Well Known Communities" registry.
           </blockquote>
 
-          <t>IANA is requested to add this note to the "BGP Well Known
-          Communities" registry:</t>
-          <blockquote>When this registry is modified, the YANG module
-          "iana-bgp-community-types"
-          &lt;https://www.iana.org/assignments/iana-bgp-community-types&gt;
-          must be updated as defined in RFC XXXX.</blockquote>
+          <section title="BGP Well Known Communities">
+            <t>IANA is requested to add this note to the "BGP Well Known
+            Communities" registry:</t>
+            <blockquote>When this registry is modified, the YANG module
+            "iana-bgp-community-types"
+            &lt;https://www.iana.org/assignments/iana-bgp-community-types&gt;
+            must be updated as defined in RFC XXXX.</blockquote>
 
-          <t>
-            When a new community value is added to the "BGP Well Known
-            Communities" registry, a new "identity" statement deriving
-            from "bgp-well-known-std-community" must be added.  The
-            "identity" statement MUST have the substatements defined
-            as described below.
-          </t>
-          <ul>
-            <li>
-              "base": The parent identity
-              ("bgp-well-known-std-community" for base identity for
-              reserved communities within the standard community).
-            </li>
-            <li>
-              "description": Replicates the description from the
-              registry.
-            </li>
-            <li>
-              "reference": Replicates the reference(s) from the
-              registry with the title of the document(s) added.
-            </li>
-          </ul>
+            <t>
+              When a new community value is added to the "BGP Well Known
+              Communities" registry, a new "identity" statement deriving
+              from "bgp-well-known-std-community" must be added.  The
+              "identity" statement MUST have the substatements defined
+              as described below.
+            </t>
+            <ul>
+              <li>
+                "base": The parent identity
+                ("bgp-well-known-std-community" for base identity for
+                reserved communities within the standard community).
+              </li>
+              <li>
+                "description": Replicates the description from the
+                registry.
+              </li>
+              <li>
+                "reference": Replicates the reference(s) from the
+                registry with the title of the document(s) added.
+              </li>
+            </ul>
+          </section>
+
+          <section title="BGP Extended Communities">
+            <t>IANA is requested to add this note to the "Border Gateway
+            Protocol (BGP) Extended Communities" registry:</t>
+            <blockquote>When this registry is modified, the YANG module
+            "iana-bgp-community-types"
+            &lt;https://www.iana.org/assignments/iana-bgp-community-types&gt;
+            must be updated as defined in RFC XXXX.</blockquote>
+
+            <t>
+              When a new extended community value is added to the "Border
+              Gateway Protocol (BGP) Extended Communities" registry, it is
+              OPTIONAL that the "bgp-ext-community-type" typedef can be updated
+              in the following manner:
+            </t>
+            <ul>
+              <li>
+                Entries for this module are subject to Expert Review.  The
+                designated experts will be appointed by the IESG.  The
+                designated experts will review entries for clarity, 
+                terseness, suitability for easy YANG parsing for union types,
+                and appropriateness to be publish in this IANA module.
+              </li>
+              <li>
+                A typedef with a unique identifier describing the canonical
+                display format is created for the new extended community.  The
+                YANG "type" of this typedef SHALL be "string".
+              </li>
+              <li>
+                This typedef MAY be added by IANA to the
+                "iana-bgp-community-types" YANG module or, if defined in the
+                format below, be imported from another IETF RFC.  If imported
+                from another RFC, the "iana-bgp-community-types" YANG module
+                MUST have its import statements updated appropriately to do so.
+              </li>
+              <li>
+                <t>
+                  The "pattern" for this new extended community's string type
+                  SHALL consist of a "short name" appropriate for the "Name"
+                  field in the registry suitable for this typedef.  A colon
+                  character is used to separate the short name from the
+                  representation of the extended community's "Value" field.
+                </t>
+                <t>
+                  This short name representing the extended community's "Name"
+                  from the registry MUST consist of only lower-case ASCII
+                  letter characters, with distinct words optionally separated
+                  using the hyphen character.
+                </t>
+                <t>
+                  The "Value" field MUST be represented as a regular expression
+                  string consistent with the rules from <xref target="RFC7950"
+                  section="9.4.5"/> and its contents intended to represent
+                  an acceptable human-readable rendering of the extended
+                  community's Value.
+                </t>
+              </li>
+              <li>
+                The "description" for this typedef MUST include descriptive
+                information derived from the registered extended community's
+                "Name" in the registry.  In the absence of a reference (see
+                below), the description SHOULD include information about the
+                registrant.
+              </li>
+              <li>
+                The "reference" for this typedef, when defined by a stable
+                publication reference, SHALL be added to the string's YANG
+                definition, when possible.  For internet-drafts, this reference
+                SHALL be updated at publication of the draft as an RFC.  Since
+                extended communities can be allocated using first-come,
+                first-served procedures, the stable publication reference might
+                not be an IETF document - or there may be no stable publication
+                reference.  In such cases, there may be no YANG reference
+                statement for this typedef.
+              </li>
+              <li>
+                Once defined and validated by the designated experts, this new
+                typedef is added to the "bgp-ext-community-type" union.
+              </li>
+            </ul>
+            <t>
+              The motivation to make the update of the bgp-ext-community-type
+              reference optional is that not all use cases for the display of
+              extended communities are necessary for the convenience of the
+              operations of BGP speakers supporting the IETF BGP YANG module.
+              The "raw" type provides for display of extended communities that
+              have not otherwise been covered by new entries in the
+              bgp-ext-community-type union.
+            </t>
+          </section>
         </section>
 
         <section title="iana-bgp-rib-types">
