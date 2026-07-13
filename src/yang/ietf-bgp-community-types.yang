@@ -63,7 +63,8 @@ module ietf-bgp-community-types {
     reference
       "RFC 1997: BGP Communities Attribute.
        RFC 4360: BGP Extended Communities Attribute.
-       RFC 5668: BGP Extended Community Attribute for Route Target Constraints.
+       RFC 5668: BGP Extended Community Attribute for Route Target
+                 Constraints.
        RFC 8092: BGP Large Communities Attribute.";
   }
 
