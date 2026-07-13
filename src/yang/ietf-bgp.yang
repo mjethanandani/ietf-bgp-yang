@@ -677,7 +677,7 @@ module ietf-bgp {
                 "Clear statistics action command.
 
                  Execution of this command should result in all the
-                 counters to be cleared and set to 0.";
+                 statistics to be cleared and set to 0.";
 
               input {
                 leaf clear-at {
