@@ -362,7 +362,7 @@ submodule ietf-bgp-common {
       }
       description
         "Routes learned via BGP are subject to weighted route
-         dampening.";
+         damping.";
     }
     leaf-list send-community {
       if-feature "ibct:send-communities";

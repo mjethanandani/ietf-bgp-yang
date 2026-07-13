@@ -297,7 +297,7 @@ module ietf-bgp {
 
       container neighbors {
         description
-          "Configuration for BGP neighbors.";
+          "Configuration and operational state for BGP neighbors.";
 
         list neighbor {
           key "neighbor-key";
