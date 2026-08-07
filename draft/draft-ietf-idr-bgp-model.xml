@@ -616,6 +616,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-capabilities
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-notification
             URI:urn:ietf:params:xml:ns:yang:iana-bgp-rib-types
+            URI:urn:ietf:params:xml:ns:yang:iana-bgp-session-security
             ]]></artwork>
           </figure></t>
 
@@ -652,6 +653,12 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
             name: ietf-bgp-types
             namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-types
             prefix: ibt
+            maintained by IANA: N
+            reference: RFC XXXX
+
+            name: ietf-bgp-session-security
+            namespace: urn:ietf:params:xml:ns:yang:ietf-bgp-session-security
+            prefix: ibss
             maintained by IANA: N
             reference: RFC XXXX
 
@@ -1127,6 +1134,9 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
           for use with <xref target="RFC9067"/> (described in more
           detail <xref target="overview.policy"/>).</li>
 
+          <li>ietf-bgp-session-security - BGP transport security settings for
+          BGP neighbors.</li>
+
           <li>ietf-bgp-types - non-IANA type, feature, and identity
           definitions for BGP, including BGP policy.</li>
 
@@ -1345,6 +1355,18 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-attributes@YYYY-MM-DD.yang)
               <artwork><![CDATA[
 <CODE BEGINS> file "ietf-bgp-rib-tables@YYYY-MM-DD.yang"
 INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-rib-tables@YYYY-MM-DD.yang)
+<CODE ENDS>
+
+]]></artwork>
+            </figure>
+          </t>
+        </section>
+        <section title = "BGP Session Security module">
+          <t>
+            <figure>
+              <artwork><![CDATA[
+<CODE BEGINS> file "ietf-bgp-session-security@YYYY-MM-DD.yang"
+INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-session-security@YYYY-MM-DD.yang)
 <CODE ENDS>
 
 ]]></artwork>
