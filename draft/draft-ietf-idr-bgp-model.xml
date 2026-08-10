@@ -599,7 +599,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
     </section>
 
     <section title="IANA Considerations">
-      <t>This document registers nine URIs, twelve IETF YANG modules and
+      <t>This document registers ten URIs, thirteen IETF YANG modules and
       submodules, and five IANA-maintained YANG modules.</t>
 
       <section title="URI Registration">

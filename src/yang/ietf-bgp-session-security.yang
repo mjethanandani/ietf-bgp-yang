@@ -25,7 +25,7 @@ module ietf-bgp-session-security {
               Jeffrey Haas (jeffrey.haas at hpe.com).";
 
   description
-    "This sub-module contains groupings particular to BGP session
+    "This module contains groupings particular to BGP session
      security.
 
      Copyright (c) 2026 IETF Trust and the persons identified as
@@ -69,7 +69,9 @@ module ietf-bgp-session-security {
 
   feature bgp-session-security-tcp-md5 {
     description
-      "Support for TCP-MD5 for neighbors.";
+      "Support for TCP-MD5 for neighbors. Note that this option has been
+       obsoleted by RFC 5925 but is included for backward compatibility
+       for legacy BGP implementations.";
     reference
       "RFC 5925: The TCP Authentication Option.";
   }
