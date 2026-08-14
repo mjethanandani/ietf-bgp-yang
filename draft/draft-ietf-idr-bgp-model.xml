@@ -501,7 +501,7 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       transport layer, and the mandatory-to-implement secure transport is
       <xref target="RFC6242">Secure Shell (SSH)</xref>. The lowest RESTCONF
       layer is HTTPS, and the mandatory-to-implement secure transport is <xref
-      target="RFC8446">TLS</xref>. The <xref target="RFC8341">NETCONF Access
+      target="RFC9846">TLS</xref>. The <xref target="RFC8341">NETCONF Access
       Control Model (NACM) </xref> provides the means to restrict access for
       particular NETCONF or RESTCONF users to a preconfigured subset of all
       available NETCONF or RESTCONF protocol operations and content.</t>
@@ -1599,8 +1599,6 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-session-security@YYYY-MM-DD.yan
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8349.xml"/>
 
-      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
-
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8525.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8528.xml"/>
@@ -1622,6 +1620,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-session-security@YYYY-MM-DD.yan
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9384.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9648.xml"/>
+
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9846.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9911.xml"/>
 
