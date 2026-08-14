@@ -297,7 +297,7 @@ module ietf-bgp {
 
       container neighbors {
         description
-          "Configuration for BGP neighbors.";
+          "Configuration and operational state for BGP neighbors.";
 
         list neighbor {
           key "neighbor-key";
@@ -455,7 +455,7 @@ module ietf-bgp {
               type boolean;
               config false;
               description
-                "This flag indicates whether the local neighbor is
+                "This flag indicates whether the local session is
                  currently restarting. The flag is cleared after all
                  NLRI have been advertised to the peer, and the
                  End-of-RIB (EOR) marker has been cleared.";
@@ -465,14 +465,14 @@ module ietf-bgp {
               type enumeration {
                 enum helper-only {
                   description
-                    "The local router is operating in helper-only
+                    "The local system is operating in helper-only
                      mode, and hence will not retain forwarding state
                      during a local session restart, but will do so
                      during a restart of the remote peer";
                 }
                 enum bilateral {
                   description
-                    "The local router is operating in both helper
+                    "The local system is operating in both helper
                      mode, and hence retains forwarding state during
                      a remote restart, and also maintains forwarding
                      state during local session restart";
@@ -677,7 +677,7 @@ module ietf-bgp {
                 "Clear statistics action command.
 
                  Execution of this command should result in all the
-                 counters to be cleared and set to 0.";
+                 statistics to be cleared and set to 0.";
 
               input {
                 leaf clear-at {

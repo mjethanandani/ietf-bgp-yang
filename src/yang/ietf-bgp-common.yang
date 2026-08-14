@@ -362,7 +362,9 @@ submodule ietf-bgp-common {
       }
       description
         "Routes learned via BGP are subject to weighted route
-         dampening.";
+         damping.";
+      reference
+        "RFC 2439: BGP Route Flap Damping.";
     }
     leaf-list send-community {
       if-feature "ibct:send-communities";
@@ -371,7 +373,8 @@ submodule ietf-bgp-common {
       }
       description
         "When supported, this tells the router to propagate any
-         prefixes that are attached to these community-types.";
+         communities that are attached to BGP routes for these
+         community-types.";
     }
     leaf description {
       type string;
@@ -923,7 +926,7 @@ submodule ietf-bgp-common {
 
   grouping dynamic-peers {
     description
-      "Grouping to contain dyamic BGP peers. Dynamic peers are
+      "Grouping to contain dynamic BGP peers. Dynamic peers are
        configured from a list of IP prefixes matching the IP source
        address of the dynamic peer.";
 
