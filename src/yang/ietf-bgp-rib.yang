@@ -455,7 +455,8 @@ submodule ietf-bgp-rib {
               "AFI,SAFI name.";
           }
           container ipv4-unicast {
-            when "derived-from-or-self(../name, 'bast:ipv4-unicast')" {
+            when "derived-from-or-self(../bgp:name, " +
+                 "'bast:ipv4-unicast')" {
               description
                 "Include this container for IPv4 unicast RIB.";
             }
@@ -574,7 +575,8 @@ submodule ietf-bgp-rib {
           }
 
           container ipv6-unicast {
-            when "derived-from-or-self(../name, 'bast:ipv6-unicast')" {
+            when "derived-from-or-self(../bgp:name, " +
+                 "'bast:ipv6-unicast')" {
               description
                 "Include this container for IPv6 unicast RIB.";
             }
