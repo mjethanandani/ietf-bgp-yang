@@ -51,7 +51,7 @@ module example-newafi-bgp {
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bgp:bgp/bgp:global/" +
           "bgp:afi-safis/bgp:afi-safi" {
-    when "derived-from-or-self(bgp:name, 'foo')" {
+    when "derived-from-or-self(bgp:name, 'example-newafi-bgp:foo')" {
       description
         "This augmentation is valid for a AFI/SAFI instance
          of 'foo'";
@@ -67,7 +67,7 @@ module example-newafi-bgp {
   augment "/rt:routing/rt:control-plane-protocols/" +
           "rt:control-plane-protocol/bgp:bgp/" +
           "bgp:rib/bgp:afi-safis/bgp:afi-safi" {
-    when "derived-from-or-self(bgp:name, 'foo')" {
+    when "derived-from-or-self(bgp:name, 'example-newafi-bgp:foo')" {
       description
         "This augmentation is valid for a AFI/SAFI instance
          of 'foo'";

@@ -3,6 +3,13 @@ module example-newco-bgp {
   namespace "http://example.com/ns/example-newco-bgp";
   prefix example-newco-bgp;
 
+  import ietf-routing {
+    prefix rt;
+    reference
+      "RFC 8349, A YANG Data Model for Routing Management
+       (NMDA Version)";
+  }
+
   import ietf-bgp {
     prefix "bgp";
   }
@@ -23,13 +30,15 @@ module example-newco-bgp {
       "RFC XXXX: YANG module for Border Gateway Protocol (BGP).";
   }
 
-  deviation "/bgp:bgp/bgp:global/bgp:graceful-restart/" +
-            "bgp:restart-time" {
+  deviation "/rt:routing/rt:control-plane-protocols/" +
+            "rt:control-plane-protocol/bgp:bgp/bgp:global/" +
+            "bgp:graceful-restart/bgp:restart-time" {
     deviate not-supported;
   }
 
-  deviation "/bgp:bgp/bgp:global/bgp:graceful-restart/" +
-            "bgp:stale-route-time" {
+  deviation "/rt:routing/rt:control-plane-protocols/" +
+            "rt:control-plane-protocol/bgp:bgp/bgp:global/" +
+            "bgp:graceful-restart/bgp:stale-routes-time" {
     deviate not-supported;
   }
 }
