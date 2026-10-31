@@ -172,8 +172,8 @@ submodule ietf-bgp-rib-tables {
     }
     leaf community-index {
       type leafref {
-        path "../../../../../../../../../bgp:communities/bgp:community/"
-           + "bgp:index";
+        path "../../../../../../../../../bgp:communities/"
+           + "bgp:community/bgp:index";
       }
       description
         "Reference to the community attribute for the route.";
