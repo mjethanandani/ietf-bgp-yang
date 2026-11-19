@@ -74,8 +74,8 @@ module ietf-bgp-types {
     description
       "Support for BFD detection of BGP neighbor reachability.";
     reference
-      "RFC 5880: Bidirectional Forward Detection (BFD),
-       RFC 5881: Bidirectional Forward Detection for IPv4 and IPv6
+      "RFC 5880: Bidirectional Forwarding Detection (BFD),
+       RFC 5881: Bidirectional Forwarding Detection for IPv4 and IPv6
                  (Single Hop),
        RFC 5883: Bidirectional Forwarding Detection (BFD) for
                  Multihop Paths.";
