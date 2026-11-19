@@ -164,7 +164,7 @@
         <t>The model conforms to the <xref target="RFC8342">NMDA</xref>
         architecture. It has support for securing BGP sessions using <xref
         target="RFC5925">TCP-AO</xref> or TCP-MD5, and for configuring <xref
-        target="RFC5880">Bidirectional Forward Detection (BFD) </xref> for
+        target="RFC5880">Bidirectional Forwarding Detection (BFD) </xref> for
         fast next hop liveliness checking.</t>
 
         <t>For the base BGP features, the focus of the model described in this
@@ -218,6 +218,21 @@
       </section>
 
       <section title="Terminology">
+        <t>
+          This document uses the terminology defined in
+          <xref target="RFC7950">YANG 1.1</xref>, the
+          <xref target="RFC8342">Network Management Datastore
+          Architecture</xref>, and the
+          <xref target="RFC8349">Routing Management model</xref>.
+          BGP terms are as defined in <xref target="RFC4271"/> and
+          <xref target="RFC4760"/>.
+        </t>
+
+        <t>
+          Tree diagrams used in this document follow the notation
+          defined in <xref target="RFC8340"/>.
+        </t>
+
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
         "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
         "OPTIONAL" in this document are to be interpreted as described in
@@ -237,7 +252,7 @@
 
           <c>BFD</c>
 
-          <c>Bidirectional Forward Detection</c>
+          <c>Bidirectional Forwarding Detection</c>
 
           <c>NLRI</c>
 
@@ -1272,8 +1287,8 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li><xref target="RFC5492">Capabilities Advertisement with BGP-4</xref></li>
       <li><xref target="RFC5668">4-Octet AS Specific BGP Extended Community</xref></li>
       <li><xref target="RFC5701">IPv6 Address Specific BGP Extended Community Attribute</xref></li>
-      <li><xref target="RFC5880">Bidirectional Forward Detection (BFD)</xref></li>
-      <li><xref target="RFC5881">Bidirectional Forward Detection for IPv4 and IPv6 (Single Hop)</xref></li>
+      <li><xref target="RFC5880">Bidirectional Forwarding Detection (BFD)</xref></li>
+      <li><xref target="RFC5881">Bidirectional Forwarding Detection for IPv4 and IPv6 (Single Hop)</xref></li>
       <li><xref target="RFC5883">Bidirectional Forwarding Detection (BFD) for Multihop Paths</xref></li>
       <li><xref target="RFC5925">The TCP Authentication Option</xref></li>
       <li><xref target="RFC6514">BGP Encodings and Procedures for Multicast in MPLS/BGP IP VPNs</xref></li>
@@ -1295,9 +1310,9 @@ INSERT_TEXT_FROM_FILE(../bin/ietf-bgp@YYYY-MM-DD-rib-tree.txt)
       <li><xref target="RFC8343">A YANG Data Model for Interface Management</xref></li>
       <li><xref target="RFC8538">Notification Message Support for BGP Graceful Restart</xref></li>
       <li><xref target="RFC9067">A YANG Data Model for Routing Policy</xref></li>
-      <li><xref target="RFC9127">YANG Data Model for Bidirectional Forward Detection</xref></li>
+      <li><xref target="RFC9127">YANG Data Model for Bidirectional Forwarding Detection</xref></li>
       <li><xref target="RFC9293">Transmission Control Protocol</xref></li>
-      <li><xref target="RFC9314">YANG Data Model for Bidirectional Forward Detection</xref></li>
+      <li><xref target="RFC9314">YANG Data Model for Bidirectional Forwarding Detection</xref></li>
       <li><xref target="RFC9384">A BGP Cease Notification Subcode For Bidirectional Forwarding Detection (BFD)</xref></li>
       <li><xref target="RFC9648">YANG Model for Transmission Control Protocol (TCP) Configuration</xref></li>
       <li><xref target="I-D.ietf-netmod-yang-semver">YANG Semantic Versioning</xref></li>
@@ -1600,6 +1615,8 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-session-security@YYYY-MM-DD.yan
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8341.xml"/>
 
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8342.xml"/>
+
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8343.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8349.xml"/>
@@ -1648,7 +1665,7 @@ INSERT_TEXT_FROM_FILE(../bin/submodules/ietf-bgp-session-security@YYYY-MM-DD.yan
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7454.xml"/>
 
-      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8342.xml"/>
+      <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8340.xml"/>
 
       <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9774.xml"/>
     </references>
