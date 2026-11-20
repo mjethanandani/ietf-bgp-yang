@@ -20,12 +20,7 @@ module iana-bgp-community-types {
              Los Angeles, CA 90094-2536
              United States of America
      Tel:    +1 310 301 5800
-     <mailto:iana@iana.org>
-
-     Authors: Mahesh Jethanandani (mjethanandani at gmail.com),
-              Keyur Patel (keyur at arrcus.com),
-              Susan Hares (shares at ndzh.com),
-              Jeffrey Haas (jeffrey.haas at hpe.com).";
+     <mailto:iana@iana.org>";
 
   description
     "This module contains data definitions for BGP Communities in
